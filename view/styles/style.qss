@@ -1,0 +1,283 @@
+/* Right Pannel */ 
+QWidget#rightPanel {
+    background-color: white;
+}
+
+QScrollArea {
+    background: transparent;
+    border: none;
+}
+QScrollArea > QWidget {
+    background-color: white;
+}
+
+
+/* Image Label */
+QLabel#artistImageLabel {
+    border: 2px solid red;
+    border-radius: 60px;      /* metà di 120px */
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+QLabel#defaultImageLabel {
+    border: 1px solid red;
+    border-radius: 4px;
+}
+
+/* Artista */
+QWidget#artistContainer {
+    background-color: #ffffff;
+}
+
+QLabel#artistName {
+    font-family: "Roboto";
+    font-size: 24pt;
+    font-weight: bold;
+    color: #333;
+    qproperty-alignment: AlignCenter;
+}
+
+QLabel#artistGenre {
+    font-family: "Roboto";
+    font-size: 16pt;
+    font-weight: normal;
+    color: #d8666666;
+    qproperty-alignment: AlignCenter;
+}
+
+QGroupBox#artistDescBox {
+    border: 1px solid #62cccccc;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+QGroupBox#artistProdBox {
+    border: 1px solid #62cccccc;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+QWidget#productCard {
+    background: #fff;
+    border: 1px solid #62cccccc;
+    border-radius: 8px;
+}
+
+QLabel#productThumb {
+    border: 1px solid #62cccccc;
+    border-radius: 4px;
+}
+
+QLabel#productTitle {
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+QLabel#productDesc {
+    font-size: 10pt;
+    color: #666;
+}
+
+QPushButton#productButton {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+
+QPushButton#productButton:hover {
+    background-color: #2176ff;  
+    color: #fff;
+}
+
+QPushButton#productButton:pressed {
+    background-color: #1549b9; 
+    padding-top: 5px;  
+    color: white;          
+}
+
+/* ----------------------------------------------------------------- */
+/* TShirt */
+QWidget#tshirtContainer {
+    background: qlineargradient(x1:0,y1:0, x2:1,y2:1, stop:0 #fafafa, stop:1 #ffffff);
+    border: 2px dashed red;
+}
+
+QLabel#tshirtImageLabel {
+    border-radius: 8px;
+    border: 2px solid transparent;
+}
+QLabel#tshirtImageLabel:hover {
+    border: 2px solid #5b757575;
+}
+
+QLabel#tshirtTitleLabel {
+    font-family: "Roboto";
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+QLabel#tshirtCodeLabel,
+QLabel#tshirtQuantityLabel,
+QLabel#tshirtSizeLabel,
+QLabel#tshirtColorLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    color: #555555;
+}
+
+QLabel#tshirtAvailabilityLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+}
+QLabel#tshirtAvailabilityLabel[available="true"] {
+    color: #31ac00;
+}
+QLabel#tshirtAvailabilityLabel[available="false"] {
+    color: #d9534f;
+}
+
+QLabel#tshirtPriceLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+}
+
+QLabel#tshirtDescLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: #666666;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+QWidget#tshirtGrid0,
+QWidget#tshirtGrid1,
+QWidget#tshirtGrid2 {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+
+/* CD */
+QLabel#cdImageLabel {
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+QLabel#cdTitleLabel {
+    qproperty-alignment: AlignCenter;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+QLabel#cdFormatLabel,
+QLabel#cdDescLabel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Vinile */
+QLabel#vinileImageLabel {
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+QLabel#vinileTitleLabel {
+    qproperty-alignment: AlignCenter;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+QLabel#vinileDescLabel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Singolo */
+QLabel#singoloImageLabel {
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+QLabel#singoloTitleLabel {
+    qproperty-alignment: AlignCenter;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+QLabel#singoloDescLabel {
+    margin-bottom: 10px;
+}
+
+QLabel#singoloTrackInfoLabel {
+    margin-top: 10px;
+}
+
+
+/* Album */
+QLabel#albumImageLabel {
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+QLabel#albumTitleLabel {
+    qproperty-alignment: AlignCenter;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+QLabel#albumLabelLabel {
+    qproperty-alignment: AlignCenter;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+QLabel#albumDescLabel {
+    margin-bottom: 10px;
+}
+
+QLabel[class^="albumTrackLabel_"] {
+    margin-left: 10px;
+    margin-bottom: 4px;
+}
+
+
+/* Tour */
+QLabel#tourImageLabel {
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+QLabel#tourTitleLabel {
+    qproperty-alignment: AlignCenter;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+QLabel#tourPeriodLabel {
+    qproperty-alignment: AlignCenter;
+    margin: 10px 0;
+}
+
+QLabel#tourDescLabel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

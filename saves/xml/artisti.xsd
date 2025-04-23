@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!-- ArtistProduct -->
+  <xs:complexType name="ArtistProduct">
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+    <xs:attribute name="imagePath" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- NotMusica -->
+  <xs:complexType name="NotMusica">
+    <xs:sequence>
+      <xs:element name="ArtistProduct" type="ArtistProduct" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="prezzo" type="xs:float" use="required"/>
+    <xs:attribute name="disponibile" type="xs:boolean" use="required"/>
+    <xs:attribute name="quantita" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <!-- Musica -->
+  <xs:complexType name="Musica">
+    <xs:sequence>
+      <xs:element name="dataUscita" type="Data" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Durata" type="Durata" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="ArtistProduct" type="ArtistProduct" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="genere" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- Disco -->
+  <xs:complexType name="Disco">
+    <xs:sequence>
+      <xs:element name="Merch" type="Merch" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="produttoreStampe" type="xs:string" use="required"/>
+    <xs:attribute name="codiceRiconoscimento" type="xs:string" use="required"/>
+    <xs:attribute name="tipoProdotto" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- Merch -->
+  <xs:complexType name="Merch">
+    <xs:sequence>
+      <xs:element name="NotMusica" type="NotMusica" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="codiceProdotto" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- CD -->
+  <xs:complexType name="CD">
+    <xs:sequence>
+      <xs:element name="Disco" type="Disco" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="formato" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- Vinile -->
+  <xs:complexType name="Vinile">
+    <xs:sequence>
+      <xs:element name="Disco" type="Disco" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="rpm" type="xs:int" use="required"/>
+    <xs:attribute name="diametro" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <!-- TShirt -->
+  <xs:complexType name="TShirt">
+    <xs:sequence>
+      <xs:element name="Merch" type="Merch" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="taglia" type="xs:string" use="required"/>
+    <xs:attribute name="colore" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- dateTour -->
+  <xs:complexType name="dateTour">
+    <xs:sequence>
+      <xs:element name="DataTour" type="DataTour" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Tour -->
+  <xs:complexType name="Tour">
+    <xs:sequence>
+      <xs:element name="dateTour" type="dateTour" minOccurs="0"/>
+      <xs:element name="NotMusica" type="NotMusica" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- partecipanti -->
+  <xs:complexType name="partecipanti">
+    <xs:sequence>
+      <xs:element name="partecipante" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="nome" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Traccia -->
+  <xs:complexType name="Traccia">
+    <xs:sequence>
+      <xs:element name="partecipanti" type="partecipanti" minOccurs="0"/>
+      <xs:element name="Durata" type="Durata" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="testo" type="xs:string" minOccurs="0"/>
+    </xs:sequence> 
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+    <xs:attribute name="has_testo" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <!-- Singolo -->
+  <xs:complexType name="Singolo">
+    <xs:sequence>
+      <xs:element name="mainTrack" type="Traccia" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Musica" type="Musica" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="isRemix" type="xs:boolean" use="required"/>
+    <xs:attribute name="chartPosition" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <!-- tracce -->
+  <xs:complexType name="tracce">
+    <xs:sequence>
+      <xs:element name="Traccia" type="Traccia" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Album -->
+  <xs:complexType name="Album">
+    <xs:sequence>
+      <xs:element name="tracce"/>
+      <xs:element name="Musica" type="Musica" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="label" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- Data -->
+  <xs:complexType name="Data">
+    <xs:attribute name="giorno" type="xs:int" use="required"/>
+    <xs:attribute name="mese" type="xs:int" use="required"/>
+    <xs:attribute name="anno" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <!-- Durata -->
+  <xs:complexType name="Durata">
+    <xs:attribute name="ore" type="xs:int" use="required"/>
+    <xs:attribute name="minuti" type="xs:int" use="required"/>
+    <xs:attribute name="secondi" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <!-- Orario -->
+  <xs:complexType name="Orario">
+    <xs:attribute name="ore" type="xs:int" use="required"/>
+    <xs:attribute name="minuti" type="xs:int" use="required"/>
+    <xs:attribute name="secondi" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <!-- DataTour -->
+  <xs:complexType name="DataTour">
+    <xs:sequence>
+      <xs:element name="Data" type="Data" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Orario" type="Orario" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="luogo" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- prodotti -->
+  <xs:complexType name="prodotti">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="Album" type="Album"/>
+      <xs:element name="Singolo" type="Singolo"/>
+      <xs:element name="Tour" type="Tour"/>
+      <xs:element name="CD" type="CD"/>
+      <xs:element name="Vinile" type="Vinile"/>
+      <xs:element name="TShirt" type="TShirt"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Artista -->
+  <xs:complexType name="Artista">
+    <xs:sequence>
+      <xs:element name="info" type="xs:string" minOccurs="0"/>
+      <xs:element name="prodotti" type="prodotti" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+    <xs:attribute name="genere" type="xs:string" use="required"/>
+    <xs:attribute name="imagePath" type="xs:string"/>
+  </xs:complexType>
+
+  <!-- Root element -->
+  <xs:element name="artisti">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Artista" type="Artista" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
