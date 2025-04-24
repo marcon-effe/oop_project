@@ -103,69 +103,87 @@ QPushButton#productButton:pressed {
 /* ----------------------------------------------------------------- */
 /* TShirt */
 QWidget#tshirtContainer {
-    background: qlineargradient(x1:0,y1:0, x2:1,y2:1, stop:0 #fafafa, stop:1 #ffffff);
-    border: 2px dashed red;
+    background-color: #ffffff;
+    padding: 20px;
+    /* Simula una leggera ombra interna */
+    background-clip: padding;
 }
 
 QLabel#tshirtImageLabel {
-    border-radius: 8px;
-    border: 2px solid transparent;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #00ffffff;
+    padding: 4px;
 }
 QLabel#tshirtImageLabel:hover {
-    border: 2px solid #5b757575;
+    border-color: #6b790000;
 }
 
 QLabel#tshirtTitleLabel {
-    font-family: "Roboto";
-    font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
     font-weight: 600;
-    color: #000000;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
+    color: #2C3E50;
+    qproperty-alignment: AlignCenter;
+    margin: 12px 0 16px 0;
 }
 
+/*
 QLabel#tshirtCodeLabel,
 QLabel#tshirtQuantityLabel,
 QLabel#tshirtSizeLabel,
 QLabel#tshirtColorLabel {
     font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    color: #555555;
+    font-size: 10pt;
+    color: #4A4A4A;
+    padding: 0;
+    margin: 0;
 }
-
-QLabel#tshirtAvailabilityLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-}
-QLabel#tshirtAvailabilityLabel[available="true"] {
-    color: #31ac00;
-}
-QLabel#tshirtAvailabilityLabel[available="false"] {
-    color: #d9534f;
-}
-
-QLabel#tshirtPriceLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #000000;
-}
+*/
 
 QLabel#tshirtDescLabel {
     font-family: "Open Sans", sans-serif;
-    font-size: 13px;
-    color: #666666;
-    padding: 12px;
-    background-color: #ffffff;
-    border-radius: 4px;
-    margin-top: 6px;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #F9FBFD;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
 }
 
-QWidget#tshirtGrid0,
-QWidget#tshirtGrid1,
-QWidget#tshirtGrid2 {
-    margin-top: 4px;
-    margin-bottom: 4px;
+QPushButton#showDetailButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #efff3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+}
+QPushButton#showDetailButton:hover {
+    background-color: #f5db2727;
+}
+QPushButton#showDetailButton:pressed {
+    background-color: #a01a1a;
+}
+
+QPushButton#addCartButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #efff3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+QPushButton#addCartButton:hover {
+    background-color: #f5db2727;
+}
+QPushButton#addCartButton:pressed {
+    background-color: #a01a1a;
 }
 
 
