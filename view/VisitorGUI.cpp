@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QSpinBox>
 #include <QComboBox>
+#include <QDialog>
 
 #include "../model/core/ArtistProduct.h"
 #include "../model/musica/Album.h"
@@ -32,6 +33,7 @@
 #include "../model/merch/TShirt.h"
 #include "../model/tour/Tour.h"
 #include "../model/artisti/Artista.h"
+#include "./util/ClickableLabel.h"
 
 VisitorGUI::VisitorGUI(QObject* parent)
     : QObject(parent),
@@ -223,78 +225,86 @@ void VisitorGUI::visit(const TShirt* tshirt) {
     clearLayout();
     qDebug() << "VisitorGUI::visit(TShirt)";
 
+    // — Main wrapper
     QWidget* mainWrapper = new QWidget();
     QHBoxLayout* mainLayout = new QHBoxLayout(mainWrapper);
     mainLayout->setContentsMargins(8,8,8,8);
     mainLayout->setSpacing(12);
 
+    // — Product card (left)
     QWidget* productCard = new QWidget();
     productCard->setObjectName("tshirtContainer");
     productCard->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     QVBoxLayout* productLayout = new QVBoxLayout(productCard);
+    // margine superiore maggiore per “spingere” giù il contenuto
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(10);
 
-    // Image
-    QLabel* imageLabel = createImageLabel(tshirt->getImagePath(), false);
+    QPixmap pix(QString::fromStdString(tshirt->getImagePath()));
+    if (pix.isNull()) pix.load(":/icons/placeholder.png");
+
+    ClickableLabel* imageLabel = new ClickableLabel(productCard);
+    imageLabel->setObjectName("tshirtImageLabel");
+    imageLabel->setPixmap(pix.scaled(180,180, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     imageLabel->setFixedSize(180,180);
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
 
-    QLabel* titleLabel = new QLabel(QString::fromStdString(tshirt->getTitle()));
+    connect(imageLabel, &ClickableLabel::clicked, this, [pix](){
+        QDialog dlg;
+        dlg.setWindowTitle("Anteprima");
+        QVBoxLayout L(&dlg);
+        QLabel* big = new QLabel();
+        big->setPixmap(pix.scaled(600,600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        big->setAlignment(Qt::AlignCenter);
+        L.addWidget(big);
+        dlg.exec();
+    });
+
+    // Title
+    QLabel* titleLabel = new QLabel(
+        QString("<h2>%1</h2>").arg(QString::fromStdString(tshirt->getTitle()))
+    );
     titleLabel->setObjectName("tshirtTitleLabel");
     titleLabel->setAlignment(Qt::AlignHCenter);
     productLayout->addWidget(titleLabel);
 
-    {
-        QWidget* codeRow = new QWidget();
-        QHBoxLayout* codeLayout = new QHBoxLayout(codeRow);
-        codeLayout->setContentsMargins(0,0,0,0);
-        codeLayout->setSpacing(4);
-        codeLayout->addWidget(new QLabel(
-            "<b>Codice:</b> " + QString::fromStdString(tshirt->getCodiceProdotto())
-        ));
-        productLayout->addWidget(codeRow, 0, Qt::AlignHCenter);
-    }
+    // Disponibilità sotto il titolo
+    QLabel* availabilityLabel = new QLabel(
+        tshirt->getDisponibile() ? "Disponibile" : "Sold Out"
+    );
+    availabilityLabel->setObjectName("tshirtAvailabilityLabel");
+    availabilityLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(availabilityLabel);
 
     {
-        QWidget* infoRow = new QWidget();
-        QHBoxLayout* infoLayout = new QHBoxLayout(infoRow);
-        infoLayout->setContentsMargins(0,0,0,0);
-        infoLayout->setSpacing(20);
-        infoLayout->addWidget(new QLabel(
-            "<b>Disponibilità:</b> " + QString(tshirt->getDisponibile() ? "Sì" : "No")
-        ));
-        infoLayout->addWidget(new QLabel(
-            "<b>Quantità:</b> " + QString::number(tshirt->getQuantita())
-        ));
-        infoLayout->addWidget(new QLabel(
-            "<b>Prezzo:</b> " + QString("%1 €").arg(tshirt->getPrezzo())
-        ));
-        productLayout->addWidget(infoRow, 0, Qt::AlignHCenter);
-    }
+        // Taglia · Colore · Prezzo (in grassetto)
+        QWidget* tagPriceRow = new QWidget();
+        QHBoxLayout* tpLayout = new QHBoxLayout(tagPriceRow);
+        tpLayout->setContentsMargins(0,0,0,0);
+        tpLayout->setSpacing(20);
 
-    {
-        QWidget* attrRow = new QWidget();
-        QHBoxLayout* attrLayout = new QHBoxLayout(attrRow);
-        attrLayout->setContentsMargins(0,0,0,0);
-        attrLayout->setSpacing(20);
-        attrLayout->addWidget(new QLabel(
+        tpLayout->addWidget(new QLabel(
             "<b>Taglia:</b> " + QString::fromStdString(tshirt->getTaglia())
         ));
-        attrLayout->addWidget(new QLabel(
+        tpLayout->addWidget(new QLabel(
             "<b>Colore:</b> " + QString::fromStdString(tshirt->getColore())
         ));
-        productLayout->addWidget(attrRow, 0, Qt::AlignHCenter);
+        QLabel* priceLabel = new QLabel(
+            "<b>Prezzo:</b> " + QString("%1 €").arg(tshirt->getPrezzo())
+        );
+        priceLabel->setObjectName("tshirtPriceLabel");
+        tpLayout->addWidget(priceLabel, 0, Qt::AlignRight);
+
+        productLayout->addWidget(tagPriceRow, 0, Qt::AlignHCenter);
     }
 
-    productLayout->addSpacing(12);
-
+    productLayout->addSpacing(8);
     QLabel* descLabel = new QLabel(QString::fromStdString(tshirt->getDescription()));
     descLabel->setWordWrap(true);
-    descLabel->setAlignment(Qt::AlignCenter);
+    descLabel->setAlignment(Qt::AlignLeft);
+    descLabel->setObjectName("tshirtDescLabel");
     productLayout->addWidget(descLabel);
-
     productLayout->addSpacing(12);
 
     QPushButton* showPurchaseBtn = new QPushButton("Procedi", productCard);
@@ -318,7 +328,6 @@ void VisitorGUI::visit(const TShirt* tshirt) {
     QPushButton* addToCartBtn = new QPushButton("Acquista");
     addToCartBtn->setObjectName("addCartButton");
     purchaseLayout->addWidget(addToCartBtn);
-
     productLayout->addWidget(purchaseOptionsRow);
 
     // — Signal/slot per mostrare/nascondere
@@ -331,355 +340,407 @@ void VisitorGUI::visit(const TShirt* tshirt) {
 
     layout->setContentsMargins(0,0,0,0);
     layout->setSpacing(0);
+    layout->addWidget(mainWrapper);    
+}
+
+void VisitorGUI::visit(const CD* cd) {
+    clearLayout();
+    qDebug() << "VisitorGUI::visit(CD)";
+
+    QWidget* mainWrapper = new QWidget();
+    QHBoxLayout* mainLayout = new QHBoxLayout(mainWrapper);
+    mainLayout->setContentsMargins(8,8,8,8);
+    mainLayout->setSpacing(12);
+
+    QWidget* productCard = new QWidget();
+    productCard->setObjectName("cdContainer");
+    productCard->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+    QVBoxLayout* productLayout = new QVBoxLayout(productCard);
+    productLayout->setContentsMargins(24,30,24,12);
+    productLayout->setSpacing(10);
+
+    // — Immagine cliccabile con preview
+    QPixmap pix(QString::fromStdString(cd->getImagePath()));
+    if (pix.isNull()) pix.load(":/icons/placeholder.png");
+
+    ClickableLabel* imageLabel = new ClickableLabel(productCard);
+    imageLabel->setObjectName("cdImageLabel");
+    imageLabel->setPixmap(pix.scaled(180,180, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageLabel->setFixedSize(180,180);
+    productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
+
+    connect(imageLabel, &ClickableLabel::clicked, this, [pix](){
+        QDialog dlg;
+        dlg.setWindowTitle("Anteprima");
+        QVBoxLayout L(&dlg);
+        QLabel* big = new QLabel();
+        big->setPixmap(pix.scaled(600,600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        big->setAlignment(Qt::AlignCenter);
+        L.addWidget(big);
+        dlg.exec();
+    });
+
+    QLabel* titleLabel = new QLabel(
+        QString("<h2>%1</h2>").arg(QString::fromStdString(cd->getTitle()))
+    );
+    titleLabel->setObjectName("cdTitleLabel");
+    titleLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(titleLabel);
+
+    QLabel* availabilityLabel = new QLabel(
+        cd->getDisponibile() ? "Disponibile" : "Sold Out"
+    );
+    availabilityLabel->setObjectName("cdAvailabilityLabel");
+    availabilityLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(availabilityLabel);
+
+    {
+        QWidget* row1 = new QWidget(productCard);
+        QHBoxLayout* l1 = new QHBoxLayout(row1);
+        l1->setContentsMargins(0,0,0,0);
+        l1->setSpacing(20);
+
+        l1->addWidget(new QLabel(
+            "<b>Tipo:</b> " + QString::fromStdString(cd->getTipoProdotto())
+        ));
+        l1->addWidget(new QLabel(
+            "<b>Produttore:</b> " + QString::fromStdString(cd->getProduttoreStampe())
+        ));
+
+        productLayout->addWidget(row1, 0, Qt::AlignHCenter);
+    }
+
+    {
+        QWidget* row2 = new QWidget(productCard);
+        QHBoxLayout* l2 = new QHBoxLayout(row2);
+        l2->setContentsMargins(0,0,0,0);
+        l2->setSpacing(20);
+
+        l2->addWidget(new QLabel(
+            "<b>Prezzo:</b> " + QString("%1 €").arg(cd->getPrezzo())
+        ));
+
+        productLayout->addWidget(row2, 0, Qt::AlignHCenter);
+    }
+
+    productLayout->addSpacing(8);
+    QLabel* descLabel = new QLabel(QString::fromStdString(cd->getDescription()));
+    descLabel->setWordWrap(true);
+    descLabel->setAlignment(Qt::AlignLeft);
+    descLabel->setObjectName("cdDescLabel");
+    productLayout->addWidget(descLabel);
+    productLayout->addSpacing(12);
+
+    QPushButton* showPurchaseBtn = new QPushButton("Procedi", productCard);
+    showPurchaseBtn->setObjectName("showDetailButton");
+    showPurchaseBtn->setMaximumWidth(120);
+    productLayout->addWidget(showPurchaseBtn, 0, Qt::AlignHCenter);
+
+    QWidget* purchaseOptionsRow = new QWidget(productCard);
+    purchaseOptionsRow->setVisible(false);
+    QHBoxLayout* purchaseLayout = new QHBoxLayout(purchaseOptionsRow);
+    purchaseLayout->setContentsMargins(0,0,0,0);
+    purchaseLayout->setSpacing(16);
+    purchaseLayout->setAlignment(Qt::AlignHCenter);
+
+    purchaseLayout->addWidget(new QLabel("Quantità:"));
+    QSpinBox* quantitySpinner = new QSpinBox();
+    quantitySpinner->setRange(1, cd->getQuantita());
+    quantitySpinner->setValue(1);
+    purchaseLayout->addWidget(quantitySpinner);
+
+    QPushButton* addToCartBtn = new QPushButton("Acquista");
+    addToCartBtn->setObjectName("addCartButton");
+    purchaseLayout->addWidget(addToCartBtn);
+    productLayout->addWidget(purchaseOptionsRow);
+
+    connect(showPurchaseBtn, &QPushButton::clicked, this, [showPurchaseBtn, purchaseOptionsRow](){
+        showPurchaseBtn->setVisible(false);
+        purchaseOptionsRow->setVisible(true);
+    });
+
+    mainLayout->addWidget(productCard, /*stretch=*/1);
+
+    layout->setContentsMargins(0,0,0,0);
+    layout->setSpacing(0);
     layout->addWidget(mainWrapper);
 }
 
-
-
-void VisitorGUI::visit(const CD* cd) {
-    qDebug() << "VisitorGUI::visit(CD)";
-
-    clearLayout();
-
-    // Container principale
-    QWidget* container = new QWidget();
-    container->setObjectName("cdContainer");
-    QVBoxLayout* vbox = new QVBoxLayout(container);
-    vbox->setContentsMargins(40, 20, 40, 20);
-    vbox->setSpacing(8);
-
-    // Immagine
-    QLabel* imgLabel = createImageLabel(cd->getImagePath(), false);
-    imgLabel->setObjectName("cdImageLabel");
-    vbox->addWidget(imgLabel, 0, Qt::AlignCenter);
-
-    // Titolo
-    QLabel* title = new QLabel(
-        QString("<h2>%1</h2>").arg(QString::fromStdString(cd->getTitle()))
-    );
-    title->setObjectName("cdTitleLabel");
-    title->setAlignment(Qt::AlignCenter);
-    vbox->addWidget(title);
-
-    // === PRIMA riga (tipo, codici, produttore) ===
-    QWidget* grid1 = new QWidget();
-    grid1->setObjectName("cdGrid1");
-    QHBoxLayout* layout1 = new QHBoxLayout(grid1);
-    layout1->setContentsMargins(10, 0, 10, 0);
-    layout1->setSpacing(15);
-    layout1->setAlignment(Qt::AlignCenter);
-
-    QLabel* typeLabel = new QLabel(
-        "<b>Tipo Prodotto:</b> " +
-        QString::fromStdString(cd->getTipoProdotto())
-    );
-    typeLabel->setObjectName("cdTypeLabel");
-
-    QLabel* codeLabel = new QLabel(
-        "<b>Codice Prodotto:</b> " +
-        QString::fromStdString(cd->getCodiceProdotto())
-    );
-    codeLabel->setObjectName("cdCodeLabel");
-
-    QLabel* recLabel = new QLabel(
-        "<b>Codice Riconoscimento:</b> " +
-        QString::fromStdString(cd->getCodiceRiconoscimento())
-    );
-    recLabel->setObjectName("cdRecognitionLabel");
-
-    QLabel* prodLabel = new QLabel(
-        "<b>Produttore Stampe:</b> " +
-        QString::fromStdString(cd->getProduttoreStampe())
-    );
-    prodLabel->setObjectName("cdProducerLabel");
-
-    layout1->addWidget(typeLabel);
-    layout1->addWidget(codeLabel);
-    layout1->addWidget(recLabel);
-    layout1->addWidget(prodLabel);
-    vbox->addWidget(grid1, 0, Qt::AlignCenter);
-
-    // === SECONDA riga (disponibilità, quantità, prezzo) ===
-    QWidget* grid2 = new QWidget();
-    grid2->setObjectName("cdGrid2");
-    QHBoxLayout* layout2 = new QHBoxLayout(grid2);
-    layout2->setContentsMargins(10, 0, 10, 0);
-    layout2->setSpacing(15);
-    layout2->setAlignment(Qt::AlignCenter);
-
-    QLabel* dispoLabel = new QLabel(
-        "<b>Disponibilità:</b> " +
-        QString(cd->getDisponibile() ? "Disponibile" : "Sold Out")
-    );
-    dispoLabel->setObjectName("cdAvailabilityLabel");
-
-    QLabel* qtyLabel = new QLabel(
-        "<b>Quantità:</b> " +
-        QString::number(cd->getQuantita())
-    );
-    qtyLabel->setObjectName("cdQuantityLabel");
-
-    QLabel* priceLabel = new QLabel(
-        "<b>Prezzo:</b> " +
-        QString("%1 €").arg(cd->getPrezzo())
-    );
-    priceLabel->setObjectName("cdPriceLabel");
-
-    layout2->addWidget(dispoLabel);
-    layout2->addWidget(qtyLabel);
-    layout2->addWidget(priceLabel);
-    vbox->addWidget(grid2, 0, Qt::AlignCenter);
-
-    // === TERZA riga (formato) ===
-    QLabel* formato = new QLabel(
-        "<b>Formato:</b> " +
-        QString::fromStdString(cd->getFormato())
-    );
-    formato->setObjectName("cdFormatLabel");
-    formato->setAlignment(Qt::AlignCenter);
-    vbox->addWidget(formato);
-
-    // Descrizione
-    QLabel* desc = new QLabel(QString::fromStdString(cd->getDescription()));
-    desc->setObjectName("cdDescLabel");
-    desc->setWordWrap(true);
-    desc->setAlignment(Qt::AlignCenter);
-    vbox->addWidget(desc);
-
-    layout->addWidget(container);
-}
-
 void VisitorGUI::visit(const Vinile* vinile) {
+    clearLayout();
     qDebug() << "VisitorGUI::visit(Vinile)";
 
-    clearLayout();
+    QWidget* mainWrapper = new QWidget();
+    QHBoxLayout* mainLayout = new QHBoxLayout(mainWrapper);
+    mainLayout->setContentsMargins(8,8,8,8);
+    mainLayout->setSpacing(12);
 
-    // Container principale
-    QWidget* container = new QWidget();
-    container->setObjectName("vinileContainer");
-    QVBoxLayout* vbox = new QVBoxLayout(container);
-    vbox->setContentsMargins(40, 20, 40, 20);
-    vbox->setSpacing(8);
+    QWidget* productCard = new QWidget();
+    productCard->setObjectName("vinileContainer");
+    productCard->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    // Immagine
-    QLabel* imgLabel = createImageLabel(vinile->getImagePath(), false);
-    imgLabel->setObjectName("vinileImageLabel");
-    vbox->addWidget(imgLabel, 0, Qt::AlignCenter);
+    QVBoxLayout* productLayout = new QVBoxLayout(productCard);
+    productLayout->setContentsMargins(24,30,24,12);
+    productLayout->setSpacing(10);
 
-    // Titolo
-    QLabel* title = new QLabel(
-        QString("<h2>%1</h2>").arg(QString::fromStdString(vinile->getTitle()))
+    QPixmap pix(QString::fromStdString(vinile->getImagePath()));
+    if (pix.isNull()) pix.load(":/icons/placeholder.png");
+
+    ClickableLabel* imageLabel = new ClickableLabel(productCard);
+    imageLabel->setObjectName("vinileImageLabel");
+    imageLabel->setPixmap(pix.scaled(180,180, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageLabel->setFixedSize(180,180);
+    productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
+
+    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
+        QDialog dlg;
+        dlg.setWindowTitle("Anteprima");
+        QVBoxLayout L(&dlg);
+        QLabel* big = new QLabel();
+        big->setPixmap(pix.scaled(600,600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        big->setAlignment(Qt::AlignCenter);
+        L.addWidget(big);
+        dlg.exec();
+    });
+
+    QLabel* titleLabel = new QLabel(
+        QString::fromStdString(vinile->getTitle())
     );
-    title->setObjectName("vinileTitleLabel");
-    title->setAlignment(Qt::AlignCenter);
-    vbox->addWidget(title);
+    titleLabel->setObjectName("vinileTitleLabel");
+    titleLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(titleLabel);
 
-    // === PRIMA riga (tipo, codici, produttore) ===
-    QWidget* grid1 = new QWidget();
-    grid1->setObjectName("vinileGrid1");
-    QHBoxLayout* layout1 = new QHBoxLayout(grid1);
-    layout1->setContentsMargins(10, 0, 10, 0);
-    layout1->setSpacing(15);
-    layout1->setAlignment(Qt::AlignCenter);
-
-    QLabel* typeLabel = new QLabel(
-        "<b>Tipo Prodotto:</b> " +
-        QString::fromStdString(vinile->getTipoProdotto())
+    QLabel* availabilityLabel = new QLabel(
+        vinile->getDisponibile() ? "Disponibile" : "Non disponibile"
     );
-    typeLabel->setObjectName("vinileTypeLabel");
+    availabilityLabel->setObjectName("vinileAvailabilityLabel");
+    availabilityLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(availabilityLabel);
 
-    QLabel* codeLabel = new QLabel(
-        "<b>Codice Prodotto:</b> " +
-        QString::fromStdString(vinile->getCodiceProdotto())
-    );
-    codeLabel->setObjectName("vinileCodeLabel");
+    {
+        QWidget* row1 = new QWidget(productCard);
+        QHBoxLayout* l1 = new QHBoxLayout(row1);
+        l1->setContentsMargins(0,0,0,0);
+        l1->setSpacing(20);
 
-    QLabel* recLabel = new QLabel(
-        "<b>Codice Riconoscimento:</b> " +
-        QString::fromStdString(vinile->getCodiceRiconoscimento())
-    );
-    recLabel->setObjectName("vinileRecognitionLabel");
+        l1->addWidget(new QLabel(
+            "<b>Tipo:</b> " + QString::fromStdString(vinile->getTipoProdotto())
+        ));
+        l1->addWidget(new QLabel(
+            "<b>Riconoscimento:</b> " + QString::fromStdString(vinile->getCodiceRiconoscimento())
+        ));
+        l1->addWidget(new QLabel(
+            "<b>Produttore:</b> " + QString::fromStdString(vinile->getProduttoreStampe())
+        ));
 
-    QLabel* prodLabel = new QLabel(
-        "<b>Produttore Stampe:</b> " +
-        QString::fromStdString(vinile->getProduttoreStampe())
-    );
-    prodLabel->setObjectName("vinileProducerLabel");
+        productLayout->addWidget(row1, 0, Qt::AlignHCenter);
+    }
 
-    layout1->addWidget(typeLabel);
-    layout1->addWidget(codeLabel);
-    layout1->addWidget(recLabel);
-    layout1->addWidget(prodLabel);
-    vbox->addWidget(grid1, 0, Qt::AlignCenter);
+    {
+        QWidget* row2 = new QWidget(productCard);
+        QHBoxLayout* l2 = new QHBoxLayout(row2);
+        l2->setContentsMargins(0,0,0,0);
+        l2->setSpacing(20);
 
-    // === SECONDA riga (disponibilità, quantità, prezzo) ===
-    QWidget* grid2 = new QWidget();
-    grid2->setObjectName("vinileGrid2");
-    QHBoxLayout* layout2 = new QHBoxLayout(grid2);
-    layout2->setContentsMargins(10, 0, 10, 0);
-    layout2->setSpacing(15);
-    layout2->setAlignment(Qt::AlignCenter);
+        l2->addWidget(new QLabel(
+            "<b>Prezzo:</b> " + QString("%1 €").arg(vinile->getPrezzo())
+        ));
 
-    QLabel* dispoLabel = new QLabel(
-        "<b>Disponibilità:</b> " +
-        QString(vinile->getDisponibile() ? "Disponibile" : "Non disponibile")
-    );
-    dispoLabel->setObjectName("vinileAvailabilityLabel");
+        productLayout->addWidget(row2, 0, Qt::AlignHCenter);
+    }
 
-    QLabel* qtyLabel = new QLabel(
-        "<b>Quantità:</b> " +
-        QString::number(vinile->getQuantita())
-    );
-    qtyLabel->setObjectName("vinileQuantityLabel");
+    {
+        QWidget* row3 = new QWidget(productCard);
+        QHBoxLayout* l3 = new QHBoxLayout(row3);
+        l3->setContentsMargins(0,0,0,0);
+        l3->setSpacing(20);
 
-    QLabel* priceLabel = new QLabel(
-        "<b>Prezzo:</b> " +
-        QString("%1 €").arg(vinile->getPrezzo())
-    );
-    priceLabel->setObjectName("vinilePriceLabel");
+        l3->addWidget(new QLabel(
+            "<b>Diametro:</b> " + QString::number(vinile->getDiametro()) + " cm"
+        ));
+        l3->addWidget(new QLabel(
+            "<b>RPM:</b> " + QString::number(vinile->getRpm())
+        ));
 
-    layout2->addWidget(dispoLabel);
-    layout2->addWidget(qtyLabel);
-    layout2->addWidget(priceLabel);
-    vbox->addWidget(grid2, 0, Qt::AlignCenter);
+        productLayout->addWidget(row3, 0, Qt::AlignHCenter);
+    }
 
-    // === TERZA riga (diametro, RPM) ===
-    QWidget* grid3 = new QWidget();
-    grid3->setObjectName("vinileGrid3");
-    QHBoxLayout* layout3 = new QHBoxLayout(grid3);
-    layout3->setContentsMargins(10, 0, 10, 0);
-    layout3->setSpacing(15);
-    layout3->setAlignment(Qt::AlignCenter);
+    // — Descrizione
+    productLayout->addSpacing(8);
+    QLabel* descLabel = new QLabel(QString::fromStdString(vinile->getDescription()));
+    descLabel->setObjectName("vinileDescLabel");
+    descLabel->setWordWrap(true);
+    descLabel->setAlignment(Qt::AlignLeft);
+    productLayout->addWidget(descLabel);
+    productLayout->addSpacing(12);
 
-    QLabel* diamLabel = new QLabel(
-        "<b>Diametro:</b> " +
-        QString::number(vinile->getDiametro()) + " cm"
-    );
-    diamLabel->setObjectName("vinileDiameterLabel");
+    // — Pulsante “Procedi” e opzioni di acquisto
+    QPushButton* showPurchaseBtn = new QPushButton("Procedi", productCard);
+    showPurchaseBtn->setObjectName("showDetailButton");
+    showPurchaseBtn->setMaximumWidth(120);
+    productLayout->addWidget(showPurchaseBtn, 0, Qt::AlignHCenter);
 
-    QLabel* rpmLabel = new QLabel(
-        "<b>RPM:</b> " +
-        QString::number(vinile->getRpm())
-    );
-    rpmLabel->setObjectName("vinileRpmLabel");
+    QWidget* purchaseOptionsRow = new QWidget(productCard);
+    purchaseOptionsRow->setVisible(false);
+    QHBoxLayout* purchaseLayout = new QHBoxLayout(purchaseOptionsRow);
+    purchaseLayout->setContentsMargins(0,0,0,0);
+    purchaseLayout->setSpacing(16);
+    purchaseLayout->setAlignment(Qt::AlignHCenter);
 
-    layout3->addWidget(diamLabel);
-    layout3->addWidget(rpmLabel);
-    vbox->addWidget(grid3, 0, Qt::AlignCenter);
+    purchaseLayout->addWidget(new QLabel("Quantità:"));
+    QSpinBox* quantitySpinner = new QSpinBox();
+    quantitySpinner->setRange(1, vinile->getQuantita());
+    quantitySpinner->setValue(1);
+    purchaseLayout->addWidget(quantitySpinner);
 
-    // Descrizione
-    QLabel* desc = new QLabel(QString::fromStdString(vinile->getDescription()));
-    desc->setObjectName("vinileDescLabel");
-    desc->setWordWrap(true);
-    desc->setAlignment(Qt::AlignLeft);
-    vbox->addWidget(desc);
+    QPushButton* addToCartBtn = new QPushButton("Acquista");
+    addToCartBtn->setObjectName("addCartButton");
+    purchaseLayout->addWidget(addToCartBtn);
+    productLayout->addWidget(purchaseOptionsRow);
 
-    layout->addWidget(container);
+    connect(showPurchaseBtn, &QPushButton::clicked, this, [showPurchaseBtn, purchaseOptionsRow]() {
+        showPurchaseBtn->setVisible(false);
+        purchaseOptionsRow->setVisible(true);
+    });
+
+    // — Inserisco la card nel mainLayout
+    mainLayout->addWidget(productCard, /*stretch=*/1);
+
+    // — Inserisco il mainWrapper nel layout di this
+    layout->setContentsMargins(0,0,0,0);
+    layout->setSpacing(0);
+    layout->addWidget(mainWrapper);
 }
 // ------------------------------------
 
 
 // ---------- musica ----------------
 void VisitorGUI::visit(const Singolo* singolo) {
+    clearLayout();
     qDebug() << "VisitorGUI::visit(Singolo)";
 
+    // — Main wrapper
+    QWidget* mainWrapper = new QWidget();
+    QHBoxLayout* mainLayout = new QHBoxLayout(mainWrapper);
+    mainLayout->setContentsMargins(8,8,8,8);
+    mainLayout->setSpacing(12);
 
-    clearLayout();
+    // — Product card (left)
+    QWidget* productCard = new QWidget();
+    productCard->setObjectName("singoloContainer");
+    productCard->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    // Container principale
-    QWidget* container = new QWidget();
-    container->setObjectName("singoloContainer");
-    QVBoxLayout* vbox = new QVBoxLayout(container);
-    vbox->setContentsMargins(40, 20, 40, 20);
-    vbox->setSpacing(8);
+    QVBoxLayout* productLayout = new QVBoxLayout(productCard);
+    productLayout->setContentsMargins(24,30,24,12);
+    productLayout->setSpacing(10);
 
-    // Immagine
-    QLabel* imgLabel = createImageLabel(singolo->getImagePath(), false);
-    imgLabel->setObjectName("singoloImageLabel");
-    vbox->addWidget(imgLabel, 0, Qt::AlignCenter);
+    // — Immagine cliccabile con anteprima
+    QPixmap pix(QString::fromStdString(singolo->getImagePath()));
+    if (pix.isNull()) pix.load(":/icons/placeholder.png");
 
-    // Titolo
-    QLabel* title = new QLabel(
-        QString("<h2>%1</h2>").arg(QString::fromStdString(singolo->getTitle()))
+    ClickableLabel* imageLabel = new ClickableLabel(productCard);
+    imageLabel->setObjectName("singoloImageLabel");
+    imageLabel->setPixmap(pix.scaled(180,180, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageLabel->setFixedSize(180,180);
+    productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
+
+    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
+        QDialog dlg;
+        dlg.setWindowTitle("Anteprima");
+        QVBoxLayout L(&dlg);
+        QLabel* big = new QLabel();
+        big->setPixmap(pix.scaled(600,600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        big->setAlignment(Qt::AlignCenter);
+        L.addWidget(big);
+        dlg.exec();
+    });
+
+    // — Titolo Singolo
+    QLabel* titleLabel = new QLabel(
+        QString::fromStdString(singolo->getTitle())
     );
-    title->setObjectName("singoloTitleLabel");
-    title->setAlignment(Qt::AlignCenter);
-    vbox->addWidget(title);
+    titleLabel->setObjectName("singoloTitleLabel");
+    titleLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(titleLabel);
 
-    // --- Primo blocco: Data Uscita + Durata ---
-    QWidget* infoRow1 = new QWidget();
-    infoRow1->setObjectName("singoloInfoRow1");
-    QHBoxLayout* layoutInfo1 = new QHBoxLayout(infoRow1);
-    layoutInfo1->setContentsMargins(0, 0, 0, 0);
-    layoutInfo1->setSpacing(15);
-    layoutInfo1->setAlignment(Qt::AlignCenter);
+    // — Prima riga: Genere · Versione · Classifica
+    {
+        QWidget* row1 = new QWidget(productCard);
+        QHBoxLayout* l1 = new QHBoxLayout(row1);
+        l1->setContentsMargins(0,0,0,0);
+        l1->setSpacing(20);
 
-    QLabel* dataLabel = new QLabel(
-        QString("<b>Data Uscita:</b> ") +
-        QString::fromStdString(singolo->getDataUscita().toString())
-    );
-    dataLabel->setObjectName("singoloReleaseDateLabel");
+        l1->addWidget(new QLabel(
+            "<b>Genere:</b> " + QString::fromStdString(singolo->getGenere())
+        ));
+        l1->addWidget(new QLabel(
+            "<b>Versione:</b> " + QString(singolo->getIsRemix() ? "Remix" : "Original")
+        ));
+        l1->addWidget(new QLabel(
+            "<b>Classifica:</b> " + QString::number(singolo->getChartPosition())
+        ));
 
-    QLabel* durataLabel = new QLabel(
-        "<b>Durata:</b> " +
-        QString::fromStdString(singolo->getDurata().toString())
-    );
-    durataLabel->setObjectName("singoloDurationLabel");
+        productLayout->addWidget(row1, 0, Qt::AlignHCenter);
+    }
 
-    layoutInfo1->addWidget(dataLabel);
-    layoutInfo1->addWidget(durataLabel);
-    vbox->addWidget(infoRow1, 0, Qt::AlignCenter);
+    // — Descrizione
+    productLayout->addSpacing(8);
+    QLabel* descLabel = new QLabel(QString::fromStdString(singolo->getDescription()));
+    descLabel->setObjectName("singoloDescLabel");
+    descLabel->setWordWrap(true);
+    descLabel->setAlignment(Qt::AlignLeft);
+    productLayout->addWidget(descLabel);
+    productLayout->addSpacing(12);
 
-    // --- Secondo blocco: Genere + Versione + Chart ---
-    QWidget* infoRow2 = new QWidget();
-    infoRow2->setObjectName("singoloInfoRow2");
-    QHBoxLayout* layoutInfo2 = new QHBoxLayout(infoRow2);
-    layoutInfo2->setContentsMargins(0, 0, 0, 0);
-    layoutInfo2->setSpacing(15);
-    layoutInfo2->setAlignment(Qt::AlignCenter);
-
-    QLabel* genreLabel = new QLabel(
-        "<b>Genere:</b> " +
-        QString::fromStdString(singolo->getGenere())
-    );
-    genreLabel->setObjectName("singoloGenreLabel");
-
-    QLabel* versionLabel = new QLabel(
-        "<b>Versione:</b> " +
-        QString(singolo->getIsRemix() ? "Remix" : "Original")
-    );
-    versionLabel->setObjectName("singoloVersionLabel");
-
-    QLabel* chartLabel = new QLabel(
-        "<b>Classifica:</b> " +
-        QString::number(singolo->getChartPosition())
-    );
-    chartLabel->setObjectName("singoloChartLabel");
-
-    layoutInfo2->addWidget(genreLabel);
-    layoutInfo2->addWidget(versionLabel);
-    layoutInfo2->addWidget(chartLabel);
-    vbox->addWidget(infoRow2, 0, Qt::AlignCenter);
-
-    // Descrizione
-    QLabel* desc = new QLabel(QString::fromStdString(singolo->getDescription()));
-    desc->setObjectName("singoloDescLabel");
-    desc->setWordWrap(true);
-    desc->setAlignment(Qt::AlignLeft);
-    vbox->addWidget(desc);
-
-    // Info traccia principale
+    // — Info traccia principale (stile track)
     const Traccia& track = singolo->getMainTrack();
-    QLabel* trackInfo = new QLabel(
-        QString("%1 (%2)")
-            .arg(QString::fromStdString(track.getNome()))
-            .arg(QString::fromStdString(track.getDurata().toString()))
+    QLabel* trackLabel = new QLabel(
+        QString("<span style='font-size:14pt; font-weight:600;'>%1</span> ")
+        .arg(QString::fromStdString(track.getNome())) +
+        QString("<span style='font-size:10pt; color:#555;'>%1</span>")
+        .arg(QString::fromStdString(track.getDurata().toString()))
     );
-    trackInfo->setObjectName("singoloTrackInfoLabel");
-    trackInfo->setAlignment(Qt::AlignLeft);
-    vbox->addWidget(trackInfo);
+    trackLabel->setObjectName("singoloTrackInfoLabel");
+    trackLabel->setAlignment(Qt::AlignCenter);
+    productLayout->addWidget(trackLabel);
 
-    layout->addWidget(container);
+    // — Pulsante “Procedi” e opzioni di acquisto
+    QPushButton* showPurchaseBtn = new QPushButton("Procedi", productCard);
+    showPurchaseBtn->setObjectName("showDetailButton");
+    showPurchaseBtn->setMaximumWidth(120);
+    productLayout->addWidget(showPurchaseBtn, 0, Qt::AlignHCenter);
+
+    QWidget* purchaseOptionsRow = new QWidget(productCard);
+    purchaseOptionsRow->setVisible(false);
+    QHBoxLayout* purchaseLayout = new QHBoxLayout(purchaseOptionsRow);
+    purchaseLayout->setContentsMargins(0,0,0,0);
+    purchaseLayout->setSpacing(16);
+    purchaseLayout->setAlignment(Qt::AlignHCenter);
+
+    /* purchaseLayout->addWidget(new QLabel("Quantità:"));
+    QSpinBox* quantitySpinner = new QSpinBox();
+    quantitySpinner->setRange(1, singolo->getQuantita());
+    quantitySpinner->setValue(1);
+    purchaseLayout->addWidget(quantitySpinner); */
+
+    QPushButton* addToCartBtn = new QPushButton("Acquista");
+    addToCartBtn->setObjectName("addCartButton");
+    purchaseLayout->addWidget(addToCartBtn);
+    productLayout->addWidget(purchaseOptionsRow);
+
+    connect(showPurchaseBtn, &QPushButton::clicked, this, [showPurchaseBtn, purchaseOptionsRow]() {
+        showPurchaseBtn->setVisible(false);
+        purchaseOptionsRow->setVisible(true);
+    });
+
+    // — Inserisco la card nel mainLayout
+    mainLayout->addWidget(productCard, /*stretch=*/1);
+
+    // — Inserisco il mainWrapper
+    layout->setContentsMargins(0,0,0,0);
+    layout->setSpacing(0);
+    layout->addWidget(mainWrapper);
 }
 
 void VisitorGUI::visit(const Album* album) {
@@ -764,85 +825,125 @@ void VisitorGUI::visit(const Album* album) {
 }
 // ------------------------------------
 
-// ---------- tour ----------------
+// ---------- Tour ----------------
 void VisitorGUI::visit(const Tour* tour) {
+    clearLayout();
     qDebug() << "VisitorGUI::visit(Tour)";
 
-    clearLayout();
+    QWidget* mainWrapper = new QWidget();
+    QHBoxLayout* mainLayout = new QHBoxLayout(mainWrapper);
+    mainLayout->setContentsMargins(8,8,8,8);
+    mainLayout->setSpacing(12);
 
-    // Container principale
-    QWidget* container = new QWidget();
-    container->setObjectName("tourContainer");
-    QVBoxLayout* vbox = new QVBoxLayout(container);
-    vbox->setContentsMargins(40, 20, 40, 20);
-    vbox->setSpacing(8);
+    QWidget* productCard = new QWidget();
+    productCard->setObjectName("tourContainer");
+    productCard->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
-    // Immagine Tour
-    QLabel* imgLabel = createImageLabel(tour->getImagePath(), false);
-    imgLabel->setObjectName("tourImageLabel");
-    vbox->addWidget(imgLabel, 0, Qt::AlignCenter);
+    QVBoxLayout* productLayout = new QVBoxLayout(productCard);
+    productLayout->setContentsMargins(24,30,24,12);
+    productLayout->setSpacing(10);
 
-    // Titolo Tour
-    QLabel* title = new QLabel(
-        QString("<h2>%1</h2>").arg(QString::fromStdString(tour->getTitle()))
+    QPixmap pix(QString::fromStdString(tour->getImagePath()));
+    if (pix.isNull()) pix.load(":/icons/placeholder.png");
+
+    ClickableLabel* imageLabel = new ClickableLabel(productCard);
+    imageLabel->setObjectName("tourImageLabel");
+    imageLabel->setPixmap(pix.scaled(180,180, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    imageLabel->setFixedSize(180,180);
+    productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
+
+    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
+        QDialog dlg;
+        dlg.setWindowTitle("Anteprima");
+        QVBoxLayout L(&dlg);
+        QLabel* big = new QLabel();
+        big->setPixmap(pix.scaled(600,600, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        big->setAlignment(Qt::AlignCenter);
+        L.addWidget(big);
+        dlg.exec();
+    });
+
+    // — Titolo
+    QLabel* titleLabel = new QLabel(QString::fromStdString(tour->getTitle()));
+    titleLabel->setObjectName("tourTitleLabel");
+    titleLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(titleLabel);
+
+    QLabel* availabilityLabel = new QLabel(
+        tour->getDisponibile() ? "Disponibile" : "Non disponibile"
     );
-    title->setObjectName("tourTitleLabel");
-    title->setAlignment(Qt::AlignCenter);
-    vbox->addWidget(title);
+    availabilityLabel->setObjectName("tourAvailabilityLabel");
+    availabilityLabel->setAlignment(Qt::AlignHCenter);
+    productLayout->addWidget(availabilityLabel);
 
-    // === PRIMA riga: disponibilità, quantità, prezzo ===
-    QWidget* grid1 = new QWidget();
-    grid1->setObjectName("tourGrid1");
-    QHBoxLayout* layout1 = new QHBoxLayout(grid1);
-    layout1->setContentsMargins(10, 0, 10, 0);
-    layout1->setSpacing(15);
-    layout1->setAlignment(Qt::AlignCenter);
+    {
+        QWidget* row1 = new QWidget(productCard);
+        QHBoxLayout* l1 = new QHBoxLayout(row1);
+        l1->setContentsMargins(0,0,0,0);
+        l1->setSpacing(20);
 
-    QLabel* dispoLabel = new QLabel(
-        "<b>Disponibilità:</b> " +
-        QString(tour->getDisponibile() ? "Disponibile" : "Non disponibile")
-    );
-    dispoLabel->setObjectName("tourAvailabilityLabel");
+        const auto& dateTour = tour->getDateTour();
+        if (!dateTour.empty()) {
+            const Data inizio = dateTour.front().getData();
+            const Data fine   = dateTour.back().getData();
+            l1->setContentsMargins(0,0,0,0);
+            l1->setSpacing(20);
 
-    QLabel* qtyLabel = new QLabel(
-        "<b>Quantità:</b> " +
-        QString::number(tour->getQuantita())
-    );
-    qtyLabel->setObjectName("tourQuantityLabel");
+            l1->addWidget(new QLabel(
+                "<b>Periodo:</b> " +
+                QString::fromStdString(inizio.toString()) + " → " +
+                QString::fromStdString(fine.toString())
+            ));
+        }
 
-    QLabel* priceLabel = new QLabel(
-        "<b>Prezzo:</b> " +
-        QString("%1 €").arg(tour->getPrezzo())
-    );
-    priceLabel->setObjectName("tourPriceLabel");
+        l1->addWidget(new QLabel(
+            "<b>Prezzo:</b> " + QString("%1 €").arg(tour->getPrezzo())
+        ));
 
-    layout1->addWidget(dispoLabel);
-    layout1->addWidget(qtyLabel);
-    layout1->addWidget(priceLabel);
-    vbox->addWidget(grid1, 0, Qt::AlignCenter);
-
-    // === SECONDA riga: periodo del tour ===
-    const auto& dateTour = tour->getDateTour();
-    if (!dateTour.empty()) {
-        const Data inizio = dateTour.front().getData();
-        const Data fine   = dateTour.back().getData();
-        QLabel* periodLabel = new QLabel(
-            "<b>Periodo:</b> " +
-            QString::fromStdString(inizio.toString()) + " → " +
-            QString::fromStdString(fine.toString())
-        );
-        periodLabel->setObjectName("tourPeriodLabel");
-        periodLabel->setAlignment(Qt::AlignCenter);
-        vbox->addWidget(periodLabel);
+        productLayout->addWidget(row1, 0, Qt::AlignHCenter);
     }
 
-    // Descrizione
-    QLabel* desc = new QLabel(QString::fromStdString(tour->getDescription()));
-    desc->setObjectName("tourDescLabel");
-    desc->setWordWrap(true);
-    desc->setAlignment(Qt::AlignLeft);
-    vbox->addWidget(desc);
+    productLayout->addSpacing(8);
+    QLabel* descLabel = new QLabel(QString::fromStdString(tour->getDescription()));
+    descLabel->setObjectName("tourDescLabel");
+    descLabel->setWordWrap(true);
+    descLabel->setAlignment(Qt::AlignLeft);
+    productLayout->addWidget(descLabel);
+    productLayout->addSpacing(12);
 
-    layout->addWidget(container);
+    QPushButton* showPurchaseBtn = new QPushButton("Procedi", productCard);
+    showPurchaseBtn->setObjectName("showDetailButton");
+    showPurchaseBtn->setMaximumWidth(120);
+    productLayout->addWidget(showPurchaseBtn, 0, Qt::AlignHCenter);
+
+    QWidget* purchaseOptionsRow = new QWidget(productCard);
+    purchaseOptionsRow->setVisible(false);
+    QHBoxLayout* purchaseLayout = new QHBoxLayout(purchaseOptionsRow);
+    purchaseLayout->setContentsMargins(0,0,0,0);
+    purchaseLayout->setSpacing(16);
+    purchaseLayout->setAlignment(Qt::AlignHCenter);
+
+    purchaseLayout->addWidget(new QLabel("Quantità:"));
+    QSpinBox* quantitySpinner = new QSpinBox();
+    quantitySpinner->setRange(1, tour->getQuantita());
+    quantitySpinner->setValue(1);
+    purchaseLayout->addWidget(quantitySpinner);
+
+    QPushButton* addToCartBtn = new QPushButton("Acquista");
+    addToCartBtn->setObjectName("addCartButton");
+    purchaseLayout->addWidget(addToCartBtn);
+    productLayout->addWidget(purchaseOptionsRow);
+
+    connect(showPurchaseBtn, &QPushButton::clicked, this, [showPurchaseBtn, purchaseOptionsRow]() {
+        showPurchaseBtn->setVisible(false);
+        purchaseOptionsRow->setVisible(true);
+    });
+
+    mainLayout->addWidget(productCard, /*stretch=*/1);
+
+    layout->setContentsMargins(0,0,0,0);
+    layout->setSpacing(0);
+    layout->addWidget(mainWrapper);
 }
+
 // ------------------------------------

@@ -105,18 +105,13 @@ QPushButton#productButton:pressed {
 QWidget#tshirtContainer {
     background-color: #ffffff;
     padding: 20px;
-    /* Simula una leggera ombra interna */
-    background-clip: padding;
 }
 
 QLabel#tshirtImageLabel {
     border: 1px solid #E0E5EA;
     border-radius: 6px;
-    background-color: #00ffffff;
+    background-color: #ffffff;
     padding: 4px;
-}
-QLabel#tshirtImageLabel:hover {
-    border-color: #6b790000;
 }
 
 QLabel#tshirtTitleLabel {
@@ -128,24 +123,19 @@ QLabel#tshirtTitleLabel {
     margin: 12px 0 16px 0;
 }
 
-/*
-QLabel#tshirtCodeLabel,
-QLabel#tshirtQuantityLabel,
-QLabel#tshirtSizeLabel,
-QLabel#tshirtColorLabel {
+QLabel#tshirtAvailabilityLabel {
     font-family: "Open Sans", sans-serif;
-    font-size: 10pt;
-    color: #4A4A4A;
-    padding: 0;
-    margin: 0;
+    font-size: 9pt;
+    color: rgba(0,0,0,0.4); 
+    qproperty-alignment: AlignCenter;
+    margin-bottom: 12px;
 }
-*/
 
 QLabel#tshirtDescLabel {
     font-family: "Open Sans", sans-serif;
     font-size: 9pt;
     color: #555555;
-    background-color: #F9FBFD;
+    background-color: #b6f9fbfd;
     border: 1px solid #E0E5EA;
     border-radius: 6px;
     padding: 10px;
@@ -157,16 +147,16 @@ QPushButton#showDetailButton {
     font-size: 10pt;
     font-weight: 500;
     color: #FFFFFF;
-    background-color: #efff3333;
+    background-color: #FF3333;
     border: none;
     border-radius: 6px;
     padding: 8px 20px;
 }
 QPushButton#showDetailButton:hover {
-    background-color: #f5db2727;
+    background-color: #E62727;
 }
 QPushButton#showDetailButton:pressed {
-    background-color: #a01a1a;
+    background-color: #A01A1A;
 }
 
 QPushButton#addCartButton {
@@ -174,78 +164,191 @@ QPushButton#addCartButton {
     font-size: 10pt;
     font-weight: 600;
     color: #FFFFFF;
-    background-color: #efff3333;
+    background-color: #FF3333;
     border: none;
     border-radius: 6px;
     padding: 8px 16px;
 }
 QPushButton#addCartButton:hover {
-    background-color: #f5db2727;
+    background-color: #E62727;
 }
 QPushButton#addCartButton:pressed {
-    background-color: #a01a1a;
+    background-color: #A01A1A;
 }
 
-
+/* -------------------------------------------------------------------- */
 /* CD */
+QWidget#cdContainer {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
 QLabel#cdImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 4px;
 }
 
 QLabel#cdTitleLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #2C3E50;
     qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
+    margin: 12px 0 16px 0;
 }
 
-QLabel#cdFormatLabel,
+QLabel#cdAvailabilityLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0,0,0,0.4);
+    qproperty-alignment: AlignCenter;
+    margin-bottom: 12px;
+}
+
+QLabel#cdTypeLabel,
+QLabel#cdProducerLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    qproperty-alignment: AlignCenter;
+    margin: 4px 10px;
+}
+
 QLabel#cdDescLabel {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #b6f9fbfd;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
 }
 
+QPushButton#showDetailButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #FF3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+}
+QPushButton#showDetailButton:hover {
+    background-color: #E62727;
+}
+QPushButton#showDetailButton:pressed {
+    background-color: #A01A1A;
+}
 
+QPushButton#addCartButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #FF3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+QPushButton#addCartButton:hover {
+    background-color: #E62727;
+}
+QPushButton#addCartButton:pressed {
+    background-color: #A01A1A;
+}
+/* ---------------------------------------------------------- */
 /* Vinile */
+QWidget#vinileContainer {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
 QLabel#vinileImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 4px;
 }
 
 QLabel#vinileTitleLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #2C3E50;
     qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
+    margin: 12px 0 16px 0;
+}
+
+QLabel#vinileAvailabilityLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0,0,0,0.4);
+    qproperty-alignment: AlignCenter;
+    margin-bottom: 12px;
+}
+
+QLabel#vinileTypeLabel,
+QLabel#vinileRecognitionLabel,
+QLabel#vinileProducerLabel,
+QLabel#vinilePriceLabel,
+QLabel#vinileDiameterLabel,
+QLabel#vinileRpmLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    qproperty-alignment: AlignCenter;
+    margin: 4px 10px;
 }
 
 QLabel#vinileDescLabel {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #b6f9fbfd;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
 }
 
-
-/* Singolo */
-QLabel#singoloImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
+QPushButton#showDetailButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #FF3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+}
+QPushButton#showDetailButton:hover {
+    background-color: #E62727;
+}
+QPushButton#showDetailButton:pressed {
+    background-color: #A01A1A;
 }
 
-QLabel#singoloTitleLabel {
-    qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
+QPushButton#addCartButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #FF3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
 }
-
-QLabel#singoloDescLabel {
-    margin-bottom: 10px;
+QPushButton#addCartButton:hover {
+    background-color: #E62727;
 }
-
-QLabel#singoloTrackInfoLabel {
-    margin-top: 10px;
+QPushButton#addCartButton:pressed {
+    background-color: #A01A1A;
 }
+/* ----------------------------------------------------------- */
 
 
 /* Album */
@@ -277,25 +380,87 @@ QLabel[class^="albumTrackLabel_"] {
 }
 
 
+/* --------------------------------------------------------------*/
 /* Tour */
+QWidget#tourContainer {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
 QLabel#tourImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 4px;
 }
 
 QLabel#tourTitleLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #2C3E50;
     qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
+    margin: 12px 0 16px 0;
 }
 
-QLabel#tourPeriodLabel {
+QLabel#tourAvailabilityLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0,0,0,0.4);
     qproperty-alignment: AlignCenter;
-    margin: 10px 0;
+    margin-bottom: 12px;
+}
+
+QLabel#tourPriceLabel,
+QLabel#tourPeriodLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    qproperty-alignment: AlignCenter;
+    margin: 4px 10px;
 }
 
 QLabel#tourDescLabel {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #b6f9fbfd;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
+}
+
+QPushButton#showDetailButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #FF3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+}
+QPushButton#showDetailButton:hover {
+    background-color: #E62727;
+}
+QPushButton#showDetailButton:pressed {
+    background-color: #A01A1A;
+}
+
+QPushButton#addCartButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color: #FFFFFF;
+    background-color: #FF3333;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+}
+QPushButton#addCartButton:hover {
+    background-color: #E62727;
+}
+QPushButton#addCartButton:pressed {
+    background-color: #A01A1A;
 }
