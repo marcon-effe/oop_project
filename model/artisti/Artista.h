@@ -3,6 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <mutex>
+#include <cassert>
+#include <stdexcept>
 
 #include "../core/ArtistProduct.h"
 #include "../../include/data_format.h"
@@ -12,11 +16,18 @@ class VisitorGUI;
 
 class Artista {
 private:
+    const unsigned int ID;
+    static unsigned int nextArtistId;
+    static std::mutex idMutex;
+
     std::string nome;
     std::string genere;
     std::string info;
     std::string imagePath;
-    std::vector<ArtistProduct*> prodotti;
+    std::unordered_map<unsigned int, ArtistProduct*> products;
+
+    static unsigned int generateId();
+
 public:
     //COSTRUTTORE STD
     Artista(const std::string &n);
@@ -24,13 +35,10 @@ public:
     Artista(const std::string &n, const std::string &g, const std::string &i);
     Artista(const std::string &n, const std::string &g, const std::string &i, const std::string &ip);
 
-    //COSTRUTTORE DA QJSONOBJECT
-    Artista(const QJsonObject &json);
-    //COSTRUTTORE DA QDOMELEMENT
-    Artista(const QDomElement &xml);
-
     //DISTRUTTORE
     ~Artista();
+
+    unsigned int getId() const;
 
     std::string getNome() const;
     void setNome(const std::string &n);
@@ -45,12 +53,26 @@ public:
     void setImagePath(const std::string &ip);
 
     void addProduct(ArtistProduct* p);
-    void removeProduct(ArtistProduct* p);
-    const std::vector<ArtistProduct*>& getProducts() const;
+    void removeProduct(unsigned int id_product);
+    const std::unordered_map<unsigned int, ArtistProduct*>& getProducts() const;
 
+    void printInfo() const;
+
+    // JSON
+    Artista(const QJsonObject &json); // Costruttore: carica SOLO le info base
+    // Metodo statico di Factory
+    static Artista* createFromJson(const QJsonObject& json);
+    void loadProductsFromJson(const QJsonArray& prodottiArray);
     QJsonObject toJson() const;
+
+    //XML
+    Artista(const QDomElement &xml); // Costruttore: carica SOLO le info base
+    // Metodo statico di Factory
+    static Artista* createFromXml(const QDomElement& xml);
+    void loadProductsFromXml(const QDomElement& prodottiElement);
     QDomElement toXml(QDomDocument& doc) const;
 
+    
     void accept(VisitorGUI *visitor) const;
 
     //OVERLOADING OPERATORI

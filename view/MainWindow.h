@@ -5,6 +5,7 @@
 #include <QListWidget>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <unordered_map>  // aggiunto per usare le hash map
 
 #include "../model/artisti/Artista.h"
 #include "../model/core/ArtistProduct.h"
@@ -36,8 +37,8 @@ private:
     QHBoxLayout *releaseArtistaLayout;
 
     // Dati
-    QList<Artista*> artists;
-    QList<ArtistProduct*> prodotti;
+    std::unordered_map<unsigned int, Artista*> artists;             // modificato da QList
+    std::unordered_map<unsigned int, ArtistProduct*> prodotti;      // modificato da QList
 
 private slots:
     void handleArtistSelection(QListWidgetItem* item);

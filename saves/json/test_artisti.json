@@ -1,399 +1,198 @@
 {
     "artisti": [
         {
+            "genere": "",
+            "imagePath": "",
+            "info": "",
             "nome": "Artista1",
-            "genere": "Rock",
-            "info": "Artista1 è un musicista rock noto per le sue performance energiche.",
-            "imagePath": "images/artista1.jpg",
-            "sitoUfficiale": "https://www.artista1.com",
-            "social": {
-                "twitter": "@artista1",
-                "instagram": "@artista1_official"
-            },
             "prodotti": [
                 {
-                    "type": "album",
-                    "label": "Label1",
-                    "musica": {
-                        "ArtistProduct": {
-                            "title": "Album1",
-                            "description": "Il primo album di Artista1",
-                            "imagePath": "images/album1.jpg"
-                        },
-                        "dataUscita": {
-                            "anno": 2020,
-                            "mese": 1,
-                            "giorno": 15
-                        },
-                        "durata": {
-                            "ore": 0,
-                            "minuti": 42,
-                            "secondi": 10
-                        },
-                        "genere": "Rock"
-                    },
-                    "tracce": [
-                        {
-                            "nome": "Traccia1",
-                            "durata": {
-                                "ore": 0,
-                                "minuti": 3,
-                                "secondi": 30
-                            },
-                            "has_testo": true,
-                            "testo": "Testo di Traccia1",
-                            "partecipanti": [
-                                "Artista1"
-                            ]
-                        },
-                        {
-                            "nome": "Traccia2",
-                            "durata": {
-                                "ore": 0,
-                                "minuti": 4,
-                                "secondi": 0
-                            },
-                            "has_testo": false,
-                            "testo": "",
-                            "partecipanti": [
-                                "Artista1"
-                            ]
-                        },
-                        {
-                            "nome": "Traccia3",
-                            "durata": {
-                                "ore": 0,
-                                "minuti": 5,
-                                "secondi": 20
-                            },
-                            "has_testo": true,
-                            "testo": "Testo di Traccia3",
-                            "partecipanti": [
-                                "Artista1",
-                                "FeatArtist"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "singolo",
-                    "label": "Label1",
-                    "musica": {
-                        "ArtistProduct": {
-                            "title": "Singolo1",
-                            "description": "Il singolo di maggior successo",
-                            "imagePath": "images/singolo1.jpg"
-                        },
-                        "dataUscita": {
-                            "anno": 2021,
-                            "mese": 5,
-                            "giorno": 20
-                        },
-                        "durata": {
-                            "ore": 0,
-                            "minuti": 3,
-                            "secondi": 45
-                        },
-                        "genere": "Rock"
-                    },
-                    "mainTrack": {
-                        "nome": "Singolo1",
-                        "durata": {
-                            "ore": 0,
-                            "minuti": 3,
-                            "secondi": 45
-                        },
-                        "has_testo": true,
-                        "testo": "Testo del singolo",
-                        "partecipanti": [
-                            "Artista1"
-                        ]
-                    },
-                    "chartPosition": 2,
-                    "isRemix": false
-                },
-                {
-                    "type": "cd",
-                    "formato": "Jewel",
-                    "disco": {
-                        "codiceRiconoscimento": "CD1",
-                        "tipoProdotto": "Standard",
-                        "produttoreStampe": "StampeX",
-                        "merch": {
-                            "codiceProdotto": "MCD1",
-                            "not_musica": {
-                                "ArtistProduct": {
-                                    "title": "CD1",
-                                    "description": "CD standard",
-                                    "imagePath": "images/cd1.jpg"
-                                },
-                                "disponibile": true,
-                                "prezzo": 15.5,
-                                "quantita": 50
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "vinile",
-                    "diametro": 12,
-                    "rpm": 33,
-                    "disco": {
-                        "codiceRiconoscimento": "VIN1",
-                        "tipoProdotto": "Limited",
-                        "produttoreStampe": "StampeY",
-                        "merch": {
-                            "codiceProdotto": "MVP1",
-                            "not_musica": {
-                                "ArtistProduct": {
-                                    "title": "Vinile1",
-                                    "description": "Vinile edizione limitata",
-                                    "imagePath": "images/vinile1.jpg"
-                                },
-                                "disponibile": true,
-                                "prezzo": 25.0,
-                                "quantita": 20
-                            }
-                        }
-                    }
-                },
-                {
-                    "type": "tshirt",
-                    "colore": "Nero",
-                    "taglia": "L",
-                    "merch": {
-                        "codiceProdotto": "TSH1",
-                        "not_musica": {
-                            "ArtistProduct": {
-                                "title": "T-Shirt1",
-                                "description": "Maglietta ufficiale",
-                                "imagePath": "images/tshirt1.jpg"
-                            },
-                            "disponibile": true,
-                            "prezzo": 20.0,
-                            "quantita": 100
-                        }
-                    }
-                },
-                {
-                    "type": "tour",
-                    "not_musica": {
-                        "ArtistProduct": {
-                            "title": "Tour1",
-                            "description": "Tour europeo",
-                            "imagePath": "images/tour1.jpg"
-                        },
-                        "disponibile": true,
-                        "prezzo": 120.0,
-                        "quantita": 300
-                    },
                     "dateTour": [
                         {
                             "data": {
                                 "anno": 2025,
-                                "mese": 6,
-                                "giorno": 10
+                                "giorno": 10,
+                                "mese": 5
                             },
                             "luogo": "Roma",
                             "orario": {
-                                "ore": 20,
                                 "minuti": 30,
-                                "secondi": 0
-                            }
-                        },
-                        {
-                            "data": {
-                                "anno": 2025,
-                                "mese": 6,
-                                "giorno": 15
-                            },
-                            "luogo": "Milano",
-                            "orario": {
-                                "ore": 21,
-                                "minuti": 0,
+                                "ore": 20,
                                 "secondi": 0
                             }
                         }
-                    ]
-                }
-            ],
-            "type": "artista"
-        },
-        {
-            "nome": "Artista2",
-            "genere": "Pop",
-            "info": "Artista2 è famoso per le sue melodie pop moderne.",
-            "imagePath": "images/artista2.png",
-            "sitoUfficiale": "https://www.artista2.com",
-            "social": {
-                "twitter": "@artista2",
-                "instagram": "@artista2"
-            },
-            "prodotti": [
+                    ],
+                    "not_musica": {
+                        "ArtistProduct": {
+                            "description": "desc",
+                            "imagePath": "",
+                            "title": "Tour1"
+                        },
+                        "disponibile": true,
+                        "prezzo": 99.99,
+                        "quantita": 200,
+                        "type": "notmusica"
+                    },
+                    "type": "tour"
+                },
                 {
-                    "type": "album",
-                    "label": "LabelPop",
+                    "colore": "Nero",
+                    "merch": {
+                        "codiceProdotto": "TP1",
+                        "not_musica": {
+                            "ArtistProduct": {
+                                "description": "desc",
+                                "imagePath": "",
+                                "title": "TS1"
+                            },
+                            "disponibile": true,
+                            "prezzo": 10,
+                            "quantita": 100,
+                            "type": "notmusica"
+                        },
+                        "type": "merch"
+                    },
+                    "taglia": "M",
+                    "type": "tshirt"
+                },
+                {
+                    "diametro": 12,
+                    "disco": {
+                        "codiceRiconoscimento": "CR2",
+                        "merch": {
+                            "codiceProdotto": "VP1",
+                            "not_musica": {
+                                "ArtistProduct": {
+                                    "description": "desc",
+                                    "imagePath": "",
+                                    "title": "Vin1"
+                                },
+                                "disponibile": true,
+                                "prezzo": 20,
+                                "quantita": 5,
+                                "type": "notmusica"
+                            },
+                            "type": "merch"
+                        },
+                        "produttoreStampe": "StampeY",
+                        "tipoProdotto": "Limited",
+                        "type": "disco"
+                    },
+                    "rpm": 33,
+                    "type": "vinile"
+                },
+                {
+                    "disco": {
+                        "codiceRiconoscimento": "CR1",
+                        "merch": {
+                            "codiceProdotto": "CP1",
+                            "not_musica": {
+                                "ArtistProduct": {
+                                    "description": "desc",
+                                    "imagePath": "",
+                                    "title": "CD1"
+                                },
+                                "disponibile": true,
+                                "prezzo": 15.5,
+                                "quantita": 10,
+                                "type": "notmusica"
+                            },
+                            "type": "merch"
+                        },
+                        "produttoreStampe": "StampeX",
+                        "tipoProdotto": "Standard",
+                        "type": "disco"
+                    },
+                    "formato": "Jewel",
+                    "type": "cd"
+                },
+                {
+                    "chartPosition": 1,
+                    "isRemix": false,
+                    "mainTrack": {
+                        "durata": {
+                            "minuti": 3,
+                            "ore": 0,
+                            "secondi": 30
+                        },
+                        "has_testo": true,
+                        "nome": "Traccia1",
+                        "partecipanti": [
+                            "Artista1"
+                        ],
+                        "testo": "Testo1"
+                    },
                     "musica": {
                         "ArtistProduct": {
-                            "title": "PopAlbum",
-                            "description": "Album pop",
-                            "imagePath": "images/popalbum.jpg"
+                            "description": "desc",
+                            "imagePath": "",
+                            "title": "Sing1"
                         },
                         "dataUscita": {
-                            "anno": 2019,
-                            "mese": 9,
-                            "giorno": 5
+                            "anno": 2021,
+                            "giorno": 2,
+                            "mese": 2
                         },
                         "durata": {
-                            "ore": 1,
                             "minuti": 3,
-                            "secondi": 0
+                            "ore": 0,
+                            "secondi": 30
                         },
-                        "genere": "Pop"
+                        "genere": "Pop",
+                        "type": "musica"
+                    },
+                    "type": "singolo"
+                },
+                {
+                    "label": "Label1",
+                    "musica": {
+                        "ArtistProduct": {
+                            "description": "desc",
+                            "imagePath": "",
+                            "title": "Album1"
+                        },
+                        "dataUscita": {
+                            "anno": 2020,
+                            "giorno": 1,
+                            "mese": 1
+                        },
+                        "durata": {
+                            "minuti": 42,
+                            "ore": 0,
+                            "secondi": 10
+                        },
+                        "genere": "Rock",
+                        "type": "musica"
                     },
                     "tracce": [
                         {
-                            "nome": "PopTrack1",
                             "durata": {
-                                "ore": 0,
-                                "minuti": 4,
-                                "secondi": 10
-                            },
-                            "has_testo": true,
-                            "testo": "Testo pop 1",
-                            "partecipanti": [
-                                "Artista2"
-                            ]
-                        },
-                        {
-                            "nome": "PopTrack2",
-                            "durata": {
-                                "ore": 0,
                                 "minuti": 3,
-                                "secondi": 50
+                                "ore": 0,
+                                "secondi": 30
                             },
                             "has_testo": true,
-                            "testo": "Testo pop 2",
+                            "nome": "Traccia1",
                             "partecipanti": [
-                                "Artista2",
-                                "FeatPop"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "singolo",
-                    "label": "LabelPop",
-                    "musica": {
-                        "ArtistProduct": {
-                            "title": "PopSingle",
-                            "description": "Hit estiva",
-                            "imagePath": "images/popsingle.jpg"
-                        },
-                        "dataUscita": {
-                            "anno": 2022,
-                            "mese": 7,
-                            "giorno": 1
-                        },
-                        "durata": {
-                            "ore": 0,
-                            "minuti": 3,
-                            "secondi": 15
-                        },
-                        "genere": "Pop"
-                    },
-                    "mainTrack": {
-                        "nome": "PopSingle",
-                        "durata": {
-                            "ore": 0,
-                            "minuti": 3,
-                            "secondi": 15
-                        },
-                        "has_testo": true,
-                        "testo": "Testo PopSingle",
-                        "partecipanti": [
-                            "Artista2"
-                        ]
-                    },
-                    "chartPosition": 1,
-                    "isRemix": true
-                }
-            ],
-            "type": "artista"
-        },
-        {
-            "nome": "Artista3",
-            "genere": "Jazz",
-            "info": "Artista3, leggendario musicista jazz.",
-            "imagePath": "images/artista3.svg",
-            "sitoUfficiale": "https://www.artista3-jazz.com",
-            "social": {
-                "twitter": "@artista3jazz",
-                "facebook": "fb.com/artista3jazz"
-            },
-            "prodotti": [
-                {
-                    "type": "tour",
-                    "not_musica": {
-                        "ArtistProduct": {
-                            "title": "Jazz Tour",
-                            "description": "Tour mondiale",
-                            "imagePath": "images/jazztour.jpg"
-                        },
-                        "disponibile": true,
-                        "prezzo": 150.0,
-                        "quantita": 500
-                    },
-                    "dateTour": [
-                        {
-                            "data": {
-                                "anno": 2025,
-                                "mese": 8,
-                                "giorno": 20
-                            },
-                            "luogo": "New York",
-                            "orario": {
-                                "ore": 19,
-                                "minuti": 0,
-                                "secondi": 0
-                            }
+                                "Artista1"
+                            ],
+                            "testo": "Testo1"
                         },
                         {
-                            "data": {
-                                "anno": 2025,
-                                "mese": 8,
-                                "giorno": 25
-                            },
-                            "luogo": "Parigi",
-                            "orario": {
-                                "ore": 20,
-                                "minuti": 30,
+                            "durata": {
+                                "minuti": 4,
+                                "ore": 0,
                                 "secondi": 0
-                            }
+                            },
+                            "has_testo": false,
+                            "nome": "Traccia2",
+                            "partecipanti": [
+                                "Artista1"
+                            ],
+                            "testo": ""
                         }
-                    ]
-                },
-                {
-                    "type": "cd",
-                    "formato": "Digipack",
-                    "disco": {
-                        "codiceRiconoscimento": "JZCD1",
-                        "tipoProdotto": "Deluxe",
-                        "produttoreStampe": "JazzPress",
-                        "merch": {
-                            "codiceProdotto": "JZCALB1",
-                            "not_musica": {
-                                "ArtistProduct": {
-                                    "title": "Jazz CD",
-                                    "description": "CD jazz deluxe",
-                                    "imagePath": "images/jazzcd.jpg"
-                                },
-                                "disponibile": true,
-                                "prezzo": 18.0,
-                                "quantita": 75
-                            }
-                        }
-                    }
+                    ],
+                    "type": "album"
                 }
             ],
             "type": "artista"

@@ -10,23 +10,38 @@ class Merch : public NotMusica {
 protected:
     std::string codiceProdotto;
 public:
-    Merch(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice);
-    Merch(NotMusica* nm, std::string cp);
+    // Costruttore standard
+    Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice);
+
+    // Costruttore di trasformazione da NotMusica*
+    Merch(NotMusica* base, const std::string& codice);
+
+    // Costruttore di copia
     Merch(const Merch* m);
-    Merch(const QJsonObject& obj);
-    Merch(const QDomElement& xml);
+
+    // Costruttore da JSON
+    Merch(Artista* owner, const QJsonObject& json);
+
+    // Costruttore da XML
+    Merch(Artista* owner, const QDomElement& xml);
+
+    // Distruttore
     virtual ~Merch();
 
+    // Getter / Setter
     std::string getCodiceProdotto() const;
-    void setCodiceProdotto(const std::string &codice);
+    void setCodiceProdotto(const std::string& codice);
 
+    // Info print
     virtual void printInfo() const override;
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
 
-    // OVERLOADING OPERATORI
+    // Serializzazione
+    virtual QJsonObject toJson() const override;
+    virtual QDomElement toXml(QDomDocument& doc) const override;
+
+    // Overloading operatori
     friend bool operator==(const Merch& a, const Merch& b);
     friend bool operator!=(const Merch& a, const Merch& b);
 };
 
-#endif
+#endif // MERCH_H

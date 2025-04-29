@@ -2,8 +2,7 @@
 #define MUSICA_H
 
 #include <string>
-
-#include "ArtistProduct.h" // Include the full definition of ArtistProduct
+#include "ArtistProduct.h"
 #include "../util/Data.h"
 #include "../util/Durata.h"
 #include "../../include/data_format.h"
@@ -14,30 +13,42 @@ private:
     Durata durata;
     std::string genere;
 public:
-    Musica(const std::string &t, const std::string &desc, const Data &du, const Durata &dur, const std::string &g);
-    Musica(ArtistProduct* ap, const Data& du, const Durata& d, const std::string& g);
+    // Costruttore standard
+    Musica(Artista* owner, const std::string& title, const std::string& desc, const Data& du, const Durata& dur, const std::string& g);
+
+    // Costruttore di "trasformazione" da ArtistProduct base
+    Musica(ArtistProduct* base, const Data& du, const Durata& dur, const std::string& g);
+
+    // Costruttore di copia da Musica*
     Musica(const Musica* m);
-    Musica(const QJsonObject &json);
-    Musica(const QDomElement &xml);
+
+    // Costruttore da JSON
+    Musica(Artista* owner, const QJsonObject& json);
+
+    // Costruttore da XML
+    Musica(Artista* owner, const QDomElement& xml);
+
+    // Distruttore
     virtual ~Musica();
 
+    // Getter/Setter
     Data getDataUscita() const;
-    void setDataUscita(const Data &d);
+    void setDataUscita(const Data& d);
 
     Durata getDurata() const;
-    void setDurata(const Durata &d);
+    void setDurata(const Durata& d);
 
     std::string getGenere() const;
-    void setGenere(const std::string &g);
+    void setGenere(const std::string& g);
 
+    // Metodi di stampa/salvataggio
     virtual void printInfo() const override;
-    
     QJsonObject toJson() const override;
     QDomElement toXml(QDomDocument& doc) const override;
 
-    // OVERLOADING OPERATORI
+    // Overloading operatori
     friend bool operator==(const Musica& a, const Musica& b);
     friend bool operator!=(const Musica& a, const Musica& b);
 };
 
-#endif
+#endif // MUSICA_H

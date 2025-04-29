@@ -1,7 +1,8 @@
 #ifndef DATAMANAGER_H
 #define DATAMANAGER_H
 
-#include <vector>
+#include <unordered_map>
+#include <string>
 
 #include "../model/artisti/Artista.h"
 
@@ -18,13 +19,15 @@
 #include "../include/data_format.h"
 
 class DataManager {
-    public:
-        static bool saveToFileJson(const std::vector<Artista*>& artisti, const std::string& filePath);
-        static std::vector<Artista*> loadFromFileJson(const std::string& filePath);
-        
-        static bool validateXmlWithSchema(const std::string& xmlFilePath, const std::string& schemaFilePath);
-        static bool saveToFileXml(const std::vector<Artista*>& artisti, const std::string& filePath);
-        static std::vector<Artista*> loadFromFileXml(const std::string& filePath);
-
+public:
+    // JSON
+    static bool saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath);
+    static std::unordered_map<unsigned int, Artista*> loadFromFileJson(const std::string& filePath);
+    
+    // XML
+    static bool validateXmlWithSchema(const std::string& xmlFilePath, const std::string& schemaFilePath);
+    static bool saveToFileXml(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath);
+    static std::unordered_map<unsigned int, Artista*> loadFromFileXml(const std::string& filePath);
 };
-#endif
+
+#endif // DATAMANAGER_H

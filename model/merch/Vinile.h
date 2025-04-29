@@ -9,11 +9,14 @@ private:
     unsigned int rpm;
     unsigned int diametro;
 public:
-    Vinile(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice, const std::string &produttoreStampe, const std::string &codiceRiconoscimento, const std::string &tipoProdotto, unsigned int rpm, unsigned int diametro);
+    Vinile(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile,
+           unsigned int quantita, const std::string& codice, const std::string& produttoreStampe,
+           const std::string& codiceRiconoscimento, const std::string& tipoProdotto, unsigned int rpm, unsigned int diametro);
+
     Vinile(Disco* d, unsigned int rpm, unsigned int diametro);
     Vinile(const Vinile* v);
-    Vinile(const QJsonObject& json);
-    Vinile(const QDomElement& xml);
+    Vinile(Artista* owner, const QJsonObject& json);
+    Vinile(Artista* owner, const QDomElement& xml);
     virtual ~Vinile();
 
     unsigned int getRpm() const;
@@ -33,4 +36,4 @@ public:
     friend bool operator!=(const Vinile& a, const Vinile& b);
 };
 
-#endif
+#endif // VINILE_H

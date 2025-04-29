@@ -168,7 +168,9 @@ void VisitorGUI::visit(const Artista* artista) {
     prodLayout->addWidget(prodList);
 
     // per ogni prodotto…
-    for (auto* p : artista->getProducts()) {
+    for (const auto& pair : artista->getProducts()) {
+        ArtistProduct* p = pair.second;
+        
         // 1) crea l'item e imposta l'altezza minima
         auto* item = new QListWidgetItem(prodList);
         item->setSizeHint(QSize(0, 100));  // altezza fissa 100px

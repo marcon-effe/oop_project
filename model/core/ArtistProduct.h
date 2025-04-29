@@ -3,25 +3,43 @@
 
 
 #include <string>
+#include <mutex>
+#include <cassert>
+#include <stdexcept>
 
 #include "../../include/data_format.h"
 
-class VisitorGUI;
 
+class VisitorGUI;
+class Artista;
 
 class ArtistProduct {
 protected:
+    const unsigned int ID;
+    unsigned int id_artist; //volutamente non const, in quanto l'artista potrebbe essere cambiato
+    static unsigned int nextProductId;
+    static std::mutex idMutex;
+
     std::string title;
     std::string description;
     std::string imagePath;
+
+    static unsigned int generateId();
+
 public:
-    ArtistProduct(const std::string &t, const std::string &desc);
-    ArtistProduct(const std::string &t, const std::string &d, const std::string &i);
+    // ho modificato i costruttori perché SIA NECESSARIO passare un puntatore ad Artista per la certezza che id_artist sia sempre valido
+    ArtistProduct(Artista* owner, const std::string& t, const std::string& desc);
+    ArtistProduct(Artista* owner, const std::string& t, const std::string& d, const std::string& i);
     ArtistProduct(const ArtistProduct* p);
-    ArtistProduct(const QJsonObject &json);
-    ArtistProduct(const QDomElement& xml);
+    // Costruttori di caricamento
+    ArtistProduct(Artista* owner, const QJsonObject& json);
+    ArtistProduct(Artista* owner, const QDomElement& el);
     virtual ~ArtistProduct();
 
+    unsigned int getId() const;
+    unsigned int getArtistId() const;
+    void setArtistId(Artista* owner);
+    
     std::string getTitle() const;
     void setTitle(const std::string &t);
 
@@ -36,8 +54,8 @@ public:
     virtual QJsonObject toJson() const;
     virtual QDomElement toXml(QDomDocument& doc) const;
     
-    static ArtistProduct* createJson(const QJsonObject& json);
-    static ArtistProduct* createXml(const QDomElement& xml);
+    static ArtistProduct* createJson(Artista* owner, const QJsonObject& json);
+    static ArtistProduct* createXml(Artista* owner, const QDomElement& xml);
 
     virtual void accept(VisitorGUI* visitor) const = 0;
 

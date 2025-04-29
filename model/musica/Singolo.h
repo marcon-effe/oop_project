@@ -13,15 +13,27 @@ private:
     bool isRemix;
     int chartPosition;
 public:
-    Singolo(const std::string &t, const std::string &desc, const Data &du, const Durata &dur, const std::string &g, const Traccia &track, bool remix, int chartPos);
-    Singolo(Musica* m, Traccia t, bool r, int c);
+    // Costruttore standard
+    Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos);
+
+    // Costruttore di trasformazione da Musica*
+    Singolo(Musica* base, const Traccia& mainTrack, bool isRemix, int chartPosition);
+
+    // Costruttore di copia
     Singolo(const Singolo* s);
-    Singolo(const QJsonObject& json);
-    Singolo(const QDomElement& xml);
+
+    // Costruttore da JSON
+    Singolo(Artista* owner, const QJsonObject& json);
+
+    // Costruttore da XML
+    Singolo(Artista* owner, const QDomElement& xml);
+
+    // Distruttore
     virtual ~Singolo();
 
+    // Getter / Setter
     Traccia getMainTrack() const;
-    void setMainTrack(const Traccia &t);
+    void setMainTrack(const Traccia& t);
 
     bool getIsRemix() const;
     void setIsRemix(bool r);
@@ -29,15 +41,19 @@ public:
     int getChartPosition() const;
     void setChartPosition(int pos);
 
+    // Serializzazione
+    virtual QJsonObject toJson() const final;
+    virtual QDomElement toXml(QDomDocument& doc) const final;
+
+    // Info print
     virtual void printInfo() const final;
-    QJsonObject toJson() const final;
-    QDomElement toXml(QDomDocument& doc) const final;
 
-    virtual void accept(VisitorGUI* v) const final;
+    // Visitor
+    virtual void accept(VisitorGUI* visitor) const final;
 
-    // OVERLOADING OPERATORI
+    // Overloading operatori
     friend bool operator==(const Singolo& a, const Singolo& b);
     friend bool operator!=(const Singolo& a, const Singolo& b);
 };
 
-#endif
+#endif // SINGOLO_H

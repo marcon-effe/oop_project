@@ -34,6 +34,12 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
     echo "🔧 Specifica del path per qmake..."
     QMAKE_PATH="/Users/leonardo/Qt/6.8.2/macos/bin/qmake"
 
+    rm -rf build/
+    rm -rf oop_project
+    rm -rf oop_project.pro
+    rm -rf .qmake.stash
+    rm -rf Makefile
+
     echo "📝 Rigenerazione del file .pro..."
     "$QMAKE_PATH" -project -o oop_project.pro
 
@@ -48,7 +54,6 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
 
     echo "📁 Creating build directory..."
     mkdir -p build
-    rm -f ./oop_project
 
     echo "🔧 Running qmake..."
     "$QMAKE_PATH" oop_project.pro

@@ -11,28 +11,40 @@ private:
     std::string taglia;
     std::string colore;
 public:
-    TShirt(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice, const std::string &taglia, const std::string &colore);
-    TShirt(Merch* m, std::string t, std::string c);
+    // Costruttore standard
+    TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore);
+
+    // Costruttore di trasformazione da Merch*
+    TShirt(Merch* base, const std::string& taglia, const std::string& colore);
+
+    // Costruttore di copia
     TShirt(const TShirt* t);
-    TShirt(const QJsonObject& json);
-    TShirt(const QDomElement& xml);
+
+    // Costruttore da JSON
+    TShirt(Artista* owner, const QJsonObject& json);
+
+    // Costruttore da XML
+    TShirt(Artista* owner, const QDomElement& xml);
+
+    // Distruttore
     virtual ~TShirt();
 
+    // Getter / Setter
     std::string getTaglia() const;
-    void setTaglia(const std::string &taglia);
+    void setTaglia(const std::string& taglia);
 
     std::string getColore() const;
-    void setColore(const std::string &colore);
+    void setColore(const std::string& colore);
 
+    // Metodi di utility
     virtual void printInfo() const override;
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
-
+    virtual QJsonObject toJson() const override;
+    virtual QDomElement toXml(QDomDocument& doc) const override;
     virtual void accept(VisitorGUI* v) const final;
 
-    // OVERLOADING OPERATORI
+    // Overloading operatori
     friend bool operator==(const TShirt& a, const TShirt& b);
     friend bool operator!=(const TShirt& a, const TShirt& b);
 };
 
-#endif
+#endif // TSHIRT_H
