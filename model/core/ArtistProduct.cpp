@@ -180,9 +180,18 @@ ArtistProduct* ArtistProduct::createXml(Artista* owner, const QDomElement& el) {
 
 // OVERLOADING OPERATORI
 bool operator==(const ArtistProduct& a, const ArtistProduct& b) {
-    if (a.title != b.title) return false;
-    if (a.description != b.description) return false;
-    if (a.imagePath != b.imagePath) return false;
+    if (a.title != b.title) {
+        std::cerr << "❌ Title diverso: " << a.title << " vs " << b.title << std::endl;
+        return false;
+    }
+    if (a.description != b.description) {
+        std::cerr << "❌ Description diversa: " << a.description << " vs " << b.description << std::endl;
+        return false;
+    }
+    if (a.imagePath != b.imagePath) {
+        std::cerr << "❌ ImagePath diverso: " << a.imagePath << " vs " << b.imagePath << std::endl;
+        return false;
+    }
     return true;
 }
 

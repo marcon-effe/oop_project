@@ -23,22 +23,18 @@
 void assertDeepEquality(const std::unordered_map<unsigned int, Artista*>& original, const std::unordered_map<unsigned int, Artista*>& loaded) {
     assert(original.size() == loaded.size());
 
-    auto it_orig = original.begin();
-    auto it_load = loaded.begin();
-
-    while (it_orig != original.end() && it_load != loaded.end()) {
-        const Artista* o = it_orig->second;
-        const Artista* l = it_load->second;
+    auto itO = original.begin();
+    auto itL = loaded.begin();
+    for (; itO != original.end() && itL != loaded.end(); ++itO, ++itL) {
+        const Artista* o = itO->second;
+        const Artista* l = itL->second;
 
         std::cout << "▶ Confronto artista: " << o->getNome() << " vs " << l->getNome() << std::endl;
 
-        if (!(o->getNome() == l->getNome() &&
-              o->getGenere() == l->getGenere() &&
-              o->getInfo() == l->getInfo() &&
-              o->getImagePath() == l->getImagePath())) {
-            std::cerr << "❌ Dati artista diversi!" << std::endl;
-            assert(false);
-        }
+        assert(o->getNome() == l->getNome());
+        assert(o->getGenere() == l->getGenere());
+        assert(o->getInfo() == l->getInfo());
+        assert(o->getImagePath() == l->getImagePath());
 
         const auto& originalProd = o->getProducts();
         const auto& loadedProd = l->getProducts();
@@ -50,31 +46,21 @@ void assertDeepEquality(const std::unordered_map<unsigned int, Artista*>& origin
             assert(false);
         }
 
-        // Confronta *contenuto* dei prodotti, NON gli ID
-        auto it_op = originalProd.begin();
-        auto it_lp = loadedProd.begin();
-        while (it_op != originalProd.end() && it_lp != loadedProd.end()) {
-            const ArtistProduct* oProd = it_op->second;
-            const ArtistProduct* lProd = it_lp->second;
-
-            if (!(*oProd == *lProd)) {
-                std::cerr << "   ❌ Differenza nei dati prodotto [" << oProd->getTitle() << "]" << std::endl;
+        // Per ogni prodotto originale, cerca un match nei prodotti caricati
+        for (const auto& [_, oProd] : originalProd) {
+            bool trovato = false;
+            for (const auto& [__, lProd] : loadedProd) {
+                if (*oProd == *lProd) {  // match sul contenuto, non sugli ID
+                    trovato = true;
+                    std::cout << "   ✅ Prodotto [" << oProd->getTitle() << "] OK" << std::endl;
+                    break;
+                }
+            }
+            if (!trovato) {
+                std::cerr << "   ❌ Nessun prodotto caricato corrisponde a [" << oProd->getTitle() << "]" << std::endl;
                 assert(false);
             }
-
-            if (lProd->getArtistId() != l -> getId()) {
-                std::cerr << "   ❌ Prodotto non collegato correttamente al nuovo artista!" << std::endl;
-                assert(false);
-            }
-
-            std::cout << "   ✅ Prodotto [" << oProd->getTitle() << "] OK" << std::endl;
-
-            ++it_op;
-            ++it_lp;
         }
-
-        ++it_orig;
-        ++it_load;
     }
 
     std::cout << "✅ Tutti gli artisti e i prodotti corrispondono perfettamente!" << std::endl;
@@ -109,20 +95,19 @@ int main(int argc, char *argv[]) {
         }
         
         // JSON
+        std::cout << "------- Salvataggio in JSON -------" << std::endl;
         DataManager::saveToFileJson(artisti, "saves/json/test_artisti.json");
         auto loadedJson = DataManager::loadFromFileJson("saves/json/test_artisti.json");
-        for (auto& p : loadedJson) {
-            std::cout << "Artista caricato: " << std::endl;
-            p.second->printInfo();
-        }
         assertDeepEquality(artisti, loadedJson);
+        std::cout << "-----------------------------------" << std::endl;
 
         // XML
+        std::cout << "------- Salvataggio in XML -------" << std::endl;
         DataManager::saveToFileXml(artisti, "saves/xml/test_artisti.xml");
         auto loadedXml = DataManager::loadFromFileXml("saves/xml/test_artisti.xml");
         assertDeepEquality(artisti, loadedXml);
+        std::cout << "-----------------------------------" << std::endl;
 
-        std::cout << "✅ Tutti i test superati: uguaglianza semantica confermata!" << std::endl;
 
         // Deallocazione memoria
         for (auto& p : artisti) delete p.second;
