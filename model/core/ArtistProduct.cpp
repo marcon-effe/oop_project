@@ -140,18 +140,25 @@ ArtistProduct* ArtistProduct::createJson(Artista* owner, const QJsonObject& json
 
 //XML
 // Converte un oggetto XML in un oggetto ArtistProduct
-ArtistProduct::ArtistProduct(Artista* owner, const QDomElement& el)
-:   ID(generateId()),
-    title(el.attribute("title").toStdString()),
-    description(el.attribute("description").toStdString()),
-    imagePath(el.attribute("imagePath").toStdString())
+ArtistProduct::ArtistProduct(Artista* owner, const QDomElement& xml)
+: ID(generateId())
 {
-    // So di avere il setter ma preferisco riscreverlo per sapere esattamente dove fallisce in caso di eccezione
-    if (!owner) {
-        assert(false && "ArtistProduct XML constructor received nullptr owner");
-        throw std::invalid_argument("ArtistProduct XML constructor received nullptr owner.");
+    // Cerca il sottoelemento <ArtistProduct>
+    QDomElement apElem = xml.firstChildElement("ArtistProduct");
+
+    if (!apElem.isNull()) {
+        if(owner == nullptr) {
+            assert(false && "ArtistProduct XML constructor received nullptr owner");
+            throw std::invalid_argument("ArtistProduct XML constructor received nullptr owner.");
+        }
+        id_artist = owner->getId(); // Associa l'ID dell'artista
+        title = apElem.attribute("title").toStdString();
+        description = apElem.attribute("description").toStdString();
+        imagePath = apElem.attribute("imagePath").toStdString();
+    } else {
+        assert(false && "ArtistProduct XML constructor received invalid XML");
+        throw std::invalid_argument("ArtistProduct XML constructor received invalid XML.");
     }
-    id_artist = owner->getId();
 }
 
 // Converte l'oggetto ArtistProduct in un oggetto XML

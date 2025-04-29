@@ -141,9 +141,8 @@ std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const st
 
     for (int i = 0; i < artistiNodes.count(); ++i) {
         QDomElement artistaEl = artistiNodes.at(i).toElement();
-        Artista* a = new Artista(artistaEl);
-        unsigned int id = a->getId();
-        artisti[id] = a;
+        Artista* a = Artista::createFromXml(artistaEl); 
+        artisti[a->getId()] = a;
     }
 
     file.close();
