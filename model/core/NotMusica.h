@@ -2,7 +2,6 @@
 #define NOTMUSICA_H
 
 #include <string>
-
 #include "ArtistProduct.h"
 #include "../../include/data_format.h"
 
@@ -12,13 +11,25 @@ protected:
     bool disponibile;
     unsigned int quantita;
 public:
-    NotMusica(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita);
-    NotMusica(ArtistProduct* p, double pr, bool disp, unsigned int q);
+    // Costruttore standard
+    NotMusica(Artista* owner, const std::string& title, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita);
+
+    // Costruttore di trasformazione da ArtistProduct*
+    NotMusica(ArtistProduct* base, double prezzo, bool disponibile, unsigned int quantita);
+
+    // Costruttore di copia
     NotMusica(const NotMusica* nm);
-    NotMusica(const QJsonObject& json);
-    NotMusica(const QDomElement& xml);
+
+    // Costruttore da JSON
+    NotMusica(Artista* owner, const QJsonObject& json);
+
+    // Costruttore da XML
+    NotMusica(Artista* owner, const QDomElement& xml);
+
+    // Distruttore
     virtual ~NotMusica();
 
+    // Getter / Setter
     double getPrezzo() const;
     void setPrezzo(double p);
 
@@ -28,13 +39,14 @@ public:
     unsigned int getQuantita() const;
     void setQuantita(unsigned int q);
 
+    // Altri metodi
     virtual void printInfo() const override;
     virtual QJsonObject toJson() const override;
     virtual QDomElement toXml(QDomDocument& doc) const override;
 
-    // OVERLOADING OPERATORI
+    // Overloading operatori
     friend bool operator==(const NotMusica& a, const NotMusica& b);
     friend bool operator!=(const NotMusica& a, const NotMusica& b);
 };
 
-#endif
+#endif // NOTMUSICA_H

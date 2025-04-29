@@ -15,7 +15,7 @@
 #include <QSpacerItem>
 #include <QPushButton>
 
-
+#include <unordered_map> // aggiunto
 
 #include "../model/artisti/Artista.h"
 #include "../model/core/ArtistProduct.h"
@@ -71,7 +71,6 @@ void MainWindow::setupUI() {
     QVBoxLayout *leftLayout = new QVBoxLayout(leftPanel);
     leftLayout->setContentsMargins(0, 0, 0, 0);
 
-    // Splitter verticale interno sinistra (artisti sopra, prodotti sotto)
     QSplitter *leftSplitter = new QSplitter(Qt::Vertical, leftPanel);
     leftSplitter->setHandleWidth(5);
 
@@ -113,7 +112,6 @@ void MainWindow::setupUI() {
     prodottiLayout->addLayout(searchLayoutProdotti);
     prodottiLayout->addWidget(productListFullWidget);
 
-    // Inserimento sezioni nello splitter interno
     leftSplitter->addWidget(artistiSection);
     leftSplitter->addWidget(prodottiSection);
     leftSplitter->setStretchFactor(0, 1);
@@ -126,9 +124,8 @@ void MainWindow::setupUI() {
     QWidget *rightPanel = new QWidget();
     rightPanel->setObjectName("rightPanel");
     QVBoxLayout *rightOuterLayout = new QVBoxLayout(rightPanel);
-    rightOuterLayout->setContentsMargins(40, 40, 40, 40);  // Margini esterni controllati
+    rightOuterLayout->setContentsMargins(40, 40, 40, 40);
 
-    // Contenitore centrale per i dettagli
     QWidget* detailsContainer = new QWidget();
     detailsContainer->setObjectName("detailsContainer");
     detailsContainer->setStyleSheet(R"(
@@ -140,45 +137,39 @@ void MainWindow::setupUI() {
     )");
 
     rightLayout = new QVBoxLayout(detailsContainer);
-    rightLayout->setSpacing(10);  // spazio tra elementi interni
+    rightLayout->setSpacing(10);
     rightLayout->setAlignment(Qt::AlignTop);
-    rightLayout->setContentsMargins(0, 0, 0, 0); // Nessun margine extra interno
+    rightLayout->setContentsMargins(0, 0, 0, 0);
 
-    // Aggiunta diretta al layout destro
     rightOuterLayout->addWidget(detailsContainer);
 
-    // Splitter principale
     mainSplitter->addWidget(leftPanel);
     mainSplitter->addWidget(rightPanel);
 
-    // Imposta proporzione 1/3 - 2/3
     QList<int> sizes;
     sizes << width() / 3 << (2 * width() / 3);
     mainSplitter->setSizes(sizes);
 
-    // Imposta limite massimo della parte sinistra
     leftPanel->setMaximumWidth(width() / 3);
 
-    // Layout finale
     QHBoxLayout *mainLayout = new QHBoxLayout(central);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(mainSplitter);
 
-    // Collegamenti
     connect(artistListWidget, &QListWidget::itemClicked, this, &MainWindow::handleArtistSelection);
     connect(productListFullWidget, &QListWidget::itemClicked, this, &MainWindow::handleProductSelection);
 }
 
 void MainWindow::loadDataFromSaves(const std::string& path) {
-    std::vector<Artista*> loaded = DataManager::loadFromFileJson(path);
+    artists = DataManager::loadFromFileJson(path);
 
-    // Inserisci gli artisti uno a uno nella QList
-    for (Artista* a : loaded) {
-        artists.append(a); // da std::vector a QList
+    for (const auto& pair : artists) {
+        Artista* a = pair.second;
         artistListWidget->addItem(QString::fromStdString(a->getNome()));
 
-        for (ArtistProduct* p : a->getProducts()) {
-            prodotti.append(p);
+        for (const auto& innerPair : a->getProducts()) {
+            ArtistProduct* p = innerPair.second;
+            prodotti[p->getId()] = p;
             productListFullWidget->addItem(QString::fromStdString(p->getTitle()));
         }
     }
@@ -186,7 +177,8 @@ void MainWindow::loadDataFromSaves(const std::string& path) {
 
 void MainWindow::handleArtistSelection(QListWidgetItem* item) {
     clearRightPanel();
-    for (Artista* a : artists) {
+    for (const auto& pair : artists) {
+        Artista* a = pair.second;
         if (QString::fromStdString(a->getNome()) == item->text()) {
             VisitorGUI* visitor = new VisitorGUI();
             a->accept(visitor);
@@ -198,7 +190,8 @@ void MainWindow::handleArtistSelection(QListWidgetItem* item) {
 
 void MainWindow::handleProductSelection(QListWidgetItem* item) {
     clearRightPanel();
-    for (ArtistProduct* p : prodotti) {
+    for (const auto& pair : prodotti) {
+        ArtistProduct* p = pair.second;
         if (QString::fromStdString(p->getTitle()) == item->text()) {
             VisitorGUI* visitor = new VisitorGUI();
             p->accept(visitor);

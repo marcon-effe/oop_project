@@ -1,58 +1,58 @@
 #include <iostream>
+
 #include "NotMusica.h"
+#include "../../view/VisitorGUI.h"
 
-#include"../../view/VisitorGUI.h"
+// COSTRUTTORI
 
-NotMusica::NotMusica(const std::string &t, const std::string &desc, double p, bool d, unsigned int q)
-: ArtistProduct(t, desc), prezzo(p), disponibile(d), quantita(q) {}
+// Costruttore standard
+NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& desc, double p, bool d, unsigned int q)
+: ArtistProduct(owner, t, desc), prezzo(p), disponibile(d), quantita(q)
+{
+    if (!owner) {
+        assert(false && "NotMusica standard constructor received nullptr owner");
+        throw std::invalid_argument("NotMusica standard constructor received nullptr owner.");
+    }
+}
 
-NotMusica::NotMusica(ArtistProduct* p, double pr, bool disp, unsigned int q)
-: ArtistProduct(p), prezzo(pr), disponibile(disp), quantita(q) {}
+// Costruttore di trasformazione da ArtistProduct*
+NotMusica::NotMusica(ArtistProduct* base, double pr, bool disp, unsigned int q)
+: ArtistProduct(*base), prezzo(pr), disponibile(disp), quantita(q)
+{
+    if (!base) {
+        assert(false && "NotMusica constructor from ArtistProduct received nullptr base");
+        throw std::invalid_argument("NotMusica constructor from ArtistProduct received nullptr base.");
+    }
+}
 
+// Costruttore di copia da NotMusica*
 NotMusica::NotMusica(const NotMusica* nm)
-: ArtistProduct(nm), prezzo(nm->getPrezzo()), disponibile(nm->getDisponibile()), quantita(nm->getQuantita()) {}
-
-NotMusica::~NotMusica() {}
-
-double NotMusica::getPrezzo() const {
-    return prezzo;
+: ArtistProduct(nm), prezzo(nm->getPrezzo()), disponibile(nm->getDisponibile()), quantita(nm->getQuantita())
+{
+    if (!nm) {
+        assert(false && "NotMusica copy constructor received nullptr NotMusica pointer");
+        throw std::invalid_argument("NotMusica copy constructor received nullptr NotMusica pointer.");
+    }
 }
-void NotMusica::setPrezzo(double p) {
-    prezzo = p;
-}
-
-bool NotMusica::getDisponibile() const {
-    return disponibile;
-}
-void NotMusica::setDisponibile(bool d) {
-    disponibile = d;
-}
-
-unsigned int NotMusica::getQuantita() const {
-    return quantita;
-}
-void NotMusica::setQuantita(unsigned int q) {
-    quantita = q;
-}
-
-void NotMusica::printInfo() const {
-    ArtistProduct::printInfo();
-    std::cout << "Prezzo: " << prezzo << std::endl;
-    std::cout << "Disponibile: " << (disponibile ? "Si" : "No") << std::endl;
-    std::cout << "Quantita: " << quantita << std::endl;
-}
-
 
 //JSON
 // Converte un oggetto JSON in un oggetto NotMusica
-NotMusica::NotMusica(const QJsonObject& json)
-: ArtistProduct(json["ArtistProduct"].toObject()),
-    prezzo(json["prezzo"].toInt()),
-    disponibile(json["disponibile"].toBool()),
-    quantita(json["quantita"].toInt()){}
-//Converte l'oggetto NotMusica in un oggetto JSON
-QJsonObject NotMusica::toJson() const{
+NotMusica::NotMusica(Artista* owner, const QJsonObject& json)
+: ArtistProduct(owner, json),
+  prezzo(json["prezzo"].toDouble()),
+  disponibile(json["disponibile"].toBool()),
+  quantita(static_cast<unsigned int>(json["quantita"].toInt()))
+{
+    if (!owner) {
+        assert(false && "NotMusica JSON constructor received nullptr owner");
+        throw std::invalid_argument("NotMusica JSON constructor received nullptr owner.");
+    }
+}
+
+// Converte l'oggetto NotMusica in un oggetto JSON
+QJsonObject NotMusica::toJson() const {
     QJsonObject json;
+    json["type"] = "notmusica"; // specifica tipo
     json["ArtistProduct"] = ArtistProduct::toJson();
     json["prezzo"] = prezzo;
     json["disponibile"] = disponibile;
@@ -62,12 +62,19 @@ QJsonObject NotMusica::toJson() const{
 
 //XML
 // Converte un oggetto XML in un oggetto NotMusica
-NotMusica::NotMusica(const QDomElement& xml)
-: ArtistProduct(xml.firstChildElement("ArtistProduct")),
-    prezzo(xml.attribute("prezzo").toDouble()),
-    disponibile(xml.attribute("disponibile").toInt()),
-    quantita(xml.attribute("quantita").toInt()) {}
-//Converte l'oggetto NotMusica in un oggetto XML   
+NotMusica::NotMusica(Artista* owner, const QDomElement& xml)
+: ArtistProduct(owner, xml),
+  prezzo(xml.attribute("prezzo").toDouble()),
+  disponibile(xml.attribute("disponibile").toInt()),
+  quantita(xml.attribute("quantita").toUInt())
+{
+    if (!owner) {
+        assert(false && "NotMusica XML constructor received nullptr owner");
+        throw std::invalid_argument("NotMusica XML constructor received nullptr owner.");
+    }
+}
+
+// Converte l'oggetto NotMusica in un oggetto XML   
 QDomElement NotMusica::toXml(QDomDocument& doc) const {
     QDomElement notMusicaEl = doc.createElement("NotMusica");
     notMusicaEl.setAttribute("prezzo", QString::number(prezzo, 'f', 2));
@@ -80,9 +87,33 @@ QDomElement NotMusica::toXml(QDomDocument& doc) const {
     return notMusicaEl;
 }
 
+// DISTRUTTORE
+NotMusica::~NotMusica() {}
+
+// GETTER/SETTER
+double NotMusica::getPrezzo() const { return prezzo; }
+void NotMusica::setPrezzo(double p) { prezzo = p; }
+
+bool NotMusica::getDisponibile() const { return disponibile; }
+void NotMusica::setDisponibile(bool d) { disponibile = d; }
+
+unsigned int NotMusica::getQuantita() const { return quantita; }
+void NotMusica::setQuantita(unsigned int q) { quantita = q; }
+
+// PRINT INFO
+void NotMusica::printInfo() const {
+    ArtistProduct::printInfo();
+    std::cout << "Prezzo: " << prezzo << std::endl;
+    std::cout << "Disponibile: " << (disponibile ? "Si" : "No") << std::endl;
+    std::cout << "Quantita: " << quantita << std::endl;
+}
+
 // OVERLOADING OPERATORI
 bool operator==(const NotMusica& a, const NotMusica& b) {
     if (!(static_cast<const ArtistProduct&>(a) == static_cast<const ArtistProduct&>(b))) return false;
+    if (a.prezzo != b.prezzo) return false;
+    if (a.disponibile != b.disponibile) return false;
+    if (a.quantita != b.quantita) return false;
     return true;
 }
 

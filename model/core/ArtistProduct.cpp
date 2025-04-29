@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "ArtistProduct.h"
+#include "../artisti/Artista.h"
 #include "../musica/Album.h"
 #include "../musica/Singolo.h"
 #include "../tour/Tour.h"
@@ -8,16 +9,59 @@
 #include "../merch/CD.h"
 #include "../merch/Vinile.h"
 
-ArtistProduct::ArtistProduct(const std::string &t, const std::string &desc)
-: title(t), description(desc), imagePath("") {}
+unsigned int ArtistProduct::nextProductId = 0;
+std::mutex ArtistProduct::idMutex;
 
-ArtistProduct::ArtistProduct(const std::string& t, const std::string& d, const std::string& i)
-: title(t), description(d), imagePath(i) {}
+ArtistProduct::ArtistProduct(Artista* owner, const std::string& t, const std::string& desc)
+: ID(generateId()), title(t), description(desc), imagePath("") {
+    if (!owner) {
+        assert(false && "Artista pointer must not be nullptr");
+        throw std::invalid_argument("ArtistProduct constructor received nullptr Artista pointer.");
+    }
+    id_artist = owner->getId();
+}
+
+ArtistProduct::ArtistProduct(Artista* owner, const std::string& t, const std::string& d, const std::string& i)
+: ID(generateId()), title(t), description(d), imagePath(i) {
+    if (!owner) {
+        assert(false && "Artista pointer must not be nullptr");
+        throw std::invalid_argument("ArtistProduct constructor received nullptr Artista pointer.");
+    }
+    id_artist = owner->getId();
+}
 
 ArtistProduct::ArtistProduct(const ArtistProduct* p)
-: title(p->getTitle()), description(p->getDescription()), imagePath(p->getImagePath()) {}
+: ID(generateId()), title(p->getTitle()), description(p->getDescription()), imagePath(p->getImagePath()) {
+    if (!p) {
+        assert(false && "ArtistProduct pointer must not be nullptr");
+        throw std::invalid_argument("ArtistProduct constructor received nullptr ArtistProduct pointer.");
+    }
+    id_artist = p->getArtistId();
+}
 
 ArtistProduct::~ArtistProduct() {}
+
+unsigned int ArtistProduct::generateId() {
+    std::lock_guard<std::mutex> lock(idMutex);
+    return nextProductId++;
+}
+
+unsigned int ArtistProduct::getId() const {
+    return ID;
+}
+
+unsigned int ArtistProduct::getArtistId() const {
+    return id_artist;
+}
+
+void ArtistProduct::setArtistId(Artista* owner) {
+    if (!owner) {
+        assert(false && "Artista pointer must not be nullptr");
+        throw std::invalid_argument("ArtistProduct setArtistId() received nullptr Artista pointer.");
+    }
+    id_artist = owner->getId();
+}
+
 
 std::string ArtistProduct::getTitle() const { 
     return title; 
@@ -36,6 +80,7 @@ void ArtistProduct::setDescription(const std::string &d) {
 std::string ArtistProduct::getImagePath() const {
     return imagePath;
 }
+
 void ArtistProduct::setImagePath(const std::string &path) {
     imagePath = path;
 }
@@ -49,8 +94,20 @@ void ArtistProduct::printInfo() const{
 
 //JSON
 // Converte un oggetto JSON in un oggetto ArtistProduct
-ArtistProduct::ArtistProduct(const QJsonObject& json)
-: title(json["title"].toString().toStdString()), description(json["description"].toString().toStdString()), imagePath(json["imagePath"].toString().toStdString()) {}
+ArtistProduct::ArtistProduct(Artista* owner, const QJsonObject& json)
+: ID(generateId()),
+    title(json["title"].toString().toStdString()),
+    description(json["description"].toString().toStdString()),
+    imagePath(json["imagePath"].toString().toStdString())
+{
+    // So di avere il setter ma preferisco riscreverlo per sapere esattamente dove fallisce in caso di eccezione
+    if (!owner) {
+        assert(false && "ArtistProduct JSON constructor received nullptr owner");
+        throw std::invalid_argument("ArtistProduct JSON constructor received nullptr owner.");
+    }
+    id_artist = owner->getId(); 
+}
+
 // Converte l'oggetto ArtistProduct in un oggetto JSON
 QJsonObject ArtistProduct::toJson() const{
     QJsonObject json;
@@ -59,28 +116,37 @@ QJsonObject ArtistProduct::toJson() const{
     json["imagePath"] = QString::fromStdString(imagePath);
     return json;
 }
+
 // Converte un oggetto JSON nella giusta sottoclasse concreta di ArtistProduct e restituisce un puntatore a quell'oggetto
-ArtistProduct* ArtistProduct::createJson(const QJsonObject& json) {
+ArtistProduct* ArtistProduct::createJson(Artista* owner, const QJsonObject& json) {
     std::string type = json["type"].toString().toStdString();
 
-    if (type == "album") return new Album(json);
-    if (type == "singolo") return new Singolo(json);
-    if (type == "tour") return new Tour(json);
-    if (type == "tshirt") return new TShirt(json);
-    if (type == "cd") return new CD(json);
-    if (type == "vinile") return new Vinile(json);
+    if (type == "album") return new Album(owner, json);
+    if (type == "singolo") return new Singolo(owner, json);
+    if (type == "tour") return new Tour(owner, json);
+    if (type == "tshirt") return new TShirt(owner, json);
+    if (type == "cd") return new CD(owner, json);
+    if (type == "vinile") return new Vinile(owner, json);
 
-    qWarning() << "Tipo prodotto sconosciuto: " << QString::fromStdString(type);
-    return nullptr;
+    throw std::runtime_error("Tipo prodotto sconosciuto durante il parsing JSON: " + type);
 }
 
 //XML
 // Converte un oggetto XML in un oggetto ArtistProduct
-ArtistProduct::ArtistProduct(const QDomElement& xml) {
-    title = xml.attribute("title").toStdString();
-    description = xml.attribute("description").toStdString();
-    imagePath = xml.attribute("imagePath").toStdString();
+ArtistProduct::ArtistProduct(Artista* owner, const QDomElement& el)
+:   ID(generateId()),
+    title(el.attribute("title").toStdString()),
+    description(el.attribute("description").toStdString()),
+    imagePath(el.attribute("imagePath").toStdString())
+{
+    // So di avere il setter ma preferisco riscreverlo per sapere esattamente dove fallisce in caso di eccezione
+    if (!owner) {
+        assert(false && "ArtistProduct XML constructor received nullptr owner");
+        throw std::invalid_argument("ArtistProduct XML constructor received nullptr owner.");
+    }
+    id_artist = owner->getId();
 }
+
 // Converte l'oggetto ArtistProduct in un oggetto XML
 QDomElement ArtistProduct::toXml(QDomDocument& doc) const {
     QDomElement el = doc.createElement("ArtistProduct");
@@ -89,18 +155,19 @@ QDomElement ArtistProduct::toXml(QDomDocument& doc) const {
     el.setAttribute("imagePath", QString::fromStdString(imagePath));
     return el;
 }
+
 // Converte un oggetto XML nella giusta sottoclasse concreta di ArtistProduct e restituisce un puntatore a quell'oggetto
-ArtistProduct* ArtistProduct::createXml(const QDomElement& el) {
+ArtistProduct* ArtistProduct::createXml(Artista* owner, const QDomElement& el) {
     QString tag = el.tagName();
 
-    if (tag == "Album")   return new Album(el);
-    if (tag == "Singolo") return new Singolo(el);
-    if (tag == "CD")      return new CD(el);
-    if (tag == "Vinile")  return new Vinile(el);
-    if (tag == "TShirt")  return new TShirt(el);
-    if (tag == "Tour")    return new Tour(el);
+    if (tag == "Album")   return new Album(owner, el);
+    if (tag == "Singolo") return new Singolo(owner, el);
+    if (tag == "CD")      return new CD(owner, el);
+    if (tag == "Vinile")  return new Vinile(owner, el);
+    if (tag == "TShirt")  return new TShirt(owner, el);
+    if (tag == "Tour")    return new Tour(owner, el);
 
-    return nullptr;
+    throw std::runtime_error("Tag prodotto XML sconosciuto: " + tag.toStdString());
 }
 
 
