@@ -56,6 +56,8 @@ public:
     void removeProduct(unsigned int id_product);
     const std::unordered_map<unsigned int, ArtistProduct*>& getProducts() const;
 
+    void printInfo() const;
+
     // JSON
     Artista(const QJsonObject &json); // Costruttore: carica SOLO le info base
     // Metodo statico di Factory

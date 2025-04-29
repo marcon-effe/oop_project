@@ -38,7 +38,7 @@ Musica::Musica(const Musica* m)
 //JSON
 // Converte un oggetto JSON in un oggetto Musica
 Musica::Musica(Artista* owner, const QJsonObject& json)
-: ArtistProduct(owner, json),
+: ArtistProduct(owner, json["ArtistProduct"].toObject()),
   dataUscita(json["dataUscita"].toObject()),
   durata(json["durata"].toObject()),
   genere(json["genere"].toString().toStdString())
@@ -108,15 +108,11 @@ void Musica::setGenere(const std::string& g) { genere = g; }
 
 // PRINT INFO
 void Musica::printInfo() const {
-    std::cout << "Musica: " << getTitle()
-              << "\nDescrizione: " << getDescription()
-              << "\nData uscita: " << dataUscita.getGiorno() << "/" 
-                                   << dataUscita.getMese() << "/" 
-                                   << dataUscita.getAnno()
-              << "\nDurata: " << durata.getOre() << "h " 
-                             << durata.getMinuti() << "m " 
-                             << durata.getSecondi() << "s"
-              << "\nGenere: " << genere << std::endl;
+    ArtistProduct::printInfo();
+    std::cout << "--MUSICA--" << std::endl;
+    std::cout << "Data di uscita: " << dataUscita.toString() << std::endl;
+    std::cout << "Durata: " << durata.toString() << std::endl;
+    std::cout << "Genere: " << genere << std::endl;
 }
 
 // OVERLOADING OPERATORI

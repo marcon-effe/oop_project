@@ -38,7 +38,7 @@ NotMusica::NotMusica(const NotMusica* nm)
 //JSON
 // Converte un oggetto JSON in un oggetto NotMusica
 NotMusica::NotMusica(Artista* owner, const QJsonObject& json)
-: ArtistProduct(owner, json),
+: ArtistProduct(owner, json["ArtistProduct"].toObject()),
   prezzo(json["prezzo"].toDouble()),
   disponibile(json["disponibile"].toBool()),
   quantita(static_cast<unsigned int>(json["quantita"].toInt()))
@@ -103,17 +103,37 @@ void NotMusica::setQuantita(unsigned int q) { quantita = q; }
 // PRINT INFO
 void NotMusica::printInfo() const {
     ArtistProduct::printInfo();
+    std::cout << "--NOT MUSICA--" << std::endl;
     std::cout << "Prezzo: " << prezzo << std::endl;
     std::cout << "Disponibile: " << (disponibile ? "Si" : "No") << std::endl;
     std::cout << "Quantita: " << quantita << std::endl;
 }
 
 // OVERLOADING OPERATORI
+#include <iostream> // in alto se serve
+
 bool operator==(const NotMusica& a, const NotMusica& b) {
-    if (!(static_cast<const ArtistProduct&>(a) == static_cast<const ArtistProduct&>(b))) return false;
-    if (a.prezzo != b.prezzo) return false;
-    if (a.disponibile != b.disponibile) return false;
-    if (a.quantita != b.quantita) return false;
+    if (!(static_cast<const ArtistProduct&>(a) == static_cast<const ArtistProduct&>(b))) {
+        std::cerr << "❌ Differenza nei campi ArtistProduct!" << std::endl;
+        return false;
+    }
+
+    constexpr double epsilon = 1e-6;
+    if (std::abs(a.prezzo - b.prezzo) > epsilon) {
+        std::cerr << "❌ Prezzo diverso: " << a.prezzo << " vs " << b.prezzo << std::endl;
+        return false;
+    }
+
+    if (a.disponibile != b.disponibile) {
+        std::cerr << "❌ Disponibile diverso: " << a.disponibile << " vs " << b.disponibile << std::endl;
+        return false;
+    }
+
+    if (a.quantita != b.quantita) {
+        std::cerr << "❌ Quantita diversa: " << a.quantita << " vs " << b.quantita << std::endl;
+        return false;
+    }
+
     return true;
 }
 

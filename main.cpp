@@ -23,19 +23,20 @@
 void assertDeepEquality(const std::unordered_map<unsigned int, Artista*>& original, const std::unordered_map<unsigned int, Artista*>& loaded) {
     assert(original.size() == loaded.size());
 
-    auto it1 = original.begin();
-    auto it2 = loaded.begin();
+    auto it_orig = original.begin();
+    auto it_load = loaded.begin();
 
-    for (; it1 != original.end() && it2 != loaded.end(); ++it1, ++it2) {
-        const Artista* o = it1->second;
-        const Artista* l = it2->second;
+    while (it_orig != original.end() && it_load != loaded.end()) {
+        const Artista* o = it_orig->second;
+        const Artista* l = it_load->second;
 
-        std::cout << "▶ Confronto artista: " << o->getNome() << std::endl;
+        std::cout << "▶ Confronto artista: " << o->getNome() << " vs " << l->getNome() << std::endl;
 
-        if (!(o->getNome() == l->getNome())) {
-            std::cerr << "❌ Nomi diversi:\n"
-                      << " - Originale: " << o->getNome() << "\n"
-                      << " - Caricato:  " << l->getNome() << std::endl;
+        if (!(o->getNome() == l->getNome() &&
+              o->getGenere() == l->getGenere() &&
+              o->getInfo() == l->getInfo() &&
+              o->getImagePath() == l->getImagePath())) {
+            std::cerr << "❌ Dati artista diversi!" << std::endl;
             assert(false);
         }
 
@@ -49,34 +50,31 @@ void assertDeepEquality(const std::unordered_map<unsigned int, Artista*>& origin
             assert(false);
         }
 
-        for (auto oit = originalProd.begin(), lit = loadedProd.begin(); oit != originalProd.end() && lit != loadedProd.end(); ++oit, ++lit) {
-            const ArtistProduct* oProd = oit->second;
-            const ArtistProduct* lProd = lit->second;
-
-            std::string oType = typeid(*oProd).name();
-            std::string lType = typeid(*lProd).name();
-
-            std::cout << "   ▶ Confronto prodotto: "
-                      << oType << " [" << oProd->getTitle() << "]"
-                      << " vs "
-                      << lType << " [" << lProd->getTitle() << "]" << std::endl;
-
-            if (oType != lType) {
-                std::cerr << "   ❌ Tipo diverso!\n"
-                          << "    - Originale: " << oType << "\n"
-                          << "    - Caricato:  " << lType << std::endl;
-                assert(false);
-            }
+        // Confronta *contenuto* dei prodotti, NON gli ID
+        auto it_op = originalProd.begin();
+        auto it_lp = loadedProd.begin();
+        while (it_op != originalProd.end() && it_lp != loadedProd.end()) {
+            const ArtistProduct* oProd = it_op->second;
+            const ArtistProduct* lProd = it_lp->second;
 
             if (!(*oProd == *lProd)) {
-                std::cerr << "   ❌ Differenza nei dati!\n"
-                          << "    - Originale title: " << oProd->getTitle() << "\n"
-                          << "    - Caricato title:  " << lProd->getTitle() << std::endl;
+                std::cerr << "   ❌ Differenza nei dati prodotto [" << oProd->getTitle() << "]" << std::endl;
                 assert(false);
-            } else {
-                std::cout << "   ✅ Prodotto [" << oProd->getTitle() << "] OK" << std::endl;
             }
+
+            if (lProd->getArtistId() != l -> getId()) {
+                std::cerr << "   ❌ Prodotto non collegato correttamente al nuovo artista!" << std::endl;
+                assert(false);
+            }
+
+            std::cout << "   ✅ Prodotto [" << oProd->getTitle() << "] OK" << std::endl;
+
+            ++it_op;
+            ++it_lp;
         }
+
+        ++it_orig;
+        ++it_load;
     }
 
     std::cout << "✅ Tutti gli artisti e i prodotti corrispondono perfettamente!" << std::endl;
@@ -104,12 +102,19 @@ int main(int argc, char *argv[]) {
             Tour* tour = new Tour(a, "Tour1", "desc", 99.99, true, 200);
             tour->addDataTour(DataTour(10,5,2025,20,30,0,"Roma"));
             a->addProduct(tour);
+
+            a -> printInfo();
+
             artisti[a->getId()] = a;
         }
-
+        
         // JSON
         DataManager::saveToFileJson(artisti, "saves/json/test_artisti.json");
         auto loadedJson = DataManager::loadFromFileJson("saves/json/test_artisti.json");
+        for (auto& p : loadedJson) {
+            std::cout << "Artista caricato: " << std::endl;
+            p.second->printInfo();
+        }
         assertDeepEquality(artisti, loadedJson);
 
         // XML

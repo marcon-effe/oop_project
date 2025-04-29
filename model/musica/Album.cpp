@@ -152,6 +152,7 @@ Durata Album::getDurataTotale() const {
 
 void Album::printInfo() const {
     Musica::printInfo();
+    std::cout << "--ALBUM--" << std::endl;
     std::cout << "Etichetta: " << label << "\n";
     std::cout << "Tracce dell'album (" << tracce.size() << "):" << std::endl;
     for (size_t i = 0; i < tracce.size(); ++i) {

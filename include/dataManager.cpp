@@ -52,14 +52,13 @@ std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileJson(const s
         if (!artistaVal.isObject()) continue;
 
         QJsonObject artistaObj = artistaVal.toObject();
-        Artista* a = new Artista(artistaObj);
+        Artista* a = Artista::createFromJson(artistaObj);
         unsigned int id = a->getId();
         artisti[id] = a;
     }
 
     return artisti;
 }
-
 // XML
 // Funzione per validare un file XML con uno schema XSD
 bool DataManager::validateXmlWithSchema(const std::string& xmlPath, const std::string& xsdPath) {

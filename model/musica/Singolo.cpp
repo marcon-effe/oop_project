@@ -107,6 +107,7 @@ void Singolo::setChartPosition(int pos) { chartPosition = pos; }
 // PRINT INFO
 void Singolo::printInfo() const {
     Musica::printInfo();
+    std::cout << "--SINGOLO--" << std::endl;
     std::cout << "Singolo - Traccia principale: " << mainTrack.getNome()
               << "\nRemix: " << (isRemix ? "Sì" : "No")
               << "\nPosizione in classifica: " << chartPosition << std::endl;

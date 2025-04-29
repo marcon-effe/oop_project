@@ -129,6 +129,7 @@ void Disco::setTipoProdotto(const std::string& tp) {
 
 void Disco::printInfo() const {
     Merch::printInfo();
+    std::cout << "--DISCO--" << std::endl;
     std::cout << "Produttore stampe: " << produttoreStampe
               << "\nCodice riconoscimento: " << codiceRiconoscimento
               << "\nTipo prodotto: " << tipoProdotto << std::endl;

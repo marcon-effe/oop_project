@@ -37,6 +37,7 @@ void Vinile::setDiametro(unsigned int d) {
 // Stampa info
 void Vinile::printInfo() const {
     Disco::printInfo();
+    std::cout << "--VINILE--" << std::endl;
     std::cout << "RPM: " << rpm << "\nDiametro: " << diametro << " pollici" << std::endl;
 }
 

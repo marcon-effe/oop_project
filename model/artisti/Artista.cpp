@@ -41,6 +41,7 @@ void Artista::setGenere(const std::string &g) {
 std::string Artista::getInfo() const { 
     return info; 
 }
+
 void Artista::setInfo(const std::string &i) { 
     info = i; 
 }
@@ -67,6 +68,22 @@ void Artista::removeProduct(unsigned int id_product) {
 
 const std::unordered_map<unsigned int, ArtistProduct*>& Artista::getProducts() const {
     return products;
+}
+
+void Artista::printInfo() const {
+    std::cout << "Artista ID: " << ID << std::endl;
+    std::cout << "Nome: " << nome << std::endl;
+    std::cout << "Genere: " << genere << std::endl;
+    std::cout << "Info: " << info << std::endl;
+    std::cout << "Image Path: " << imagePath << std::endl;
+
+    std::cout << "Prodotti: " << std::endl;
+    for(auto& pair : products) {
+        std::cout << "------------------------" << std::endl;
+        std::cout << "Prodotto ID: " << pair.first << std::endl;
+        pair.second->printInfo();
+        std::cout << "------------------------" << std::endl;
+    }
 }
 
 

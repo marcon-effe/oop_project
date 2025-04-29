@@ -13,5 +13,7 @@ rm -f moc_*.cpp
 rm -f ui_*.h
 rm -f qrc_*.cpp
 rm -f ./oop_project
+rm -f .qmake.stash
+rm -rf .vscode/
 
 echo "✅ Build pulita con successo."

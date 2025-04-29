@@ -91,6 +91,7 @@ void Merch::setCodiceProdotto(const std::string& codice) {
 // PRINT INFO
 void Merch::printInfo() const {
     NotMusica::printInfo();
+    std::cout << "--MERCH--" << std::endl;
     std::cout << "Codice prodotto: " << codiceProdotto << std::endl;
 }
 

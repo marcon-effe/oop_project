@@ -108,6 +108,7 @@ void TShirt::setColore(const std::string& c) {
 
 void TShirt::printInfo() const {
     Merch::printInfo();
+    std::cout << "--TSHIRT--" << std::endl;
     std::cout << "Taglia: " << taglia
               << "\nColore: " << colore << std::endl;
 }

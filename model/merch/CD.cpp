@@ -26,6 +26,7 @@ void CD::setFormato(const std::string& f) {
 
 void CD::printInfo() const {
     Disco::printInfo();
+    std::cout << "--CD--" << std::endl;
     std::cout << "Formato: " << formato << std::endl;
 }
 

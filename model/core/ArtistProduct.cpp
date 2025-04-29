@@ -86,9 +86,12 @@ void ArtistProduct::setImagePath(const std::string &path) {
 }
 
 void ArtistProduct::printInfo() const{
-    std::cout << "Title: " << title << std::endl;
-    std::cout << "Description: " << description << std::endl;
-    std::cout << "Image Path: " << imagePath << std::endl;
+    std::cout << "--ARTIST PRODUCT--" << std::endl;
+    std::cout << "ArtistProduct ID: " << getId() << std::endl;
+    std::cout << "Artist ID: " << getArtistId() << std::endl;
+    std::cout << "Title: " << getTitle() << std::endl;
+    std::cout << "Description: " << getDescription() << std::endl;
+    std::cout << "Image Path: " << getImagePath() << std::endl;
 }
 
 
@@ -120,6 +123,10 @@ QJsonObject ArtistProduct::toJson() const{
 // Converte un oggetto JSON nella giusta sottoclasse concreta di ArtistProduct e restituisce un puntatore a quell'oggetto
 ArtistProduct* ArtistProduct::createJson(Artista* owner, const QJsonObject& json) {
     std::string type = json["type"].toString().toStdString();
+    if (type.empty()) {
+        assert(false && "ArtistProduct::createJson() ricevuto JSON senza campo 'type'");
+        throw std::invalid_argument("ArtistProduct::createJson() JSON malformato: campo 'type' mancante.");
+    }
 
     if (type == "album") return new Album(owner, json);
     if (type == "singolo") return new Singolo(owner, json);

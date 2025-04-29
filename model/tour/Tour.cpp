@@ -31,11 +31,9 @@ const std::vector<DataTour>& Tour::getDateTour() const {
 }
 
 void Tour::printInfo() const {
-    std::cout << "Tour: " << title << "\nDescrizione: " << description
-              << "\nPrezzo: " << getPrezzo()
-              << "\nDisponibilita': " << (getDisponibile() ? "Si" : "No")
-              << "\nQuantita': " << getQuantita()
-              << "\nDate del tour:\n";
+    NotMusica::printInfo();
+    std::cout << "--TOUR--" << std::endl;
+    std::cout << "Date del tour:\n";
 
     for (size_t i = 0; i < dateTour.size(); ++i) {
         std::cout << " " << i + 1 << ". " 
