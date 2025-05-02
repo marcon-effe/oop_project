@@ -11,6 +11,7 @@
 
 
 class VisitorGUI;
+class VisitorConsoleEditor;
 class Artista;
 
 class ArtistProduct {
@@ -58,6 +59,7 @@ public:
     static ArtistProduct* createXml(Artista* owner, const QDomElement& xml);
 
     virtual void accept(VisitorGUI* visitor) const = 0;
+    virtual void accept(VisitorConsoleEditor* visitor) = 0;
 
     //OVERLOADING OPERATORI
     friend bool operator==(const ArtistProduct& a, const ArtistProduct& b);

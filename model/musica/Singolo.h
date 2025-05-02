@@ -41,6 +41,10 @@ public:
     int getChartPosition() const;
     void setChartPosition(int pos);
 
+    void updateDurata() override;
+
+    Traccia& getTracciaModificabile();
+
     // Serializzazione
     virtual QJsonObject toJson() const final;
     virtual QDomElement toXml(QDomDocument& doc) const final;
@@ -50,6 +54,7 @@ public:
 
     // Visitor
     virtual void accept(VisitorGUI* visitor) const final;
+    virtual void accept(VisitorConsoleEditor* visitor) final;
 
     // Overloading operatori
     friend bool operator==(const Singolo& a, const Singolo& b);

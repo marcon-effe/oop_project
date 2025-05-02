@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Artista.h"
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 unsigned int Artista::nextArtistId = 0;
 std::mutex Artista::idMutex;
@@ -196,9 +197,13 @@ QDomElement Artista::toXml(QDomDocument& doc) const {
     return artistaElem;
 }
 
-
+// VISITOR
 void Artista::accept(VisitorGUI* visitor) const{
     visitor -> visit(this);
+}
+
+void Artista::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
 }
 
 

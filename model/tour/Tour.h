@@ -22,12 +22,14 @@ public:
     void removeDataTour(unsigned int index);
 
     const std::vector<DataTour>& getDateTour() const;
+    std::vector<DataTour>& getDateTourModificabile();
 
     virtual void printInfo() const override;
     QJsonObject toJson() const override;
     QDomElement toXml(QDomDocument& doc) const override;
 
     virtual void accept(VisitorGUI* v) const final;
+    virtual void accept(VisitorConsoleEditor* visitor) final;
 
     // OVERLOADING OPERATORI
     friend bool operator==(const Tour& a, const Tour& b);

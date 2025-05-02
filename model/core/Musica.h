@@ -41,6 +41,8 @@ public:
     std::string getGenere() const;
     void setGenere(const std::string& g);
 
+    virtual void updateDurata() = 0;
+
     // Metodi di stampa/salvataggio
     virtual void printInfo() const override;
     QJsonObject toJson() const override;

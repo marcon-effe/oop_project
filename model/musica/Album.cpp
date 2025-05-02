@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Album.h"
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 // COSTRUTTORI
 
@@ -16,7 +17,7 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
 
 // Costruttore standard con tracce
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tra, const std::string& lbl)
-: Musica(owner, t, desc, du, dur, g), label(lbl), tracce(tra)
+: Musica(owner, t, desc, du, dur, g), tracce(tra), label(lbl)
 {
     if (!owner) {
         assert(false && "Album standard constructor (with tracce) received nullptr owner");
@@ -36,7 +37,7 @@ Album::Album(Musica* m, const std::vector<Traccia>& t, const std::string& l)
 
 // Costruttore di copia
 Album::Album(const Album* a)
-: Musica(a), tracce(a->getTracce()), label(a->getLabel())
+: Musica(a), label(a->getLabel()), tracce(a->getTracce())
 {
     if (!a) {
         assert(false && "Album copy constructor received nullptr Album pointer");
@@ -137,17 +138,14 @@ void Album::removeTraccia(const std::string& nomeTraccia) {
 
 const std::vector<Traccia>& Album::getTracce() const { return tracce; }
 
-Durata Album::getDurataTotale() const {
-    unsigned int ore = 0, minuti = 0, secondi = 0;
-
-    for (const Traccia& t : tracce) {
-        Durata d = t.getDurata();
-        ore += d.getOre();
-        minuti += d.getMinuti();
-        secondi += d.getSecondi();
+void Album::updateDurata() {
+    int totOre = 0, totMin = 0, totSec = 0;
+    for (const auto& tr : tracce) {
+        totOre += tr.getDurata().getOre();
+        totMin += tr.getDurata().getMinuti();
+        totSec += tr.getDurata().getSecondi();
     }
-
-    return Durata(ore, minuti, secondi); // Normalizzazione automatica
+    setDurata(Durata(totOre, totMin, totSec));
 }
 
 void Album::printInfo() const {
@@ -160,10 +158,21 @@ void Album::printInfo() const {
     }
 }
 
+Traccia& Album::getTracciaModificabile(unsigned int index) {
+    if (index >= tracce.size())
+        throw std::out_of_range("Indice traccia non valido nell'album.");
+    return tracce.at(index);
+}
+
 // VISITOR
 void Album::accept(VisitorGUI* visitor) const {
     visitor->visit(this);
 }
+
+void Album::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
+}
+
 
 // OVERLOADING OPERATORI
 bool operator==(const Album& a, const Album& b) {

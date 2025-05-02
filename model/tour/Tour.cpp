@@ -2,6 +2,7 @@
 #include "Tour.h"
 
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 // Costruttore standard
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita)
@@ -27,6 +28,10 @@ void Tour::removeDataTour(unsigned int index) {
 }
 
 const std::vector<DataTour>& Tour::getDateTour() const {
+    return dateTour;
+}
+
+std::vector<DataTour>& Tour::getDateTourModificabile() {
     return dateTour;
 }
 
@@ -113,6 +118,9 @@ void Tour::accept(VisitorGUI* v) const {
     v->visit(this);
 }
 
+void Tour::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
+}
 
 // OVERLOADING OPERATORI
 bool operator==(const Tour& a, const Tour& b) {

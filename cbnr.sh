@@ -5,7 +5,7 @@ OS_TYPE="$(uname)"
 if [ "$OS_TYPE" == "Linux" ]; then
     echo "🧹 Cleaning build directory..."
     rm -rf build
-    rm -rf ./oop_project
+    rm -f ./oop_project
 
     echo "📁 Creating build directory..."
     mkdir -p build
@@ -24,6 +24,10 @@ if [ "$OS_TYPE" == "Linux" ]; then
         echo "❌ Compilation failed"
         exit 2
     fi
+
+    echo "📦 Moving executable to root directory..."
+    mv ./oop_project ../
+    cd ..
 
     echo "🚀 Running app..."
     ./oop_project

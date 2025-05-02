@@ -40,7 +40,9 @@ public:
     virtual void printInfo() const override;
     virtual QJsonObject toJson() const override;
     virtual QDomElement toXml(QDomDocument& doc) const override;
+
     virtual void accept(VisitorGUI* v) const final;
+    virtual void accept(VisitorConsoleEditor* visitor) final override;
 
     // Overloading operatori
     friend bool operator==(const TShirt& a, const TShirt& b);

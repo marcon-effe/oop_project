@@ -1,9 +1,9 @@
 #include <iostream>
 #include "TShirt.h"
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 // COSTRUTTORI
-
 // Costruttore standard
 TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore)
 : Merch(owner, t, desc, prezzo, disponibile, quantita, codice), taglia(taglia), colore(colore)
@@ -35,7 +35,6 @@ TShirt::TShirt(const TShirt* t)
 }
 
 // JSON
-
 // Costruttore da JSON
 TShirt::TShirt(Artista* owner, const QJsonObject& json)
 : Merch(owner, json["merch"].toObject()),
@@ -59,7 +58,6 @@ QJsonObject TShirt::toJson() const {
 }
 
 // XML
-
 // Costruttore da XML
 TShirt::TShirt(Artista* owner, const QDomElement& xml)
 : Merch(owner, xml.firstChildElement("Merch")),
@@ -83,11 +81,9 @@ QDomElement TShirt::toXml(QDomDocument& doc) const {
 }
 
 // DISTRUTTORE
-
 TShirt::~TShirt() {}
 
 // GETTER/SETTER
-
 std::string TShirt::getTaglia() const {
     return taglia;
 }
@@ -105,7 +101,6 @@ void TShirt::setColore(const std::string& c) {
 }
 
 // PRINT INFO
-
 void TShirt::printInfo() const {
     Merch::printInfo();
     std::cout << "--TSHIRT--" << std::endl;
@@ -113,14 +108,18 @@ void TShirt::printInfo() const {
               << "\nColore: " << colore << std::endl;
 }
 
-// VISITOR
 
+// VISITOR
 void TShirt::accept(VisitorGUI* visitor) const {
     visitor->visit(this);
 }
 
-// OVERLOADING OPERATORI
+void TShirt::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
+}
 
+
+// OVERLOADING OPERATORI
 bool operator==(const TShirt& a, const TShirt& b) {
     if (!(static_cast<const Merch&>(a) == static_cast<const Merch&>(b))) return false;
     if (a.taglia != b.taglia) return false;

@@ -33,6 +33,7 @@ public:
     friend bool operator!=(const Durata& a, const Durata& b);
     friend bool operator<(const Durata& a, const Durata& b);
     friend bool operator>(const Durata& a, const Durata& b);
+    friend Durata operator+(const Durata& lhs, const Durata& rhs);
 
 private:
     unsigned int ore;

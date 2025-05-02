@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Traccia.h"
 
+#include "../../cli/VisitorConsoleEditor.h"
+
 Traccia::Traccia(const std::string &n, const std::vector<std::string> &parts, const Durata &d, const std::string &t, bool ht)
 : nome(n), partecipanti(parts), durata(d), testo(t), hasTesto(ht){
     if (!ht) testo = "";
@@ -33,6 +35,11 @@ void Traccia::setTesto(const std::string &t) {
     hasTesto = !t.empty();
 }
 
+void Traccia::setHasTesto(bool ht) {
+    hasTesto = ht;
+    if (!ht) testo = "";
+}
+
 bool Traccia::hasTestoPresent() const {
     return hasTesto;
 }
@@ -46,7 +53,23 @@ void Traccia::addPartecipante(const std::string &a) {
 }
 
 void Traccia::removePartecipante(const std::string &a) {
-    partecipanti.erase(std::remove(partecipanti.begin(), partecipanti.end(), a), partecipanti.end());
+    auto it = std::find(partecipanti.begin(), partecipanti.end(), a);
+    if (it != partecipanti.end())
+        partecipanti.erase(it);
+    else
+        throw std::invalid_argument("Partecipante non trovato.");
+}
+
+void Traccia::removePartecipante(unsigned int index) {
+    if (index >= partecipanti.size())
+        throw std::out_of_range("Indice partecipante non valido.");
+    partecipanti.erase(partecipanti.begin() + index);
+}
+
+void Traccia::editPartecipante(unsigned int index, const std::string& nuovoNome) {
+    if(index >= partecipanti.size())
+        throw std::out_of_range("Indice non valido.");
+    partecipanti[index] = nuovoNome;
 }
 
 
@@ -119,6 +142,10 @@ QDomElement Traccia::toXml(QDomDocument& doc) const {
     return tracciaElem;
 }
 
+// VISITOR
+void Traccia::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
+}
 
 // OVERLOADING OPERATORI
 bool operator==(const Traccia& lhs, const Traccia& rhs) {

@@ -41,7 +41,9 @@ public:
     void addTraccia(const Traccia& tr);
     void removeTraccia(const std::string& nomeTraccia);
     const std::vector<Traccia>& getTracce() const;
-    Durata getDurataTotale() const;
+    void updateDurata() override;
+
+    Traccia& getTracciaModificabile(unsigned int index);
 
     // Serializzazione
     virtual QJsonObject toJson() const final;
@@ -52,6 +54,7 @@ public:
 
     // Visitor
     virtual void accept(VisitorGUI* visitor) const final;
+    virtual void accept(VisitorConsoleEditor* visitor) final;
 
     // Overloading operatori
     friend bool operator==(const Album& a, const Album& b);

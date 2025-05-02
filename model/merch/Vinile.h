@@ -30,6 +30,7 @@ public:
     QDomElement toXml(QDomDocument& doc) const final;
 
     virtual void accept(VisitorGUI* v) const final;
+    virtual void accept(VisitorConsoleEditor* v) final;
 
     // OVERLOADING OPERATORI
     friend bool operator==(const Vinile& a, const Vinile& b);

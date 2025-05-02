@@ -1,31 +1,85 @@
-/* Right Pannel */ 
-QWidget#rightPanel {
-    background-color: white;
+/* Left Panel */
+#leftPanel {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+}
+
+#artistList, #productList {
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+#searchArtisti, #searchProdotti {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background-color: #ffffff;
+}
+
+#filtroArtisti, #filtroProdotti {
+    background-color: #4285f4;
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+#filtroArtisti:hover, #filtroProdotti:hover {
+    background-color: #2c6fe6;
+}
+
+#labelArtisti, #labelProdotti {
+    font-weight: bold;
+    color: #2C3E50;
+    font-size: 13pt;
+}
+
+
+/* Right Panel */
+QWidget#rightPanel,
+QScrollArea > QWidget,
+#relatedProductsContainer {
+    background-color: #ffffff;
 }
 
 QScrollArea {
     background: transparent;
     border: none;
 }
-QScrollArea > QWidget {
-    background-color: white;
+
+
+/* Correlati */
+#relatedProductsScrollArea {
+    background-color: #ffffff;
+    border: none;
 }
 
-
-/* Image Label */
-QLabel#artistImageLabel {
-    border: 2px solid red;
-    border-radius: 60px;      /* metà di 120px */
-    min-width: 120px;
-    min-height: 120px;
-    max-width: 120px;
-    max-height: 120px;
+#productCard {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-QLabel#defaultImageLabel {
-    border: 1px solid red;
+#productTitle {
+    color: #333;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+#productButton {
+    background-color: #2196F3;
+    color: white;
+    border: none;
     border-radius: 4px;
+    padding: 8px 16px;
 }
+#productButton:hover {
+    background-color: #2176ff;
+}
+#productButton:pressed {
+    background-color: #1549b9;
+}
+
 
 /* Artista */
 QWidget#artistContainer {
@@ -43,31 +97,19 @@ QLabel#artistName {
 QLabel#artistGenre {
     font-family: "Roboto";
     font-size: 16pt;
-    font-weight: normal;
-    color: #d8666666;
+    color: #666;
     qproperty-alignment: AlignCenter;
 }
 
-QGroupBox#artistDescBox {
-    border: 1px solid #62cccccc;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
+QGroupBox#artistDescBox,
 QGroupBox#artistProdBox {
-    border: 1px solid #62cccccc;
+    border: 1px solid #cccccc;
     border-radius: 8px;
     margin-top: 10px;
-}
-
-QWidget#productCard {
-    background: #fff;
-    border: 1px solid #62cccccc;
-    border-radius: 8px;
 }
 
 QLabel#productThumb {
-    border: 1px solid #62cccccc;
+    border: 1px solid #cccccc;
     border-radius: 4px;
 }
 
@@ -81,312 +123,142 @@ QLabel#productDesc {
     color: #666;
 }
 
-QPushButton#productButton {
-    background-color: #4285f4;
+
+/* Singolo */
+QWidget#singoloContainer {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+QLabel#singoloImageLabel {
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 4px;
+}
+
+QLabel#singoloTitleLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #2C3E50;
+    qproperty-alignment: AlignCenter;
+    margin: 12px 0 16px 0;
+}
+
+QLabel#singoloDescLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #b6f9fbfd;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
+}
+
+QWidget#singoloTrackContainer {
+    background-color: #ffffff;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 8px 0 12px 0;
+}
+
+QLabel#trackNameLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2C3E50;
+}
+
+QLabel#trackDurationLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 10pt;
+    color: #555555;
+}
+
+QPushButton#textTrackButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
     color: white;
+    background-color: #4285f4;
     border: none;
     border-radius: 6px;
-    padding: 4px 8px;
+    padding: 6px 10px;
 }
-
-QPushButton#productButton:hover {
-    background-color: #2176ff;  
-    color: #fff;
+QPushButton#textTrackButton:hover {
+    background-color: #2176ff;
 }
-
-QPushButton#productButton:pressed {
-    background-color: #1549b9; 
-    padding-top: 5px;  
-    color: white;          
+QPushButton#textTrackButton:pressed {
+    background-color: #1549b9;
+    padding-top: 5px;
 }
-
-/* ----------------------------------------------------------------- */
-/* TShirt */
-QWidget#tshirtContainer {
-    background-color: #ffffff;
-    padding: 20px;
-}
-
-QLabel#tshirtImageLabel {
-    border: 1px solid #E0E5EA;
-    border-radius: 6px;
-    background-color: #ffffff;
-    padding: 4px;
-}
-
-QLabel#tshirtTitleLabel {
-    font-family: "Roboto", sans-serif;
-    font-size: 20pt;
-    font-weight: 600;
-    color: #2C3E50;
-    qproperty-alignment: AlignCenter;
-    margin: 12px 0 16px 0;
-}
-
-QLabel#tshirtAvailabilityLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: rgba(0,0,0,0.4); 
-    qproperty-alignment: AlignCenter;
-    margin-bottom: 12px;
-}
-
-QLabel#tshirtDescLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: #555555;
-    background-color: #b6f9fbfd;
-    border: 1px solid #E0E5EA;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 12px 0;
-}
-
-QPushButton#showDetailButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 500;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 20px;
-}
-QPushButton#showDetailButton:hover {
-    background-color: #E62727;
-}
-QPushButton#showDetailButton:pressed {
-    background-color: #A01A1A;
-}
-
-QPushButton#addCartButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 600;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-}
-QPushButton#addCartButton:hover {
-    background-color: #E62727;
-}
-QPushButton#addCartButton:pressed {
-    background-color: #A01A1A;
-}
-
-/* -------------------------------------------------------------------- */
-/* CD */
-QWidget#cdContainer {
-    background-color: #ffffff;
-    padding: 20px;
-}
-
-QLabel#cdImageLabel {
-    border: 1px solid #E0E5EA;
-    border-radius: 6px;
-    background-color: #ffffff;
-    padding: 4px;
-}
-
-QLabel#cdTitleLabel {
-    font-family: "Roboto", sans-serif;
-    font-size: 20pt;
-    font-weight: 600;
-    color: #2C3E50;
-    qproperty-alignment: AlignCenter;
-    margin: 12px 0 16px 0;
-}
-
-QLabel#cdAvailabilityLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: rgba(0,0,0,0.4);
-    qproperty-alignment: AlignCenter;
-    margin-bottom: 12px;
-}
-
-QLabel#cdTypeLabel,
-QLabel#cdProducerLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: #555555;
-    qproperty-alignment: AlignCenter;
-    margin: 4px 10px;
-}
-
-QLabel#cdDescLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: #555555;
-    background-color: #b6f9fbfd;
-    border: 1px solid #E0E5EA;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 12px 0;
-}
-
-QPushButton#showDetailButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 500;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 20px;
-}
-QPushButton#showDetailButton:hover {
-    background-color: #E62727;
-}
-QPushButton#showDetailButton:pressed {
-    background-color: #A01A1A;
-}
-
-QPushButton#addCartButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 600;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-}
-QPushButton#addCartButton:hover {
-    background-color: #E62727;
-}
-QPushButton#addCartButton:pressed {
-    background-color: #A01A1A;
-}
-/* ---------------------------------------------------------- */
-/* Vinile */
-QWidget#vinileContainer {
-    background-color: #ffffff;
-    padding: 20px;
-}
-
-QLabel#vinileImageLabel {
-    border: 1px solid #E0E5EA;
-    border-radius: 6px;
-    background-color: #ffffff;
-    padding: 4px;
-}
-
-QLabel#vinileTitleLabel {
-    font-family: "Roboto", sans-serif;
-    font-size: 20pt;
-    font-weight: 600;
-    color: #2C3E50;
-    qproperty-alignment: AlignCenter;
-    margin: 12px 0 16px 0;
-}
-
-QLabel#vinileAvailabilityLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: rgba(0,0,0,0.4);
-    qproperty-alignment: AlignCenter;
-    margin-bottom: 12px;
-}
-
-QLabel#vinileTypeLabel,
-QLabel#vinileRecognitionLabel,
-QLabel#vinileProducerLabel,
-QLabel#vinilePriceLabel,
-QLabel#vinileDiameterLabel,
-QLabel#vinileRpmLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: #555555;
-    qproperty-alignment: AlignCenter;
-    margin: 4px 10px;
-}
-
-QLabel#vinileDescLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: #555555;
-    background-color: #b6f9fbfd;
-    border: 1px solid #E0E5EA;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 12px 0;
-}
-
-QPushButton#showDetailButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 500;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 20px;
-}
-QPushButton#showDetailButton:hover {
-    background-color: #E62727;
-}
-QPushButton#showDetailButton:pressed {
-    background-color: #A01A1A;
-}
-
-QPushButton#addCartButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 600;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-}
-QPushButton#addCartButton:hover {
-    background-color: #E62727;
-}
-QPushButton#addCartButton:pressed {
-    background-color: #A01A1A;
-}
-/* ----------------------------------------------------------- */
 
 
 /* Album */
 QLabel#albumImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 4px;
 }
 
 QLabel#albumTitleLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #2C3E50;
     qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
 }
 
 QLabel#albumLabelLabel {
-    qproperty-alignment: AlignCenter;
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
     font-style: italic;
-    margin: 10px 0;
+    color: #555555;
+    qproperty-alignment: AlignCenter;
 }
 
 QLabel#albumDescLabel {
-    margin-bottom: 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #b6f9fbfd;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
 }
 
 QLabel[class^="albumTrackLabel_"] {
-    margin-left: 10px;
-    margin-bottom: 4px;
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2C3E50;
+}
+
+QWidget#albumTrackContainer {
+    background-color: #ffffff;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 8px 0 12px 0;
 }
 
 
-/* --------------------------------------------------------------*/
-/* Tour */
+/* Tshirt CD e Vinile*/
+QWidget#tshirtContainer,
+QWidget#cdContainer,
+QWidget#vinileContainer,
 QWidget#tourContainer {
     background-color: #ffffff;
     padding: 20px;
 }
 
+QLabel#tshirtImageLabel,
+QLabel#cdImageLabel,
+QLabel#vinileImageLabel,
 QLabel#tourImageLabel {
     border: 1px solid #E0E5EA;
     border-radius: 6px;
@@ -394,6 +266,9 @@ QLabel#tourImageLabel {
     padding: 4px;
 }
 
+QLabel#tshirtTitleLabel,
+QLabel#cdTitleLabel,
+QLabel#vinileTitleLabel,
 QLabel#tourTitleLabel {
     font-family: "Roboto", sans-serif;
     font-size: 20pt;
@@ -403,23 +278,19 @@ QLabel#tourTitleLabel {
     margin: 12px 0 16px 0;
 }
 
+QLabel#tshirtAvailabilityLabel,
+QLabel#cdAvailabilityLabel,
+QLabel#vinileAvailabilityLabel,
 QLabel#tourAvailabilityLabel {
     font-family: "Open Sans", sans-serif;
     font-size: 9pt;
     color: rgba(0,0,0,0.4);
     qproperty-alignment: AlignCenter;
-    margin-bottom: 12px;
 }
 
-QLabel#tourPriceLabel,
-QLabel#tourPeriodLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 9pt;
-    color: #555555;
-    qproperty-alignment: AlignCenter;
-    margin: 4px 10px;
-}
-
+QLabel#tshirtDescLabel,
+QLabel#cdDescLabel,
+QLabel#vinileDescLabel,
 QLabel#tourDescLabel {
     font-family: "Open Sans", sans-serif;
     font-size: 9pt;
@@ -429,38 +300,4 @@ QLabel#tourDescLabel {
     border-radius: 6px;
     padding: 10px;
     margin: 12px 0;
-}
-
-QPushButton#showDetailButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 500;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 20px;
-}
-QPushButton#showDetailButton:hover {
-    background-color: #E62727;
-}
-QPushButton#showDetailButton:pressed {
-    background-color: #A01A1A;
-}
-
-QPushButton#addCartButton {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 10pt;
-    font-weight: 600;
-    color: #FFFFFF;
-    background-color: #FF3333;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 16px;
-}
-QPushButton#addCartButton:hover {
-    background-color: #E62727;
-}
-QPushButton#addCartButton:pressed {
-    background-color: #A01A1A;
 }

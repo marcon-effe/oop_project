@@ -35,6 +35,7 @@ Musica::Musica(const Musica* m)
     }
 }
 
+
 //JSON
 // Converte un oggetto JSON in un oggetto Musica
 Musica::Musica(Artista* owner, const QJsonObject& json)

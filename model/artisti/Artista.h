@@ -13,6 +13,7 @@
 
 class ArtistProduct;
 class VisitorGUI;
+class VisitorConsoleEditor;
 
 class Artista {
 private:
@@ -72,8 +73,9 @@ public:
     void loadProductsFromXml(const QDomElement& prodottiElement);
     QDomElement toXml(QDomDocument& doc) const;
 
-    
+    //Visitor
     void accept(VisitorGUI *visitor) const;
+    void accept(VisitorConsoleEditor *visitor);
 
     //OVERLOADING OPERATORI
     friend bool operator==(const Artista& a, const Artista& b);

@@ -113,3 +113,11 @@ bool operator>(const Durata& lhs, const Durata& rhs) {
     return std::make_tuple(lhs.getOre(), lhs.getMinuti(), lhs.getSecondi()) >
            std::make_tuple(rhs.getOre(), rhs.getMinuti(), rhs.getSecondi());
 }
+
+Durata operator+(const Durata& lhs, const Durata& rhs) {
+    Durata result(lhs.getOre() + rhs.getOre(),
+                  lhs.getMinuti() + rhs.getMinuti(),
+                  lhs.getSecondi() + rhs.getSecondi());
+    result.normalize();
+    return result;
+}

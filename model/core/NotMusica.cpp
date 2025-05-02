@@ -110,27 +110,13 @@ void NotMusica::printInfo() const {
 }
 
 // OVERLOADING OPERATORI
-#include <iostream> // in alto se serve
-
 bool operator==(const NotMusica& a, const NotMusica& b) {
     if (!(static_cast<const ArtistProduct&>(a) == static_cast<const ArtistProduct&>(b))) {
-        std::cerr << "❌ Differenza nei campi ArtistProduct!" << std::endl;
         return false;
     }
 
     constexpr double epsilon = 1e-6;
-    if (std::abs(a.prezzo - b.prezzo) > epsilon) {
-        std::cerr << "❌ Prezzo diverso: " << a.prezzo << " vs " << b.prezzo << std::endl;
-        return false;
-    }
-
-    if (a.disponibile != b.disponibile) {
-        std::cerr << "❌ Disponibile diverso: " << a.disponibile << " vs " << b.disponibile << std::endl;
-        return false;
-    }
-
-    if (a.quantita != b.quantita) {
-        std::cerr << "❌ Quantita diversa: " << a.quantita << " vs " << b.quantita << std::endl;
+    if (std::abs(a.prezzo - b.prezzo) > epsilon || a.disponibile != b.disponibile || a.quantita != b.quantita) {
         return false;
     }
 

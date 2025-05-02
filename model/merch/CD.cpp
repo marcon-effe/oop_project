@@ -1,6 +1,7 @@
 #include <iostream>
 #include "CD.h"
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 
 CD::CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
@@ -59,6 +60,11 @@ QDomElement CD::toXml(QDomDocument& doc) const {
 void CD::accept(VisitorGUI* visitor) const {
     visitor->visit(this);
 }
+
+void CD::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
+}
+
 
 // OVERLOADING OPERATORI
 bool operator==(const CD& a, const CD& b) {

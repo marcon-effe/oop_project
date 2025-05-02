@@ -42,6 +42,7 @@ public:
 
     // Visitor
     void accept(VisitorGUI* visitor) const final override;
+    void accept(VisitorConsoleEditor* visitor) final override;
 
     // Overloading operatori
     friend bool operator==(const CD& a, const CD& b);

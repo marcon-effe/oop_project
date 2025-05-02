@@ -33,12 +33,17 @@ public:
     void visit(const TShirt* tshirt) override;
     void visit(const Tour* tour) override;
 
+    void setArtistMap(const std::unordered_map<unsigned int, Artista*>& artistsMap);
+    QWidget* createRelatedProductsSection(unsigned int artistId);
+
 private:
     void clearLayout();
     QLabel* createImageLabel(const std::string& imagePathStr, bool isArtist) const;
+    QWidget* createTrackWidget(const Traccia& track);
 
     QWidget* widget;
     QVBoxLayout* layout;
+    const std::unordered_map<unsigned int, Artista*>* m_artists = nullptr;
 };
 
 #endif // VISITORGUI_H

@@ -2,6 +2,7 @@
 #include "Vinile.h"
 
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 // Costruttori
 Vinile::Vinile(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile,
@@ -77,6 +78,10 @@ QDomElement Vinile::toXml(QDomDocument& doc) const {
 // Visitor
 void Vinile::accept(VisitorGUI* v) const {
     v->visit(this);
+}
+
+void Vinile::accept(VisitorConsoleEditor* visitor) {
+    visitor->visit(this);
 }
 
 // OVERLOADING OPERATORI

@@ -7,6 +7,7 @@
 #include "../util/Durata.h"
 #include "../../include/data_format.h"
 
+class VisitorConsoleEditor;
 
 class Traccia {
 private:
@@ -31,13 +32,19 @@ public:
     void setTesto(const std::string &t);
 
     bool hasTestoPresent() const;
+    void setHasTesto(bool ht);
 
     const std::vector<std::string>& getPartecipanti() const;
     void addPartecipante(const std::string &a);
     void removePartecipante(const std::string &a);
+    void removePartecipante(unsigned int index);
+    void editPartecipante(unsigned int index, const std::string& nuovoNome);
 
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
+
+    //Visitor
+    void accept(VisitorConsoleEditor* visitor);
 
     // OVERLOADING OPERATORI
     friend bool operator==(const Traccia& a, const Traccia& b);

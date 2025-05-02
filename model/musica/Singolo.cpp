@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Singolo.h"
 #include "../../view/VisitorGUI.h"
+#include "../../cli/VisitorConsoleEditor.h"
 
 // COSTRUTTORI
 
@@ -104,6 +105,16 @@ void Singolo::setIsRemix(bool r) { isRemix = r; }
 int Singolo::getChartPosition() const { return chartPosition; }
 void Singolo::setChartPosition(int pos) { chartPosition = pos; }
 
+// Ritorna la traccia principale modificabile
+Traccia& Singolo::getTracciaModificabile() {
+    return mainTrack;
+}
+
+// Aggiorna la durata del singolo
+void Singolo::updateDurata() {
+    this->setDurata(mainTrack.getDurata());
+}
+
 // PRINT INFO
 void Singolo::printInfo() const {
     Musica::printInfo();
@@ -115,6 +126,10 @@ void Singolo::printInfo() const {
 
 // VISITOR
 void Singolo::accept(VisitorGUI* visitor) const {
+    visitor->visit(this);
+}
+
+void Singolo::accept(VisitorConsoleEditor* visitor) {
     visitor->visit(this);
 }
 
