@@ -46,7 +46,7 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 }
 
 void MainWindow::setupUI() {
-    // Menu
+    // === MENÙ SUPERIORE ===
     QMenu *fileMenu = menuBar()->addMenu("File");
     fileMenu->addAction("Importa");
     fileMenu->addAction("Esporta");
@@ -57,82 +57,100 @@ void MainWindow::setupUI() {
     inserisciMenu->addAction("Artista");
     inserisciMenu->addAction("Prodotto");
 
-    // Centrale
+    // === CENTRO ===
     QWidget *central = new QWidget(this);
     setCentralWidget(central);
 
-    // Splitter principale (orizzontale)
     QSplitter *mainSplitter = new QSplitter(Qt::Horizontal, this);
     mainSplitter->setHandleWidth(8);
-    mainSplitter->setStyleSheet("QSplitter::handle { background-color: white; }");
+    mainSplitter->setStyleSheet("QSplitter::handle { background-color: #e0e0e0; }");
 
-    // LEFT PANEL
+    // === LEFT PANEL ===
     QWidget *leftPanel = new QWidget();
+    leftPanel->setObjectName("leftPanel");
+
     QVBoxLayout *leftLayout = new QVBoxLayout(leftPanel);
     leftLayout->setContentsMargins(0, 0, 0, 0);
 
     QSplitter *leftSplitter = new QSplitter(Qt::Vertical, leftPanel);
     leftSplitter->setHandleWidth(5);
 
-    // Artisti section
+    // --- Artisti Section ---
     QWidget *artistiSection = new QWidget();
     QVBoxLayout *artistiLayout = new QVBoxLayout(artistiSection);
-    artistiLayout->setContentsMargins(4, 4, 4, 4);
+    artistiLayout->setContentsMargins(12, 12, 12, 12);
+    artistiLayout->setSpacing(10);
 
     QLabel *labelArtisti = new QLabel("Artisti");
+    labelArtisti->setObjectName("labelArtisti");
+
     QHBoxLayout *searchLayoutArtisti = new QHBoxLayout();
     QLineEdit *searchArtisti = new QLineEdit();
     searchArtisti->setPlaceholderText("Cerca artisti...");
+    searchArtisti->setObjectName("searchArtisti");
+
     QPushButton *filtroArtisti = new QPushButton("Filtri");
+    filtroArtisti->setObjectName("filtroArtisti");
+
     searchLayoutArtisti->addWidget(searchArtisti);
     searchLayoutArtisti->addWidget(filtroArtisti);
 
     artistListWidget = new QListWidget();
+    artistListWidget->setObjectName("artistList");
 
     artistiLayout->addWidget(labelArtisti);
     artistiLayout->addLayout(searchLayoutArtisti);
     artistiLayout->addWidget(artistListWidget);
 
-    // Prodotti section
+    // --- Prodotti Section ---
     QWidget *prodottiSection = new QWidget();
     QVBoxLayout *prodottiLayout = new QVBoxLayout(prodottiSection);
-    prodottiLayout->setContentsMargins(4, 4, 4, 4);
+    prodottiLayout->setContentsMargins(12, 12, 12, 12);
+    prodottiLayout->setSpacing(10);
 
     QLabel *labelProdotti = new QLabel("Prodotti");
+    labelProdotti->setObjectName("labelProdotti");
+
     QHBoxLayout *searchLayoutProdotti = new QHBoxLayout();
     QLineEdit *searchProdotti = new QLineEdit();
     searchProdotti->setPlaceholderText("Cerca prodotti...");
+    searchProdotti->setObjectName("searchProdotti");
+
     QPushButton *filtroProdotti = new QPushButton("Filtri");
+    filtroProdotti->setObjectName("filtroProdotti");
+
     searchLayoutProdotti->addWidget(searchProdotti);
     searchLayoutProdotti->addWidget(filtroProdotti);
 
     productListFullWidget = new QListWidget();
+    productListFullWidget->setObjectName("productList");
 
     prodottiLayout->addWidget(labelProdotti);
     prodottiLayout->addLayout(searchLayoutProdotti);
     prodottiLayout->addWidget(productListFullWidget);
 
+    // --- Inserimento nelle sezioni ---
     leftSplitter->addWidget(artistiSection);
     leftSplitter->addWidget(prodottiSection);
     leftSplitter->setStretchFactor(0, 1);
     leftSplitter->setStretchFactor(1, 1);
-    leftSplitter->setStyleSheet("QSplitter::handle { background-color: white; }");
 
     leftLayout->addWidget(leftSplitter);
 
-    // RIGHT PANEL
+    // === RIGHT PANEL ===
     QWidget *rightPanel = new QWidget();
     rightPanel->setObjectName("rightPanel");
+
     QVBoxLayout *rightOuterLayout = new QVBoxLayout(rightPanel);
     rightOuterLayout->setContentsMargins(40, 40, 40, 40);
 
-    QWidget* detailsContainer = new QWidget();
+    QWidget *detailsContainer = new QWidget();
     detailsContainer->setObjectName("detailsContainer");
     detailsContainer->setStyleSheet(R"(
         #detailsContainer {
             padding: 10px 20px;
-            border: 2px dashed red;
-            background-color: rgb(255, 255, 255);
+            background-color: #ffffff;
+            border-radius: 8px;
         }
     )");
 
@@ -143,22 +161,31 @@ void MainWindow::setupUI() {
 
     rightOuterLayout->addWidget(detailsContainer);
 
+    // === INSERIMENTO NEGLI SPLITTER ===
     mainSplitter->addWidget(leftPanel);
     mainSplitter->addWidget(rightPanel);
 
     QList<int> sizes;
     sizes << width() / 3 << (2 * width() / 3);
     mainSplitter->setSizes(sizes);
-
     leftPanel->setMaximumWidth(width() / 3);
 
     QHBoxLayout *mainLayout = new QHBoxLayout(central);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->addWidget(mainSplitter);
 
+    // === CONNESSIONI ===
     connect(artistListWidget, &QListWidget::itemClicked, this, &MainWindow::handleArtistSelection);
     connect(productListFullWidget, &QListWidget::itemClicked, this, &MainWindow::handleProductSelection);
+
+    // === CARICAMENTO STILE DA FILE QSS (leftPanel.qss) ===
+    QFile styleFile(":/styles/leftPanel.qss");
+    if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
+        QString style = styleFile.readAll();
+        leftPanel->setStyleSheet(style);
+    }
 }
+
 
 void MainWindow::loadDataFromSaves(const std::string& path) {
     artists = DataManager::loadFromFileJson(path);
@@ -194,6 +221,7 @@ void MainWindow::handleProductSelection(QListWidgetItem* item) {
         ArtistProduct* p = pair.second;
         if (QString::fromStdString(p->getTitle()) == item->text()) {
             VisitorGUI* visitor = new VisitorGUI();
+            visitor->setArtistMap(artists);
             p->accept(visitor);
             rightLayout->addWidget(visitor->getWidget());
             return;

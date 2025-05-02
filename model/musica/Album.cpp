@@ -16,7 +16,7 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
 
 // Costruttore standard con tracce
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tra, const std::string& lbl)
-: Musica(owner, t, desc, du, dur, g), label(lbl), tracce(tra)
+: Musica(owner, t, desc, du, dur, g), tracce(tra), label(lbl)
 {
     if (!owner) {
         assert(false && "Album standard constructor (with tracce) received nullptr owner");
