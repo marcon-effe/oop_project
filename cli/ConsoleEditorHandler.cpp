@@ -550,7 +550,64 @@ void ConsoleEditorHandler::editPartecipanteTraccia(Traccia* t, unsigned int inde
 }
 
 void ConsoleEditorHandler::gestisciPartecipantiTraccia(Traccia* t) {
-    // Implementazione da fare o almeno vuota:
+    int scelta = -1;
+    while (scelta != 0) {
+        std::cout << "\n--- Gestione Partecipanti ---\n";
+        const auto& partecipanti = t->getPartecipanti();
+        if (partecipanti.empty()) {
+            std::cout << "Nessun partecipante.\n";
+        } else {
+            for (size_t i = 0; i < partecipanti.size(); ++i) {
+                std::cout << i + 1 << ") " << partecipanti[i] << "\n";
+            }
+        }
+
+        std::cout << "\nOpzioni:\n";
+        std::cout << "1. Aggiungi partecipante\n";
+        std::cout << "2. Modifica partecipante\n";
+        std::cout << "3. Rimuovi partecipante\n";
+        std::cout << "0. Torna indietro\n";
+        std::cout << "Scelta: ";
+
+        std::cin >> scelta;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Pulisce il buffer
+
+        switch (scelta) {
+            case 1:
+                aggiungiPartecipanteTraccia(t);
+                break;
+            case 2: {
+                unsigned int index;
+                std::cout << "Numero partecipante da modificare: ";
+                std::cin >> index;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                if (index >= 1 && index <= partecipanti.size()) {
+                    editPartecipanteTraccia(t, index - 1);
+                } else {
+                    std::cout << "Indice non valido.\n";
+                }
+                break;
+            }
+            case 3: {
+                unsigned int index;
+                std::cout << "Numero partecipante da rimuovere: ";
+                std::cin >> index;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                if (index >= 1 && index <= partecipanti.size()) {
+                    rimuoviPartecipanteTraccia(t, index - 1);
+                } else {
+                    std::cout << "Indice non valido.\n";
+                }
+                break;
+            }
+            case 0:
+                std::cout << "Uscita dalla gestione partecipanti.\n";
+                break;
+            default:
+                std::cout << "Scelta non valida.\n";
+                break;
+        }
+    }
 }
 
 // ----- DATATOUR -----

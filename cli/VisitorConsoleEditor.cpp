@@ -130,7 +130,7 @@ void VisitorConsoleEditor::visit(Artista* artista) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto nella edit artista.");
+            ErrorManager::showError("Errore sconosciuto nella modifica artista.");
         }
     }
 }
@@ -138,13 +138,13 @@ void VisitorConsoleEditor::visit(Artista* artista) {
 void VisitorConsoleEditor::visit(Album* album) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit Album: " << album->getTitle() << " ---\n";
-        std::cout << "1. edit titolo\n";
-        std::cout << "2. edit descrizione\n";
-        std::cout << "3. edit immagine\n";
-        std::cout << "4. edit genere\n";
-        std::cout << "5. edit data di uscita\n";
-        std::cout << "6. edit etichetta\n";
+        std::cout << "\n--- Modifica Album: " << album->getTitle() << " ---\n";
+        std::cout << "1. Modifica titolo\n";
+        std::cout << "2. Modifica descrizione\n";
+        std::cout << "3. Modifica immagine\n";
+        std::cout << "4. Modifica genere\n";
+        std::cout << "5. Modifica data di uscita\n";
+        std::cout << "6. Modifica etichetta\n";
         std::cout << "7. Gestisci tracce\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
@@ -188,10 +188,10 @@ void VisitorConsoleEditor::visit(Album* album) {
                                 ConsoleEditorHandler::aggiungiTracciaAlbum(album);
                             } else if (opzione == "m") {
                                 if (tracce.empty()) {
-                                    std::cout << "Non ci sono tracce da editare.\n";
+                                    std::cout << "Non ci sono tracce da modificare.\n";
                                 } else {
                                     int index;
-                                    std::cout << "Numero traccia da editare: ";
+                                    std::cout << "Numero traccia da modificare: ";
                                     std::cin >> index;
                                     std::cin.ignore();
                                     if (index >= 1 && static_cast<size_t>(index) <= tracce.size()) {
@@ -234,7 +234,7 @@ void VisitorConsoleEditor::visit(Album* album) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto nella edit album.");
+            ErrorManager::showError("Errore sconosciuto nella modifica dell'album.");
         }
     }
 }
@@ -294,7 +294,7 @@ void VisitorConsoleEditor::visit(Singolo* singolo) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto durante la edit del singolo.");
+            ErrorManager::showError("Errore sconosciuto durante la modifica del singolo.");
         }
     }
 }
@@ -302,10 +302,10 @@ void VisitorConsoleEditor::visit(Singolo* singolo) {
 void VisitorConsoleEditor::visit(Traccia* traccia) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit Traccia: " << traccia->getNome() << " ---\n";
-        std::cout << "1. edit nome\n";
-        std::cout << "2. edit durata\n";
-        std::cout << "3. edit testo\n";
+        std::cout << "\n--- Modifica Traccia: " << traccia->getNome() << " ---\n";
+        std::cout << "1. Modifica nome\n";
+        std::cout << "2. Modifica durata\n";
+        std::cout << "3. Modifica testo\n";
         std::cout << "4. Gestisci partecipanti\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
@@ -339,7 +339,7 @@ void VisitorConsoleEditor::visit(Traccia* traccia) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto durante la edit della traccia.");
+            ErrorManager::showError("Errore sconosciuto durante la modifica della traccia.");
         }
     }
 }
@@ -347,14 +347,14 @@ void VisitorConsoleEditor::visit(Traccia* traccia) {
 void VisitorConsoleEditor::visit(CD* cd) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit CD: " << cd->getTitle() << " ---\n";
-        std::cout << "1. edit titolo\n";
-        std::cout << "2. edit descrizione\n";
-        std::cout << "3. edit immagine\n";
-        std::cout << "4. edit prezzo\n";
-        std::cout << "5. edit disponibilità\n";
-        std::cout << "6. edit quantità\n";
-        std::cout << "7. edit formato\n";
+        std::cout << "\n--- Modifica CD: " << cd->getTitle() << " ---\n";
+        std::cout << "1. Modifica titolo\n";
+        std::cout << "2. Modifica descrizione\n";
+        std::cout << "3. Modifica immagine\n";
+        std::cout << "4. Modifica prezzo\n";
+        std::cout << "5. Modifica disponibilità\n";
+        std::cout << "6. Modifica quantità\n";
+        std::cout << "7. Modifica formato\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -377,7 +377,7 @@ void VisitorConsoleEditor::visit(CD* cd) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto durante la edit del CD.");
+            ErrorManager::showError("Errore sconosciuto durante la modifica del CD.");
         }
     }
 }
@@ -385,7 +385,7 @@ void VisitorConsoleEditor::visit(CD* cd) {
 void VisitorConsoleEditor::visit(Vinile* vinile) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit Vinile: " << vinile->getTitle() << " ---\n";
+        std::cout << "\n--- Modifica Vinile: " << vinile->getTitle() << " ---\n";
         std::cout << "1. Modifica titolo\n";
         std::cout << "2. Modifica descrizione\n";
         std::cout << "3. Modifica immagine\n";
@@ -417,7 +417,7 @@ void VisitorConsoleEditor::visit(Vinile* vinile) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto durante la edit del vinile.");
+            ErrorManager::showError("Errore sconosciuto durante la modifica del vinile.");
         }
     }
 }
@@ -425,15 +425,15 @@ void VisitorConsoleEditor::visit(Vinile* vinile) {
 void VisitorConsoleEditor::visit(TShirt* tshirt) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit TShirt: " << tshirt->getTitle() << " ---\n";
-        std::cout << "1. edit titolo\n";
-        std::cout << "2. edit descrizione\n";
-        std::cout << "3. edit immagine\n";
-        std::cout << "4. edit prezzo\n";
-        std::cout << "5. edit disponibilità\n";
-        std::cout << "6. edit quantità\n";
-        std::cout << "7. edit taglia\n";
-        std::cout << "8. edit colore\n";
+        std::cout << "\n--- Modifica TShirt: " << tshirt->getTitle() << " ---\n";
+        std::cout << "1. Modifica titolo\n";
+        std::cout << "2. Modifica descrizione\n";
+        std::cout << "3. Modifica immagine\n";
+        std::cout << "4. Modifica prezzo\n";
+        std::cout << "5. Modifica disponibilità\n";
+        std::cout << "6. Modifica quantità\n";
+        std::cout << "7. Modifica taglia\n";
+        std::cout << "8. Modifica colore\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -458,7 +458,7 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto durante la edit della TShirt.");
+            ErrorManager::showError("Errore sconosciuto durante la modifica della TShirt.");
         }
     }
 }
@@ -466,7 +466,7 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
 void VisitorConsoleEditor::visit(Tour* tour) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit Tour: " << tour->getTitle() << " ---\n";
+        std::cout << "\n--- Modifica Tour: " << tour->getTitle() << " ---\n";
         std::cout << "1. Modifica titolo\n";
         std::cout << "2. Modifica descrizione\n";
         std::cout << "3. Modifica immagine\n";
@@ -511,7 +511,7 @@ void VisitorConsoleEditor::visit(Tour* tour) {
                                 ConsoleEditorHandler::aggiungiDataTour(tour);
                             } else if (opzione == "m") {
                                 int index;
-                                std::cout << "Numero data da editare: ";
+                                std::cout << "Numero data da modificare: ";
                                 std::cin >> index;
                                 std::cin.ignore();
                                 if (index >= 1 && index <= static_cast<int>(date.size())) {
@@ -552,7 +552,7 @@ void VisitorConsoleEditor::visit(Tour* tour) {
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto durante la edit del Tour.");
+            ErrorManager::showError("Errore sconosciuto durante la modifica del Tour.");
         }
     }
 }
@@ -560,7 +560,7 @@ void VisitorConsoleEditor::visit(Tour* tour) {
 void VisitorConsoleEditor::visit(DataTour* dataTour) {
     bool fine = false;
     while (!fine) {
-        std::cout << "\n--- edit Data del Tour ---\n";
+        std::cout << "\n--- Modifica Data del Tour ---\n";
         std::cout << "1. Modifica data (giorno/mese/anno)\n";
         std::cout << "2. Modifica orario (ore/minuti/secondi)\n";
         std::cout << "3. Modifica luogo\n";

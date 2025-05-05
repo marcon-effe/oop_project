@@ -4,12 +4,12 @@
 #include <unordered_map>
 #include "../model/artisti/Artista.h"
 
-class ConsoleApp { // Renamed from CliManager
+class ConsoleApp {
 public:
-    ConsoleApp(); // Renamed from CliManager
-    ~ConsoleApp(); // Renamed from CliManager
+    ConsoleApp();
+    ~ConsoleApp();
 
-    void run(); // Loop principale
+    void run();
     std::unordered_map<unsigned int, Artista*> artisti;
 
 private:
