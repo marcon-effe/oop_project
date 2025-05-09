@@ -177,13 +177,6 @@ void MainWindow::setupUI() {
     // === CONNESSIONI ===
     connect(artistListWidget, &QListWidget::itemClicked, this, &MainWindow::handleArtistSelection);
     connect(productListFullWidget, &QListWidget::itemClicked, this, &MainWindow::handleProductSelection);
-
-    // === CARICAMENTO STILE DA FILE QSS (leftPanel.qss) ===
-    QFile styleFile(":/styles/leftPanel.qss");
-    if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
-        QString style = styleFile.readAll();
-        leftPanel->setStyleSheet(style);
-    }
 }
 
 

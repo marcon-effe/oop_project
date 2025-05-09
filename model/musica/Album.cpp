@@ -37,7 +37,7 @@ Album::Album(Musica* m, const std::vector<Traccia>& t, const std::string& l)
 
 // Costruttore di copia
 Album::Album(const Album* a)
-: Musica(a), label(a->getLabel()), tracce(a->getTracce())
+: Musica(a), tracce(a->getTracce()), label(a->getLabel())
 {
     if (!a) {
         assert(false && "Album copy constructor received nullptr Album pointer");

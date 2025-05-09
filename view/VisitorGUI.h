@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
+#include <QScrollArea>
 
 #include "./VistorInterface.h"
 
@@ -34,15 +35,20 @@ public:
     void visit(const Tour* tour) override;
 
     void setArtistMap(const std::unordered_map<unsigned int, Artista*>& artistsMap);
-    QWidget* createRelatedProductsSection(unsigned int artistId);
 
 private:
     void clearLayout();
+    QWidget* createRelatedProductsSection(unsigned int artistId, unsigned int excludeProductId);
     QLabel* createImageLabel(const std::string& imagePathStr, bool isArtist) const;
     QWidget* createTrackWidget(const Traccia& track);
+    QWidget* createDateTourWidget(const DataTour& dt);
 
-    QWidget* widget;
+    // Per scollbar
+    QScrollArea* scrollArea;
+    QWidget* scrollContent;      
     QVBoxLayout* layout;
+    QWidget* widget;    // per getWidget
+
     const std::unordered_map<unsigned int, Artista*>* m_artists = nullptr;
 };
 
