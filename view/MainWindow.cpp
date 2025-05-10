@@ -14,8 +14,11 @@
 #include <QAction>
 #include <QSpacerItem>
 #include <QPushButton>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QInputDialog>
 
-#include <unordered_map> // aggiunto
+#include <unordered_map>
 
 #include "../model/artisti/Artista.h"
 #include "../model/core/ArtistProduct.h"
@@ -25,10 +28,15 @@
 #include "../model/musica/Singolo.h"
 #include "../model/musica/Traccia.h"
 #include "../include/dataManager.h"
+#include "ErrorManager.h"
+
+static bool endsWith(const std::string& str, const std::string& suffix) {
+    return str.size() >= suffix.size() &&
+           str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setupUI();
-    loadDataFromSaves();
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event) {
@@ -48,8 +56,12 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
 void MainWindow::setupUI() {
     // === MENÙ SUPERIORE ===
     QMenu *fileMenu = menuBar()->addMenu("File");
-    fileMenu->addAction("Importa");
-    fileMenu->addAction("Esporta");
+    QAction* importAction = fileMenu->addAction("Importa");
+    QAction* exportAction = fileMenu->addAction("Esporta");
+
+    connect(importAction, &QAction::triggered, this, &MainWindow::importData);
+    connect(exportAction, &QAction::triggered, this, &MainWindow::exportData);
+
     fileMenu->addSeparator();
     fileMenu->addAction("Esci", this, SLOT(close()));
 
@@ -179,19 +191,94 @@ void MainWindow::setupUI() {
     connect(productListFullWidget, &QListWidget::itemClicked, this, &MainWindow::handleProductSelection);
 }
 
+void MainWindow::clearAll() {
+    artistListWidget->clear();
+    productListFullWidget->clear();
+    clearRightPanel();
+    artists.clear();
+    prodotti.clear();
+}
+
+void MainWindow::importData() {
+    QString fileName = QFileDialog::getOpenFileName(this, "Importa dati", "", "JSON Files (*.json);;XML Files (*.xml)");
+    if (fileName.isEmpty()) return;
+
+    clearAll();
+
+    loadDataFromSaves(fileName.toStdString());
+
+    if (artists.empty()) {
+        ErrorManager::showError("Importazione fallita o file vuoto/non valido.");
+        ErrorManager::logError("Errore durante l'importazione da file: " + fileName.toStdString());
+    } else {
+        QMessageBox::information(this, "Importa", "Dati importati con successo.");
+    }
+}
 
 void MainWindow::loadDataFromSaves(const std::string& path) {
-    artists = DataManager::loadFromFileJson(path);
+    artists.clear();
+    prodotti.clear();
+
+    if (endsWith(path, ".json")) {
+        artists = DataManager::loadFromFileJson(path);
+    } else if (endsWith(path, ".xml")) {
+        artists = DataManager::loadFromFileXml(path);
+    } else {
+        std::string msg = "Formato file non supportato: " + path;
+        ErrorManager::showError("Estensione del file non supportata. Sono ammessi solo .json e .xml.");
+        ErrorManager::logError(msg);
+        return;
+    }
 
     for (const auto& pair : artists) {
         Artista* a = pair.second;
-        artistListWidget->addItem(QString::fromStdString(a->getNome()));
-
         for (const auto& innerPair : a->getProducts()) {
             ArtistProduct* p = innerPair.second;
             prodotti[p->getId()] = p;
-            productListFullWidget->addItem(QString::fromStdString(p->getTitle()));
         }
+    }
+
+    updateListWidgets();
+}
+
+void MainWindow::updateListWidgets() {
+    artistListWidget->clear();
+    productListFullWidget->clear();
+
+    for (const auto& pair : artists) {
+        artistListWidget->addItem(QString::fromStdString(pair.second->getNome()));
+    }
+    for (const auto& pair : prodotti) {
+        productListFullWidget->addItem(QString::fromStdString(pair.second->getTitle()));
+    }
+}
+
+void MainWindow::exportData() {
+    QStringList formats = { "JSON", "XML" };
+    bool ok = false;
+    QString selectedFormat = QInputDialog::getItem(this, "Esporta dati", "Scegli il formato di esportazione:", formats, 0, false, &ok);
+    if (!ok || selectedFormat.isEmpty()) return;
+
+    QString filter = selectedFormat == "JSON" ? "JSON Files (*.json)" : "XML Files (*.xml)";
+    QString extension = selectedFormat == "JSON" ? ".json" : ".xml";
+
+    QString fileName = QFileDialog::getSaveFileName(this, "Salva file", "", filter);
+    if (fileName.isEmpty()) return;
+
+    if (!fileName.endsWith(extension)) fileName += extension;
+
+    bool success = false;
+    if (selectedFormat == "JSON") {
+        success = DataManager::saveToFileJson(artists, fileName.toStdString());
+    } else if (selectedFormat == "XML") {
+        success = DataManager::saveToFileXml(artists, fileName.toStdString());
+    }
+
+    if (success) {
+        QMessageBox::information(this, "Esporta", "Dati esportati con successo.");
+    } else {
+        ErrorManager::showError("Errore durante l'esportazione dei dati.");
+        ErrorManager::logError("Errore salvataggio su file: " + fileName.toStdString());
     }
 }
 

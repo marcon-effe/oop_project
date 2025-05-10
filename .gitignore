@@ -1,3 +1,8 @@
 .vscode/
 build/
 oop_project
+.qmake.stash
+Makefile
+.DS_Store
+saves/xml/*.xml
+saves/json/*.json

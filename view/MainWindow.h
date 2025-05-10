@@ -23,6 +23,8 @@ private:
 
     QVBoxLayout* rightLayout;
     void clearRightPanel();
+    void clearAll();
+    void updateListWidgets();
 
     // Widget principali
     QListWidget *artistListWidget;
@@ -37,12 +39,17 @@ private:
     QHBoxLayout *releaseArtistaLayout;
 
     // Dati
-    std::unordered_map<unsigned int, Artista*> artists;             // modificato da QList
-    std::unordered_map<unsigned int, ArtistProduct*> prodotti;      // modificato da QList
+    std::unordered_map<unsigned int, Artista*> artists;
+    std::unordered_map<unsigned int, ArtistProduct*> prodotti;
 
 private slots:
     void handleArtistSelection(QListWidgetItem* item);
     void handleProductSelection(QListWidgetItem* item);
+
+public slots:
+    void importData();
+    void exportData();
+
 };
 
 #endif // MAINWINDOW_H
