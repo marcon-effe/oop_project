@@ -211,7 +211,7 @@ Artista* ConsoleApp::selectArtist() {
 
     std::cout << "ID artisti disponibili:\n";
     for (auto& [id, a] : artisti) {
-        std::cout << " - ID " << id << ": " << a->getNome() << "\n";
+        std::cout << "ID " << id << ": " << a->getNome() << "\n";
     }
 
     std::cout << "Inserisci ID artista: ";
