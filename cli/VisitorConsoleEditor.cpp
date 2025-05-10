@@ -67,7 +67,7 @@ void VisitorConsoleEditor::visit(Artista* artista) {
                 
                                     std::cout << "Prodotti disponibili:\n";
                                     for (const auto& [id, prod] : prodotti)
-                                        std::cout << " - ID " << id << ": " << prod->getTitle() << "]\n";
+                                        std::cout << "ID " << id << ": " << prod->getTitle() << "\n";
                 
                                     std::cout << "ID prodotto da editare: ";
                                     unsigned int pid;
@@ -93,7 +93,7 @@ void VisitorConsoleEditor::visit(Artista* artista) {
                 
                                     std::cout << "Prodotti disponibili:\n";
                                     for (const auto& [id, prod] : prodotti)
-                                        std::cout << " - ID " << id << ": " << prod->getTitle() << "\n";
+                                        std::cout << "ID " << id << ": " << prod->getTitle() << "\n";
                 
                                     std::cout << "ID prodotto da eliminare: ";
                                     unsigned int pid;
