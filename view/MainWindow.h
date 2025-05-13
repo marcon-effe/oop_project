@@ -25,6 +25,8 @@ private:
     void clearRightPanel();
     void clearAll();
     void updateListWidgets();
+    void sortArtistListWidget();
+    void sortProductListWidget();
 
     // Widget principali
     QListWidget *artistListWidget;
@@ -45,10 +47,19 @@ private:
 private slots:
     void handleArtistSelection(QListWidgetItem* item);
     void handleProductSelection(QListWidgetItem* item);
+    
+    void openArtistFilterDialog();
+    void applyArtistGenreFilter(const QString& genere);
+    
+    void openProductFilterDialog();
+    void applyProductFilters(const std::vector<std::string>& tipi, const QString& genereMusica, bool disponibile, const QString& artistaId);
 
 public slots:
     void importData();
     void exportData();
+    
+    void filterArtistList(const QString& query);
+    void filterProductList(const QString& query);
 
 };
 

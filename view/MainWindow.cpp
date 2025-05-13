@@ -29,6 +29,7 @@
 #include "../model/musica/Traccia.h"
 #include "../include/dataManager.h"
 #include "ErrorManager.h"
+#include "filters/FilterDialog.h"
 
 static bool endsWith(const std::string& str, const std::string& suffix) {
     return str.size() >= suffix.size() &&
@@ -58,9 +59,6 @@ void MainWindow::setupUI() {
     QMenu *fileMenu = menuBar()->addMenu("File");
     QAction* importAction = fileMenu->addAction("Importa");
     QAction* exportAction = fileMenu->addAction("Esporta");
-
-    connect(importAction, &QAction::triggered, this, &MainWindow::importData);
-    connect(exportAction, &QAction::triggered, this, &MainWindow::exportData);
 
     fileMenu->addSeparator();
     fileMenu->addAction("Esci", this, SLOT(close()));
@@ -187,8 +185,63 @@ void MainWindow::setupUI() {
     mainLayout->addWidget(mainSplitter);
 
     // === CONNESSIONI ===
+    connect(importAction, &QAction::triggered, this, &MainWindow::importData);
+    connect(exportAction, &QAction::triggered, this, &MainWindow::exportData);
+
     connect(artistListWidget, &QListWidget::itemClicked, this, &MainWindow::handleArtistSelection);
     connect(productListFullWidget, &QListWidget::itemClicked, this, &MainWindow::handleProductSelection);
+
+    connect(searchArtisti, &QLineEdit::textChanged, this, &MainWindow::filterArtistList);
+    connect(searchProdotti, &QLineEdit::textChanged, this, &MainWindow::filterProductList);
+
+    connect(filtroArtisti, &QPushButton::clicked, this, &MainWindow::openArtistFilterDialog);
+    connect(filtroProdotti, &QPushButton::clicked, this, &MainWindow::openProductFilterDialog);
+}
+
+
+/// RIPRISTINO GUI ------------
+void MainWindow::sortArtistListWidget() {
+    QStringList items;
+    for (int i = 0; i < artistListWidget->count(); ++i) {
+        items.append(artistListWidget->item(i)->text());
+    }
+    std::sort(items.begin(), items.end(), [](const QString& a, const QString& b) {
+        return a.toLower() < b.toLower();
+    });
+
+    artistListWidget->clear();
+    for (const QString& nome : items) {
+        artistListWidget->addItem(nome);
+    }
+}
+
+void MainWindow::sortProductListWidget() {
+    QStringList items;
+    for (int i = 0; i < productListFullWidget->count(); ++i) {
+        items.append(productListFullWidget->item(i)->text());
+    }
+    std::sort(items.begin(), items.end(), [](const QString& a, const QString& b) {
+        return a.toLower() < b.toLower();
+    });
+
+    productListFullWidget->clear();
+    for (const QString& titolo : items) {
+        productListFullWidget->addItem(titolo);
+    }
+}
+
+void MainWindow::updateListWidgets() {
+    artistListWidget->clear();
+    productListFullWidget->clear();
+
+    for (const auto& pair : artists)
+        artistListWidget->addItem(QString::fromStdString(pair.second->getNome()));
+
+    for (const auto& pair : prodotti)
+        productListFullWidget->addItem(QString::fromStdString(pair.second->getTitle()));
+
+    sortArtistListWidget();
+    sortProductListWidget();
 }
 
 void MainWindow::clearAll() {
@@ -199,6 +252,18 @@ void MainWindow::clearAll() {
     prodotti.clear();
 }
 
+void MainWindow::clearRightPanel() {
+    QLayoutItem* child;
+    while ((child = rightLayout->takeAt(0)) != nullptr) {
+        if (child->widget())
+            child->widget()->deleteLater();
+        delete child;
+    }
+}
+// -----------------------------
+
+
+// IMPORTAZIONE/ESPORTAZIONE DATI
 void MainWindow::importData() {
     QString fileName = QFileDialog::getOpenFileName(this, "Importa dati", "", "JSON Files (*.json);;XML Files (*.xml)");
     if (fileName.isEmpty()) return;
@@ -241,18 +306,6 @@ void MainWindow::loadDataFromSaves(const std::string& path) {
     updateListWidgets();
 }
 
-void MainWindow::updateListWidgets() {
-    artistListWidget->clear();
-    productListFullWidget->clear();
-
-    for (const auto& pair : artists) {
-        artistListWidget->addItem(QString::fromStdString(pair.second->getNome()));
-    }
-    for (const auto& pair : prodotti) {
-        productListFullWidget->addItem(QString::fromStdString(pair.second->getTitle()));
-    }
-}
-
 void MainWindow::exportData() {
     QStringList formats = { "JSON", "XML" };
     bool ok = false;
@@ -281,7 +334,10 @@ void MainWindow::exportData() {
         ErrorManager::logError("Errore salvataggio su file: " + fileName.toStdString());
     }
 }
+// -----------------------------
 
+
+// LISTA ARTISTI E PRODOTTI ----
 void MainWindow::handleArtistSelection(QListWidgetItem* item) {
     clearRightPanel();
     for (const auto& pair : artists) {
@@ -309,11 +365,113 @@ void MainWindow::handleProductSelection(QListWidgetItem* item) {
     }
 }
 
-void MainWindow::clearRightPanel() {
-    QLayoutItem* child;
-    while ((child = rightLayout->takeAt(0)) != nullptr) {
-        if (child->widget())
-            child->widget()->deleteLater();
-        delete child;
+//  ricerca
+void MainWindow::filterArtistList(const QString& query) {
+    artistListWidget->clear();
+    QString lowerQuery = query.trimmed().toLower();
+
+    for (const auto& pair : artists) {
+        const Artista* a = pair.second;
+        QString nome = QString::fromStdString(a->getNome());
+        if (nome.toLower().contains(lowerQuery)) {
+            artistListWidget->addItem(nome);
+        }
     }
 }
+
+void MainWindow::filterProductList(const QString& query) {
+    productListFullWidget->clear();
+    QString lowerQuery = query.trimmed().toLower();
+
+    for (const auto& pair : prodotti) {
+        const ArtistProduct* p = pair.second;
+        QString titolo = QString::fromStdString(p->getTitle());
+        if (titolo.toLower().contains(lowerQuery)) {
+            productListFullWidget->addItem(titolo);
+        }
+    }
+}
+
+
+// filtri
+void MainWindow::applyArtistGenreFilter(const QString& genere) {
+    artistListWidget->clear();
+
+    for (const auto& pair : artists) {
+        Artista* a = pair.second;
+        if (genere == "Tutti" || QString::fromStdString(a->getGenere()) == genere) {
+            artistListWidget->addItem(QString::fromStdString(a->getNome()));
+        }
+    }
+
+    sortArtistListWidget();
+}
+
+void MainWindow::applyProductFilters(const std::vector<std::string>& tipi, const QString& genereMusica, bool disponibile, const QString& artistaId) 
+{
+    productListFullWidget->clear();
+
+    for (const auto& pair : prodotti) {
+        ArtistProduct* p = pair.second;
+
+        // Filtro per tipo
+        bool tipoMatch = tipi.empty();
+        for (const std::string& t : tipi) {
+            if ((t == "Album" && dynamic_cast<Album*>(p)) ||
+                (t == "Singolo" && dynamic_cast<Singolo*>(p)) ||
+                (t == "CD" && dynamic_cast<CD*>(p)) ||
+                (t == "Vinile" && dynamic_cast<Vinile*>(p)) ||
+                (t == "TShirt" && dynamic_cast<TShirt*>(p)) ||
+                (t == "Tour" && dynamic_cast<Tour*>(p))) {
+                tipoMatch = true;
+                break;
+            }
+        }
+        if (!tipoMatch) continue;
+
+        // Filtro per genere (solo se è Musica)
+        if (auto* m = dynamic_cast<Musica*>(p)) {
+            if (genereMusica != "Tutti" && QString::fromStdString(m->getGenere()) != genereMusica)
+                continue;
+        }
+
+        // Filtro per disponibile (solo se è NotMusica)
+        if (auto* nm = dynamic_cast<NotMusica*>(p)) {
+            if (disponibile && !nm->getDisponibile())
+                continue;
+        }
+
+        // Filtro per artista
+        if (artistaId != "Tutti" && QString::number(p->getArtistId()) != artistaId)
+            continue;
+
+        productListFullWidget->addItem(QString::fromStdString(p->getTitle()));
+    }
+    sortProductListWidget();
+}
+
+void MainWindow::openArtistFilterDialog() {
+    FilterDialog dialog(this);
+    dialog.setupForArtisti(artists);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        QString genere = dialog.getSelectedGenere();
+        applyArtistGenreFilter(genere);
+    }
+}
+
+void MainWindow::openProductFilterDialog() {
+    FilterDialog dialog(this);
+    dialog.setupForProdotti(prodotti, artists);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        std::vector<std::string> tipi = dialog.getSelectedTipoProdotto();
+        QString genereMusica = dialog.getSelectedGenereMusica();  // per musica
+        bool disponibile = dialog.isDisponibileChecked();   // per not musica
+        QString artistaId = dialog.getSelectedArtistaId();  // filtro artista
+
+        applyProductFilters(tipi, genereMusica, disponibile, artistaId);
+    }
+}
+
+// --------------------------------------

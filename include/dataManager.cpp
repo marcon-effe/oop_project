@@ -59,6 +59,7 @@ std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileJson(const s
 
     return artisti;
 }
+
 // XML
 // Funzione per validare un file XML con uno schema XSD
 bool DataManager::validateXmlWithSchema(const std::string& xmlPath, const std::string& xsdPath) {
