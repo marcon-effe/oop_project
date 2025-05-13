@@ -16,6 +16,9 @@ public:
     // Costruttore standard
     Musica(Artista* owner, const std::string& title, const std::string& desc, const Data& du, const Durata& dur, const std::string& g);
 
+    // Costruttore con immagine
+    Musica(Artista* owner, const std::string& title, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& img);
+
     // Costruttore di "trasformazione" da ArtistProduct base
     Musica(ArtistProduct* base, const Data& du, const Durata& dur, const std::string& g);
 

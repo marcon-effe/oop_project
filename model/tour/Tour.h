@@ -12,6 +12,10 @@ private:
     std::vector<DataTour> dateTour;
 public:
     Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita);
+    Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::vector<DataTour>& dateTour);
+    Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img);
+    Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img, const std::vector<DataTour>& dateTour);
+
     Tour(NotMusica* n, const std::vector<DataTour>& dateTour);
     Tour(const Tour* t);
     Tour(Artista* owner, const QJsonObject& json);

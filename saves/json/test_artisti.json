@@ -2,109 +2,31 @@
     "artisti": [
         {
             "genere": "",
+            "imageB64": "",
             "imagePath": "",
             "info": "",
-            "nome": "Artista1",
+            "nome": "ArtistaTest_1747152587",
             "prodotti": [
-                {
-                    "dateTour": [
-                        {
-                            "data": {
-                                "anno": 2025,
-                                "giorno": 10,
-                                "mese": 5
-                            },
-                            "luogo": "Roma",
-                            "orario": {
-                                "minuti": 30,
-                                "ore": 20,
-                                "secondi": 0
-                            }
-                        }
-                    ],
-                    "not_musica": {
-                        "ArtistProduct": {
-                            "description": "desc",
-                            "imagePath": "",
-                            "title": "Tour1"
-                        },
-                        "disponibile": true,
-                        "prezzo": 99.99,
-                        "quantita": 200,
-                        "type": "notmusica"
-                    },
-                    "type": "tour"
-                },
                 {
                     "colore": "Nero",
                     "merch": {
-                        "codiceProdotto": "TP1",
+                        "codiceProdotto": "TPX",
                         "not_musica": {
                             "ArtistProduct": {
                                 "description": "desc",
+                                "imageB64": "",
                                 "imagePath": "",
-                                "title": "TS1"
+                                "title": "TS_1747152587"
                             },
                             "disponibile": true,
                             "prezzo": 10,
-                            "quantita": 100,
+                            "quantita": 50,
                             "type": "notmusica"
                         },
                         "type": "merch"
                     },
-                    "taglia": "M",
+                    "taglia": "L",
                     "type": "tshirt"
-                },
-                {
-                    "diametro": 12,
-                    "disco": {
-                        "codiceRiconoscimento": "CR2",
-                        "merch": {
-                            "codiceProdotto": "VP1",
-                            "not_musica": {
-                                "ArtistProduct": {
-                                    "description": "desc",
-                                    "imagePath": "",
-                                    "title": "Vin1"
-                                },
-                                "disponibile": true,
-                                "prezzo": 20,
-                                "quantita": 5,
-                                "type": "notmusica"
-                            },
-                            "type": "merch"
-                        },
-                        "produttoreStampe": "StampeY",
-                        "tipoProdotto": "Limited",
-                        "type": "disco"
-                    },
-                    "rpm": 33,
-                    "type": "vinile"
-                },
-                {
-                    "disco": {
-                        "codiceRiconoscimento": "CR1",
-                        "merch": {
-                            "codiceProdotto": "CP1",
-                            "not_musica": {
-                                "ArtistProduct": {
-                                    "description": "desc",
-                                    "imagePath": "",
-                                    "title": "CD1"
-                                },
-                                "disponibile": true,
-                                "prezzo": 15.5,
-                                "quantita": 10,
-                                "type": "notmusica"
-                            },
-                            "type": "merch"
-                        },
-                        "produttoreStampe": "StampeX",
-                        "tipoProdotto": "Standard",
-                        "type": "disco"
-                    },
-                    "formato": "Jewel",
-                    "type": "cd"
                 },
                 {
                     "chartPosition": 1,
@@ -116,17 +38,18 @@
                             "secondi": 30
                         },
                         "has_testo": true,
-                        "nome": "Traccia1",
+                        "nome": "Traccia_1747152587_1",
                         "partecipanti": [
-                            "Artista1"
+                            "ArtistaTest_1747152587"
                         ],
                         "testo": "Testo1"
                     },
                     "musica": {
                         "ArtistProduct": {
                             "description": "desc",
+                            "imageB64": "",
                             "imagePath": "",
-                            "title": "Sing1"
+                            "title": "Sing_1747152587"
                         },
                         "dataUscita": {
                             "anno": 2021,
@@ -148,8 +71,9 @@
                     "musica": {
                         "ArtistProduct": {
                             "description": "desc",
+                            "imageB64": "",
                             "imagePath": "",
-                            "title": "Album1"
+                            "title": "Album_1747152587"
                         },
                         "dataUscita": {
                             "anno": 2020,
@@ -172,24 +96,24 @@
                                 "secondi": 30
                             },
                             "has_testo": true,
-                            "nome": "Traccia1",
+                            "nome": "Traccia_1747152587_1",
                             "partecipanti": [
-                                "Artista1"
+                                "ArtistaTest_1747152587"
                             ],
                             "testo": "Testo1"
                         },
                         {
                             "durata": {
-                                "minuti": 4,
+                                "minuti": 3,
                                 "ore": 0,
-                                "secondi": 0
+                                "secondi": 30
                             },
-                            "has_testo": false,
-                            "nome": "Traccia2",
+                            "has_testo": true,
+                            "nome": "Traccia_1747152587_1",
                             "partecipanti": [
-                                "Artista1"
+                                "ArtistaTest_1747152587"
                             ],
-                            "testo": ""
+                            "testo": "Testo1"
                         }
                     ],
                     "type": "album"

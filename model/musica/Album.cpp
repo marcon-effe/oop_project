@@ -25,6 +25,26 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
     }
 }
 
+// Costruttore con immagine (senza tracce)
+Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& lbl, const std::string& img)
+: Musica(owner, t, desc, du, dur, g, img), label(lbl)
+{
+    if (!owner) {
+        assert(false && "Album constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("Album constructor with imagePath received nullptr owner.");
+    }
+}
+
+// Costruttore con immagine (con tracce)
+Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tra, const std::string& lbl, const std::string& img)
+: Musica(owner, t, desc, du, dur, g, img), tracce(tra), label(lbl)
+{
+    if (!owner) {
+        assert(false && "Album constructor with imagePath and tracce received nullptr owner");
+        throw std::invalid_argument("Album constructor with imagePath and tracce received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da Musica*
 Album::Album(Musica* m, const std::vector<Traccia>& t, const std::string& l)
 : Musica(m), tracce(t), label(l)

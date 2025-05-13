@@ -15,6 +15,16 @@ NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& de
     }
 }
 
+// Costruttore con immagine
+NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& desc, double p, bool d, unsigned int q, const std::string& img)
+: ArtistProduct(owner, t, desc, img), prezzo(p), disponibile(d), quantita(q)
+{
+    if (!owner) {
+        assert(false && "NotMusica constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("NotMusica constructor with imagePath received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da ArtistProduct*
 NotMusica::NotMusica(ArtistProduct* base, double pr, bool disp, unsigned int q)
 : ArtistProduct(*base), prezzo(pr), disponibile(disp), quantita(q)

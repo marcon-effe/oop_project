@@ -17,6 +17,19 @@ Disco::Disco(Artista* owner, const std::string& t, const std::string& desc, doub
     }
 }
 
+// Costruttore con immagine
+Disco::Disco(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto, const std::string& img)
+: Merch(owner, t, desc, prezzo, disponibile, quantita, codice, img),
+  produttoreStampe(produttoreStampe),
+  codiceRiconoscimento(codiceRiconoscimento),
+  tipoProdotto(tipoProdotto)
+{
+    if (!owner) {
+        assert(false && "Disco constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("Disco constructor with imagePath received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da Merch*
 Disco::Disco(Merch* base, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto)
 : Merch(base),

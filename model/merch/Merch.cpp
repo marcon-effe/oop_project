@@ -14,6 +14,16 @@ Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, doub
     }
 }
 
+// Costruttore con immagine
+Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& img)
+: NotMusica(owner, t, desc, prezzo, disponibile, quantita, img), codiceProdotto(codice)
+{
+    if (!owner) {
+        assert(false && "Merch constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("Merch constructor with imagePath received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da NotMusica*
 Merch::Merch(NotMusica* base, const std::string& codice)
 : NotMusica(base), codiceProdotto(codice)

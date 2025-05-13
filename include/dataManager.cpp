@@ -3,6 +3,54 @@
 #include <cassert>
 #include <unordered_map>
 
+
+std::string DataManager::sanitizeForPath(const std::string& raw) {
+    std::string cleaned = raw;
+
+    // Rimuove caratteri illegali
+    static const std::regex illegal(R"([\\/:*?"<>|])");
+    cleaned = std::regex_replace(cleaned, illegal, "");
+
+    // Rimuove spazi all'inizio/fine
+    cleaned.erase(0, cleaned.find_first_not_of(" \t\n\r\f\v"));
+    cleaned.erase(cleaned.find_last_not_of(" \t\n\r\f\v") + 1);
+
+    // Sostituisce multipli spazi con _
+    static const std::regex spaces(R"(\s+)");
+    cleaned = std::regex_replace(cleaned, spaces, "_");
+
+    // Blacklist parole riservate (Windows)
+    static const std::set<std::string> reserved = {
+        "con", "prn", "aux", "nul", "com1", "com2", "com3",
+        "lpt1", "lpt2", "lpt3"
+    };
+    std::string lower;
+    std::transform(cleaned.begin(), cleaned.end(), std::back_inserter(lower), ::tolower);
+    if (reserved.count(lower)) cleaned += "_";
+
+    return cleaned;
+}
+
+void DataManager::clearIconsDirectory() {
+    QDir iconsDir("view/icons/");
+    if (!iconsDir.exists()) return;
+
+    QStringList entries = iconsDir.entryList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
+
+    for (const QString& entry : entries) {
+        if (entry == "placeholder.png") continue;
+
+        QString fullPath = iconsDir.absoluteFilePath(entry);
+        QFileInfo info(fullPath);
+
+        if (info.isDir()) {
+            QDir(fullPath).removeRecursively();
+        } else {
+            QFile::remove(fullPath);
+        }
+    }
+}
+
 // JSON
 // Funzione per salvare i dati in un file JSON
 bool DataManager::saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath) {
@@ -30,6 +78,9 @@ bool DataManager::saveToFileJson(const std::unordered_map<unsigned int, Artista*
 // Funzione per caricare i dati da un file JSON
 std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileJson(const std::string& filePath) {
     std::unordered_map<unsigned int, Artista*> artisti;
+
+    // Pulisce la cartella view/icons/ mantenendo solo placeholder.png
+    DataManager::clearIconsDirectory();
 
     QFile file(QString::fromStdString(filePath));
     if (!file.open(QIODevice::ReadOnly)) {
@@ -119,6 +170,9 @@ bool DataManager::saveToFileXml(const std::unordered_map<unsigned int, Artista*>
 // Funzione per caricare i dati da un file XML
 std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const std::string& filePath) {
     std::unordered_map<unsigned int, Artista*> artisti;
+
+    // Pulisce la cartella view/icons/ mantenendo solo placeholder.png
+    DataManager::clearIconsDirectory();
 
     const std::string schemaPath = filePath.substr(0, filePath.find_last_of("/\\") + 1) + "artisti.xsd";
 

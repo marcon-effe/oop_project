@@ -3,6 +3,10 @@
 
 #include <unordered_map>
 #include <string>
+#include <regex>
+#include <set>
+#include <string>
+#include <algorithm>
 
 #include "../model/artisti/Artista.h"
 
@@ -19,7 +23,11 @@
 #include "../include/data_format.h"
 
 class DataManager {
+private:
+    static void clearIconsDirectory();
 public:
+    static std::string sanitizeForPath(const std::string& raw);
+
     // JSON
     static bool saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath);
     static std::unordered_map<unsigned int, Artista*> loadFromFileJson(const std::string& filePath);

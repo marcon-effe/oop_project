@@ -14,6 +14,9 @@ public:
     // Costruttore standard
     TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore);
 
+    // Costruttore con immagine
+    TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore, const std::string& img);
+
     // Costruttore di trasformazione da Merch*
     TShirt(Merch* base, const std::string& taglia, const std::string& colore);
 

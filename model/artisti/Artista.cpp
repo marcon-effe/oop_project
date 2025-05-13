@@ -2,16 +2,27 @@
 #include "Artista.h"
 #include "../../view/VisitorGUI.h"
 #include "../../cli/VisitorConsoleEditor.h"
+#include "../../view/ErrorManager.h"
+#include "../../include/dataManager.h"
 
 unsigned int Artista::nextArtistId = 0;
 std::mutex Artista::idMutex;
 
 //COSTRUTTORE STD
-Artista::Artista(const std::string &n) : ID(generateId()), nome(n) {}
-Artista::Artista(const std::string &n, const std::string &g) : ID(generateId()), nome(n), genere(g) {}
-Artista::Artista(const std::string &n, const std::string &g, const std::string &i) : ID(generateId()), nome(n), genere(g), info(i) {}
-Artista::Artista(const std::string &n, const std::string &g, const std::string &i, const std::string &ip) : ID(generateId()), nome(n), genere(g), info(i), imagePath(ip) {}
+Artista::Artista(const std::string &n)
+    : ID(generateId()), nome(n) {}
 
+Artista::Artista(const std::string &n, const std::string &g)
+    : ID(generateId()), nome(n), genere(g) {}
+
+Artista::Artista(const std::string &n, const std::string &g, const std::string &i)
+    : ID(generateId()), nome(n), genere(g), info(i) {}
+
+Artista::Artista(const std::string &n, const std::string &g, const std::string &i, const std::string &ip)
+    : ID(generateId()), nome(n), genere(g), info(i)
+{
+    setImagePath(ip); // conversione completa
+}
 
 //DISTRUTTORE
 Artista::~Artista() {}
@@ -28,8 +39,52 @@ unsigned int Artista::getId() const {
 std::string Artista::getNome() const { 
     return nome; 
 }
-void Artista::setNome(const std::string &n) { 
-    nome = n; 
+
+void Artista::setNome(const std::string& n) {
+    if (n == nome) return;
+
+    // Path sanitizzati
+    QString oldSanitized = QString::fromStdString(DataManager::sanitizeForPath(nome));
+    QString newSanitized = QString::fromStdString(DataManager::sanitizeForPath(n));
+
+    QString oldDir = "view/icons/" + oldSanitized;
+    QString newDir = "view/icons/" + newSanitized;
+
+    // Controlla conflitto di directory
+    if (QDir(newDir).exists()) {
+        std::string errorMessage = "Impossibile rinominare artista: esiste già una directory con il nome \"" + n + "\" (o con lo stesso path dopo sanitizzazione).";
+        ErrorManager::showError(errorMessage);
+        ErrorManager::logError(errorMessage);
+        return;
+    }
+
+    // Rinomina fisicamente la directory se esiste
+    if (QDir(oldDir).exists()) {
+        QDir().mkpath(QFileInfo(newDir).path());
+        if (!QDir().rename(oldDir, newDir)) {
+            std::string errorMessage = "Rinomina cartella fallita: impossibile spostare \"icons/" + oldSanitized.toStdString() + "\" in \"icons/" + newSanitized.toStdString() + "\".";
+            ErrorManager::showError(errorMessage);
+            ErrorManager::logError(errorMessage);
+            return;
+        }
+    }
+
+    // Aggiorna imagePath se presente
+    if (!imagePath.empty()) {
+        QString ext = QFileInfo(QString::fromStdString(imagePath)).suffix();
+        QString newImagePath = ":/icons/" + newSanitized + "/profilo." + ext;
+        imagePath = newImagePath.toStdString();
+    }
+
+    // Aggiorna il nome reale (non sanitizzato)
+    nome = n;
+
+    // Notifica tutti i prodotti collegati
+    for (auto& p : products) {
+        if (p.second) {
+            p.second->setOwner(this);  // aggiorna anche il path immagine prodotto
+        }
+    }
 }
 
 std::string Artista::getGenere() const { 
@@ -51,8 +106,44 @@ std::string Artista::getImagePath() const {
     return imagePath;
 }
 
-void Artista::setImagePath(const std::string &path) {
-    imagePath = path;
+void Artista::setImagePath(const std::string& userSelectedPath) {
+    QFile file(QString::fromStdString(userSelectedPath));
+    if (!file.exists()) {
+        imagePath = "";
+        imageB64 = "";
+        return;
+    }
+
+    QString extension = QFileInfo(file).suffix().toLower();
+    QString sanitizedName = QString::fromStdString(DataManager::sanitizeForPath(nome));
+    QString folderPath = "view/icons/" + sanitizedName;
+    QString fileName = "profilo." + extension;
+    QString localPath = folderPath + "/" + fileName;
+    QString qrcPath = ":/icons/" + sanitizedName + "/" + fileName;
+
+    // Crea la cartella se non esiste
+    QDir().mkpath(folderPath);
+
+    // Sovrascrive file locale
+    QFile::remove(localPath);
+    if (!file.copy(localPath)) {
+        ErrorManager::showError("Errore durante la copia dell'immagine in " + localPath.toStdString());
+        imagePath = "";
+        imageB64 = "";
+        return;
+    }
+
+    QFile saved(localPath);
+    if (saved.open(QIODevice::ReadOnly)) {
+        QByteArray data = saved.readAll();
+        saved.close();
+        imageB64 = data.toBase64().toStdString();
+        imagePath = qrcPath.toStdString();
+    } else {
+        ErrorManager::showError("Errore durante la lettura dell'immagine copiata.");
+        imagePath = "";
+        imageB64 = "";
+    }
 }
 
 void Artista::addProduct(ArtistProduct* p) {
@@ -60,11 +151,54 @@ void Artista::addProduct(ArtistProduct* p) {
         assert(false && "ArtistProduct pointer must not be nullptr");
         throw std::invalid_argument("Artista addProduct() received nullptr ArtistProduct pointer.");
     }
+
+    // Spostamento immagine se necessaria
+    std::string imagePath = p->getImagePath();
+    if (!imagePath.empty() && imagePath.find(":/icons/") == 0) {
+        QString localPath = "view/icons/" + QString::fromStdString(imagePath).mid(8); // rimuove ":/icons/"
+        QFileInfo info(localPath);
+        if (info.exists()) {
+            QString ext = info.suffix().toLower();
+            QString sanitizedArtist = QString::fromStdString(DataManager::sanitizeForPath(nome));
+            QString sanitizedTitle = QString::fromStdString(DataManager::sanitizeForPath(p->getTitle()));
+
+            QString correctFolder = "view/icons/" + sanitizedArtist;
+            QString newLocalPath = correctFolder + "/" + sanitizedTitle + "." + ext;
+            QString newQrcPath = ":/icons/" + sanitizedArtist + "/" + sanitizedTitle + "." + ext;
+
+            if (localPath != newLocalPath) {
+                QDir().mkpath(correctFolder);
+                QFile::remove(newLocalPath); // eventualmente sovrascrive
+                QFile::rename(localPath, newLocalPath);
+
+                // Aggiorna percorso e base64
+                QFile copied(newLocalPath);
+                if (copied.open(QIODevice::ReadOnly)) {
+                    QByteArray data = copied.readAll();
+                    copied.close();
+                    p->setImagePath(newLocalPath.toStdString()); // imposta correttamente anche imageB64
+                }
+            }
+        }
+    }
+
     products[p->getId()] = p;
 }
 
 void Artista::removeProduct(unsigned int id_product) {
-    products.erase(id_product);
+    auto it = products.find(id_product);
+    if (it != products.end()) {
+        ArtistProduct* prodotto = it->second;
+        if (prodotto) {
+            std::string path = prodotto->getImagePath();
+            if (!path.empty() && path.find(":/icons/") == 0) {
+                QString localPath = "view/icons/" + QString::fromStdString(path).mid(8);
+                QFile::remove(localPath);
+            }
+            delete prodotto;
+        }
+        products.erase(it);
+    }
 }
 
 const std::unordered_map<unsigned int, ArtistProduct*>& Artista::getProducts() const {
@@ -88,15 +222,54 @@ void Artista::printInfo() const {
 }
 
 
+static std::string restoreImageFromB64(const std::string& artistName, const std::string& imageB64, const std::string& originalExt) {
+    if (imageB64.empty()) return "";
+
+    std::string sanitized = DataManager::sanitizeForPath(artistName);
+    QString folder = "view/icons/" + QString::fromStdString(sanitized);
+    QString ext = QString::fromStdString(originalExt).toLower();
+    QString fileName = "profilo." + ext;
+    QString localPath = folder + "/" + fileName;
+    QString qrcPath = ":/icons/" + QString::fromStdString(sanitized) + "/" + fileName;
+
+    // Assicura che la directory esista
+    QDir().mkpath(folder);
+
+    // Rimuove eventuali file "profilo.*" preesistenti
+    QDir dir(folder);
+    QStringList existing = dir.entryList(QStringList() << "profilo.*", QDir::Files);
+    for (const QString& f : existing) {
+        dir.remove(f);
+    }
+
+    // Scrive il nuovo file decodificato
+    QFile out(localPath);
+    if (out.open(QIODevice::WriteOnly)) {
+        out.write(QByteArray::fromBase64(QString::fromStdString(imageB64).toUtf8()));
+        out.close();
+        return qrcPath.toStdString();
+    }
+
+    ErrorManager::logError("Impossibile scrivere immagine base64 per artista: " + artistName);
+    return "";
+}
+
+
 // JSON
 // Costruttore: carica SOLO le info base
 Artista::Artista(const QJsonObject& json)
-: ID(generateId()),
-  nome(json["nome"].toString().toStdString()),
-  genere(json["genere"].toString().toStdString()),
-  info(json["info"].toString().toStdString()),
-  imagePath(json["imagePath"].toString().toStdString())
-{}
+    : ID(generateId()),
+      nome(json["nome"].toString().toStdString()),
+      genere(json["genere"].toString().toStdString()),
+      info(json["info"].toString().toStdString())
+{
+    imageB64 = json["imageB64"].toString().toStdString();
+    imagePath = json["imagePath"].toString().toStdString();
+
+    // Estensione dal path
+    QString ext = QFileInfo(QString::fromStdString(imagePath)).suffix();
+    imagePath = restoreImageFromB64(nome, imageB64, ext.toStdString());
+}
 
 // Metodo statico di Factory
 Artista* Artista::createFromJson(const QJsonObject& json) {
@@ -126,11 +299,12 @@ QJsonObject Artista::toJson() const {
     json["genere"] = QString::fromStdString(genere);
     json["info"] = QString::fromStdString(info);
     json["imagePath"] = QString::fromStdString(imagePath);
-    
+    json["imageB64"] = QString::fromStdString(imageB64);
+
     QJsonArray array_prodotti;
-    for (const auto& pair : products) {
+    for (const auto& pair : products)
         array_prodotti.append(pair.second->toJson());
-    }
+
     json["prodotti"] = array_prodotti;
     return json;
 }
@@ -139,12 +313,18 @@ QJsonObject Artista::toJson() const {
 // XML
 // Costruttore: carica SOLO le info base
 Artista::Artista(const QDomElement& el)
-: ID(generateId()),
-  nome(el.attribute("nome").toStdString()),
-  genere(el.attribute("genere").toStdString()),
-  imagePath(el.attribute("imagePath").toStdString())
+    : ID(generateId()),
+      nome(el.attribute("nome").toStdString()),
+      genere(el.attribute("genere").toStdString())
 {
     info = el.firstChildElement("info").text().toStdString();
+    imagePath = el.attribute("imagePath").toStdString();
+
+    QDomElement imageElem = el.firstChildElement("imageB64");
+    imageB64 = imageElem.isNull() ? "" : imageElem.text().toStdString();
+
+    QString ext = QFileInfo(QString::fromStdString(imagePath)).suffix();
+    imagePath = restoreImageFromB64(nome, imageB64, ext.toStdString());
 }
 
 // Metodo statico di Factory
@@ -187,13 +367,17 @@ QDomElement Artista::toXml(QDomDocument& doc) const {
     infoElem.appendChild(doc.createTextNode(QString::fromStdString(info)));
     artistaElem.appendChild(infoElem);
 
-    QDomElement prodottiElem = doc.createElement("prodotti");
-    for (const auto& pair : products) { // attenzione: stiamo iterando la mappa products
-        QDomElement prodottoElem = pair.second->toXml(doc);
-        prodottiElem.appendChild(prodottoElem);
+    if (!imageB64.empty()) {
+        QDomElement imageElem = doc.createElement("imageB64");
+        imageElem.appendChild(doc.createTextNode(QString::fromStdString(imageB64)));
+        artistaElem.appendChild(imageElem);
     }
-    artistaElem.appendChild(prodottiElem);
 
+    QDomElement prodottiElem = doc.createElement("prodotti");
+    for (const auto& pair : products)
+        prodottiElem.appendChild(pair.second->toXml(doc));
+
+    artistaElem.appendChild(prodottiElem);
     return artistaElem;
 }
 
@@ -209,13 +393,21 @@ void Artista::accept(VisitorConsoleEditor* visitor) {
 
 // OVERLOADING OPERATORI
 bool operator==(const Artista& a, const Artista& b) {
-    if (a.nome != b.nome || a.genere != b.genere || a.info != b.info || a.imagePath != b.imagePath) return false;
-    if (a.products.size() != b.products.size()) return false;
+    if (a.nome != b.nome ||
+        a.genere != b.genere ||
+        a.info != b.info ||
+        a.imageB64 != b.imageB64)
+        return false;
+
+    if (a.products.size() != b.products.size())
+        return false;
 
     for (const auto& pair : a.products) {
         auto it = b.products.find(pair.first);
-        if (it == b.products.end()) return false;
-        if (*(pair.second) != *(it->second)) return false;
+        if (it == b.products.end())
+            return false;
+        if (*(pair.second) != *(it->second))
+            return false;
     }
 
     return true;

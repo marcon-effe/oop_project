@@ -15,6 +15,16 @@ Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, 
     }
 }
 
+// Costruttore con immagine
+Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos, const std::string& img)
+: Musica(owner, t, desc, du, dur, g, img), mainTrack(track), isRemix(remix), chartPosition(chartPos)
+{
+    if (!owner) {
+        assert(false && "Singolo constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("Singolo constructor with imagePath received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da Musica*
 Singolo::Singolo(Musica* m, const Traccia& t, bool remix, int chartPos)
 : Musica(m), mainTrack(t), isRemix(remix), chartPosition(chartPos)

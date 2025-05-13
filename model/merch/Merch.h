@@ -13,6 +13,9 @@ public:
     // Costruttore standard
     Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice);
 
+    // Costruttore con immagine
+    Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& img);
+
     // Costruttore di trasformazione da NotMusica*
     Merch(NotMusica* base, const std::string& codice);
 

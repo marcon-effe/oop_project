@@ -1,47 +1,18 @@
 <artisti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="artisti.xsd">
-    <Artista genere="" imagePath="" nome="Artista1">
+    <Artista genere="" imagePath="" nome="ArtistaTest_1747152587">
         <info></info>
         <prodotti>
-            <Tour>
-                <dateTour>
-                    <DataTour luogo="Roma">
-                        <Data anno="2025" giorno="10" mese="5"/>
-                        <Orario minuti="30" ore="20" secondi="0"/>
-                    </DataTour>
-                </dateTour>
-                <NotMusica disponibile="1" prezzo="99.99" quantita="200">
-                    <ArtistProduct description="desc" imagePath="" title="Tour1"/>
-                </NotMusica>
-            </Tour>
-            <TShirt colore="Nero" taglia="M">
-                <Merch codiceProdotto="TP1">
-                    <NotMusica disponibile="1" prezzo="10.00" quantita="100">
-                        <ArtistProduct description="desc" imagePath="" title="TS1"/>
+            <TShirt colore="Nero" taglia="L">
+                <Merch codiceProdotto="TPX">
+                    <NotMusica disponibile="1" prezzo="10.00" quantita="50">
+                        <ArtistProduct description="desc" imagePath="" title="TS_1747152587"/>
                     </NotMusica>
                 </Merch>
             </TShirt>
-            <Vinile diametro="12" rpm="33">
-                <Disco codiceRiconoscimento="CR2" produttoreStampe="StampeY" tipoProdotto="Limited">
-                    <Merch codiceProdotto="VP1">
-                        <NotMusica disponibile="1" prezzo="20.00" quantita="5">
-                            <ArtistProduct description="desc" imagePath="" title="Vin1"/>
-                        </NotMusica>
-                    </Merch>
-                </Disco>
-            </Vinile>
-            <CD formato="Jewel">
-                <Disco codiceRiconoscimento="CR1" produttoreStampe="StampeX" tipoProdotto="Standard">
-                    <Merch codiceProdotto="CP1">
-                        <NotMusica disponibile="1" prezzo="15.50" quantita="10">
-                            <ArtistProduct description="desc" imagePath="" title="CD1"/>
-                        </NotMusica>
-                    </Merch>
-                </Disco>
-            </CD>
             <Singolo chartPosition="1" isRemix="false">
-                <mainTrack has_testo="1" nome="Traccia1">
+                <mainTrack has_testo="1" nome="Traccia_1747152587_1">
                     <partecipanti>
-                        <partecipante nome="Artista1"/>
+                        <partecipante nome="ArtistaTest_1747152587"/>
                     </partecipanti>
                     <Durata minuti="3" ore="0" secondi="30"/>
                     <testo>Testo1</testo>
@@ -49,30 +20,30 @@
                 <Musica genere="Pop">
                     <dataUscita anno="2021" giorno="2" mese="2"/>
                     <Durata minuti="3" ore="0" secondi="30"/>
-                    <ArtistProduct description="desc" imagePath="" title="Sing1"/>
+                    <ArtistProduct description="desc" imagePath="" title="Sing_1747152587"/>
                 </Musica>
             </Singolo>
             <Album label="Label1">
                 <tracce>
-                    <Traccia has_testo="1" nome="Traccia1">
+                    <Traccia has_testo="1" nome="Traccia_1747152587_1">
                         <partecipanti>
-                            <partecipante nome="Artista1"/>
+                            <partecipante nome="ArtistaTest_1747152587"/>
                         </partecipanti>
                         <Durata minuti="3" ore="0" secondi="30"/>
                         <testo>Testo1</testo>
                     </Traccia>
-                    <Traccia has_testo="0" nome="Traccia2">
+                    <Traccia has_testo="1" nome="Traccia_1747152587_1">
                         <partecipanti>
-                            <partecipante nome="Artista1"/>
+                            <partecipante nome="ArtistaTest_1747152587"/>
                         </partecipanti>
-                        <Durata minuti="4" ore="0" secondi="0"/>
-                        <testo></testo>
+                        <Durata minuti="3" ore="0" secondi="30"/>
+                        <testo>Testo1</testo>
                     </Traccia>
                 </tracce>
                 <Musica genere="Rock">
                     <dataUscita anno="2020" giorno="1" mese="1"/>
                     <Durata minuti="42" ore="0" secondi="10"/>
-                    <ArtistProduct description="desc" imagePath="" title="Album1"/>
+                    <ArtistProduct description="desc" imagePath="" title="Album_1747152587"/>
                 </Musica>
             </Album>
         </prodotti>

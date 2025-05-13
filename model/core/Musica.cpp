@@ -15,6 +15,16 @@ Musica::Musica(Artista* owner, const std::string& t, const std::string& desc, co
     }
 }
 
+// Costruttore con immagine
+Musica::Musica(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& img)
+: ArtistProduct(owner, t, desc, img), dataUscita(du), durata(dur), genere(g)
+{
+    if (!owner) {
+        assert(false && "Musica constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("Musica constructor with imagePath received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da ArtistProduct*
 Musica::Musica(ArtistProduct* base, const Data& du, const Durata& dur, const std::string& g)
 : ArtistProduct(*base), dataUscita(du), durata(dur), genere(g)

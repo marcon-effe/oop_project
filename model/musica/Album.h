@@ -19,6 +19,12 @@ public:
     // Costruttore standard con tracce
     Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tracce, const std::string& lbl);
 
+    // Costruttore con immagine (senza tracce)
+    Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& lbl, const std::string& img);
+
+    // Costruttore con immagine (con tracce)
+    Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tracce, const std::string& lbl, const std::string& img);
+
     // Costruttore di trasformazione da Musica*
     Album(Musica* base, const std::vector<Traccia>& tracce, const std::string& lbl);
 

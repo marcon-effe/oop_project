@@ -18,12 +18,14 @@ class ArtistProduct {
 protected:
     const unsigned int ID;
     unsigned int id_artist; //volutamente non const, in quanto l'artista potrebbe essere cambiato
+    std::string nomeArtista; // nome dell'artista, usato per il path dell'immagine
     static unsigned int nextProductId;
     static std::mutex idMutex;
 
     std::string title;
     std::string description;
     std::string imagePath;
+    std::string imageB64;
 
     static unsigned int generateId();
 
@@ -39,7 +41,9 @@ public:
 
     unsigned int getId() const;
     unsigned int getArtistId() const;
-    void setArtistId(Artista* owner);
+    void setOwner(Artista* owner);
+    std::string getNomeArtista() const;
+    
     
     std::string getTitle() const;
     void setTitle(const std::string &t);

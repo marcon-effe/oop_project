@@ -12,4 +12,5 @@
 #include <QTextStream>
 #include <QProcess>
 #include <QFileInfo>
+#include <QDir>
 #endif

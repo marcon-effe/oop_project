@@ -14,6 +14,16 @@ TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, do
     }
 }
 
+// Costruttore con immagine
+TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore, const std::string& img)
+: Merch(owner, t, desc, prezzo, disponibile, quantita, codice, img), taglia(taglia), colore(colore)
+{
+    if (!owner) {
+        assert(false && "TShirt constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("TShirt constructor with imagePath received nullptr owner.");
+    }
+}
+
 // Costruttore di trasformazione da Merch*
 TShirt::TShirt(Merch* base, const std::string& taglia, const std::string& colore)
 : Merch(base), taglia(taglia), colore(colore)

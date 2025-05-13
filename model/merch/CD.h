@@ -16,6 +16,11 @@ public:
        const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento,
        const std::string& tipoProdotto, const std::string& formato);
 
+    // Costruttore con immagine
+    CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
+       const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento,
+       const std::string& tipoProdotto, const std::string& formato, const std::string& img);
+
     // Costruttore di trasformazione da Disco*
     CD(Disco* base, const std::string& formato);
 

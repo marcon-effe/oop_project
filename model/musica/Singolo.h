@@ -16,6 +16,9 @@ public:
     // Costruttore standard
     Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos);
 
+    // Costruttore con immagine
+    Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos, const std::string& img);
+
     // Costruttore di trasformazione da Musica*
     Singolo(Musica* base, const Traccia& mainTrack, bool isRemix, int chartPosition);
 

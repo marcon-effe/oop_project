@@ -25,6 +25,8 @@ private:
     std::string genere;
     std::string info;
     std::string imagePath;
+    std::string imageB64;
+
     std::unordered_map<unsigned int, ArtistProduct*> products;
 
     static unsigned int generateId();

@@ -12,6 +12,14 @@ Vinile::Vinile(Artista* owner, const std::string& t, const std::string& desc, do
 : Disco(owner, t, desc, prezzo, disponibile, quantita, codice, produttoreStampe, codiceRiconoscimento, tipoProdotto),
   rpm(rpm), diametro(diametro) {}
 
+// Costruttore con immagine
+Vinile::Vinile(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile,
+               unsigned int quantita, const std::string& codice, const std::string& produttoreStampe,
+               const std::string& codiceRiconoscimento, const std::string& tipoProdotto,
+               unsigned int rpm, unsigned int diametro, const std::string& img)
+: Disco(owner, t, desc, prezzo, disponibile, quantita, codice, produttoreStampe, codiceRiconoscimento, tipoProdotto, img),
+  rpm(rpm), diametro(diametro) {}
+
 Vinile::Vinile(Disco* d, unsigned int rpm, unsigned int diametro)
 : Disco(d), rpm(rpm), diametro(diametro) {}
 

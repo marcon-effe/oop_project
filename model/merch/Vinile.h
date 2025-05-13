@@ -13,6 +13,11 @@ public:
            unsigned int quantita, const std::string& codice, const std::string& produttoreStampe,
            const std::string& codiceRiconoscimento, const std::string& tipoProdotto, unsigned int rpm, unsigned int diametro);
 
+    Vinile(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile,
+           unsigned int quantita, const std::string& codice, const std::string& produttoreStampe,
+           const std::string& codiceRiconoscimento, const std::string& tipoProdotto, unsigned int rpm, unsigned int diametro,
+           const std::string& img);
+
     Vinile(Disco* d, unsigned int rpm, unsigned int diametro);
     Vinile(const Vinile* v);
     Vinile(Artista* owner, const QJsonObject& json);

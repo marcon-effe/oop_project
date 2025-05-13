@@ -14,6 +14,9 @@ public:
     // Costruttore standard
     NotMusica(Artista* owner, const std::string& title, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita);
 
+    // Costruttore con immagine
+    NotMusica(Artista* owner, const std::string& title, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img);
+
     // Costruttore di trasformazione da ArtistProduct*
     NotMusica(ArtistProduct* base, double prezzo, bool disponibile, unsigned int quantita);
 

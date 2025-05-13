@@ -8,6 +8,18 @@
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita) {}
 
+// Costruttore con date
+Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::vector<DataTour>& dt)
+: NotMusica(owner, t, desc, prezzo, disponibile, quantita), dateTour(dt) {}
+
+// Costruttore con immagine
+Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img)
+: NotMusica(owner, t, desc, prezzo, disponibile, quantita, img) {}
+
+// Costruttore con immagine e date
+Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img, const std::vector<DataTour>& dt)
+: NotMusica(owner, t, desc, prezzo, disponibile, quantita, img), dateTour(dt) {}
+
 // Costruttore da NotMusica*
 Tour::Tour(NotMusica* n, const std::vector<DataTour>& dt)
 : NotMusica(n), dateTour(dt) {}

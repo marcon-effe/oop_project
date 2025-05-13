@@ -4,11 +4,14 @@
            attributeFormDefault="unqualified">
 
   <!-- ArtistProduct -->
-  <xs:complexType name="ArtistProduct">
-    <xs:attribute name="title" type="xs:string" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="required"/>
-    <xs:attribute name="imagePath" type="xs:string" use="required"/>
-  </xs:complexType>
+<xs:complexType name="ArtistProduct">
+  <xs:sequence>
+    <xs:element name="imageB64" type="xs:string" minOccurs="0"/>
+  </xs:sequence>
+  <xs:attribute name="title" type="xs:string" use="required"/>
+  <xs:attribute name="description" type="xs:string" use="required"/>
+  <xs:attribute name="imagePath" type="xs:string" use="optional"/>
+</xs:complexType>
 
   <!-- NotMusica -->
   <xs:complexType name="NotMusica">
@@ -183,11 +186,12 @@
   <xs:complexType name="Artista">
     <xs:sequence>
       <xs:element name="info" type="xs:string" minOccurs="0"/>
+      <xs:element name="imageB64" type="xs:string" minOccurs="0"/>
       <xs:element name="prodotti" type="prodotti" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="nome" type="xs:string" use="required"/>
     <xs:attribute name="genere" type="xs:string" use="required"/>
-    <xs:attribute name="imagePath" type="xs:string"/>
+    <xs:attribute name="imagePath" type="xs:string" use="optional"/>
   </xs:complexType>
 
   <!-- Root element -->
