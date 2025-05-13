@@ -71,18 +71,19 @@ void Artista::setNome(const std::string& n) {
 
     // Aggiorna imagePath se presente
     if (!imagePath.empty()) {
-        QString ext = QFileInfo(QString::fromStdString(imagePath)).suffix();
-        QString newImagePath = ":/icons/" + newSanitized + "/profilo." + ext;
+        QFileInfo info(QString::fromStdString(imagePath));
+        QString ext = info.suffix();
+        QString newImagePath = "view/icons/" + newSanitized + "/profilo." + ext;
         imagePath = newImagePath.toStdString();
     }
 
     // Aggiorna il nome reale (non sanitizzato)
     nome = n;
 
-    // Notifica tutti i prodotti collegati
+    // Notifica tutti i prodotti collegati (per aggiornare eventuali path immagine legati al nome artista)
     for (auto& p : products) {
         if (p.second) {
-            p.second->setOwner(this);  // aggiorna anche il path immagine prodotto
+            p.second->setOwner(this);  // aggiorna anche i path immagini prodotti se necessario
         }
     }
 }
@@ -119,7 +120,6 @@ void Artista::setImagePath(const std::string& userSelectedPath) {
     QString folderPath = "view/icons/" + sanitizedName;
     QString fileName = "profilo." + extension;
     QString localPath = folderPath + "/" + fileName;
-    QString qrcPath = ":/icons/" + sanitizedName + "/" + fileName;
 
     // Crea la cartella se non esiste
     QDir().mkpath(folderPath);
@@ -138,12 +138,20 @@ void Artista::setImagePath(const std::string& userSelectedPath) {
         QByteArray data = saved.readAll();
         saved.close();
         imageB64 = data.toBase64().toStdString();
-        imagePath = qrcPath.toStdString();
+        imagePath = localPath.toStdString();  // SALVA path relativo REALE, non più :/
     } else {
         ErrorManager::showError("Errore durante la lettura dell'immagine copiata.");
         imagePath = "";
         imageB64 = "";
     }
+}
+
+std::string Artista::getImageB64() const {
+    return imageB64;
+}
+
+void Artista::setImageB64(const std::string& b64) {
+    imageB64 = b64;
 }
 
 void Artista::addProduct(ArtistProduct* p) {
@@ -152,31 +160,36 @@ void Artista::addProduct(ArtistProduct* p) {
         throw std::invalid_argument("Artista addProduct() received nullptr ArtistProduct pointer.");
     }
 
-    // Spostamento immagine se necessaria
+    // Spostamento immagine se necessario
     std::string imagePath = p->getImagePath();
-    if (!imagePath.empty() && imagePath.find(":/icons/") == 0) {
-        QString localPath = "view/icons/" + QString::fromStdString(imagePath).mid(8); // rimuove ":/icons/"
-        QFileInfo info(localPath);
+    if (!imagePath.empty()) {
+        QString currentPath = QString::fromStdString(imagePath);
+        QFileInfo info(currentPath);
+
         if (info.exists()) {
             QString ext = info.suffix().toLower();
             QString sanitizedArtist = QString::fromStdString(DataManager::sanitizeForPath(nome));
             QString sanitizedTitle = QString::fromStdString(DataManager::sanitizeForPath(p->getTitle()));
 
-            QString correctFolder = "view/icons/" + sanitizedArtist;
-            QString newLocalPath = correctFolder + "/" + sanitizedTitle + "." + ext;
-            QString newQrcPath = ":/icons/" + sanitizedArtist + "/" + sanitizedTitle + "." + ext;
+            QString targetDir = "view/icons/" + sanitizedArtist;
+            QString newLocalPath = targetDir + "/" + sanitizedTitle + "." + ext;
 
-            if (localPath != newLocalPath) {
-                QDir().mkpath(correctFolder);
-                QFile::remove(newLocalPath); // eventualmente sovrascrive
-                QFile::rename(localPath, newLocalPath);
+            if (currentPath != newLocalPath) {
+                QDir().mkpath(targetDir);
+                QFile::remove(newLocalPath); // sovrascrive se già presente
+                QFile::rename(currentPath, newLocalPath);
 
                 // Aggiorna percorso e base64
                 QFile copied(newLocalPath);
                 if (copied.open(QIODevice::ReadOnly)) {
                     QByteArray data = copied.readAll();
                     copied.close();
-                    p->setImagePath(newLocalPath.toStdString()); // imposta correttamente anche imageB64
+                    p->setImageB64(data.toBase64().toStdString());
+                    p->setImagePath(newLocalPath.toStdString());
+                } else {
+                    ErrorManager::showError("Errore durante la lettura dell'immagine spostata.");
+                    p->setImagePath("");
+                    p->setImageB64("");
                 }
             }
         }
@@ -191,9 +204,11 @@ void Artista::removeProduct(unsigned int id_product) {
         ArtistProduct* prodotto = it->second;
         if (prodotto) {
             std::string path = prodotto->getImagePath();
-            if (!path.empty() && path.find(":/icons/") == 0) {
-                QString localPath = "view/icons/" + QString::fromStdString(path).mid(8);
-                QFile::remove(localPath);
+            if (!path.empty()) {
+                QFile file(QString::fromStdString(path));
+                if (file.exists()) {
+                    file.remove();
+                }
             }
             delete prodotto;
         }
@@ -230,7 +245,6 @@ static std::string restoreImageFromB64(const std::string& artistName, const std:
     QString ext = QString::fromStdString(originalExt).toLower();
     QString fileName = "profilo." + ext;
     QString localPath = folder + "/" + fileName;
-    QString qrcPath = ":/icons/" + QString::fromStdString(sanitized) + "/" + fileName;
 
     // Assicura che la directory esista
     QDir().mkpath(folder);
@@ -247,13 +261,12 @@ static std::string restoreImageFromB64(const std::string& artistName, const std:
     if (out.open(QIODevice::WriteOnly)) {
         out.write(QByteArray::fromBase64(QString::fromStdString(imageB64).toUtf8()));
         out.close();
-        return qrcPath.toStdString();
+        return localPath.toStdString();  // restituisce path REALE su disco
     }
 
     ErrorManager::logError("Impossibile scrivere immagine base64 per artista: " + artistName);
     return "";
 }
-
 
 // JSON
 // Costruttore: carica SOLO le info base

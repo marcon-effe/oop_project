@@ -30,6 +30,8 @@ private:
     std::unordered_map<unsigned int, ArtistProduct*> products;
 
     static unsigned int generateId();
+    std::string getImageB64() const;
+    void setImageB64(const std::string& b64);
 
 public:
     //COSTRUTTORE STD

@@ -9,3 +9,5 @@ saves/json/*.json
 
 model/filtri.txt
 model/costruttori.txt
+
+view/icons/*/

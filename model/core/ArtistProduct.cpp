@@ -92,14 +92,13 @@ void ArtistProduct::setOwner(Artista* nuovoArtista) {
         return;
     }
 
-    // Costruzione path
+    // Costruzione path immagine
     QString ext = QFileInfo(QString::fromStdString(imagePath)).suffix();
     QString fileName = QString::fromStdString(DataManager::sanitizeForPath(title)) + "." + ext;
 
     QString oldPath = "view/icons/" + sanitizedOld + "/" + fileName;
     QString newFolder = "view/icons/" + sanitizedNew;
     QString newPath = newFolder + "/" + fileName;
-    QString newQrcPath = ":/icons/" + sanitizedNew + "/" + fileName;
 
     // Sposta il file fisicamente se esiste
     if (QFile::exists(oldPath)) {
@@ -109,15 +108,17 @@ void ArtistProduct::setOwner(Artista* nuovoArtista) {
     }
 
     // Aggiorna dati interni
-    imagePath = newQrcPath.toStdString();
+    imagePath = newPath.toStdString();
     nomeArtista = nuovoNome;
 
-    // Ricarica contenuto B64 aggiornato (solo se immagine esiste fisicamente)
+    // Ricarica contenuto B64 aggiornato
     QFile copied(newPath);
     if (copied.open(QIODevice::ReadOnly)) {
         QByteArray data = copied.readAll();
         copied.close();
         imageB64 = data.toBase64().toStdString();
+    } else {
+        imageB64.clear();
     }
 }
 
@@ -158,8 +159,8 @@ void ArtistProduct::setTitle(const std::string& t) {
             }
         }
 
-        QString path = ":/icons/" + sanitizedArtist + "/" + newFile;
-        imagePath = path.toStdString();
+        imagePath = newPath.toStdString();  // usa il path reale, non più `:/icons/...`
+
         QFile img(newPath);
         if (img.open(QIODevice::ReadOnly)) {
             QByteArray data = img.readAll();
@@ -184,6 +185,14 @@ std::string ArtistProduct::getImagePath() const {
     return imagePath;
 }
 
+std::string ArtistProduct::getImageB64() const {
+    return imageB64;
+}
+
+void ArtistProduct::setImageB64(const std::string& b64) {
+    imageB64 = b64;
+}
+
 void ArtistProduct::setImagePath(const std::string& ip) {
     QFile file(QString::fromStdString(ip));
     if (!file.exists() || !file.open(QIODevice::ReadOnly)) {
@@ -198,7 +207,7 @@ void ArtistProduct::setImagePath(const std::string& ip) {
     }
 
     QString ext = QFileInfo(QString::fromStdString(ip)).suffix().toLower();
-    if (ext.isEmpty()) ext = "png"; // fallback se assente
+    if (ext.isEmpty()) ext = "png"; // fallback se l'estensione non è rilevabile
 
     QString sanitizedArtist = QString::fromStdString(DataManager::sanitizeForPath(nomeArtista));
     QString sanitizedTitle  = QString::fromStdString(DataManager::sanitizeForPath(title));
@@ -206,11 +215,10 @@ void ArtistProduct::setImagePath(const std::string& ip) {
     QString folder = "view/icons/" + sanitizedArtist;
     QString fileName = sanitizedTitle + "." + ext;
     QString localPath = folder + "/" + fileName;
-    QString qrcPath = ":/icons/" + sanitizedArtist + "/" + fileName;
 
     QDir().mkpath(folder);
 
-    // Rimuove altre versioni del file con estensione diversa
+    // Rimuove eventuali versioni precedenti con estensione diversa
     QDir dir(folder);
     QStringList existing = dir.entryList(QStringList() << sanitizedTitle + ".*", QDir::Files);
     for (const QString& e : existing) {
@@ -225,7 +233,7 @@ void ArtistProduct::setImagePath(const std::string& ip) {
 
     // Aggiorna campi interni
     imageB64 = data.toBase64().toStdString();
-    imagePath = qrcPath.toStdString();
+    imagePath = localPath.toStdString();
 }
 
 void ArtistProduct::printInfo() const {
@@ -252,7 +260,6 @@ static std::string restoreProductImageFromB64(const std::string& artistName, con
 
     QString fileName = QString::fromStdString(sanitizedTitle) + "." + ext;
     QString localPath = folder + "/" + fileName;
-    QString qrcPath = ":/icons/" + QString::fromStdString(sanitizedArtist) + "/" + fileName;
 
     // Crea directory se mancante
     QDir().mkpath(folder);
@@ -269,7 +276,7 @@ static std::string restoreProductImageFromB64(const std::string& artistName, con
     if (out.open(QIODevice::WriteOnly)) {
         out.write(QByteArray::fromBase64(QString::fromStdString(imageB64).toUtf8()));
         out.close();
-        return qrcPath.toStdString();
+        return localPath.toStdString();
     }
 
     ErrorManager::logError("Impossibile scrivere immagine base64 del prodotto '" + productTitle + "' per artista '" + artistName + "'");

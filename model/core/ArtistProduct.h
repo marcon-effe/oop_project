@@ -53,6 +53,8 @@ public:
 
     std::string getImagePath() const;
     void setImagePath(const std::string &path);
+    std::string getImageB64() const;
+    void setImageB64(const std::string &b64);
 
     virtual void printInfo() const;
 
