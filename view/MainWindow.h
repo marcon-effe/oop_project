@@ -5,7 +5,7 @@
 #include <QListWidget>
 #include <QLabel>
 #include <QHBoxLayout>
-#include <unordered_map>  // aggiunto per usare le hash map
+#include <unordered_map> 
 
 #include "../model/artisti/Artista.h"
 #include "../model/core/ArtistProduct.h"
@@ -28,6 +28,13 @@ private:
     void sortArtistListWidget();
     void sortProductListWidget();
 
+    QAction* inserisciArtista;
+    QAction* inserisciProdotto;
+    QAction* modificaArtista;
+    QAction* modificaProdotto;
+    QAction* eliminaArtista;
+    QAction* eliminaProdotto;
+
     // Widget principali
     QListWidget *artistListWidget;
     QListWidget *productListFullWidget;
@@ -45,6 +52,13 @@ private:
     std::unordered_map<unsigned int, ArtistProduct*> prodotti;
 
 private slots:
+    void onInserisciArtista();
+    void onInserisciProdotto();
+    void onModificaArtista();
+    void onModificaProdotto();
+    void onEliminaArtista();
+    void onEliminaProdotto();
+
     void handleArtistSelection(QListWidgetItem* item);
     void handleProductSelection(QListWidgetItem* item);
     

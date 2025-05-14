@@ -52,14 +52,7 @@ void VisitorGUI::setArtistMap(const std::unordered_map<unsigned int, Artista*>& 
     m_artists = &artistsMap;
 }
 
-// VisitorGUI.h
-// …
-// Cambia la firma:
-QWidget* createRelatedProductsSection(unsigned int artistId,
-    unsigned int excludeProductId = 0);
-// …
 
-// VisitorGUI.cpp
 QWidget* VisitorGUI::createRelatedProductsSection(unsigned int artistId,
                 unsigned int excludeProductId)
 {

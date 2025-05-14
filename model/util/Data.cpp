@@ -64,6 +64,10 @@ std::string Data::toString() const {
     return dayStr + "/" + monthStr + "/" + yearStr;
 }
 
+QDate Data::toQDate() const {
+    return QDate(anno, mese, giorno);
+}
+
 // JSON
 // Converte un oggetto JSON in un oggetto Data
 Data::Data(const QJsonObject& json) {

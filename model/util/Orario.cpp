@@ -60,6 +60,9 @@ std::string Orario::toString() const {
     return str;
 }
 
+QTime Orario::toQTime() const {
+    return QTime(ore, minuti, secondi);
+}
 
 //JSON
 // Converte un oggetto JSON in un oggetto Orario

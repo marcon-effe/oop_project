@@ -21,7 +21,7 @@ Artista::Artista(const std::string &n, const std::string &g, const std::string &
 Artista::Artista(const std::string &n, const std::string &g, const std::string &i, const std::string &ip)
     : ID(generateId()), nome(n), genere(g), info(i)
 {
-    setImagePath(ip); // conversione completa
+    setImagePath(ip);
 }
 
 //DISTRUTTORE
@@ -80,10 +80,9 @@ void Artista::setNome(const std::string& n) {
     // Aggiorna il nome reale (non sanitizzato)
     nome = n;
 
-    // Notifica tutti i prodotti collegati (per aggiornare eventuali path immagine legati al nome artista)
     for (auto& p : products) {
         if (p.second) {
-            p.second->setOwner(this);  // aggiorna anche i path immagini prodotti se necessario
+            p.second->setOwner(this);
         }
     }
 }
@@ -138,7 +137,7 @@ void Artista::setImagePath(const std::string& userSelectedPath) {
         QByteArray data = saved.readAll();
         saved.close();
         imageB64 = data.toBase64().toStdString();
-        imagePath = localPath.toStdString();  // SALVA path relativo REALE, non più :/
+        imagePath = localPath.toStdString();
     } else {
         ErrorManager::showError("Errore durante la lettura dell'immagine copiata.");
         imagePath = "";
@@ -176,7 +175,7 @@ void Artista::addProduct(ArtistProduct* p) {
 
             if (currentPath != newLocalPath) {
                 QDir().mkpath(targetDir);
-                QFile::remove(newLocalPath); // sovrascrive se già presente
+                QFile::remove(newLocalPath);
                 QFile::rename(currentPath, newLocalPath);
 
                 // Aggiorna percorso e base64

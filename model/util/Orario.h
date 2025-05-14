@@ -2,6 +2,7 @@
 #define ORARIO_H
 
 #include "../../include/data_format.h"
+#include <QTime>
 
 class Orario {
 private:
@@ -24,6 +25,7 @@ public:
     void setSecondi(unsigned int s);
 
     std::string toString() const;
+    QTime toQTime() const;
 
     Orario getOrario() const;
     QJsonObject toJson() const;

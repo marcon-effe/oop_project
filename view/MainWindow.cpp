@@ -30,6 +30,8 @@
 #include "../include/dataManager.h"
 #include "ErrorManager.h"
 #include "filters/FilterDialog.h"
+#include "crud_dialogs/ArtistaEditorDialog.h"
+#include "crud_dialogs/ProdottoInsertDialog.h"
 
 static bool endsWith(const std::string& str, const std::string& suffix) {
     return str.size() >= suffix.size() &&
@@ -64,8 +66,16 @@ void MainWindow::setupUI() {
     fileMenu->addAction("Esci", this, SLOT(close()));
 
     QMenu *inserisciMenu = menuBar()->addMenu("Inserisci");
-    inserisciMenu->addAction("Artista");
-    inserisciMenu->addAction("Prodotto");
+    inserisciArtista = inserisciMenu->addAction("Artista");
+    inserisciProdotto = inserisciMenu->addAction("Prodotto");
+
+    QMenu *modificaMenu = menuBar()->addMenu("Modifica");
+    modificaArtista = modificaMenu->addAction("Artista");
+    modificaProdotto = modificaMenu->addAction("Prodotto");
+
+    QMenu *eliminaMenu = menuBar()->addMenu("Elimina");
+    eliminaArtista = eliminaMenu->addAction("Artista");
+    eliminaProdotto = eliminaMenu->addAction("Prodotto");
 
     // === CENTRO ===
     QWidget *central = new QWidget(this);
@@ -188,6 +198,15 @@ void MainWindow::setupUI() {
     connect(importAction, &QAction::triggered, this, &MainWindow::importData);
     connect(exportAction, &QAction::triggered, this, &MainWindow::exportData);
 
+    connect(inserisciArtista, &QAction::triggered, this, &MainWindow::onInserisciArtista);
+    connect(inserisciProdotto, &QAction::triggered, this, &MainWindow::onInserisciProdotto);
+
+    connect(modificaArtista, &QAction::triggered, this, &MainWindow::onModificaArtista);
+    connect(modificaProdotto, &QAction::triggered, this, &MainWindow::onModificaProdotto);
+
+    connect(eliminaArtista, &QAction::triggered, this, &MainWindow::onEliminaArtista);
+    connect(eliminaProdotto, &QAction::triggered, this, &MainWindow::onEliminaProdotto);
+
     connect(artistListWidget, &QListWidget::itemClicked, this, &MainWindow::handleArtistSelection);
     connect(productListFullWidget, &QListWidget::itemClicked, this, &MainWindow::handleProductSelection);
 
@@ -197,6 +216,72 @@ void MainWindow::setupUI() {
     connect(filtroArtisti, &QPushButton::clicked, this, &MainWindow::openArtistFilterDialog);
     connect(filtroProdotti, &QPushButton::clicked, this, &MainWindow::openProductFilterDialog);
 }
+
+// ------------ INSERIMENTO ARTISTA E PRODOTTO ------------
+void MainWindow::onInserisciArtista() {
+
+}
+
+void MainWindow::onInserisciProdotto()
+{
+    if (artists.empty()) {
+        QMessageBox::warning(this, "Attenzione", "Nessun artista disponibile. Crea prima un artista.");
+        return;
+    }
+
+    ProdottoInsertDialog* dialog = new ProdottoInsertDialog(artists, prodotti, this);
+    dialog->exec();
+    updateListWidgets();
+}
+// ------------------------------
+
+// ------------ MODIFICA ARTISTA E PRODOTTO ------------
+void MainWindow::onModificaArtista()
+{
+    QListWidgetItem* item = artistListWidget->currentItem();
+    if (!item) {
+        QMessageBox::warning(this, "Attenzione", "Seleziona un artista da modificare.");
+        return;
+    }
+
+    QString nomeArtista = item->text();
+    Artista* artista = nullptr;
+
+    for (const auto& pair : artists) {
+        if (QString::fromStdString(pair.second->getNome()) == nomeArtista) {
+            artista = pair.second;
+            break;
+        }
+    }
+
+    if (artista) {
+        ArtistaEditorDialog dlg(artista, this);
+        if (dlg.exec() == QDialog::Accepted) {
+            updateListWidgets();
+        }
+    }
+}
+
+void MainWindow::onModificaProdotto()
+{
+    
+}
+
+
+// ------------------------------
+
+// ------------ ELIMINA ARTISTA E PRODOTTO ------------
+void MainWindow::onEliminaArtista()
+{
+    
+}
+
+void MainWindow::onEliminaProdotto()
+{
+    //apriamo un dialog con combobox per selezionare il prodotto da eliminare 
+
+}
+
 
 
 /// RIPRISTINO GUI ------------

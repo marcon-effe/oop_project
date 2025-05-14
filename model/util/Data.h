@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <string>
+#include <QDate>
 
 #include "../../include/data_format.h"
 
@@ -11,6 +12,7 @@ class Data {
         unsigned int mese; 
         unsigned int anno; 
     public: 
+        Data() = default;
         Data(unsigned int g, unsigned int m, unsigned int a);
         Data(const QJsonObject& json);
         Data(const QDomElement& xml);
@@ -26,9 +28,12 @@ class Data {
         void setAnno(unsigned int a);
 
         std::string toString() const;
+        QDate toQDate() const;
 
         QJsonObject toJson() const;
         QDomElement toXml(QDomDocument& doc) const;
+
+        
 
         //OVERLOADING OPERATORI
         friend bool operator==(const Data& a, const Data& b);
