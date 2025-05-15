@@ -245,8 +245,8 @@ void MainWindow::setupUI() {
 void MainWindow::onInserisciArtista()
 {
     std::set<std::string> nomiSan;
-for (const auto& pair : artists)
-    nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
+    for (const auto& pair : artists)
+        nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
 
     ArtistaEditorDialog dialog(nullptr, this, nomiSan);
     if (dialog.exec() == QDialog::Accepted) {
