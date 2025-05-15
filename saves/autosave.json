@@ -8,6 +8,46 @@
             "nome": "ArtistaTest_1_1747159092",
             "prodotti": [
                 {
+                    "chartPosition": 0,
+                    "isRemix": false,
+                    "mainTrack": {
+                        "durata": {
+                            "minuti": 0,
+                            "ore": 0,
+                            "secondi": 0
+                        },
+                        "has_testo": false,
+                        "nome": "traccia8",
+                        "partecipanti": [
+                            "b1",
+                            "b3",
+                            "b4"
+                        ],
+                        "testo": ""
+                    },
+                    "musica": {
+                        "ArtistProduct": {
+                            "description": "",
+                            "imageB64": "",
+                            "imagePath": "",
+                            "title": "singoloaaa"
+                        },
+                        "dataUscita": {
+                            "anno": 2025,
+                            "giorno": 31,
+                            "mese": 5
+                        },
+                        "durata": {
+                            "minuti": 0,
+                            "ore": 0,
+                            "secondi": 0
+                        },
+                        "genere": "",
+                        "type": "musica"
+                    },
+                    "type": "singolo"
+                },
+                {
                     "label": "LabelX",
                     "musica": {
                         "ArtistProduct": {
@@ -741,6 +781,62 @@
                     },
                     "taglia": "",
                     "type": "tshirt"
+                },
+                {
+                    "label": "",
+                    "musica": {
+                        "ArtistProduct": {
+                            "description": "",
+                            "imageB64": "",
+                            "imagePath": "",
+                            "title": "album"
+                        },
+                        "dataUscita": {
+                            "anno": 2025,
+                            "giorno": 15,
+                            "mese": 5
+                        },
+                        "durata": {
+                            "minuti": 28,
+                            "ore": 0,
+                            "secondi": 0
+                        },
+                        "genere": "",
+                        "type": "musica"
+                    },
+                    "tracce": [
+                        {
+                            "durata": {
+                                "minuti": 0,
+                                "ore": 0,
+                                "secondi": 0
+                            },
+                            "has_testo": false,
+                            "nome": "traccia1",
+                            "partecipanti": [
+                                "p1",
+                                "p2",
+                                "p3"
+                            ],
+                            "testo": ""
+                        },
+                        {
+                            "durata": {
+                                "minuti": 28,
+                                "ore": 0,
+                                "secondi": 0
+                            },
+                            "has_testo": false,
+                            "nome": "traccia2",
+                            "partecipanti": [
+                                "a1",
+                                "a2",
+                                "a3"
+                            ],
+                            "testo": ""
+                        }
+                    ],
+                    "type": "album"
                 }
             ],
             "type": "artista"

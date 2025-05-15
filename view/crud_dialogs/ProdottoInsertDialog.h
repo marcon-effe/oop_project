@@ -120,7 +120,7 @@ private:
         QPushButton* aggiungiPartecipanteBtn;
         std::vector<QLineEdit*> partecipantiLines;
     };
-    std::vector<TracciaEditor> tracceEditors;
+    std::vector<TracciaEditor*> tracceEditors;
 
     // === Singolo ===
     QLineEdit* nomeTracciaEdit;

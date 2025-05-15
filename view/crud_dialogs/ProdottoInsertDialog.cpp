@@ -426,52 +426,52 @@ void ProdottoInsertDialog::buildAlbum() {
 
     aggiungiTracciaBtn = new QPushButton("Aggiungi traccia", this);
     connect(aggiungiTracciaBtn, &QPushButton::clicked, this, [this]() {
-        TracciaEditor editor;
+        TracciaEditor* editor = new TracciaEditor;
 
-        editor.nomeEdit = new QLineEdit(this);
+        editor->nomeEdit = new QLineEdit(this);
 
-        editor.oreDurata = new QSpinBox(this);
-        editor.minutiDurata = new QSpinBox(this);
-        editor.secondiDurata = new QSpinBox(this);
-        editor.oreDurata->setRange(0, 23);
-        editor.minutiDurata->setRange(0, 59);
-        editor.secondiDurata->setRange(0, 59);
+        editor->oreDurata = new QSpinBox(this);
+        editor->minutiDurata = new QSpinBox(this);
+        editor->secondiDurata = new QSpinBox(this);
+        editor->oreDurata->setRange(0, 23);
+        editor->minutiDurata->setRange(0, 59);
+        editor->secondiDurata->setRange(0, 59);
 
-        editor.hasTestoCheck = new QCheckBox("Ha testo", this);
-        editor.testoEdit = new QTextEdit(this);
-        editor.testoEdit->setFixedHeight(50);
+        editor->hasTestoCheck = new QCheckBox("Ha testo", this);
+        editor->testoEdit = new QTextEdit(this);
+        editor->testoEdit->setFixedHeight(50);
 
         // Partecipanti
-        editor.partecipantiWidget = new QWidget(this);
-        editor.partecipantiLayout = new QVBoxLayout(editor.partecipantiWidget);
-        editor.aggiungiPartecipanteBtn = new QPushButton("Aggiungi partecipante", this);
-        connect(editor.aggiungiPartecipanteBtn, &QPushButton::clicked, this, [this, &editor]() {
+        editor->partecipantiWidget = new QWidget(this);
+        editor->partecipantiLayout = new QVBoxLayout(editor->partecipantiWidget);
+        editor->aggiungiPartecipanteBtn = new QPushButton("Aggiungi partecipante", this);
+        connect(editor->aggiungiPartecipanteBtn, &QPushButton::clicked, this, [this, editor]() {
             QLineEdit* nuovo = new QLineEdit(this);
-            editor.partecipantiLayout->addWidget(nuovo);
-            editor.partecipantiLines.push_back(nuovo);
+            editor->partecipantiLayout->addWidget(nuovo);
+            editor->partecipantiLines.push_back(nuovo);
         });
 
         QFormLayout* tracciaLayout = new QFormLayout;
-        tracciaLayout->addRow("Nome:", editor.nomeEdit);
+        tracciaLayout->addRow("Nome:", editor->nomeEdit);
 
         QHBoxLayout* durataLayout = new QHBoxLayout;
-        durataLayout->addWidget(editor.oreDurata);
+        durataLayout->addWidget(editor->oreDurata);
         durataLayout->addWidget(new QLabel("h"));
-        durataLayout->addWidget(editor.minutiDurata);
+        durataLayout->addWidget(editor->minutiDurata);
         durataLayout->addWidget(new QLabel("m"));
-        durataLayout->addWidget(editor.secondiDurata);
+        durataLayout->addWidget(editor->secondiDurata);
         durataLayout->addWidget(new QLabel("s"));
 
         QWidget* durataWidget = new QWidget(this);
         durataWidget->setLayout(durataLayout);
         tracciaLayout->addRow("Durata:", durataWidget);
 
-        tracciaLayout->addRow("", editor.hasTestoCheck);
-        tracciaLayout->addRow("Testo:", editor.testoEdit);
+        tracciaLayout->addRow("", editor->hasTestoCheck);
+        tracciaLayout->addRow("Testo:", editor->testoEdit);
 
         QVBoxLayout* partecipantiSection = new QVBoxLayout;
-        partecipantiSection->addWidget(editor.partecipantiWidget);
-        partecipantiSection->addWidget(editor.aggiungiPartecipanteBtn);
+        partecipantiSection->addWidget(editor->partecipantiWidget);
+        partecipantiSection->addWidget(editor->aggiungiPartecipanteBtn);
 
         QWidget* partecipantiWrapper = new QWidget(this);
         partecipantiWrapper->setLayout(partecipantiSection);
@@ -483,10 +483,9 @@ void ProdottoInsertDialog::buildAlbum() {
         tracceLayout->addWidget(tracciaBox);
         tracceEditors.push_back(editor);
     });
-
+    
     tracceBoxLayout->addWidget(tracceWidget);
     tracceBoxLayout->addWidget(aggiungiTracciaBtn);
-
     campiSpecificiLayout->addWidget(tracceBox);
 }
 
@@ -601,13 +600,13 @@ void ProdottoInsertDialog::confermaInserimento() {
 
             std::vector<Traccia> tracce;
             for (const auto& ed : tracceEditors) {
-                std::string nome = ed.nomeEdit->text().toStdString();
-                bool hasTesto = ed.hasTestoCheck->isChecked();
-                std::string testo = ed.testoEdit->toPlainText().toStdString();
-                Durata durata(ed.oreDurata->value(), ed.minutiDurata->value(), ed.secondiDurata->value());
+                std::string nome = ed->nomeEdit->text().toStdString();
+                bool hasTesto = ed->hasTestoCheck->isChecked();
+                std::string testo = ed->testoEdit->toPlainText().toStdString();
+                Durata durata(ed->oreDurata->value(), ed->minutiDurata->value(), ed->secondiDurata->value());
 
                 std::vector<std::string> partecipanti;
-                for (auto* line : ed.partecipantiLines) {
+                for (auto* line : ed->partecipantiLines) {
                     partecipanti.push_back(line->text().toStdString());
                 }
 
@@ -621,6 +620,10 @@ void ProdottoInsertDialog::confermaInserimento() {
             artistaSelezionato->addProduct(album);
         }
 
+        for (TracciaEditor* editor : tracceEditors) {
+            delete editor;
+        }
+        tracceEditors.clear();
         accept();
     } catch (const std::exception& ex) {
         QMessageBox::critical(this, "Errore", ex.what());
