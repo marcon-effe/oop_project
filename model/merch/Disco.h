@@ -3,8 +3,13 @@
 
 #include <string>
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "Merch.h"
-#include "../../include/data_format.h"
+
 
 class Disco : public Merch {
 protected:

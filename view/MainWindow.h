@@ -16,6 +16,9 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = nullptr);
 
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
 private:
     void resizeEvent(QResizeEvent* event) override;
     void setupUI();
@@ -27,7 +30,9 @@ private:
     void updateListWidgets();
     void sortArtistListWidget();
     void sortProductListWidget();
+    void saveIfAutosaveEnabled();
 
+    QAction* autosaveAction;
     QAction* inserisciArtista;
     QAction* inserisciProdotto;
     QAction* modificaArtista;

@@ -17,6 +17,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QCloseEvent>
 
 #include <unordered_map>
 
@@ -27,7 +28,7 @@
 #include "../model/musica/Album.h"
 #include "../model/musica/Singolo.h"
 #include "../model/musica/Traccia.h"
-#include "../include/dataManager.h"
+#include "../data/DataManager.h"
 #include "ErrorManager.h"
 #include "filters/FilterDialog.h"
 #include "crud_dialogs/ArtistaEditorDialog.h"
@@ -56,11 +57,24 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
     }
 }
 
+void MainWindow::closeEvent(QCloseEvent* event) {
+    if (autosaveAction && autosaveAction->isChecked()) {
+        DataManager::saveToFileJson(artists, "saves/autosave.json");
+    }
+    QMainWindow::closeEvent(event);
+}
+
 void MainWindow::setupUI() {
     // === MENÙ SUPERIORE ===
     QMenu *fileMenu = menuBar()->addMenu("File");
     QAction* importAction = fileMenu->addAction("Importa");
     QAction* exportAction = fileMenu->addAction("Esporta");
+    QAction* autosaveAction = new QAction("Autosave", this);
+    autosaveAction->setCheckable(true);
+    autosaveAction->setChecked(true);
+    fileMenu->addAction(autosaveAction);
+
+    this->autosaveAction = autosaveAction;
 
     fileMenu->addSeparator();
     fileMenu->addAction("Esci", this, SLOT(close()));
@@ -215,11 +229,34 @@ void MainWindow::setupUI() {
 
     connect(filtroArtisti, &QPushButton::clicked, this, &MainWindow::openArtistFilterDialog);
     connect(filtroProdotti, &QPushButton::clicked, this, &MainWindow::openProductFilterDialog);
+
+    //== LOAD DATA ===
+    const std::string autosavePath = "saves/autosave.json";
+    if (QFile::exists(QString::fromStdString(autosavePath))) {
+        loadDataFromSaves(autosavePath);
+        if(!artists.empty()) {
+            updateListWidgets();
+        }
+    }
+    showMaximized();
 }
 
 // ------------ INSERIMENTO ARTISTA E PRODOTTO ------------
-void MainWindow::onInserisciArtista() {
+void MainWindow::onInserisciArtista()
+{
+    std::set<std::string> nomiSan;
+for (const auto& pair : artists)
+    nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
 
+    ArtistaEditorDialog dialog(nullptr, this, nomiSan);
+    if (dialog.exec() == QDialog::Accepted) {
+        Artista* nuovo = dialog.artist();
+        if (nuovo) {
+            artists[nuovo->getId()] = nuovo;
+            updateListWidgets();
+        }
+    }
+    saveIfAutosaveEnabled();
 }
 
 void MainWindow::onInserisciProdotto()
@@ -232,6 +269,7 @@ void MainWindow::onInserisciProdotto()
     ProdottoInsertDialog* dialog = new ProdottoInsertDialog(artists, prodotti, this);
     dialog->exec();
     updateListWidgets();
+    saveIfAutosaveEnabled();
 }
 // ------------------------------
 
@@ -244,27 +282,33 @@ void MainWindow::onModificaArtista()
         return;
     }
 
-    QString nomeArtista = item->text();
+    const QString nomeArtista = item->text();
     Artista* artista = nullptr;
 
-    for (const auto& pair : artists) {
-        if (QString::fromStdString(pair.second->getNome()) == nomeArtista) {
-            artista = pair.second;
+    for (const auto& [id, ptr] : artists) {
+        if (QString::fromStdString(ptr->getNome()) == nomeArtista) {
+            artista = ptr;
             break;
         }
     }
 
-    if (artista) {
-        ArtistaEditorDialog dlg(artista, this);
-        if (dlg.exec() == QDialog::Accepted) {
-            updateListWidgets();
-        }
+    if (!artista) return;
+
+    std::set<std::string> nomiSan;
+    for (const auto& pair : artists)
+        nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
+
+    ArtistaEditorDialog dialog(artista, this, nomiSan);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        updateListWidgets();
     }
+    saveIfAutosaveEnabled();
 }
 
 void MainWindow::onModificaProdotto()
 {
-    
+    saveIfAutosaveEnabled();
 }
 
 
@@ -273,13 +317,12 @@ void MainWindow::onModificaProdotto()
 // ------------ ELIMINA ARTISTA E PRODOTTO ------------
 void MainWindow::onEliminaArtista()
 {
-    
+    saveIfAutosaveEnabled();
 }
 
 void MainWindow::onEliminaProdotto()
 {
-    //apriamo un dialog con combobox per selezionare il prodotto da eliminare 
-
+    saveIfAutosaveEnabled();
 }
 
 
@@ -349,6 +392,12 @@ void MainWindow::clearRightPanel() {
 
 
 // IMPORTAZIONE/ESPORTAZIONE DATI
+void MainWindow::saveIfAutosaveEnabled() {
+    if (autosaveAction && autosaveAction->isChecked()) {
+        DataManager::saveToFileJson(artists, "saves/autosave.json");
+    }
+}
+
 void MainWindow::importData() {
     QString fileName = QFileDialog::getOpenFileName(this, "Importa dati", "", "JSON Files (*.json);;XML Files (*.xml)");
     if (fileName.isEmpty()) return;

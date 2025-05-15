@@ -3,8 +3,10 @@
 
 #include <string>
 #include <QDate>
-
-#include "../../include/data_format.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
 
 class Data {
     private: 

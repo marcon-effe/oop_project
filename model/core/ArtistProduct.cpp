@@ -9,8 +9,7 @@
 #include "../merch/CD.h"
 #include "../merch/Vinile.h"
 
-#include "../../include/dataManager.h"
-#include "../../include/data_format.h"
+#include "../../data/DataManager.h"
 #include "../../view/ErrorManager.h"
 
 unsigned int ArtistProduct::nextProductId = 0;
@@ -194,6 +193,16 @@ void ArtistProduct::setImageB64(const std::string& b64) {
 }
 
 void ArtistProduct::setImagePath(const std::string& ip) {
+    if(ip == imagePath) {
+        return;
+    }
+
+    if(ip.empty()) {
+        imagePath = "";
+        imageB64 = "";
+        return;
+    }
+    
     QFile file(QString::fromStdString(ip));
     if (!file.exists() || !file.open(QIODevice::ReadOnly)) {
         throw std::runtime_error("Il file immagine specificato non esiste o non è leggibile.");

@@ -1,8 +1,12 @@
 #ifndef VINILE_H
 #define VINILE_H
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "Disco.h"
-#include "../../include/data_format.h"
 
 class Vinile : public Disco {
 private:

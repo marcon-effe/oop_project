@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <QDir>
 
-#include "../include/dataManager.h"
+#include "../data/DataManager.h"
 #include "../view/ErrorManager.h"
 #include "VisitorConsoleEditor.h"
 #include "ConsoleEditorHandler.h"

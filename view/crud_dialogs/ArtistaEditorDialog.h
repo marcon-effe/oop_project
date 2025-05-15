@@ -1,6 +1,8 @@
 #ifndef ARTISTA_EDITOR_DIALOG_H
 #define ARTISTA_EDITOR_DIALOG_H
 
+#include <set>
+
 #include <QDialog>
 #include <QFormLayout>
 #include <QLineEdit>
@@ -17,7 +19,7 @@
 class ArtistaEditorDialog : public QDialog {
     Q_OBJECT
 public:
-    explicit ArtistaEditorDialog(Artista* existing, QWidget* parent = nullptr);
+    explicit ArtistaEditorDialog(Artista* existing, QWidget* parent = nullptr, const std::set<std::string>& nomiEsistenti = {});
     Artista* artist() const { return m_artist; }
 
 private slots:
@@ -33,6 +35,7 @@ private:
     Artista* m_original;  // se nullptr → creazione
     Artista* m_artist;    // risultato
     QDialogButtonBox* m_buttons;
+    std::set<std::string> m_nomiEsistenti;
 
     // UI
     QFormLayout* m_formLayout;

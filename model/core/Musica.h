@@ -2,10 +2,16 @@
 #define MUSICA_H
 
 #include <string>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "ArtistProduct.h"
 #include "../util/Data.h"
 #include "../util/Durata.h"
-#include "../../include/data_format.h"
+
 
 class Musica : public ArtistProduct {
 private:

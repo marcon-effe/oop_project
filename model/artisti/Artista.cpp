@@ -3,7 +3,7 @@
 #include "../../view/VisitorGUI.h"
 #include "../../cli/VisitorConsoleEditor.h"
 #include "../../view/ErrorManager.h"
-#include "../../include/dataManager.h"
+#include "../../data/DataManager.h"
 
 unsigned int Artista::nextArtistId = 0;
 std::mutex Artista::idMutex;
@@ -107,6 +107,16 @@ std::string Artista::getImagePath() const {
 }
 
 void Artista::setImagePath(const std::string& userSelectedPath) {
+    if(imagePath == userSelectedPath) {
+        return;
+    }
+    
+    if(userSelectedPath.empty()) {
+        imagePath = "";
+        imageB64 = "";
+        return;
+    }
+    
     QFile file(QString::fromStdString(userSelectedPath));
     if (!file.exists()) {
         imagePath = "";

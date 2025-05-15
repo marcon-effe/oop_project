@@ -4,8 +4,12 @@
 #include <string>
 #include <vector>
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "../util/Durata.h"
-#include "../../include/data_format.h"
 
 class VisitorConsoleEditor;
 

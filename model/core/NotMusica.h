@@ -2,8 +2,13 @@
 #define NOTMUSICA_H
 
 #include <string>
+
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "ArtistProduct.h"
-#include "../../include/data_format.h"
 
 class NotMusica : public ArtistProduct {
 protected:

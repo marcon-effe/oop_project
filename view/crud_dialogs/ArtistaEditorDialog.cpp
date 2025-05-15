@@ -1,10 +1,17 @@
 #include "ArtistaEditorDialog.h"
+#include "../../data/DataManager.h"
 
-ArtistaEditorDialog::ArtistaEditorDialog(Artista* existing, QWidget* parent)
+ArtistaEditorDialog::ArtistaEditorDialog(Artista* existing, QWidget* parent, const std::set<std::string>& nomiEsistenti)
     : QDialog(parent),
       m_original(existing),
-      m_artist(nullptr)
+      m_artist(nullptr),
+      m_nomiEsistenti(nomiEsistenti)
 {
+    // se siamo in modifica, togliamo il nome attuale dal set (così non è considerato "duplicato")
+    if (m_original) {
+        m_nomiEsistenti.erase(m_original->getNome());
+    }
+
     setWindowTitle(existing ? tr("Modifica Artista") : tr("Nuovo Artista"));
 
     auto* mainLayout = new QVBoxLayout(this);
@@ -15,7 +22,7 @@ ArtistaEditorDialog::ArtistaEditorDialog(Artista* existing, QWidget* parent)
     if (m_original) { loadExisting(); }
 
     m_buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    m_buttons->button(QDialogButtonBox::Ok)->setEnabled(false);
+    m_buttons->button(QDialogButtonBox::Ok)->setEnabled(m_original || !m_leNome->text().trimmed().isEmpty());
 
     connect(m_buttons, &QDialogButtonBox::accepted, this, &ArtistaEditorDialog::saveValues);
     connect(m_buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
@@ -95,6 +102,12 @@ void ArtistaEditorDialog::saveValues()
 
     if (qNome.isEmpty()) {
         QMessageBox::warning(this, tr("Errore"), tr("Il nome dell'artista è obbligatorio."));
+        return;
+    }
+
+    if (m_nomiEsistenti.count(DataManager::sanitizeForPath(qNome.toStdString()))) {
+        QMessageBox::warning(this, tr("Nome già esistente"),
+                            tr("Esiste già un artista con questo nome."));
         return;
     }
 

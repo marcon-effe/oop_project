@@ -7,7 +7,10 @@
 #include <cassert>
 #include <stdexcept>
 
-#include "../../include/data_format.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
 
 
 class VisitorGUI;

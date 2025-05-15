@@ -8,6 +8,9 @@
 #include <QMessageBox>
 #include <QFormLayout>
 #include <QFileDialog>
+#include <QGuiApplication>
+#include <QScreen>
+#include "../../data/DataManager.h"
 
 
 ProdottoInsertDialog::ProdottoInsertDialog(
@@ -58,6 +61,16 @@ void ProdottoInsertDialog::setupUI()
 {
     QVBoxLayout* mainLayout = qobject_cast<QVBoxLayout*>(layout());
 
+    // Scroll area per la parte dinamica
+    QScrollArea* scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
+
+    QWidget* scrollContent = new QWidget(this);
+    scrollLayout = new QVBoxLayout(scrollContent);
+
+    scrollArea->setWidget(scrollContent);
+    mainLayout->addWidget(scrollArea);
+
     // BOX: Selezione tipo prodotto
     QGroupBox* tipoBox = new QGroupBox("Tipo di prodotto");
     QHBoxLayout* tipoLayout = new QHBoxLayout;
@@ -67,12 +80,12 @@ void ProdottoInsertDialog::setupUI()
     tipoLayout->addWidget(new QLabel("Tipo:"));
     tipoLayout->addWidget(tipoComboBox);
     tipoBox->setLayout(tipoLayout);
-    mainLayout->addWidget(tipoBox);
+    scrollLayout->addWidget(tipoBox);
 
     // Contenitore dei campi dinamici
     campiSpecificiContainer = new QWidget;
     campiSpecificiLayout = new QVBoxLayout(campiSpecificiContainer);
-    mainLayout->addWidget(campiSpecificiContainer);
+    scrollLayout->addWidget(campiSpecificiContainer);
 
     // Cambio dinamico in base al tipo selezionato
     connect(tipoComboBox, &QComboBox::currentTextChanged, this, [this](const QString& tipo) {
@@ -92,13 +105,31 @@ void ProdottoInsertDialog::setupUI()
         else if (tipo == "Singolo") buildSingolo();
     });
 
-    // Pulsante finale di conferma
-    QPushButton* confermaBtn = new QPushButton("Aggiungi prodotto");
+    QDialogButtonBox* btnBox = new QDialogButtonBox(Qt::Horizontal, this);
+    QPushButton* annullaBtn = btnBox->addButton(QDialogButtonBox::Cancel);
+    QPushButton* confermaBtn = btnBox->addButton("Aggiungi prodotto", QDialogButtonBox::AcceptRole);
+
+    btnBox->setCenterButtons(false);  // allinea a destra (default)
+    btnBox->setContentsMargins(0, 10, 0, 0);
+
+    connect(annullaBtn, &QPushButton::clicked, this, &QDialog::reject);
     connect(confermaBtn, &QPushButton::clicked, this, &ProdottoInsertDialog::confermaInserimento);
-    mainLayout->addWidget(confermaBtn);
+
+    scrollLayout->addWidget(btnBox);
 
     // Innesca la prima costruzione iniziale
     emit tipoComboBox->currentTextChanged(tipoComboBox->currentText());
+
+    // Ridimensionamento dopo selezione artista
+    QScreen* screen = QGuiApplication::primaryScreen();
+    if (screen) {
+        QSize screenSize = screen->availableGeometry().size();
+        int w = static_cast<int>(screenSize.width() * 0.3);
+        int h = static_cast<int>(screenSize.height() * 0.95);
+        resize(w, h);
+        move((screenSize.width() - w) / 2, 5);
+    }
+
 }
 
 void ProdottoInsertDialog::selezionaImmagine() {
@@ -187,9 +218,6 @@ void ProdottoInsertDialog::buildNotMusica() {
     quantitaSpin = new QSpinBox(this);
     quantitaSpin->setRange(0, 100000);
     form->addRow("Quantità:", quantitaSpin);
-
-    codiceProdottoEdit = new QLineEdit(this);
-    form->addRow("Codice prodotto:", codiceProdottoEdit);
 
     box->setLayout(form);
     campiSpecificiLayout->addWidget(box);
@@ -467,8 +495,17 @@ void ProdottoInsertDialog::confermaInserimento() {
         QMessageBox::warning(this, "Errore", "Seleziona un artista.");
         return;
     }
-
     std::string titolo = titoloEdit->text().toStdString();
+    if(titolo.empty()) {
+        QMessageBox::warning(this, "Errore", "Il titolo non può essere vuoto.");
+        return;
+    }
+    for (const auto& pair : artistaSelezionato->getProducts()) {
+        if (DataManager::sanitizeForPath(pair.second->getTitle()) == DataManager::sanitizeForPath(titolo)) {
+            QMessageBox::warning(this, "Prodotto già esistente", "Esiste già un prodotto con questo titolo (post sanitizzazione) per l'artista selezionato.");
+            return;
+        }
+    }
     std::string descrizione = descrizioneEdit->toPlainText().toStdString();
     std::string imagePath = imagePathEdit->text().toStdString();
 
@@ -584,7 +621,7 @@ void ProdottoInsertDialog::confermaInserimento() {
             artistaSelezionato->addProduct(album);
         }
 
-        accept();  // chiude il dialog
+        accept();
     } catch (const std::exception& ex) {
         QMessageBox::critical(this, "Errore", ex.what());
     }

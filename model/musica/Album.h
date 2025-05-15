@@ -4,9 +4,13 @@
 #include <vector>
 #include <string>
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "../core/Musica.h"
 #include "Traccia.h"
-#include "../../include/data_format.h"
 
 class Album : public Musica {
 private:

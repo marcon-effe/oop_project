@@ -1,7 +1,10 @@
 #ifndef ORARIO_H
 #define ORARIO_H
 
-#include "../../include/data_format.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
 #include <QTime>
 
 class Orario {

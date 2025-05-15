@@ -3,8 +3,12 @@
 
 #include <string>
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "../core/NotMusica.h"
-#include "../../include/data_format.h"
 
 class Merch : public NotMusica {
 protected:

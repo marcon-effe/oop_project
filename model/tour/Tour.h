@@ -3,9 +3,13 @@
 
 #include <vector>
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "../core/NotMusica.h"
 #include "DataTour.h"
-#include "../../include/data_format.h"
 
 class Tour : public NotMusica {
 private:

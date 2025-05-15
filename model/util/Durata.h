@@ -1,12 +1,11 @@
-// CONSIDERANE LA RIMOZIONE PERCHE' GIA' PRESENTE ORARIO
-// L'implementazione e' praticamente la stessa
-
 #ifndef DURATA_H
 #define DURATA_H
 
 #include <string>
-
-#include "../../include/data_format.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
 
 class Durata {
 public:

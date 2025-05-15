@@ -53,6 +53,7 @@ private:
     Artista* artistaSelezionato;
 
     // === Layout ===
+    QVBoxLayout* scrollLayout;
     QComboBox* artistaComboBox;
     QLineEdit* titoloEdit;
     QTextEdit* descrizioneEdit;

@@ -18,7 +18,7 @@
 #include "model/musica/Traccia.h"
 #include "model/tour/DataTour.h"
 
-#include "include/dataManager.h"
+#include "data/DataManager.h"
 #include "view/MainWindow.h"
 #include "view/ErrorManager.h"
 #include "cli/ConsoleApp.h"

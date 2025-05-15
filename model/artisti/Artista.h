@@ -8,8 +8,12 @@
 #include <cassert>
 #include <stdexcept>
 
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+
 #include "../core/ArtistProduct.h"
-#include "../../include/data_format.h"
 
 class ArtistProduct;
 class VisitorGUI;
