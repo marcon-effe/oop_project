@@ -22,7 +22,7 @@
 class VisitorGUI : public QObject, public VisitorInterface {
     Q_OBJECT        // uso di connect
 public:
-    explicit VisitorGUI(QObject* parent = nullptr);
+    explicit VisitorGUI(const std::unordered_map<unsigned int, Artista*>* artistsMap, QObject* parent = nullptr);
     QWidget* getWidget() const;
 
     // Visitor methods
@@ -49,7 +49,7 @@ private:
     QVBoxLayout* layout;
     QWidget* widget;    // per getWidget
 
-    const std::unordered_map<unsigned int, Artista*>* m_artists = nullptr;
+    const std::unordered_map<unsigned int, Artista*>* m_artists;
 };
 
 #endif // VISITORGUI_H

@@ -477,7 +477,7 @@ void MainWindow::handleArtistSelection(QListWidgetItem* item) {
     for (const auto& pair : artists) {
         Artista* a = pair.second;
         if (QString::fromStdString(a->getNome()) == item->text()) {
-            VisitorGUI* visitor = new VisitorGUI();
+            VisitorGUI* visitor = new VisitorGUI(&artists, this);
             a->accept(visitor);
             rightLayout->addWidget(visitor->getWidget());
             return;
@@ -490,8 +490,8 @@ void MainWindow::handleProductSelection(QListWidgetItem* item) {
     for (const auto& pair : prodotti) {
         ArtistProduct* p = pair.second;
         if (QString::fromStdString(p->getTitle()) == item->text()) {
-            VisitorGUI* visitor = new VisitorGUI();
-            visitor->setArtistMap(artists);
+            VisitorGUI* visitor = new VisitorGUI(&artists, this);
+            /* visitor->setArtistMap(artists); */
             p->accept(visitor);
             rightLayout->addWidget(visitor->getWidget());
             return;

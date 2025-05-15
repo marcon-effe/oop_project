@@ -27,8 +27,8 @@
 #include "./util/ClickableLabel.h"
 
 
-VisitorGUI::VisitorGUI(QObject* parent)
-    : QObject(parent)
+VisitorGUI::VisitorGUI(const std::unordered_map<unsigned int, Artista*>* artistsMap, QObject* parent)
+    : QObject(parent), m_artists(artistsMap)
 {
     scrollContent = new QWidget();                     // contenuto effettivo
     layout = new QVBoxLayout(scrollContent);
@@ -48,10 +48,10 @@ QWidget* VisitorGUI::getWidget() const {
 }
 
 // Gestione della sezione correlati 
-void VisitorGUI::setArtistMap(const std::unordered_map<unsigned int, Artista*>& artistsMap) {
+/* void VisitorGUI::setArtistMap(const std::unordered_map<unsigned int, Artista*>& artistsMap) {
     m_artists = &artistsMap;
 }
-
+ */
 
 QWidget* VisitorGUI::createRelatedProductsSection(unsigned int artistId,
                 unsigned int excludeProductId)
