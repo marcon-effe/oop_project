@@ -160,17 +160,39 @@ QWidget* VisitorGUI::createTrackWidget(const Traccia& track) {
     layout->setContentsMargins(8, 8, 8, 8);
     layout->setSpacing(12);
 
-    // Info (nome e durata)
     auto* infoWidget = new QWidget(trackContainer);
     auto* infoLayout = new QVBoxLayout(infoWidget);
     infoLayout->setContentsMargins(0,0,0,0);
     infoLayout->setSpacing(4);
 
-    auto* nameLabel = new QLabel(QString::fromStdString(track.getNome()), infoWidget);
+    auto* titleBar = new QWidget(infoWidget);
+    auto* titleLayout = new QHBoxLayout(titleBar);
+    titleLayout->setContentsMargins(0,0,0,0);
+    titleLayout->setSpacing(8);
+
+    auto* nameLabel = new QLabel(QString::fromStdString(track.getNome()), titleBar);
     nameLabel->setObjectName("trackNameLabel");
     QFont f = nameLabel->font(); f.setPointSize(12); f.setBold(true);
     nameLabel->setFont(f);
-    infoLayout->addWidget(nameLabel);
+    titleLayout->addWidget(nameLabel);
+
+    if (!track.getPartecipanti().empty()) {
+        auto* featLabel = new QLabel("feat.", titleBar); 
+        featLabel->setObjectName("trackFeatLabel");
+        QFont fl = featLabel->font(); fl.setPointSize(10); fl.setBold(true);
+        titleLayout->addWidget(featLabel);
+    }
+
+    for (const auto& artistName : track.getPartecipanti()) {
+        auto* partLabel = new QLabel(QString::fromStdString(artistName), titleBar);
+        partLabel->setObjectName("trackParticipantLabel");
+        titleLayout->addWidget(partLabel);
+    }
+
+    titleLayout->addStretch();
+
+    infoLayout->addWidget(titleBar);
+
 
     auto* durLabel = new QLabel(QString::fromStdString(track.getDurata().toString()), infoWidget);
     durLabel->setObjectName("trackDurationLabel");

@@ -208,6 +208,23 @@ QPushButton#textTrackButton:pressed {
     padding-top: 5px;
 }
 
+QLabel#trackFeatLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+    margin: 0 6px;            
+    qproperty-alignment: AlignVCenter;
+}
+
+QLabel#trackParticipantLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+    margin: 0 1.5px;
+    qproperty-alignment: AlignVCenter;
+}
 
 /* Artista Specifico */
 QLabel#artistName {
