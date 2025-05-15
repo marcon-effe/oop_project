@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QGuiApplication>
 #include <QScreen>
+#include <QDialogButtonBox>
 #include "../../data/DataManager.h"
 
 
