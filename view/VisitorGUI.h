@@ -18,6 +18,7 @@
 #include "../model/merch/Vinile.h"
 #include "../model/merch/TShirt.h"
 #include "../model/tour/Tour.h"
+#include "./util/ClickableLabel.h"
 
 class VisitorGUI : public QObject, public VisitorInterface {
     Q_OBJECT        // uso di connect
