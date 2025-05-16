@@ -37,8 +37,7 @@ QWidget *VisitorGUI::getWidget() const
     return widget;
 }
 
-QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId,
-                                                  unsigned int excludeProductId)
+QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigned int excludeProductId)
 {
     // 1) Scroll area full-width, altezza minimal
     auto *scroll = new QScrollArea;
@@ -400,7 +399,13 @@ void VisitorGUI::visit(const Artista *artista)
 
         QLabel *thumb = createImageLabel(p->getImagePath(), false);
         thumb->setFixedSize(80, 80);
+        thumb->setAlignment(Qt::AlignCenter);
         thumb->setObjectName("productThumb");
+
+        // Ridimensionamento dell'immagine
+        QPixmap pm = thumb->pixmap(Qt::ReturnByValue).scaled(thumb->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);     // ridimensiono in modo proporzionale, costruendo
+                                                                                                                                // un pixmap dalla QLabel precedente, applicando filtri
+        thumb->setPixmap(pm);
         h->addWidget(thumb);
 
         QVBoxLayout *info = new QVBoxLayout();
