@@ -5,7 +5,7 @@
 #include "../../view/ErrorManager.h"
 #include "../../data/DataManager.h"
 
-unsigned int Artista::nextArtistId = 0;
+unsigned int Artista::nextArtistId = 1;
 std::mutex Artista::idMutex;
 
 //COSTRUTTORE STD
@@ -212,13 +212,15 @@ void Artista::removeProduct(unsigned int id_product) {
     if (it != products.end()) {
         ArtistProduct* prodotto = it->second;
         if (prodotto) {
+            // Elimina immagine associata
             std::string path = prodotto->getImagePath();
-            if (!path.empty()) {
+            if (!path.empty() && !QString::fromStdString(path).startsWith(":/")) {
                 QFile file(QString::fromStdString(path));
                 if (file.exists()) {
                     file.remove();
                 }
             }
+
             delete prodotto;
         }
         products.erase(it);

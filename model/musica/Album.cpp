@@ -184,6 +184,10 @@ Traccia& Album::getTracciaModificabile(unsigned int index) {
     return tracce.at(index);
 }
 
+void Album::setTracce(const std::vector<Traccia>& t) {
+    tracce = t;
+}
+
 // VISITOR
 void Album::accept(VisitorGUI* visitor) const {
     visitor->visit(this);

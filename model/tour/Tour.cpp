@@ -47,6 +47,14 @@ std::vector<DataTour>& Tour::getDateTourModificabile() {
     return dateTour;
 }
 
+void Tour::clearDateTour() {
+    dateTour.clear();
+}
+
+void Tour::setDateTour(const std::vector<DataTour>& dt) {
+    dateTour = dt;
+}
+
 void Tour::printInfo() const {
     NotMusica::printInfo();
     std::cout << "--TOUR--" << std::endl;

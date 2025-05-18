@@ -31,6 +31,8 @@ public:
 
     const std::vector<DataTour>& getDateTour() const;
     std::vector<DataTour>& getDateTourModificabile();
+    void clearDateTour();
+    void setDateTour(const std::vector<DataTour>& dt);
 
     virtual void printInfo() const override;
     QJsonObject toJson() const override;

@@ -576,13 +576,19 @@ void ProdottoInsertDialog::confermaInserimento() {
             std::string genere = genereEdit->text().toStdString();
 
             std::string nome = nomeTracciaEdit->text().toStdString();
+            if (nome.empty()) {
+                QMessageBox::warning(this, "Errore", "Il nome della traccia principale non può essere vuoto.");
+                return;
+            }
             bool hasTesto = hasTestoTracciaCheck->isChecked();
             std::string testo = testoTracciaEdit->toPlainText().toStdString();
             Durata durata(oreTraccia->value(), minutiTraccia->value(), secondiTraccia->value());
 
             std::vector<std::string> partecipanti;
             for (auto* line : partecipantiSingoloLines) {
-                partecipanti.push_back(line->text().toStdString());
+                if(!line->text().isEmpty()) {
+                    partecipanti.push_back(line->text().toStdString());
+                }
             }
 
             Traccia traccia(nome, partecipanti, durata, testo, hasTesto);
@@ -602,13 +608,19 @@ void ProdottoInsertDialog::confermaInserimento() {
             std::vector<Traccia> tracce;
             for (const auto& ed : tracceEditors) {
                 std::string nome = ed->nomeEdit->text().toStdString();
+                if (nome.empty()) {
+                    QMessageBox::warning(this, "Errore", "Ogni traccia deve avere un nome.");
+                    return;
+                }
                 bool hasTesto = ed->hasTestoCheck->isChecked();
                 std::string testo = ed->testoEdit->toPlainText().toStdString();
                 Durata durata(ed->oreDurata->value(), ed->minutiDurata->value(), ed->secondiDurata->value());
 
                 std::vector<std::string> partecipanti;
-                for (auto* line : ed->partecipantiLines) {
-                    partecipanti.push_back(line->text().toStdString());
+                for (auto* line : partecipantiSingoloLines) {
+                    if(!line->text().isEmpty()) {
+                        partecipanti.push_back(line->text().toStdString());
+                    }
                 }
 
                 tracce.emplace_back(nome, partecipanti, durata, testo, hasTesto);

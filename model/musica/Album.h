@@ -55,6 +55,8 @@ public:
 
     Traccia& getTracciaModificabile(unsigned int index);
 
+    void setTracce(const std::vector<Traccia>& t);
+
     // Serializzazione
     virtual QJsonObject toJson() const final;
     virtual QDomElement toXml(QDomDocument& doc) const final;

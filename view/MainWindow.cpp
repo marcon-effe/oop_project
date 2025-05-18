@@ -33,6 +33,9 @@
 #include "filters/FilterDialog.h"
 #include "crud_dialogs/ArtistaEditorDialog.h"
 #include "crud_dialogs/ProdottoInsertDialog.h"
+#include "crud_dialogs/ProdottoEditorDialog.h"
+#include "crud_dialogs/ArtistaDeleteDialog.h"
+#include "crud_dialogs/ProdottoDeleteDialog.h"
 
 static bool endsWith(const std::string& str, const std::string& suffix) {
     return str.size() >= suffix.size() &&
@@ -302,60 +305,138 @@ void MainWindow::onModificaArtista()
 
     if (dialog.exec() == QDialog::Accepted) {
         updateListWidgets();
+        saveIfAutosaveEnabled();
     }
-    saveIfAutosaveEnabled();
 }
 
-void MainWindow::onModificaProdotto()
-{
-    saveIfAutosaveEnabled();
+void MainWindow::onModificaProdotto() {
+    ArtistProduct* prodotto = nullptr;
+
+    // Caso 1: selezione da lista visibile
+    QListWidgetItem* item = productListFullWidget->currentItem();
+    if (!item) {
+        QMessageBox::warning(this, "Attenzione", "Seleziona un prodotto da modificare.");
+        return;
+    }
+
+    unsigned int id = item->data(Qt::UserRole).toUInt();
+    auto it = prodotti.find(id);
+    if (it == prodotti.end()) {
+        QMessageBox::critical(this, "Errore", "Prodotto non trovato.");
+        return;
+    }
+
+    prodotto = it->second;
+
+    // Caso 2: nessuna selezione → chiedi artista e prodotto da dialogo
+    if (!prodotto) {
+        QDialog sceltaDialog(this);
+        sceltaDialog.setWindowTitle("Seleziona prodotto da modificare");
+        QVBoxLayout* layout = new QVBoxLayout(&sceltaDialog);
+
+        QComboBox* artistaCombo = new QComboBox(&sceltaDialog);
+        for (const auto& [id, artista] : artists) {
+            artistaCombo->addItem(QString::fromStdString(artista->getNome()), QVariant::fromValue(id));
+        }
+
+        QComboBox* prodottoCombo = new QComboBox(&sceltaDialog);
+
+        auto aggiornaProdotti = [&]() {
+            prodottoCombo->clear();
+            unsigned int id = artistaCombo->currentData().toUInt();
+            auto artista = artists.at(id);
+            for (const auto& [pid, prod] : artista->getProducts()) {
+                prodottoCombo->addItem(QString::fromStdString(prod->getTitle()), QVariant::fromValue(prod->getId()));
+            }
+        };
+
+        connect(artistaCombo, &QComboBox::currentIndexChanged, aggiornaProdotti);
+        artistaCombo->setCurrentIndex(0);  // forza caricamento iniziale
+        aggiornaProdotti();
+
+        layout->addWidget(new QLabel("Artista:"));
+        layout->addWidget(artistaCombo);
+        layout->addWidget(new QLabel("Prodotto:"));
+        layout->addWidget(prodottoCombo);
+
+        QDialogButtonBox* btnBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &sceltaDialog);
+        layout->addWidget(btnBox);
+        connect(btnBox, &QDialogButtonBox::accepted, &sceltaDialog, &QDialog::accept);
+        connect(btnBox, &QDialogButtonBox::rejected, &sceltaDialog, &QDialog::reject);
+
+        if (sceltaDialog.exec() == QDialog::Accepted) {
+            unsigned int id = prodottoCombo->currentData().toUInt();
+            auto it = prodotti.find(id);
+            if (it != prodotti.end()) {
+                prodotto = it->second;
+            } else {
+                QMessageBox::critical(this, "Errore", "Prodotto non trovato.");
+                return;
+            }
+        } else {
+            return;  // utente ha annullato
+        }
+    }
+
+    // Apre il dialogo di modifica
+    ProdottoEditorDialog dialog(prodotto, artists, prodotti, this);
+    if (dialog.exec() == QDialog::Accepted) {
+        updateListWidgets();
+        saveIfAutosaveEnabled();
+    }
 }
 
 
 // ------------------------------
 
 // ------------ ELIMINA ARTISTA E PRODOTTO ------------
-void MainWindow::onEliminaArtista()
-{
-    saveIfAutosaveEnabled();
+void MainWindow::onEliminaArtista() {
+    ArtistaDeleteDialog dialog(artists, prodotti, this);
+    if (dialog.esegui()) {
+        updateListWidgets();
+        saveIfAutosaveEnabled();
+    }
 }
 
-void MainWindow::onEliminaProdotto()
-{
-    saveIfAutosaveEnabled();
+void MainWindow::onEliminaProdotto() {
+    ProdottoDeleteDialog dialog(artists, prodotti, this);
+    if (dialog.esegui()) {
+        updateListWidgets();
+        saveIfAutosaveEnabled();
+    }
 }
 
 
 
 /// RIPRISTINO GUI ------------
 void MainWindow::sortArtistListWidget() {
-    QStringList items;
+    QList<QListWidgetItem*> items;
     for (int i = 0; i < artistListWidget->count(); ++i) {
-        items.append(artistListWidget->item(i)->text());
+        items.append(artistListWidget->takeItem(i));
+        --i;
     }
-    std::sort(items.begin(), items.end(), [](const QString& a, const QString& b) {
-        return a.toLower() < b.toLower();
+
+    std::sort(items.begin(), items.end(), [](QListWidgetItem* a, QListWidgetItem* b) {
+        return a->text().toLower() < b->text().toLower();
     });
 
-    artistListWidget->clear();
-    for (const QString& nome : items) {
-        artistListWidget->addItem(nome);
-    }
+    for (QListWidgetItem* item : items)
+        artistListWidget->addItem(item);
 }
 
 void MainWindow::sortProductListWidget() {
-    QStringList items;
+    QList<QListWidgetItem*> items;
     for (int i = 0; i < productListFullWidget->count(); ++i) {
-        items.append(productListFullWidget->item(i)->text());
+        items.append(productListFullWidget->takeItem(i));
+        --i;  // decrementa perché la lista si accorcia
     }
-    std::sort(items.begin(), items.end(), [](const QString& a, const QString& b) {
-        return a.toLower() < b.toLower();
+
+    std::sort(items.begin(), items.end(), [](QListWidgetItem* a, QListWidgetItem* b) {
+        return a->text().toLower() < b->text().toLower();
     });
 
-    productListFullWidget->clear();
-    for (const QString& titolo : items) {
-        productListFullWidget->addItem(titolo);
-    }
+    for (QListWidgetItem* item : items)
+        productListFullWidget->addItem(item);
 }
 
 void MainWindow::updateListWidgets() {
@@ -365,8 +446,11 @@ void MainWindow::updateListWidgets() {
     for (const auto& pair : artists)
         artistListWidget->addItem(QString::fromStdString(pair.second->getNome()));
 
-    for (const auto& pair : prodotti)
-        productListFullWidget->addItem(QString::fromStdString(pair.second->getTitle()));
+    for (const auto& pair : prodotti) {
+        QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(pair.second->getTitle()));
+        item->setData(Qt::UserRole, QVariant::fromValue(pair.first));
+        productListFullWidget->addItem(item);
+    }
 
     sortArtistListWidget();
     sortProductListWidget();
@@ -487,15 +571,14 @@ void MainWindow::handleArtistSelection(QListWidgetItem* item) {
 
 void MainWindow::handleProductSelection(QListWidgetItem* item) {
     clearRightPanel();
-    for (const auto& pair : prodotti) {
-        ArtistProduct* p = pair.second;
-        if (QString::fromStdString(p->getTitle()) == item->text()) {
-            VisitorGUI* visitor = new VisitorGUI(&artists, this);
-            /* visitor->setArtistMap(artists); */
-            p->accept(visitor);
-            rightLayout->addWidget(visitor->getWidget());
-            return;
-        }
+
+    unsigned int id = item->data(Qt::UserRole).toUInt();
+    auto it = prodotti.find(id);
+    if (it != prodotti.end()) {
+        ArtistProduct* p = it->second;
+        VisitorGUI* visitor = new VisitorGUI(&artists, this);
+        p->accept(visitor);
+        rightLayout->addWidget(visitor->getWidget());
     }
 }
 
@@ -521,7 +604,9 @@ void MainWindow::filterProductList(const QString& query) {
         const ArtistProduct* p = pair.second;
         QString titolo = QString::fromStdString(p->getTitle());
         if (titolo.toLower().contains(lowerQuery)) {
-            productListFullWidget->addItem(titolo);
+            QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(p->getTitle()));
+            item->setData(Qt::UserRole, QVariant::fromValue(p->getId()));
+            productListFullWidget->addItem(item);
         }
     }
 }
@@ -579,7 +664,9 @@ void MainWindow::applyProductFilters(const std::vector<std::string>& tipi, const
         if (artistaId != "Tutti" && QString::number(p->getArtistId()) != artistaId)
             continue;
 
-        productListFullWidget->addItem(QString::fromStdString(p->getTitle()));
+        QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(p->getTitle()));
+        item->setData(Qt::UserRole, QVariant::fromValue(p->getId()));
+        productListFullWidget->addItem(item);
     }
     sortProductListWidget();
 }

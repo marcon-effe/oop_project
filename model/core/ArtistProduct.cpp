@@ -12,7 +12,7 @@
 #include "../../data/DataManager.h"
 #include "../../view/ErrorManager.h"
 
-unsigned int ArtistProduct::nextProductId = 0;
+unsigned int ArtistProduct::nextProductId = 1;
 std::mutex ArtistProduct::idMutex;
 
 ArtistProduct::ArtistProduct(Artista* owner, const std::string& t, const std::string& desc)
