@@ -70,6 +70,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
 void MainWindow::setupUI() {
     // === MENÙ SUPERIORE ===
     QMenu *fileMenu = menuBar()->addMenu("File");
+    QAction* nuovoAction = fileMenu->addAction("Nuovo");
     QAction* importAction = fileMenu->addAction("Importa");
     QAction* exportAction = fileMenu->addAction("Esporta");
     QAction* autosaveAction = new QAction("Autosave", this);
@@ -212,6 +213,7 @@ void MainWindow::setupUI() {
     mainLayout->addWidget(mainSplitter);
 
     // === CONNESSIONI ===
+    connect(nuovoAction, &QAction::triggered, this, &MainWindow::onNuovoProgetto);
     connect(importAction, &QAction::triggered, this, &MainWindow::importData);
     connect(exportAction, &QAction::triggered, this, &MainWindow::exportData);
 
@@ -391,6 +393,11 @@ void MainWindow::onModificaProdotto() {
 
 // ------------ ELIMINA ARTISTA E PRODOTTO ------------
 void MainWindow::onEliminaArtista() {
+    if (artists.empty()) {
+        QMessageBox::information(this, "Eliminazione artista", "Non ci sono artisti da eliminare.");
+        return;
+    }
+
     ArtistaDeleteDialog dialog(artists, prodotti, this);
     if (dialog.esegui()) {
         updateListWidgets();
@@ -399,6 +406,11 @@ void MainWindow::onEliminaArtista() {
 }
 
 void MainWindow::onEliminaProdotto() {
+    if (prodotti.empty()) {
+        QMessageBox::information(this, "Eliminazione prodotto", "Non ci sono prodotti da eliminare.");
+        return;
+    }
+
     ProdottoDeleteDialog dialog(artists, prodotti, this);
     if (dialog.esegui()) {
         updateListWidgets();
@@ -471,6 +483,25 @@ void MainWindow::clearRightPanel() {
             child->widget()->deleteLater();
         delete child;
     }
+}
+
+void MainWindow::onNuovoProgetto() {
+    QMessageBox::StandardButton risposta = QMessageBox::question(
+        this,
+        "Nuovo progetto",
+        "Vuoi salvare il progetto corrente prima di iniziare uno nuovo?",
+        QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel
+    );
+
+    if (risposta == QMessageBox::Cancel) {
+        return;  // utente ha annullato
+    }
+
+    if (risposta == QMessageBox::Yes) {
+        exportData();  // salva prima di cancellare
+    }
+
+    clearAll();  // azzera i dati a prescindere da Yes/No
 }
 // -----------------------------
 

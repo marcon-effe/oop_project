@@ -32,6 +32,7 @@ private:
     void sortProductListWidget();
     void saveIfAutosaveEnabled();
 
+    QAction* nuovoAction;
     QAction* autosaveAction;
     QAction* inserisciArtista;
     QAction* inserisciProdotto;
@@ -57,6 +58,7 @@ private:
     std::unordered_map<unsigned int, ArtistProduct*> prodotti;
 
 private slots:
+    void onNuovoProgetto();
     void onInserisciArtista();
     void onInserisciProdotto();
     void onModificaArtista();
