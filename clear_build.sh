@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🧹 Pulizia della build..."
+echo "Pulizia della build..."
 
 # Cancella directory build e tutti gli output della compilazione
 rm -rf build
@@ -16,4 +16,4 @@ rm -f ./oop_project
 rm -f .qmake.stash
 rm -rf .vscode/
 
-echo "✅ Build pulita con successo."
+echo "Build pulita con successo."

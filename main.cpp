@@ -67,17 +67,17 @@ void runTestCompleto() {
             artisti[a->getId()] = a;
         }
 
-        std::cout << "\n[💾 Salvataggio JSON]" << std::endl;
+        std::cout << "\n[Salvataggio JSON]" << std::endl;
         DataManager::saveToFileJson(artisti, "saves/json/test_completo.json");
 
-        std::cout << "[📥 Caricamento JSON]" << std::endl;
+        std::cout << "[Caricamento JSON]" << std::endl;
         auto loadedJson = DataManager::loadFromFileJson("saves/json/test_completo.json");
         for (const auto& [_, art] : loadedJson) art->printInfo();
 
-        std::cout << "\n[💾 Salvataggio XML]" << std::endl;
+        std::cout << "\n[Salvataggio XML]" << std::endl;
         DataManager::saveToFileXml(artisti, "saves/xml/test_completo.xml");
 
-        std::cout << "[📥 Caricamento XML]" << std::endl;
+        std::cout << "[Caricamento XML]" << std::endl;
         auto loadedXml = DataManager::loadFromFileXml("saves/xml/test_completo.xml");
         for (const auto& [_, art] : loadedXml) art->printInfo();
 
@@ -85,7 +85,7 @@ void runTestCompleto() {
         for (auto& [_, a] : loadedJson) delete a;
         for (auto& [_, a] : loadedXml) delete a;
 
-        std::cout << "\n✅ Test completo terminato con successo.\n";
+        std::cout << "\nTest completo terminato con successo.\n";
 
     } catch (const std::exception& ex) {
         ErrorManager::showError(std::string("Errore durante il test completo: ") + ex.what());
@@ -123,14 +123,14 @@ int main(int argc, char *argv[]) {
             if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
                 QTextStream ts(&styleFile);
                 app.setStyleSheet(ts.readAll());
-                qDebug() << "✅ style.qss applicato correttamente!";
+                qDebug() << "style.qss applicato correttamente!";
             } else {
-                qDebug() << "❌ style.qss non trovato!";
+                qDebug() << "style.qss non trovato!";
             }
 
             MainWindow w;
             w.show();
-            return app.exec();  // esce dal ciclo principale
+            return app.exec();
         }
         case 0:
             return 0;

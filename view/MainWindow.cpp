@@ -554,6 +554,7 @@ void MainWindow::loadDataFromSaves(const std::string& path) {
         }
     }
 
+    saveIfAutosaveEnabled();
     updateListWidgets();
 }
 

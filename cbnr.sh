@@ -3,39 +3,39 @@
 OS_TYPE="$(uname)"
 
 if [ "$OS_TYPE" == "Linux" ]; then
-    echo "🧹 Cleaning build directory..."
+    echo "Cleaning build directory..."
     rm -rf build
     rm -f ./oop_project
 
-    echo "📁 Creating build directory..."
+    echo "Creating build directory..."
     mkdir -p build
     cd build || exit 1
 
-    echo "🔧 Running qmake..."
+    echo "Running qmake..."
     qmake ../oop_project.pro
     if [ $? -ne 0 ]; then
-        echo "❌ qmake failed"
+        echo "!! qmake failed"
         exit 1
     fi
 
-    echo "⚙️ Compiling..."
+    echo "Compiling..."
     make -j$(nproc)
     if [ $? -ne 0 ]; then
-        echo "❌ Compilation failed"
+        echo "!! Compilation failed"
         exit 2
     fi
 
-    echo "📦 Moving executable to root directory..."
+    echo "Moving executable to root directory..."
     mv ./oop_project ../
     cd ..
 
-    echo "🚀 Running app..."
+    echo "Running app..."
     ./oop_project
 
 elif [ "$OS_TYPE" == "Darwin" ]; then
-    echo "🍎 macOS detected - eseguo comandi alternativi"
+    echo "macOS detected - eseguo comandi alternativi"
 
-    echo "🔧 Specifica del path per qmake..."
+    echo "Specifica del path per qmake..."
     QMAKE_PATH="/Users/leonardo/Qt/6.8.2/macos/bin/qmake"
 
     rm -rf build/
@@ -44,10 +44,10 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
     rm -rf .qmake.stash
     rm -rf Makefile
 
-    echo "📝 Rigenerazione del file .pro..."
+    echo "Rigenerazione del file .pro..."
     "$QMAKE_PATH" -project -o oop_project.pro
 
-    echo "🧩 Aggiunta moduli Qt e disattivazione del bundle..."
+    echo "Aggiunta moduli Qt e disattivazione del bundle..."
     echo -e "\nQT += core gui widgets xml\nCONFIG -= app_bundle" >> oop_project.pro
     echo "RESOURCES += view/resources.qrc" >> oop_project.pro
     echo "DESTDIR = ." >> oop_project.pro
@@ -56,27 +56,27 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
     echo "RCC_DIR = build" >> oop_project.pro
     echo "UI_DIR = build" >> oop_project.pro
 
-    echo "📁 Creating build directory..."
+    echo "Creating build directory..."
     mkdir -p build
 
-    echo "🔧 Running qmake..."
+    echo "Running qmake..."
     "$QMAKE_PATH" oop_project.pro
     if [ $? -ne 0 ]; then
-        echo "❌ qmake failed"
+        echo "!! qmake failed"
         exit 1
     fi
 
-    echo "⚙️ Compiling..."
+    echo "Compiling..."
     make -j$(sysctl -n hw.ncpu)
     if [ $? -ne 0 ]; then
-        echo "❌ Compilation failed"
+        echo "!! Compilation failed"
         exit 2
     fi
 
-    echo "🚀 Running app..."
+    echo "Running app..."
     ./oop_project
 
 else
-    echo "⚠️ Sistema operativo non supportato: $OS_TYPE"
+    echo "Sistema operativo non supportato: $OS_TYPE"
     exit 3
 fi
