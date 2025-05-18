@@ -58,8 +58,8 @@ public:
     void setTracce(const std::vector<Traccia>& t);
 
     // Serializzazione
-    virtual QJsonObject toJson() const final;
-    virtual QDomElement toXml(QDomDocument& doc) const final;
+    virtual QJsonObject toJson(bool reduced=false) const final;
+    virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const final;
 
     // Stampa info
     virtual void printInfo() const final;

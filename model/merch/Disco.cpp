@@ -72,10 +72,10 @@ Disco::Disco(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto Disco in un oggetto JSON
-QJsonObject Disco::toJson() const {
+QJsonObject Disco::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "disco";
-    json["merch"] = Merch::toJson();
+    json["merch"] = Merch::toJson(reduced);
     json["produttoreStampe"] = QString::fromStdString(produttoreStampe);
     json["codiceRiconoscimento"] = QString::fromStdString(codiceRiconoscimento);
     json["tipoProdotto"] = QString::fromStdString(tipoProdotto);
@@ -98,13 +98,13 @@ Disco::Disco(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto Disco in un oggetto XML
-QDomElement Disco::toXml(QDomDocument& doc) const {
+QDomElement Disco::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("Disco");
     xml.setAttribute("produttoreStampe", QString::fromStdString(produttoreStampe));
     xml.setAttribute("codiceRiconoscimento", QString::fromStdString(codiceRiconoscimento));
     xml.setAttribute("tipoProdotto", QString::fromStdString(tipoProdotto));
 
-    xml.appendChild(Merch::toXml(doc));
+    xml.appendChild(Merch::toXml(doc, reduced));
     return xml;
 }
 

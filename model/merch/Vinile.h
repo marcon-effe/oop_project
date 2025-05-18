@@ -35,8 +35,8 @@ public:
     void setDiametro(unsigned int d);
 
     virtual void printInfo() const final;
-    QJsonObject toJson() const final;
-    QDomElement toXml(QDomDocument& doc) const final;
+    QJsonObject toJson(bool reduced=false) const final;
+    QDomElement toXml(QDomDocument& doc, bool reduced=false) const final;
 
     virtual void accept(VisitorGUI* v) const final;
     virtual void accept(VisitorConsoleEditor* v) final;

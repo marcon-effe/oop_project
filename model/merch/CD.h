@@ -46,8 +46,8 @@ public:
 
     // Metodi di utility
     void printInfo() const final override;
-    QJsonObject toJson() const final override;
-    QDomElement toXml(QDomDocument& doc) const final override;
+    QJsonObject toJson(bool reduced=false) const final override;
+    QDomElement toXml(QDomDocument& doc, bool reduced=false) const final override;
 
     // Visitor
     void accept(VisitorGUI* visitor) const final override;

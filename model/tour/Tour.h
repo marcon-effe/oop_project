@@ -35,8 +35,8 @@ public:
     void setDateTour(const std::vector<DataTour>& dt);
 
     virtual void printInfo() const override;
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
+    QJsonObject toJson(bool reduced=false) const override;
+    QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
     virtual void accept(VisitorGUI* v) const final;
     virtual void accept(VisitorConsoleEditor* visitor) final;

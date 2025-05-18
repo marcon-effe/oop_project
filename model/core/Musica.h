@@ -54,8 +54,8 @@ public:
 
     // Metodi di stampa/salvataggio
     virtual void printInfo() const override;
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
+    QJsonObject toJson(bool reduced=false) const override;
+    QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
     // Overloading operatori
     friend bool operator==(const Musica& a, const Musica& b);

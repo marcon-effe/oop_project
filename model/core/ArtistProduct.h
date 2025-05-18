@@ -61,8 +61,8 @@ public:
 
     virtual void printInfo() const;
 
-    virtual QJsonObject toJson() const;
-    virtual QDomElement toXml(QDomDocument& doc) const;
+    virtual QJsonObject toJson(bool reduced=false) const;
+    virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const;
     
     static ArtistProduct* createJson(Artista* owner, const QJsonObject& json);
     static ArtistProduct* createXml(Artista* owner, const QDomElement& xml);

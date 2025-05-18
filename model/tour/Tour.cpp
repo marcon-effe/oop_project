@@ -86,10 +86,10 @@ Tour::Tour(Artista* owner, const QJsonObject& json)
 }
 
 // Salvataggio in JSON
-QJsonObject Tour::toJson() const {
+QJsonObject Tour::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "tour";
-    json["not_musica"] = NotMusica::toJson();
+    json["not_musica"] = NotMusica::toJson(reduced);
 
     QJsonArray dateArray;
     for (const DataTour& dt : dateTour)
@@ -117,7 +117,7 @@ Tour::Tour(Artista* owner, const QDomElement& xml)
 }
 
 // Salvataggio in XML
-QDomElement Tour::toXml(QDomDocument& doc) const {
+QDomElement Tour::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("Tour");
 
     if (!dateTour.empty()) {
@@ -128,7 +128,7 @@ QDomElement Tour::toXml(QDomDocument& doc) const {
         xml.appendChild(dateTourElem);
     }
 
-    xml.appendChild(NotMusica::toXml(doc));
+    xml.appendChild(NotMusica::toXml(doc, reduced));
     return xml;
 }
 

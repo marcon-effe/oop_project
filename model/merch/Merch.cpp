@@ -57,10 +57,10 @@ Merch::Merch(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto Merch in un oggetto JSON
-QJsonObject Merch::toJson() const {
+QJsonObject Merch::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "merch";
-    json["not_musica"] = NotMusica::toJson();
+    json["not_musica"] = NotMusica::toJson(reduced);
     json["codiceProdotto"] = QString::fromStdString(codiceProdotto);
     return json;
 }
@@ -78,11 +78,11 @@ Merch::Merch(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto Merch in un oggetto XML
-QDomElement Merch::toXml(QDomDocument& doc) const {
+QDomElement Merch::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("Merch");
     xml.setAttribute("codiceProdotto", QString::fromStdString(codiceProdotto));
 
-    xml.appendChild(NotMusica::toXml(doc));
+    xml.appendChild(NotMusica::toXml(doc, reduced));
     return xml;
 }
 

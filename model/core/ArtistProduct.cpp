@@ -316,12 +316,13 @@ ArtistProduct::ArtistProduct(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto ArtistProduct in un oggetto JSON
-QJsonObject ArtistProduct::toJson() const {
+QJsonObject ArtistProduct::toJson(bool reduced) const {
     QJsonObject json;
     json["title"] = QString::fromStdString(title);
     json["description"] = QString::fromStdString(description);
     json["imagePath"] = QString::fromStdString(imagePath);
-    json["imageB64"] = QString::fromStdString(imageB64);
+    if(!reduced)
+        json["imageB64"] = QString::fromStdString(imageB64);
     return json;
 }
 
@@ -376,13 +377,13 @@ ArtistProduct::ArtistProduct(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto ArtistProduct in un oggetto XML
-QDomElement ArtistProduct::toXml(QDomDocument& doc) const {
+QDomElement ArtistProduct::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement el = doc.createElement("ArtistProduct");
     el.setAttribute("title", QString::fromStdString(title));
     el.setAttribute("description", QString::fromStdString(description));
     el.setAttribute("imagePath", QString::fromStdString(imagePath));
 
-    if (!imageB64.empty()) {
+    if (!imageB64.empty() && !reduced) {
         QDomElement imgEl = doc.createElement("imageB64");
         imgEl.appendChild(doc.createTextNode(QString::fromStdString(imageB64)));
         el.appendChild(imgEl);

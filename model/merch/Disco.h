@@ -51,8 +51,8 @@ public:
 
     // Funzioni di utility
     virtual void printInfo() const override;
-    virtual QJsonObject toJson() const override;
-    virtual QDomElement toXml(QDomDocument& doc) const override;
+    virtual QJsonObject toJson(bool reduced=false) const override;
+    virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
     // Overloading operatori
     friend bool operator==(const Disco& a, const Disco& b);

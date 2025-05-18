@@ -84,10 +84,10 @@ Album::Album(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto Album in un oggetto JSON
-QJsonObject Album::toJson() const {
+QJsonObject Album::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "album";
-    json["musica"] = Musica::toJson();
+    json["musica"] = Musica::toJson(reduced);
     
     QJsonArray array_tracce;
     for (const Traccia& t : tracce)
@@ -120,7 +120,7 @@ Album::Album(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto Album in un oggetto XML
-QDomElement Album::toXml(QDomDocument& doc) const {
+QDomElement Album::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement albumEl = doc.createElement("Album");
     albumEl.setAttribute("label", QString::fromStdString(label));
 
@@ -131,7 +131,7 @@ QDomElement Album::toXml(QDomDocument& doc) const {
     }
     
     albumEl.appendChild(tracceElement);
-    albumEl.appendChild(Musica::toXml(doc));
+    albumEl.appendChild(Musica::toXml(doc, reduced));
     
     return albumEl;
 }

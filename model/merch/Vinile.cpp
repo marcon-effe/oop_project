@@ -58,10 +58,10 @@ Vinile::Vinile(Artista* owner, const QJsonObject& json)
   diametro(json["diametro"].toInt()) {}
 
 // Converte l'oggetto Vinile in un oggetto JSON
-QJsonObject Vinile::toJson() const {
+QJsonObject Vinile::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "vinile";
-    json["disco"] = Disco::toJson();
+    json["disco"] = Disco::toJson(reduced);
     json["rpm"] = static_cast<int>(rpm);
     json["diametro"] = static_cast<int>(diametro);
     return json;
@@ -75,11 +75,11 @@ Vinile::Vinile(Artista* owner, const QDomElement& xml)
   diametro(xml.attribute("diametro").toUInt()) {}
 
 // Converte l'oggetto Vinile in un oggetto XML
-QDomElement Vinile::toXml(QDomDocument& doc) const {
+QDomElement Vinile::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("Vinile");
     xml.setAttribute("rpm", static_cast<int>(rpm));
     xml.setAttribute("diametro", static_cast<int>(diametro));
-    xml.appendChild(Disco::toXml(doc));
+    xml.appendChild(Disco::toXml(doc, reduced));
     return xml;
 }
 

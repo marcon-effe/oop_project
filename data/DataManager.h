@@ -41,12 +41,12 @@ public:
     static std::string sanitizeForPath(const std::string& raw);
 
     // JSON
-    static bool saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath);
+    static bool saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath, bool reduced=false);
     static std::unordered_map<unsigned int, Artista*> loadFromFileJson(const std::string& filePath);
     
     // XML
     static bool validateXmlWithSchema(const std::string& xmlFilePath, const std::string& schemaFilePath);
-    static bool saveToFileXml(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath);
+    static bool saveToFileXml(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath, bool reduced=false);
     static std::unordered_map<unsigned int, Artista*> loadFromFileXml(const std::string& filePath);
 };
 

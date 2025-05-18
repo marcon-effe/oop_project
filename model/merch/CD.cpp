@@ -42,10 +42,10 @@ CD::CD(Artista* owner, const QJsonObject& json)
 : Disco(owner, json["disco"].toObject()),
   formato(json["formato"].toString().toStdString()) {}
 
-QJsonObject CD::toJson() const {
+QJsonObject CD::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "cd";
-    json["disco"] = Disco::toJson();
+    json["disco"] = Disco::toJson(reduced);
     json["formato"] = QString::fromStdString(formato);
     return json;
 }
@@ -55,10 +55,10 @@ CD::CD(Artista* owner, const QDomElement& xml)
 : Disco(owner, xml.firstChildElement("Disco")),
   formato(xml.attribute("formato").toStdString()) {}
 
-QDomElement CD::toXml(QDomDocument& doc) const {
+QDomElement CD::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("CD");
     xml.setAttribute("formato", QString::fromStdString(formato));
-    xml.appendChild(Disco::toXml(doc));
+    xml.appendChild(Disco::toXml(doc, reduced));
     return xml;
 }
 

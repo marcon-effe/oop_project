@@ -60,10 +60,10 @@ Singolo::Singolo(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto Singolo in un oggetto JSON
-QJsonObject Singolo::toJson() const {
+QJsonObject Singolo::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "singolo";
-    json["musica"] = Musica::toJson();
+    json["musica"] = Musica::toJson(reduced);
     json["mainTrack"] = mainTrack.toJson();
     json["isRemix"] = isRemix;
     json["chartPosition"] = chartPosition;
@@ -85,7 +85,7 @@ Singolo::Singolo(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto Singolo in un oggetto XML
-QDomElement Singolo::toXml(QDomDocument& doc) const {
+QDomElement Singolo::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement singoloEl = doc.createElement("Singolo");
     
     singoloEl.setAttribute("isRemix", isRemix ? "true" : "false");
@@ -97,7 +97,7 @@ QDomElement Singolo::toXml(QDomDocument& doc) const {
     singoloEl.appendChild(track);
 
     // Inserimento dell'elemento <Musica>
-    singoloEl.appendChild(Musica::toXml(doc));
+    singoloEl.appendChild(Musica::toXml(doc, reduced));
 
     return singoloEl;
 }

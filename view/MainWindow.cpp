@@ -18,6 +18,8 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QCloseEvent>
+#include <QToolButton>
+
 
 #include <unordered_map>
 
@@ -556,24 +558,53 @@ void MainWindow::loadDataFromSaves(const std::string& path) {
 }
 
 void MainWindow::exportData() {
-    QStringList formats = { "JSON", "XML" };
-    bool ok = false;
-    QString selectedFormat = QInputDialog::getItem(this, "Esporta dati", "Scegli il formato di esportazione:", formats, 0, false, &ok);
-    if (!ok || selectedFormat.isEmpty()) return;
+    QDialog dialog(this);
+    dialog.setWindowTitle("Esporta dati");
+    QVBoxLayout* layout = new QVBoxLayout(&dialog);
 
-    QString filter = selectedFormat == "JSON" ? "JSON Files (*.json)" : "XML Files (*.xml)";
-    QString extension = selectedFormat == "JSON" ? ".json" : ".xml";
+    // Combo formato
+    QComboBox* formatCombo = new QComboBox(&dialog);
+    formatCombo->addItems({"JSON", "XML"});
+    layout->addWidget(new QLabel("Scegli il formato di esportazione:", &dialog));
+    layout->addWidget(formatCombo);
+
+    // Checkbox esportazione ridotta
+    QHBoxLayout* reducedLayout = new QHBoxLayout;
+    QCheckBox* reducedCheck = new QCheckBox("Esportazione ridotta", &dialog);
+
+    QToolButton* infoButton = new QToolButton(&dialog);
+    infoButton->setIcon(QIcon(":/icons/info.png"));  // usa una tua icona oppure lascia il tema
+    infoButton->setToolTip("Non salva le immagini in formato Base64 all'interno del file.");
+    infoButton->setAutoRaise(true);
+    infoButton->setStyleSheet("QToolButton { border: none; padding: 0px; }");
+
+    reducedLayout->addWidget(reducedCheck);
+    reducedLayout->addWidget(infoButton);
+    reducedLayout->addStretch();
+    layout->addLayout(reducedLayout);
+
+    // Bottoni
+    QDialogButtonBox* btnBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &dialog);
+    layout->addWidget(btnBox);
+    connect(btnBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+    connect(btnBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+
+    if (dialog.exec() != QDialog::Accepted) return;
+
+    const QString selectedFormat = formatCombo->currentText();
+    const bool reduced = reducedCheck->isChecked();
+    const QString filter = selectedFormat == "JSON" ? "JSON Files (*.json)" : "XML Files (*.xml)";
+    const QString extension = selectedFormat == "JSON" ? ".json" : ".xml";
 
     QString fileName = QFileDialog::getSaveFileName(this, "Salva file", "", filter);
     if (fileName.isEmpty()) return;
-
     if (!fileName.endsWith(extension)) fileName += extension;
 
     bool success = false;
     if (selectedFormat == "JSON") {
-        success = DataManager::saveToFileJson(artists, fileName.toStdString());
-    } else if (selectedFormat == "XML") {
-        success = DataManager::saveToFileXml(artists, fileName.toStdString());
+        success = DataManager::saveToFileJson(artists, fileName.toStdString(), reduced);
+    } else {
+        success = DataManager::saveToFileXml(artists, fileName.toStdString(), reduced);
     }
 
     if (success) {

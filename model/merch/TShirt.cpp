@@ -58,10 +58,10 @@ TShirt::TShirt(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto TShirt in un oggetto JSON
-QJsonObject TShirt::toJson() const {
+QJsonObject TShirt::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "tshirt";
-    json["merch"] = Merch::toJson();
+    json["merch"] = Merch::toJson(reduced);
     json["taglia"] = QString::fromStdString(taglia);
     json["colore"] = QString::fromStdString(colore);
     return json;
@@ -81,12 +81,12 @@ TShirt::TShirt(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto TShirt in un oggetto XML
-QDomElement TShirt::toXml(QDomDocument& doc) const {
+QDomElement TShirt::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("TShirt");
     xml.setAttribute("taglia", QString::fromStdString(taglia));
     xml.setAttribute("colore", QString::fromStdString(colore));
     
-    xml.appendChild(Merch::toXml(doc));
+    xml.appendChild(Merch::toXml(doc, reduced));
     return xml;
 }
 

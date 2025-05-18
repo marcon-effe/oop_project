@@ -72,14 +72,14 @@ public:
     // Metodo statico di Factory
     static Artista* createFromJson(const QJsonObject& json);
     void loadProductsFromJson(const QJsonArray& prodottiArray);
-    QJsonObject toJson() const;
+    QJsonObject toJson(bool reduced=false) const;
 
     //XML
     Artista(const QDomElement &xml); // Costruttore: carica SOLO le info base
     // Metodo statico di Factory
     static Artista* createFromXml(const QDomElement& xml);
     void loadProductsFromXml(const QDomElement& prodottiElement);
-    QDomElement toXml(QDomDocument& doc) const;
+    QDomElement toXml(QDomDocument& doc, bool reduced=false) const;
 
     //Visitor
     void accept(VisitorGUI *visitor) const;

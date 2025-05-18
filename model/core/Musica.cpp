@@ -61,10 +61,10 @@ Musica::Musica(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto Musica in un oggetto JSON
-QJsonObject Musica::toJson() const {
+QJsonObject Musica::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "musica"; // tipo specifico
-    json["ArtistProduct"] = ArtistProduct::toJson();
+    json["ArtistProduct"] = ArtistProduct::toJson(reduced);
     json["dataUscita"] = dataUscita.toJson();
     json["durata"] = durata.toJson();
     json["genere"] = QString::fromStdString(genere);
@@ -87,7 +87,7 @@ Musica::Musica(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto Musica in un oggetto XML
-QDomElement Musica::toXml(QDomDocument& doc) const {
+QDomElement Musica::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement musicaEl = doc.createElement("Musica");
     musicaEl.setAttribute("genere", QString::fromStdString(genere));
 
@@ -98,7 +98,7 @@ QDomElement Musica::toXml(QDomDocument& doc) const {
     QDomElement durataEl = durata.toXml(doc);
     musicaEl.appendChild(durataEl);
 
-    QDomElement artistaBase = ArtistProduct::toXml(doc);
+    QDomElement artistaBase = ArtistProduct::toXml(doc, reduced);
     musicaEl.appendChild(artistaBase);
 
     return musicaEl;

@@ -38,7 +38,7 @@ void DataManager::clearIconsDirectory() {
     QStringList entries = iconsDir.entryList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
 
     for (const QString& entry : entries) {
-        if (entry == "placeholder.png") continue;
+        if (entry == "placeholder.png" || entry == "info.png") continue;
 
         QString fullPath = iconsDir.absoluteFilePath(entry);
         QFileInfo info(fullPath);
@@ -53,11 +53,11 @@ void DataManager::clearIconsDirectory() {
 
 // JSON
 // Funzione per salvare i dati in un file JSON
-bool DataManager::saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath) {
+bool DataManager::saveToFileJson(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath, bool reduced) {
     QJsonArray jsonArray;
     for (const auto& pair : artisti) {
         assert(pair.second != nullptr);
-        jsonArray.append(pair.second->toJson());
+        jsonArray.append(pair.second->toJson(reduced));
     }
 
     QJsonObject json;
@@ -79,7 +79,7 @@ bool DataManager::saveToFileJson(const std::unordered_map<unsigned int, Artista*
 std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileJson(const std::string& filePath) {
     std::unordered_map<unsigned int, Artista*> artisti;
 
-    // Pulisce la cartella view/icons/ mantenendo solo placeholder.png
+    // Pulisce la cartella view/icons/ mantenendo solo placeholder.png e info.png
     DataManager::clearIconsDirectory();
 
     QFile file(QString::fromStdString(filePath));
@@ -142,7 +142,7 @@ bool DataManager::validateXmlWithSchema(const std::string& xmlPath, const std::s
 }
 
 // Funzione per salvare i dati in un file XML
-bool DataManager::saveToFileXml(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath) {
+bool DataManager::saveToFileXml(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath, bool reduced) {
     QFile file(QString::fromStdString(filePath));
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         throw std::runtime_error("Impossibile aprire il file per la scrittura: " + filePath);
@@ -156,7 +156,7 @@ bool DataManager::saveToFileXml(const std::unordered_map<unsigned int, Artista*>
 
     for (const auto& pair : artisti) {
         assert(pair.second != nullptr);
-        QDomElement artistaElement = pair.second->toXml(doc);
+        QDomElement artistaElement = pair.second->toXml(doc, reduced);
         root.appendChild(artistaElement);
     }
 
@@ -171,7 +171,7 @@ bool DataManager::saveToFileXml(const std::unordered_map<unsigned int, Artista*>
 std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const std::string& filePath) {
     std::unordered_map<unsigned int, Artista*> artisti;
 
-    // Pulisce la cartella view/icons/ mantenendo solo placeholder.png
+    // Pulisce la cartella view/icons/ mantenendo solo placeholder.png e info.png
     DataManager::clearIconsDirectory();
 
     const std::string schemaPath = filePath.substr(0, filePath.find_last_of("/\\") + 1) + "artisti.xsd";

@@ -316,18 +316,19 @@ void Artista::loadProductsFromJson(const QJsonArray& prodottiArray) {
 }
 
 // Metodo di salvataggio JSON
-QJsonObject Artista::toJson() const {
+QJsonObject Artista::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "artista";
     json["nome"] = QString::fromStdString(nome);
     json["genere"] = QString::fromStdString(genere);
     json["info"] = QString::fromStdString(info);
     json["imagePath"] = QString::fromStdString(imagePath);
-    json["imageB64"] = QString::fromStdString(imageB64);
+    if(!reduced)
+        json["imageB64"] = QString::fromStdString(imageB64);
 
     QJsonArray array_prodotti;
     for (const auto& pair : products)
-        array_prodotti.append(pair.second->toJson());
+        array_prodotti.append(pair.second->toJson(reduced));
 
     json["prodotti"] = array_prodotti;
     return json;
@@ -381,7 +382,7 @@ void Artista::loadProductsFromXml(const QDomElement& prodottiElem) {
 }
 
 // Metodo di salvataggio XML
-QDomElement Artista::toXml(QDomDocument& doc) const {
+QDomElement Artista::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement artistaElem = doc.createElement("Artista");
     artistaElem.setAttribute("nome", QString::fromStdString(nome));
     artistaElem.setAttribute("genere", QString::fromStdString(genere));
@@ -391,7 +392,7 @@ QDomElement Artista::toXml(QDomDocument& doc) const {
     infoElem.appendChild(doc.createTextNode(QString::fromStdString(info)));
     artistaElem.appendChild(infoElem);
 
-    if (!imageB64.empty()) {
+    if (!imageB64.empty() && !reduced) {
         QDomElement imageElem = doc.createElement("imageB64");
         imageElem.appendChild(doc.createTextNode(QString::fromStdString(imageB64)));
         artistaElem.appendChild(imageElem);
@@ -399,7 +400,7 @@ QDomElement Artista::toXml(QDomDocument& doc) const {
 
     QDomElement prodottiElem = doc.createElement("prodotti");
     for (const auto& pair : products)
-        prodottiElem.appendChild(pair.second->toXml(doc));
+        prodottiElem.appendChild(pair.second->toXml(doc, reduced));
 
     artistaElem.appendChild(prodottiElem);
     return artistaElem;

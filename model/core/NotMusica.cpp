@@ -60,10 +60,10 @@ NotMusica::NotMusica(Artista* owner, const QJsonObject& json)
 }
 
 // Converte l'oggetto NotMusica in un oggetto JSON
-QJsonObject NotMusica::toJson() const {
+QJsonObject NotMusica::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "notmusica"; // specifica tipo
-    json["ArtistProduct"] = ArtistProduct::toJson();
+    json["ArtistProduct"] = ArtistProduct::toJson(reduced);
     json["prezzo"] = prezzo;
     json["disponibile"] = disponibile;
     json["quantita"] = static_cast<int>(quantita);
@@ -85,13 +85,13 @@ NotMusica::NotMusica(Artista* owner, const QDomElement& xml)
 }
 
 // Converte l'oggetto NotMusica in un oggetto XML   
-QDomElement NotMusica::toXml(QDomDocument& doc) const {
+QDomElement NotMusica::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement notMusicaEl = doc.createElement("NotMusica");
     notMusicaEl.setAttribute("prezzo", QString::number(prezzo, 'f', 2));
     notMusicaEl.setAttribute("disponibile", disponibile ? 1 : 0);
     notMusicaEl.setAttribute("quantita", static_cast<int>(quantita));
 
-    QDomElement artistProductEl = ArtistProduct::toXml(doc);
+    QDomElement artistProductEl = ArtistProduct::toXml(doc, reduced);
     notMusicaEl.appendChild(artistProductEl);
 
     return notMusicaEl;
