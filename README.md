@@ -1,4 +1,4 @@
-# PAO Project
+# OOP Project
 
 Questa repository è stata realizzata per lo sviluppo del progetto di Programmazione ad Oggetti.
 
