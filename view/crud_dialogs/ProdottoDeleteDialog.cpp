@@ -27,7 +27,7 @@ ProdottoDeleteDialog::ProdottoDeleteDialog(
     prodottoComboBox = new QComboBox(this);
     layout->addWidget(prodottoComboBox);
 
-    connect(artistaComboBox, &QComboBox::currentIndexChanged, this, &ProdottoDeleteDialog::aggiornaProdotti);
+    connect(artistaComboBox, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ProdottoDeleteDialog::aggiornaProdotti);    // disambiguamento dell'overloading della funzione
     artistaComboBox->setCurrentIndex(0);  // forza aggiornamento
     aggiornaProdotti();
 

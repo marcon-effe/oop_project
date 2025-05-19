@@ -77,7 +77,7 @@ void MainWindow::setupUI() {
     QAction* exportAction = fileMenu->addAction("Esporta");
     QAction* autosaveAction = new QAction("Autosave", this);
     autosaveAction->setCheckable(true);
-    autosaveAction->setChecked(true);
+    autosaveAction->setChecked(false);
     fileMenu->addAction(autosaveAction);
 
     this->autosaveAction = autosaveAction;
@@ -354,7 +354,7 @@ void MainWindow::onModificaProdotto() {
             }
         };
 
-        connect(artistaCombo, &QComboBox::currentIndexChanged, aggiornaProdotti);
+        connect(artistaCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), aggiornaProdotti);    // disambiguazione dell'overload della funzione
         artistaCombo->setCurrentIndex(0);  // forza caricamento iniziale
         aggiornaProdotti();
 

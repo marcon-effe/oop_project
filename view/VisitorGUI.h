@@ -40,7 +40,10 @@ public:
 private:
     void clearLayout();
     QWidget* createRelatedProductsSection(unsigned int artistId, unsigned int excludeProductId);
-    QLabel* createImageLabel(const std::string& imagePathStr, bool isArtist) const;
+    QPixmap loadPixmapOrPlaceholder(const QString& path) const;
+    QPixmap centerCropSquare(const QPixmap& src, const QSize& target) const;
+    QPixmap makeCircularPixmap(const QPixmap& src, int diameter) const;
+    QLabel* createImageLabel(const std::string& imagePathStr, const QSize& size, bool isArtist, QWidget* parent) const;
     QWidget* createTrackWidget(const Traccia& track);
     QWidget* createDateTourWidget(const DataTour& dt);
 

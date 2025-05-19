@@ -92,24 +92,13 @@ QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigne
         thumb->setObjectName("productThumbnail");
         thumb->setFixedSize(120, 120);
         thumb->setAlignment(Qt::AlignCenter);
-        thumb->setScaledContents(true);
 
         QString imgPath = QString::fromStdString(prod->getImagePath());
-        QPixmap pixmap;
+        QPixmap original = loadPixmapOrPlaceholder(imgPath);
+        QPixmap thumbPixmap = centerCropSquare(original, thumb->size());
 
-        // prova a caricare l’immagine “reale”
-        if (!imgPath.isEmpty() && pixmap.load(imgPath))
-        {
-            thumb->setPixmap(pixmap.scaled(thumb->size(),
-                                           Qt::KeepAspectRatio,
-                                           Qt::SmoothTransformation));
-        }
-        else if (pixmap.load(":/icons/placeholder.png"))
-        {
-            thumb->setPixmap(pixmap.scaled(thumb->size(),
-                                           Qt::KeepAspectRatio,
-                                           Qt::SmoothTransformation));
-        }
+        thumb->setPixmap(thumbPixmap);
+        vLayout->addWidget(thumb);
 
         QLabel *title = new QLabel(QString::fromStdString(prod->getTitle()));
         title->setObjectName("productTitle");
@@ -273,68 +262,87 @@ void VisitorGUI::clearLayout()
     }
 }
 
-QLabel *VisitorGUI::createImageLabel(const std::string &imagePathStr, bool isArtist) const
+QPixmap VisitorGUI::loadPixmapOrPlaceholder(const QString& path) const {
+    QPixmap pm;
+    if (!path.isEmpty() && QFile::exists(path) && pm.load(path)) {
+        return pm;
+    }
+    pm.load(":/icons/placeholder.png");
+    return pm;
+}
+
+QPixmap VisitorGUI::centerCropSquare(const QPixmap& src, const QSize& target) const {
+    if (src.isNull()) {
+        return QPixmap(target); // ritorna vuoto
+    }
+    QPixmap expanded = src.scaled(target,
+                                  Qt::KeepAspectRatioByExpanding,
+                                  Qt::SmoothTransformation);
+
+    const int offsetX = (expanded.width()  - target.width())  / 2;
+    const int offsetY = (expanded.height() - target.height()) / 2;
+
+    return expanded.copy(offsetX, offsetY,
+                         target.width(), target.height());
+}
+
+QPixmap VisitorGUI::makeCircularPixmap(const QPixmap& src, int diameter) const {
+    QPixmap circle(diameter, diameter);
+    circle.fill(Qt::transparent);
+
+    QPainter painter(&circle);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    QPainterPath clipPath;
+    clipPath.addEllipse(circle.rect());
+    painter.setClipPath(clipPath);
+
+    if (!src.isNull()) {
+        QPixmap scaled = src.scaled(diameter, diameter,
+                                    Qt::KeepAspectRatioByExpanding,
+                                    Qt::SmoothTransformation);
+        painter.drawPixmap(circle.rect(), scaled);
+    }
+    return circle;
+}
+
+QLabel* VisitorGUI::createImageLabel(const std::string& imagePathStr,
+                                      const QSize& size,
+                                      bool isArtist,
+                                      QWidget* parent) const
 {
-    QString imagePath = QString::fromStdString(imagePathStr);
-    QPixmap pixmap;
+    QString path = QString::fromStdString(imagePathStr);
+    QPixmap original = loadPixmapOrPlaceholder(path);
 
-    // Prova a caricare immagine se il path è valido
-    if (!imagePath.isEmpty() && QFile::exists(imagePath))
-    {
-        pixmap.load(imagePath);
+    QPixmap finalPixmap;
+    if (isArtist) {
+        finalPixmap = makeCircularPixmap(original, size.width());
+    } else {
+        finalPixmap = centerCropSquare(original, size);
     }
 
-    // Fallback
-    if (pixmap.isNull())
-    {
-        pixmap.load(":/icons/placeholder.png");
-    }
+    auto* lbl = new ClickableLabel(parent);
+    lbl->setFixedSize(size);
+    lbl->setAlignment(Qt::AlignCenter);
+    lbl->setPixmap(finalPixmap);
 
-    QLabel *label = new QLabel();
-    label->setFixedSize(200, 200);
-    label->setAlignment(Qt::AlignCenter);
+    connect(lbl, &ClickableLabel::clicked, this, [original]() {
+        QDialog* dlg = new QDialog;
+        dlg->setAttribute(Qt::WA_DeleteOnClose);
+        dlg->setWindowTitle("Anteprima");
 
-    if (isArtist)
-    {
-        QPixmap circle(200, 200);
-        circle.fill(Qt::transparent);
-
-        QPainter p(&circle);
-        p.setRenderHint(QPainter::Antialiasing);
-
-        // Solo bordo bianco, sfondo trasparente
-        QPen pen(Qt::white);
-        pen.setWidth(4);
-        p.setPen(pen);
-        p.setBrush(Qt::NoBrush);
-        p.drawEllipse(2, 2, 196, 196);
-
-        // Se immagine valida, disegnala centrata e ritagliata nel cerchio
-        if (!pixmap.isNull())
-        {
-            QPainterPath path;
-            path.addEllipse(0, 0, 200, 200);
-            p.setClipPath(path);
-            p.drawPixmap(0, 0,
-                         pixmap.scaled(200, 200,
-                                       Qt::KeepAspectRatioByExpanding,
+        QVBoxLayout* layout = new QVBoxLayout(dlg);
+        QLabel* big = new QLabel(dlg);
+        big->setPixmap(original.scaled(600, 600,
+                                       Qt::KeepAspectRatio,
                                        Qt::SmoothTransformation));
-        }
+        big->setAlignment(Qt::AlignCenter);
+        layout->addWidget(big);
 
-        p.end();
-        label->setPixmap(circle);
-        label->setObjectName("artistImageLabel");
-    }
-    else
-    {
-        label->setPixmap(
-            pixmap.scaled(200, 200,
-                          Qt::KeepAspectRatio,
-                          Qt::SmoothTransformation));
-        label->setObjectName("defaultImageLabel");
-    }
+        dlg->exec();
+    });
 
-    return label;
+    return lbl;
 }
 // ---------------- VISITORS ----------------
 
@@ -351,7 +359,13 @@ void VisitorGUI::visit(const Artista *artista)
     QVBoxLayout *vbox = new QVBoxLayout(container);
     vbox->setContentsMargins(24, 30, 24, 12);
 
-    QLabel *imageLabel = createImageLabel(artista->getImagePath(), true);
+    QSize artistImgSize(200, 200);
+    QLabel *imageLabel = createImageLabel(
+        artista->getImagePath(),
+        artistImgSize,
+        /*isArtist=*/true,
+        container
+    );
     imageLabel->setObjectName("artistImage");
     vbox->addWidget(imageLabel, 0, Qt::AlignHCenter);
 
@@ -397,15 +411,14 @@ void VisitorGUI::visit(const Artista *artista)
         h->setContentsMargins(10, 10, 10, 10);
         h->setSpacing(12);
 
-        QLabel *thumb = createImageLabel(p->getImagePath(), false);
-        thumb->setFixedSize(80, 80);
-        thumb->setAlignment(Qt::AlignCenter);
+        QSize thumbSize(80, 80);
+        auto *thumb = createImageLabel(
+            p->getImagePath(),
+            thumbSize,
+            /*isArtist=*/false, 
+            card
+        );
         thumb->setObjectName("productThumb");
-
-        // Ridimensionamento dell'immagine
-        QPixmap pm = thumb->pixmap(Qt::ReturnByValue).scaled(thumb->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);     // ridimensiono in modo proporzionale, costruendo
-                                                                                                                                // un pixmap dalla QLabel precedente, applicando filtri
-        thumb->setPixmap(pm);
         h->addWidget(thumb);
 
         QVBoxLayout *info = new QVBoxLayout();
@@ -459,42 +472,15 @@ void VisitorGUI::visit(const TShirt *tshirt)
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(12);
 
-    QPixmap pix(QString::fromStdString(tshirt->getImagePath()));
-    if (pix.isNull())
-        pix.load(":/icons/placeholder.png");
-
-    QSize target(180, 180);
-
-    QPixmap expanded = pix.scaled(
-        target,
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation
+    QSize imageSize(180, 180);
+    auto *imageLabel = createImageLabel(
+        tshirt->getImagePath(), 
+        imageSize,
+        /*isArtist=*/false,
+        productCard
     );
-
-    int xOff = (expanded.width()  - target.width())  / 2;
-    int yOff = (expanded.height() - target.height()) / 2;
-    QPixmap cropped = expanded.copy(xOff, yOff, target.width(), target.height());
-
-    auto *imageLabel = new ClickableLabel(productCard);
     imageLabel->setObjectName("tshirtImageLabel");
-    imageLabel->setFixedSize(target);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(cropped);
-
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
-
-    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
-        QDialog dlg;
-        dlg.setWindowTitle("Anteprima");
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        QLabel* big = new QLabel;
-        big->setPixmap(pix.scaled(600, 600,
-                                   Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation));
-        big->setAlignment(Qt::AlignCenter);
-        dlgLayout->addWidget(big);
-        dlg.exec();
-    });
 
     QLabel *titleLabel = new QLabel(
         QString("<h2>%1</h2>").arg(QString::fromStdString(tshirt->getTitle())),
@@ -570,42 +556,15 @@ void VisitorGUI::visit(const CD *cd)
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(12);
 
-    QPixmap pix(QString::fromStdString(cd->getImagePath()));
-    if (pix.isNull())
-        pix.load(":/icons/placeholder.png");
-
-    QSize target(180, 180);
-
-    QPixmap expanded = pix.scaled(
-        target,
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation
+    QSize imageSize(180, 180);
+    auto *imageLabel = createImageLabel(
+        cd->getImagePath(),
+        imageSize,
+        /*isArtist=*/false,
+        productCard
     );
-
-    int xOff = (expanded.width()  - target.width())  / 2;
-    int yOff = (expanded.height() - target.height()) / 2;
-    QPixmap cropped = expanded.copy(xOff, yOff, target.width(), target.height());
-
-    auto *imageLabel = new ClickableLabel(productCard);
     imageLabel->setObjectName("cdImageLabel");
-    imageLabel->setFixedSize(target);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(cropped);
-
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
-
-    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
-        QDialog dlg;
-        dlg.setWindowTitle("Anteprima");
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        QLabel* big = new QLabel;
-        big->setPixmap(pix.scaled(600, 600,
-                                   Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation));
-        big->setAlignment(Qt::AlignCenter);
-        dlgLayout->addWidget(big);
-        dlg.exec();
-    });
 
     QLabel *titleLabel = new QLabel(
         QString("<h2>%1</h2>").arg(QString::fromStdString(cd->getTitle())));
@@ -692,42 +651,16 @@ void VisitorGUI::visit(const Vinile *vinile)
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(12);
 
-    QPixmap pix(QString::fromStdString(vinile->getImagePath()));
-    if (pix.isNull())
-        pix.load(":/icons/placeholder.png");
-
-    QSize target(180, 180);
-
-    QPixmap expanded = pix.scaled(
-        target,
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation
+    QSize imageSize(180, 180);
+    auto *imageLabel = createImageLabel(
+        vinile->getImagePath(),
+        imageSize,
+        /*isArtist=*/false,
+        productCard
     );
-
-    int xOff = (expanded.width()  - target.width())  / 2;
-    int yOff = (expanded.height() - target.height()) / 2;
-    QPixmap cropped = expanded.copy(xOff, yOff, target.width(), target.height());
-
-    auto *imageLabel = new ClickableLabel(productCard);
     imageLabel->setObjectName("vinileImageLabel");
-    imageLabel->setFixedSize(target);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(cropped);
-
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
 
-    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
-        QDialog dlg;
-        dlg.setWindowTitle("Anteprima");
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        QLabel* big = new QLabel;
-        big->setPixmap(pix.scaled(600, 600,
-                                   Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation));
-        big->setAlignment(Qt::AlignCenter);
-        dlgLayout->addWidget(big);
-        dlg.exec();
-    });
 
     QLabel *titleLabel = new QLabel(
         QString("<h2>%1</h2>").arg(QString::fromStdString(vinile->getTitle())));
@@ -832,42 +765,15 @@ void VisitorGUI::visit(const Singolo *singolo)
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(12);
 
-    QPixmap pix(QString::fromStdString(singolo->getImagePath()));
-    if (pix.isNull())
-        pix.load(":/icons/placeholder.png");
-
-    QSize target(180, 180);
-
-    QPixmap expanded = pix.scaled(
-        target,
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation
+    QSize imageSize(180, 180);
+    auto *imageLabel = createImageLabel(
+        singolo->getImagePath(),
+        imageSize,
+        /*isArtist=*/false,
+        productCard
     );
-
-    int xOff = (expanded.width()  - target.width())  / 2;
-    int yOff = (expanded.height() - target.height()) / 2;
-    QPixmap cropped = expanded.copy(xOff, yOff, target.width(), target.height());
-
-    auto *imageLabel = new ClickableLabel(productCard);
     imageLabel->setObjectName("singoloImageLabel");
-    imageLabel->setFixedSize(target);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(cropped);
-
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
-
-    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
-        QDialog dlg;
-        dlg.setWindowTitle("Anteprima");
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        QLabel* big = new QLabel;
-        big->setPixmap(pix.scaled(600, 600,
-                                   Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation));
-        big->setAlignment(Qt::AlignCenter);
-        dlgLayout->addWidget(big);
-        dlg.exec();
-    });
 
     QLabel *titleLabel = new QLabel(
         QString("<h2>%1</h2>").arg(QString::fromStdString(singolo->getTitle())));
@@ -946,42 +852,15 @@ void VisitorGUI::visit(const Album *album)
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(12);
 
-    QPixmap pix(QString::fromStdString(album->getImagePath()));
-    if (pix.isNull())
-        pix.load(":/icons/placeholder.png");
-
-    QSize target(180, 180);
-
-    QPixmap expanded = pix.scaled(
-        target,
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation
+    QSize imageSize(180, 180);
+    auto *imageLabel = createImageLabel(
+        album->getImagePath(),
+        imageSize,
+        /*isArtist=*/false,
+        productCard
     );
-
-    int xOff = (expanded.width()  - target.width())  / 2;
-    int yOff = (expanded.height() - target.height()) / 2;
-    QPixmap cropped = expanded.copy(xOff, yOff, target.width(), target.height());
-
-    auto *imageLabel = new ClickableLabel(productCard);
     imageLabel->setObjectName("albumImageLabel");
-    imageLabel->setFixedSize(target);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(cropped);
-
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
-
-    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
-        QDialog dlg;
-        dlg.setWindowTitle("Anteprima");
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        QLabel* big = new QLabel;
-        big->setPixmap(pix.scaled(600, 600,
-                                   Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation));
-        big->setAlignment(Qt::AlignCenter);
-        dlgLayout->addWidget(big);
-        dlg.exec();
-    });
 
     QLabel *titleLabel = new QLabel(
         QString("<h2>%1</h2>").arg(QString::fromStdString(album->getTitle())));
@@ -1056,42 +935,15 @@ void VisitorGUI::visit(const Tour *tour)
     productLayout->setContentsMargins(24, 30, 24, 12);
     productLayout->setSpacing(12);
 
-    QPixmap pix(QString::fromStdString(tour->getImagePath()));
-    if (pix.isNull())
-        pix.load(":/icons/placeholder.png");
-
-    QSize target(180, 180);
-
-    QPixmap expanded = pix.scaled(
-        target,
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation
+    QSize imageSize(180, 180);
+    auto *imageLabel = createImageLabel(
+        tour->getImagePath(),
+        imageSize,
+        /*isArtist=*/false,
+        productCard
     );
-
-    int xOff = (expanded.width()  - target.width())  / 2;
-    int yOff = (expanded.height() - target.height()) / 2;
-    QPixmap cropped = expanded.copy(xOff, yOff, target.width(), target.height());
-
-    auto *imageLabel = new ClickableLabel(productCard);
     imageLabel->setObjectName("tourImageLabel");
-    imageLabel->setFixedSize(target);
-    imageLabel->setAlignment(Qt::AlignCenter);
-    imageLabel->setPixmap(cropped);
-
     productLayout->addWidget(imageLabel, 0, Qt::AlignHCenter);
-
-    connect(imageLabel, &ClickableLabel::clicked, this, [pix]() {
-        QDialog dlg;
-        dlg.setWindowTitle("Anteprima");
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        QLabel* big = new QLabel;
-        big->setPixmap(pix.scaled(600, 600,
-                                   Qt::KeepAspectRatio,
-                                   Qt::SmoothTransformation));
-        big->setAlignment(Qt::AlignCenter);
-        dlgLayout->addWidget(big);
-        dlg.exec();
-    });
 
     QLabel *titleLabel = new QLabel(
         QString("<h2>%1</h2>").arg(QString::fromStdString(tour->getTitle())));
