@@ -302,7 +302,7 @@ void ProdottoInsertDialog::buildTShirt() {
 }
 
 void ProdottoInsertDialog::buildTour() {
-    buildMerch();  // Include i campi comuni come prezzo, disponibile, quantita, codice prodotto
+    buildNotMusica();  // Include i campi comuni come prezzo, disponibile, quantita, codice prodotto
 
     QGroupBox* tourBox = new QGroupBox("Date del Tour");
     QVBoxLayout* tourMainLayout = new QVBoxLayout;
@@ -557,9 +557,8 @@ void ProdottoInsertDialog::confermaInserimento() {
             double prezzo = prezzoSpin->value();
             bool disponibile = disponibileCheck->isChecked();
             unsigned int quantita = quantitaSpin->value();
-            std::string codice = codiceProdottoEdit->text().toStdString();
 
-            auto tour = new Tour(artistaSelezionato, titolo, descrizione, prezzo, disponibile, quantita, codice);
+            auto tour = new Tour(artistaSelezionato, titolo, descrizione, prezzo, disponibile, quantita);
             tour->setImagePath(imagePath);
 
             for (const auto& w : dateTourWidgets) {
