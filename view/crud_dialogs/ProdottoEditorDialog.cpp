@@ -623,8 +623,7 @@ void ProdottoEditorDialog::confermaModifica() {
     }
 
     // Campi comuni
-    if (nuovoTitolo != prodotto->getTitle())
-        prodotto->setTitle(nuovoTitolo);
+    
 
     std::string nuovaDescrizione = descrizioneEdit->toPlainText().toStdString();
     if (nuovaDescrizione != prodotto->getDescription())
@@ -633,6 +632,9 @@ void ProdottoEditorDialog::confermaModifica() {
     std::string nuovoImagePath = imagePathEdit->text().toStdString();
     if (nuovoImagePath != prodotto->getImagePath())
         prodotto->setImagePath(nuovoImagePath);
+
+    if (nuovoTitolo != prodotto->getTitle())
+        prodotto->setTitle(nuovoTitolo);
 
     // Dispatch dinamico per modifiche specifiche
     if (auto tshirt = dynamic_cast<TShirt*>(prodotto)) {

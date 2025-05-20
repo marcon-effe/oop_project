@@ -158,8 +158,7 @@ void ArtistProduct::setTitle(const std::string& t) {
             }
         }
 
-        imagePath = newPath.toStdString();  // usa il path reale, non più `:/icons/...`
-
+        imagePath = newPath.toStdString();
         QFile img(newPath);
         if (img.open(QIODevice::ReadOnly)) {
             QByteArray data = img.readAll();

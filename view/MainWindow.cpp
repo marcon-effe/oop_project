@@ -77,7 +77,7 @@ void MainWindow::setupUI() {
     QAction* exportAction = fileMenu->addAction("Esporta");
     QAction* autosaveAction = new QAction("Autosave", this);
     autosaveAction->setCheckable(true);
-    autosaveAction->setChecked(false);
+    autosaveAction->setChecked(true);
     fileMenu->addAction(autosaveAction);
 
     this->autosaveAction = autosaveAction;
@@ -308,6 +308,7 @@ void MainWindow::onModificaArtista()
     ArtistaEditorDialog dialog(artista, this, nomiSan);
 
     if (dialog.exec() == QDialog::Accepted) {
+        clearRightPanel();
         updateListWidgets();
         saveIfAutosaveEnabled();
     }
@@ -385,6 +386,7 @@ void MainWindow::onModificaProdotto() {
     // Apre il dialogo di modifica
     ProdottoEditorDialog dialog(prodotto, artists, prodotti, this);
     if (dialog.exec() == QDialog::Accepted) {
+        clearRightPanel();
         updateListWidgets();
         saveIfAutosaveEnabled();
     }
