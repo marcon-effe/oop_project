@@ -185,24 +185,26 @@ QWidget *VisitorGUI::createTrackWidget(const Traccia &track)
 
     layout->addWidget(infoWidget, 1);
 
-    auto *testoBtn = new QPushButton("Testo", trackContainer);
-    testoBtn->setObjectName("textTrackButton");
-    testoBtn->setCursor(Qt::PointingHandCursor);
-    layout->addWidget(testoBtn, 0, Qt::AlignVCenter);
+    if (!track.getTesto().empty()) {
+        auto *testoBtn = new QPushButton("Testo", trackContainer);
+        testoBtn->setObjectName("textTrackButton");
+        testoBtn->setCursor(Qt::PointingHandCursor);
+        layout->addWidget(testoBtn, 0, Qt::AlignVCenter);
 
-    connect(testoBtn, &QPushButton::clicked, this, [this, track, trackContainer]()
-            {
-        QDialog dlg(trackContainer);   // mantengo scollegato -> obbliga la chiusura del dialog prima della chiusura della pagina
-        dlg.setWindowTitle("Testo: " + QString::fromStdString(track.getNome()));
-        auto* dlgLayout = new QVBoxLayout(&dlg);
-        auto* editor = new QTextEdit(&dlg);
-        editor->setReadOnly(true);
-        editor->setText(QString::fromStdString(track.getTesto()));
-        dlgLayout->addWidget(editor);
-        auto* closeBtn = new QPushButton("Chiudi", &dlg);
-        connect(closeBtn, &QPushButton::clicked, &dlg, &QDialog::accept);
-        dlgLayout->addWidget(closeBtn, 0, Qt::AlignRight);
-        dlg.exec(); });
+        connect(testoBtn, &QPushButton::clicked, this, [this, track, trackContainer]()
+                {
+            QDialog dlg(trackContainer);   // mantengo scollegato -> obbliga la chiusura del dialog prima della chiusura della pagina
+            dlg.setWindowTitle("Testo: " + QString::fromStdString(track.getNome()));
+            auto* dlgLayout = new QVBoxLayout(&dlg);
+            auto* editor = new QTextEdit(&dlg);
+            editor->setReadOnly(true);
+            editor->setText(QString::fromStdString(track.getTesto()));
+            dlgLayout->addWidget(editor);
+            auto* closeBtn = new QPushButton("Chiudi", &dlg);
+            connect(closeBtn, &QPushButton::clicked, &dlg, &QDialog::accept);
+            dlgLayout->addWidget(closeBtn, 0, Qt::AlignRight);
+            dlg.exec(); });
+    }
 
     return trackContainer;
 }
