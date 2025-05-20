@@ -239,7 +239,7 @@ void ProdottoEditorDialog::buildTour() {
     Tour* tour = dynamic_cast<Tour*>(prodotto);
     if (!tour) return;
 
-    buildMerch();  // include ArtistProduct, NotMusica, Merch
+    buildNotMusica();  // include ArtistProduct, NotMusica
 
     QGroupBox* tourBox = new QGroupBox("Date del Tour");
     QVBoxLayout* tourMainLayout = new QVBoxLayout;
@@ -683,11 +683,13 @@ void ProdottoEditorDialog::confermaModifica() {
             QDate d = w.dataEdit->date();
             QTime t = w.orarioEdit->time();
             std::string luogo = w.luogoEdit->text().toStdString();
-            nuoveDate.emplace_back(
-                d.day(), d.month(), d.year(),
-                t.hour(), t.minute(), t.second(),
-                luogo
-            );
+            if(!luogo.empty()){
+                nuoveDate.emplace_back(
+                    d.day(), d.month(), d.year(),
+                    t.hour(), t.minute(), t.second(),
+                    luogo
+                );
+            }
         }
 
         // Confronto con la lista originale
