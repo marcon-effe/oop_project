@@ -12,7 +12,6 @@ Vinile::Vinile(Artista* owner, const std::string& t, const std::string& desc, do
 : Disco(owner, t, desc, prezzo, disponibile, quantita, codice, produttoreStampe, codiceRiconoscimento, tipoProdotto),
   rpm(rpm), diametro(diametro) {}
 
-// Costruttore con immagine
 Vinile::Vinile(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile,
                unsigned int quantita, const std::string& codice, const std::string& produttoreStampe,
                const std::string& codiceRiconoscimento, const std::string& tipoProdotto,
@@ -28,7 +27,6 @@ Vinile::Vinile(const Vinile* v)
 
 Vinile::~Vinile() {}
 
-// Getter e Setter
 unsigned int Vinile::getRpm() const {
     return rpm;
 }
@@ -43,7 +41,6 @@ void Vinile::setDiametro(unsigned int d) {
     diametro = d;
 }
 
-// Stampa info
 void Vinile::printInfo() const {
     Disco::printInfo();
     std::cout << "--VINILE--" << std::endl;
@@ -83,7 +80,7 @@ QDomElement Vinile::toXml(QDomDocument& doc, bool reduced) const {
     return xml;
 }
 
-// Visitor
+
 void Vinile::accept(VisitorGUI* v) const {
     v->visit(this);
 }

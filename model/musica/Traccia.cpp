@@ -142,12 +142,10 @@ QDomElement Traccia::toXml(QDomDocument& doc) const {
     return tracciaElem;
 }
 
-// VISITOR
 void Traccia::accept(VisitorConsoleEditor* visitor) {
     visitor->visit(this);
 }
 
-// OVERLOADING OPERATORI
 bool operator==(const Traccia& lhs, const Traccia& rhs) {
     return lhs.getNome() == rhs.getNome() &&
            lhs.getDurata() == rhs.getDurata() &&

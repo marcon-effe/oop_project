@@ -1,13 +1,6 @@
 #ifndef DATATOUR_H
 #define DATATOUR_H
 
-#include <string>
-
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDomElement>
-#include <QDomDocument>
-
 #include "../util/Data.h"
 #include "../util/Orario.h"
 

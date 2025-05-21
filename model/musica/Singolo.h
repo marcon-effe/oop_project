@@ -1,13 +1,6 @@
 #ifndef SINGOLO_H
 #define SINGOLO_H
 
-#include <string>
-
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDomElement>
-#include <QDomDocument>
-
 #include "../core/Musica.h" 
 #include "Traccia.h"
 
@@ -17,16 +10,12 @@ private:
     bool isRemix;
     int chartPosition;
 public:
-    // Costruttore standard
     Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos);
 
-    // Costruttore con immagine
     Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos, const std::string& img);
 
-    // Costruttore di trasformazione da Musica*
     Singolo(Musica* base, const Traccia& mainTrack, bool isRemix, int chartPosition);
 
-    // Costruttore di copia
     Singolo(const Singolo* s);
 
     // Costruttore da JSON
@@ -35,10 +24,8 @@ public:
     // Costruttore da XML
     Singolo(Artista* owner, const QDomElement& xml);
 
-    // Distruttore
     virtual ~Singolo();
 
-    // Getter / Setter
     Traccia getMainTrack() const;
     void setMainTrack(const Traccia& t);
 
@@ -52,18 +39,14 @@ public:
 
     Traccia& getTracciaModificabile();
 
-    // Serializzazione
     virtual QJsonObject toJson(bool reduced=false) const final;
     virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const final;
 
-    // Info print
     virtual void printInfo() const final;
 
-    // Visitor
     virtual void accept(VisitorGUI* visitor) const final;
     virtual void accept(VisitorConsoleEditor* visitor) final;
 
-    // Overloading operatori
     friend bool operator==(const Singolo& a, const Singolo& b);
     friend bool operator!=(const Singolo& a, const Singolo& b);
 };

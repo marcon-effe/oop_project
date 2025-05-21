@@ -73,12 +73,10 @@ QDomElement DataTour::toXml(QDomDocument& doc) const {
     return xml;
 }
 
-// VISITOR
 void DataTour::accept(VisitorConsoleEditor* visitor) {
     visitor->visit(this);
 }
 
-// OVERLOADING OPERATORI
 bool operator==(const DataTour& lhs, const DataTour& rhs) {
     return static_cast<const Data&>(lhs) == static_cast<const Data&>(rhs)
         && static_cast<const Orario&>(lhs) == static_cast<const Orario&>(rhs)

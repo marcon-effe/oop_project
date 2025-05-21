@@ -4,8 +4,6 @@
 #include "../../cli/VisitorConsoleEditor.h"
 
 // COSTRUTTORI
-
-// Costruttore standard senza tracce
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& lbl)
 : Musica(owner, t, desc, du, dur, g), label(lbl)
 {
@@ -15,7 +13,6 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
     }
 }
 
-// Costruttore standard con tracce
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tra, const std::string& lbl)
 : Musica(owner, t, desc, du, dur, g), tracce(tra), label(lbl)
 {
@@ -25,7 +22,6 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
     }
 }
 
-// Costruttore con immagine (senza tracce)
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& lbl, const std::string& img)
 : Musica(owner, t, desc, du, dur, g, img), label(lbl)
 {
@@ -35,7 +31,6 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
     }
 }
 
-// Costruttore con immagine (con tracce)
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::vector<Traccia>& tra, const std::string& lbl, const std::string& img)
 : Musica(owner, t, desc, du, dur, g, img), tracce(tra), label(lbl)
 {
@@ -45,7 +40,6 @@ Album::Album(Artista* owner, const std::string& t, const std::string& desc, cons
     }
 }
 
-// Costruttore di trasformazione da Musica*
 Album::Album(Musica* m, const std::vector<Traccia>& t, const std::string& l)
 : Musica(m), tracce(t), label(l)
 {
@@ -55,7 +49,6 @@ Album::Album(Musica* m, const std::vector<Traccia>& t, const std::string& l)
     }
 }
 
-// Costruttore di copia
 Album::Album(const Album* a)
 : Musica(a), tracce(a->getTracce()), label(a->getLabel())
 {
@@ -136,10 +129,8 @@ QDomElement Album::toXml(QDomDocument& doc, bool reduced) const {
     return albumEl;
 }
 
-// DISTRUTTORE
 Album::~Album() {}
 
-// METODI SPECIFICI
 std::string Album::getLabel() const { return label; }
 void Album::setLabel(const std::string& l) { label = l; }
 
@@ -188,7 +179,7 @@ void Album::setTracce(const std::vector<Traccia>& t) {
     tracce = t;
 }
 
-// VISITOR
+
 void Album::accept(VisitorGUI* visitor) const {
     visitor->visit(this);
 }
@@ -198,7 +189,6 @@ void Album::accept(VisitorConsoleEditor* visitor) {
 }
 
 
-// OVERLOADING OPERATORI
 bool operator==(const Album& a, const Album& b) {
     if (!(static_cast<const Musica&>(a) == static_cast<const Musica&>(b))) return false;
     if (a.label != b.label) return false;

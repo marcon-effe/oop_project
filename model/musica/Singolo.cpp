@@ -4,8 +4,6 @@
 #include "../../cli/VisitorConsoleEditor.h"
 
 // COSTRUTTORI
-
-// Costruttore standard
 Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos)
 : Musica(owner, t, desc, du, dur, g), mainTrack(track), isRemix(remix), chartPosition(chartPos)
 {
@@ -15,7 +13,6 @@ Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, 
     }
 }
 
-// Costruttore con immagine
 Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos, const std::string& img)
 : Musica(owner, t, desc, du, dur, g, img), mainTrack(track), isRemix(remix), chartPosition(chartPos)
 {
@@ -25,7 +22,6 @@ Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, 
     }
 }
 
-// Costruttore di trasformazione da Musica*
 Singolo::Singolo(Musica* m, const Traccia& t, bool remix, int chartPos)
 : Musica(m), mainTrack(t), isRemix(remix), chartPosition(chartPos)
 {
@@ -35,7 +31,6 @@ Singolo::Singolo(Musica* m, const Traccia& t, bool remix, int chartPos)
     }
 }
 
-// Costruttore di copia
 Singolo::Singolo(const Singolo* s)
 : Musica(s), mainTrack(s->getMainTrack()), isRemix(s->getIsRemix()), chartPosition(s->getChartPosition())
 {
@@ -102,10 +97,8 @@ QDomElement Singolo::toXml(QDomDocument& doc, bool reduced) const {
     return singoloEl;
 }
 
-// DISTRUTTORE
 Singolo::~Singolo() {}
 
-// GETTER/SETTER
 Traccia Singolo::getMainTrack() const { return mainTrack; }
 void Singolo::setMainTrack(const Traccia& t) { mainTrack = t; }
 
@@ -115,17 +108,14 @@ void Singolo::setIsRemix(bool r) { isRemix = r; }
 int Singolo::getChartPosition() const { return chartPosition; }
 void Singolo::setChartPosition(int pos) { chartPosition = pos; }
 
-// Ritorna la traccia principale modificabile
 Traccia& Singolo::getTracciaModificabile() {
     return mainTrack;
 }
 
-// Aggiorna la durata del singolo
 void Singolo::updateDurata() {
     this->setDurata(mainTrack.getDurata());
 }
 
-// PRINT INFO
 void Singolo::printInfo() const {
     Musica::printInfo();
     std::cout << "--SINGOLO--" << std::endl;
@@ -134,7 +124,6 @@ void Singolo::printInfo() const {
               << "\nPosizione in classifica: " << chartPosition << std::endl;
 }
 
-// VISITOR
 void Singolo::accept(VisitorGUI* visitor) const {
     visitor->visit(this);
 }
@@ -143,7 +132,6 @@ void Singolo::accept(VisitorConsoleEditor* visitor) {
     visitor->visit(this);
 }
 
-// OVERLOADING OPERATORI
 bool operator==(const Singolo& a, const Singolo& b) {
     if (!(static_cast<const Musica&>(a) == static_cast<const Musica&>(b))) return false;
     if (a.mainTrack != b.mainTrack) return false;

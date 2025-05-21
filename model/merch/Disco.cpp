@@ -4,7 +4,6 @@
 
 // COSTRUTTORI
 
-// Costruttore standard
 Disco::Disco(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto)
 : Merch(owner, t, desc, prezzo, disponibile, quantita, codice),
   produttoreStampe(produttoreStampe),
@@ -17,7 +16,6 @@ Disco::Disco(Artista* owner, const std::string& t, const std::string& desc, doub
     }
 }
 
-// Costruttore con immagine
 Disco::Disco(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto, const std::string& img)
 : Merch(owner, t, desc, prezzo, disponibile, quantita, codice, img),
   produttoreStampe(produttoreStampe),
@@ -30,7 +28,6 @@ Disco::Disco(Artista* owner, const std::string& t, const std::string& desc, doub
     }
 }
 
-// Costruttore di trasformazione da Merch*
 Disco::Disco(Merch* base, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto)
 : Merch(base),
   produttoreStampe(produttoreStampe),
@@ -43,7 +40,6 @@ Disco::Disco(Merch* base, const std::string& produttoreStampe, const std::string
     }
 }
 
-// Costruttore di copia
 Disco::Disco(const Disco* d)
 : Merch(d),
   produttoreStampe(d->getProduttoreStampe()),
@@ -57,7 +53,6 @@ Disco::Disco(const Disco* d)
 }
 
 // JSON
-
 // Costruttore da JSON
 Disco::Disco(Artista* owner, const QJsonObject& json)
 : Merch(owner, json["merch"].toObject()),
@@ -83,7 +78,6 @@ QJsonObject Disco::toJson(bool reduced) const {
 }
 
 // XML
-
 // Costruttore da XML
 Disco::Disco(Artista* owner, const QDomElement& xml)
 : Merch(owner, xml.firstChildElement("Merch")),
@@ -108,11 +102,7 @@ QDomElement Disco::toXml(QDomDocument& doc, bool reduced) const {
     return xml;
 }
 
-// DISTRUTTORE
-
 Disco::~Disco() {}
-
-// GETTER/SETTER
 
 std::string Disco::getProduttoreStampe() const {
     return produttoreStampe;
@@ -138,8 +128,6 @@ void Disco::setTipoProdotto(const std::string& tp) {
     tipoProdotto = tp;
 }
 
-// PRINT INFO
-
 void Disco::printInfo() const {
     Merch::printInfo();
     std::cout << "--DISCO--" << std::endl;
@@ -147,9 +135,6 @@ void Disco::printInfo() const {
               << "\nCodice riconoscimento: " << codiceRiconoscimento
               << "\nTipo prodotto: " << tipoProdotto << std::endl;
 }
-
-
-// OVERLOADING OPERATORI
 
 bool operator==(const Disco& a, const Disco& b) {
     if (!(static_cast<const Merch&>(a) == static_cast<const Merch&>(b))) return false;

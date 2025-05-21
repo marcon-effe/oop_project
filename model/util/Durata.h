@@ -2,6 +2,7 @@
 #define DURATA_H
 
 #include <string>
+
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QDomElement>
@@ -27,7 +28,6 @@ public:
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    //OVERLOADING OPERATORI
     friend bool operator==(const Durata& a, const Durata& b);
     friend bool operator!=(const Durata& a, const Durata& b);
     friend bool operator<(const Durata& a, const Durata& b);

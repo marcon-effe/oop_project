@@ -3,8 +3,6 @@
 #include "../../view/VisitorGUI.h"
 
 // COSTRUTTORI
-
-// Costruttore standard
 Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita), codiceProdotto(codice)
 {
@@ -14,7 +12,6 @@ Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, doub
     }
 }
 
-// Costruttore con immagine
 Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& img)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita, img), codiceProdotto(codice)
 {
@@ -24,7 +21,6 @@ Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, doub
     }
 }
 
-// Costruttore di trasformazione da NotMusica*
 Merch::Merch(NotMusica* base, const std::string& codice)
 : NotMusica(base), codiceProdotto(codice)
 {
@@ -34,7 +30,6 @@ Merch::Merch(NotMusica* base, const std::string& codice)
     }
 }
 
-// Costruttore di copia
 Merch::Merch(const Merch* m)
 : NotMusica(m), codiceProdotto(m->getCodiceProdotto())
 {
@@ -86,10 +81,8 @@ QDomElement Merch::toXml(QDomDocument& doc, bool reduced) const {
     return xml;
 }
 
-// DISTRUTTORE
 Merch::~Merch() {}
 
-// GETTER/SETTER
 std::string Merch::getCodiceProdotto() const {
     return codiceProdotto;
 }
@@ -98,14 +91,12 @@ void Merch::setCodiceProdotto(const std::string& codice) {
     codiceProdotto = codice;
 }
 
-// PRINT INFO
 void Merch::printInfo() const {
     NotMusica::printInfo();
     std::cout << "--MERCH--" << std::endl;
     std::cout << "Codice prodotto: " << codiceProdotto << std::endl;
 }
 
-// OVERLOADING OPERATORI
 bool operator==(const Merch& a, const Merch& b) {
     if (!(static_cast<const NotMusica&>(a) == static_cast<const NotMusica&>(b))) return false;
     if (a.codiceProdotto != b.codiceProdotto) return false;

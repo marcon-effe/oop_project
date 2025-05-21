@@ -34,7 +34,6 @@ public:
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    //OVERLOADING OPERATORI
     friend bool operator==(const Orario& a, const Orario& b);
     friend bool operator!=(const Orario& a, const Orario& b);
     friend bool operator<(const Orario& a, const Orario& b);

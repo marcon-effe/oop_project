@@ -4,7 +4,6 @@
 #include "../../cli/VisitorConsoleEditor.h"
 
 // COSTRUTTORI
-// Costruttore standard
 TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore)
 : Merch(owner, t, desc, prezzo, disponibile, quantita, codice), taglia(taglia), colore(colore)
 {
@@ -14,7 +13,6 @@ TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, do
     }
 }
 
-// Costruttore con immagine
 TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore, const std::string& img)
 : Merch(owner, t, desc, prezzo, disponibile, quantita, codice, img), taglia(taglia), colore(colore)
 {
@@ -24,7 +22,6 @@ TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, do
     }
 }
 
-// Costruttore di trasformazione da Merch*
 TShirt::TShirt(Merch* base, const std::string& taglia, const std::string& colore)
 : Merch(base), taglia(taglia), colore(colore)
 {
@@ -34,7 +31,6 @@ TShirt::TShirt(Merch* base, const std::string& taglia, const std::string& colore
     }
 }
 
-// Costruttore di copia
 TShirt::TShirt(const TShirt* t)
 : Merch(t), taglia(t->getTaglia()), colore(t->getColore())
 {
@@ -90,10 +86,8 @@ QDomElement TShirt::toXml(QDomDocument& doc, bool reduced) const {
     return xml;
 }
 
-// DISTRUTTORE
 TShirt::~TShirt() {}
 
-// GETTER/SETTER
 std::string TShirt::getTaglia() const {
     return taglia;
 }
@@ -110,7 +104,6 @@ void TShirt::setColore(const std::string& c) {
     colore = c;
 }
 
-// PRINT INFO
 void TShirt::printInfo() const {
     Merch::printInfo();
     std::cout << "--TSHIRT--" << std::endl;
@@ -119,7 +112,6 @@ void TShirt::printInfo() const {
 }
 
 
-// VISITOR
 void TShirt::accept(VisitorGUI* visitor) const {
     visitor->visit(this);
 }
@@ -129,7 +121,6 @@ void TShirt::accept(VisitorConsoleEditor* visitor) {
 }
 
 
-// OVERLOADING OPERATORI
 bool operator==(const TShirt& a, const TShirt& b) {
     if (!(static_cast<const Merch&>(a) == static_cast<const Merch&>(b))) return false;
     if (a.taglia != b.taglia) return false;

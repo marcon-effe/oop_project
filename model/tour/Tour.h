@@ -3,11 +3,6 @@
 
 #include <vector>
 
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDomElement>
-#include <QDomDocument>
-
 #include "../core/NotMusica.h"
 #include "DataTour.h"
 
@@ -41,7 +36,6 @@ public:
     virtual void accept(VisitorGUI* v) const final;
     virtual void accept(VisitorConsoleEditor* visitor) final;
 
-    // OVERLOADING OPERATORI
     friend bool operator==(const Tour& a, const Tour& b);
     friend bool operator!=(const Tour& a, const Tour& b);
 };

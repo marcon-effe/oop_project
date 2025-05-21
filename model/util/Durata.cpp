@@ -93,7 +93,6 @@ QDomElement Durata::toXml(QDomDocument& doc) const {
 }
 
 
-//OVERLOADING OPERATORI
 bool operator==(const Durata& lhs, const Durata& rhs) {
     return lhs.getOre() == rhs.getOre() &&
            lhs.getMinuti() == rhs.getMinuti() &&

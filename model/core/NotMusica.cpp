@@ -5,7 +5,6 @@
 
 // COSTRUTTORI
 
-// Costruttore standard
 NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& desc, double p, bool d, unsigned int q)
 : ArtistProduct(owner, t, desc), prezzo(p), disponibile(d), quantita(q)
 {
@@ -15,7 +14,6 @@ NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& de
     }
 }
 
-// Costruttore con immagine
 NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& desc, double p, bool d, unsigned int q, const std::string& img)
 : ArtistProduct(owner, t, desc, img), prezzo(p), disponibile(d), quantita(q)
 {
@@ -25,7 +23,6 @@ NotMusica::NotMusica(Artista* owner, const std::string& t, const std::string& de
     }
 }
 
-// Costruttore di trasformazione da ArtistProduct*
 NotMusica::NotMusica(ArtistProduct* base, double pr, bool disp, unsigned int q)
 : ArtistProduct(*base), prezzo(pr), disponibile(disp), quantita(q)
 {
@@ -35,7 +32,6 @@ NotMusica::NotMusica(ArtistProduct* base, double pr, bool disp, unsigned int q)
     }
 }
 
-// Costruttore di copia da NotMusica*
 NotMusica::NotMusica(const NotMusica* nm)
 : ArtistProduct(nm), prezzo(nm->getPrezzo()), disponibile(nm->getDisponibile()), quantita(nm->getQuantita())
 {
@@ -97,10 +93,8 @@ QDomElement NotMusica::toXml(QDomDocument& doc, bool reduced) const {
     return notMusicaEl;
 }
 
-// DISTRUTTORE
 NotMusica::~NotMusica() {}
 
-// GETTER/SETTER
 double NotMusica::getPrezzo() const { return prezzo; }
 void NotMusica::setPrezzo(double p) { prezzo = p; }
 
@@ -110,7 +104,6 @@ void NotMusica::setDisponibile(bool d) { disponibile = d; }
 unsigned int NotMusica::getQuantita() const { return quantita; }
 void NotMusica::setQuantita(unsigned int q) { quantita = q; }
 
-// PRINT INFO
 void NotMusica::printInfo() const {
     ArtistProduct::printInfo();
     std::cout << "--NOT MUSICA--" << std::endl;
@@ -119,7 +112,6 @@ void NotMusica::printInfo() const {
     std::cout << "Quantita: " << quantita << std::endl;
 }
 
-// OVERLOADING OPERATORI
 bool operator==(const NotMusica& a, const NotMusica& b) {
     if (!(static_cast<const ArtistProduct&>(a) == static_cast<const ArtistProduct&>(b))) {
         return false;

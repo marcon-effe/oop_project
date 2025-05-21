@@ -4,27 +4,21 @@
 #include "../../view/VisitorGUI.h"
 #include "../../cli/VisitorConsoleEditor.h"
 
-// Costruttore standard
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita) {}
 
-// Costruttore con date
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::vector<DataTour>& dt)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita), dateTour(dt) {}
 
-// Costruttore con immagine
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita, img) {}
 
-// Costruttore con immagine e date
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& img, const std::vector<DataTour>& dt)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita, img), dateTour(dt) {}
 
-// Costruttore da NotMusica*
 Tour::Tour(NotMusica* n, const std::vector<DataTour>& dt)
 : NotMusica(n), dateTour(dt) {}
 
-// Costruttore di copia
 Tour::Tour(const Tour* t)
 : NotMusica(t), dateTour(t->getDateTour()) {}
 
@@ -133,7 +127,6 @@ QDomElement Tour::toXml(QDomDocument& doc, bool reduced) const {
 }
 
 
-// VISITOR
 void Tour::accept(VisitorGUI* v) const {
     v->visit(this);
 }
@@ -142,7 +135,6 @@ void Tour::accept(VisitorConsoleEditor* visitor) {
     visitor->visit(this);
 }
 
-// OVERLOADING OPERATORI
 bool operator==(const Tour& a, const Tour& b) {
     return static_cast<const NotMusica&>(a) == static_cast<const NotMusica&>(b)
         && a.dateTour == b.dateTour;

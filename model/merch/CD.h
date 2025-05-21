@@ -1,13 +1,6 @@
 #ifndef CD_H
 #define CD_H
 
-#include <string>
-
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDomElement>
-#include <QDomDocument>
-
 #include "Disco.h"
 
 class CD : public Disco {
@@ -15,20 +8,16 @@ private:
     std::string formato; // Es: "CD Audio", "Enhanced CD", etc.
 
 public:
-    // Costruttore standard
     CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
        const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento,
        const std::string& tipoProdotto, const std::string& formato);
 
-    // Costruttore con immagine
     CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
        const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento,
        const std::string& tipoProdotto, const std::string& formato, const std::string& img);
 
-    // Costruttore di trasformazione da Disco*
     CD(Disco* base, const std::string& formato);
 
-    // Costruttore di copia
     CD(const CD* other);
 
     // Costruttore da JSON
@@ -37,10 +26,8 @@ public:
     // Costruttore da XML
     CD(Artista* owner, const QDomElement& xml);
 
-    // Distruttore
     virtual ~CD();
 
-    // Getter/Setter
     std::string getFormato() const;
     void setFormato(const std::string& formato);
 
@@ -53,7 +40,6 @@ public:
     void accept(VisitorGUI* visitor) const final override;
     void accept(VisitorConsoleEditor* visitor) final override;
 
-    // Overloading operatori
     friend bool operator==(const CD& a, const CD& b);
     friend bool operator!=(const CD& a, const CD& b);
 };

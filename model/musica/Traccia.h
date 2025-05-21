@@ -1,13 +1,7 @@
 #ifndef TRACCIA_H
 #define TRACCIA_H
 
-#include <string>
 #include <vector>
-
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDomElement>
-#include <QDomDocument>
 
 #include "../util/Durata.h"
 
@@ -47,12 +41,10 @@ public:
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    //Visitor
     void accept(VisitorConsoleEditor* visitor);
 
-    // OVERLOADING OPERATORI
     friend bool operator==(const Traccia& a, const Traccia& b);
     friend bool operator!=(const Traccia& a, const Traccia& b);
 };
 
-#endif 
+#endif // TRACCIA_H

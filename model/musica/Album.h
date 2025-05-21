@@ -2,12 +2,6 @@
 #define ALBUM_H
 
 #include <vector>
-#include <string>
-
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDomElement>
-#include <QDomDocument>
 
 #include "../core/Musica.h"
 #include "Traccia.h"

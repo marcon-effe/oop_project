@@ -16,7 +16,6 @@ unsigned int Orario::getOre() const {
 }
 void Orario::setOre(unsigned int o) { 
     if(o >= 24) {
-        // TOOO -> valutare uso di cout 
         std::cerr << "Errore: valore per le ore (" << o 
                   << ") non valido. Deve essere compreso tra 0 e 23." << std::endl;
         return; 

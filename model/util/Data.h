@@ -2,6 +2,7 @@
 #define DATA_H
 
 #include <string>
+
 #include <QDate>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -36,8 +37,6 @@ class Data {
         QDomElement toXml(QDomDocument& doc) const;
 
         
-
-        //OVERLOADING OPERATORI
         friend bool operator==(const Data& a, const Data& b);
         friend bool operator!=(const Data& a, const Data& b);
         friend bool operator<(const Data& a, const Data& b);
