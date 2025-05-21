@@ -1,8 +1,5 @@
 #include "ErrorManager.h"
-#include <QMessageBox> // se usi Qt
-#include <iostream>
 
-#include "ErrorManager.h"
 #include <QMessageBox>
 #include <iostream>
 #include <fstream>

@@ -2,11 +2,8 @@
 #include "VisitorGUI.h"
 
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QSplitter>
-#include <QListWidget>
 #include <QScrollArea>
-#include <QLabel>
 #include <QLineEdit>
 #include <QDebug>
 #include <QMenu>
@@ -15,13 +12,10 @@
 #include <QSpacerItem>
 #include <QPushButton>
 #include <QFileDialog>
-#include <QMessageBox>
 #include <QInputDialog>
 #include <QCloseEvent>
 #include <QToolButton>
 
-
-#include <unordered_map>
 
 #include "../model/artisti/Artista.h"
 #include "../model/core/ArtistProduct.h"
@@ -30,8 +24,10 @@
 #include "../model/musica/Album.h"
 #include "../model/musica/Singolo.h"
 #include "../model/musica/Traccia.h"
+
 #include "../data/DataManager.h"
 #include "ErrorManager.h"
+
 #include "filters/FilterDialog.h"
 #include "crud_dialogs/ArtistaEditorDialog.h"
 #include "crud_dialogs/ProdottoInsertDialog.h"
@@ -317,7 +313,6 @@ void MainWindow::onModificaArtista()
 void MainWindow::onModificaProdotto() {
     ArtistProduct* prodotto = nullptr;
 
-    // Caso 1: selezione da lista visibile
     QListWidgetItem* item = productListFullWidget->currentItem();
     if (!item) {
         QMessageBox::warning(this, "Attenzione", "Seleziona un prodotto da modificare.");
@@ -333,7 +328,6 @@ void MainWindow::onModificaProdotto() {
 
     prodotto = it->second;
 
-    // Caso 2: nessuna selezione → chiedi artista e prodotto da dialogo
     if (!prodotto) {
         QDialog sceltaDialog(this);
         sceltaDialog.setWindowTitle("Seleziona prodotto da modificare");
@@ -383,7 +377,6 @@ void MainWindow::onModificaProdotto() {
         }
     }
 
-    // Apre il dialogo di modifica
     ProdottoEditorDialog dialog(prodotto, artists, prodotti, this);
     if (dialog.exec() == QDialog::Accepted) {
         clearRightPanel();
@@ -391,8 +384,6 @@ void MainWindow::onModificaProdotto() {
         saveIfAutosaveEnabled();
     }
 }
-
-
 // ------------------------------
 
 // ------------ ELIMINA ARTISTA E PRODOTTO ------------
@@ -759,5 +750,4 @@ void MainWindow::openProductFilterDialog() {
         applyProductFilters(tipi, genereMusica, disponibile, artistaId);
     }
 }
-
 // --------------------------------------

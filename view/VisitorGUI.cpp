@@ -1,6 +1,5 @@
 #include "VisitorGUI.h"
-#include <QLabel>
-#include <QVBoxLayout>
+
 #include <QHBoxLayout>
 #include <QPixmap>
 #include <QPainter>
@@ -39,7 +38,6 @@ QWidget *VisitorGUI::getWidget() const
 
 QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigned int excludeProductId)
 {
-    // 1) Scroll area full-width, altezza minimal
     auto *scroll = new QScrollArea;
     scroll->setObjectName("relatedProductsScrollArea");
     scroll->setWidgetResizable(true);
@@ -47,7 +45,6 @@ QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigne
     scroll->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scroll->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    // 2) Container interno
     QWidget *container = new QWidget;
     container->setObjectName("relatedProductsContainer");
     container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -69,7 +66,6 @@ QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigne
         return scroll;
     }
 
-    // 3) Creazione delle card, saltando l’excludeProductId
     for (const auto &pp : it->second->getProducts())
     {
         unsigned int thisId = pp.first; // la chiave è l’ID
@@ -77,7 +73,6 @@ QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigne
             continue;
 
         ArtistProduct *prod = pp.second;
-        // … (qui riprendi esattamente il tuo codice di creazione della card) …
         QWidget *card = new QWidget;
         card->setObjectName("productCard");
         card->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -126,7 +121,6 @@ QWidget *VisitorGUI::createRelatedProductsSection(unsigned int artistId, unsigne
 
 QWidget *VisitorGUI::createTrackWidget(const Traccia &track)
 {
-    // Container come QFrame per ereditare lo stile QSS
     QFrame *trackContainer = new QFrame;
     trackContainer->setObjectName("singoloTrackContainer");
     trackContainer->setFrameShape(QFrame::StyledPanel);
@@ -246,7 +240,7 @@ QWidget *VisitorGUI::createDateTourWidget(const DataTour &dt)
     placeLabel->setObjectName("tourPlaceLabel");
     infoLayout->addWidget(placeLabel);
 
-    layout->addWidget(infoWidget, /*stretch=*/1);
+    layout->addWidget(infoWidget, 1);
 
     return container;
 }
@@ -351,9 +345,6 @@ QLabel* VisitorGUI::createImageLabel(const std::string& imagePathStr,
 // ---------------- artista -----------------
 void VisitorGUI::visit(const Artista *artista)
 {
-    // Da cancellare
-    qDebug() << "VisitorGUI::visit(Artista)" << QString::fromStdString(artista->getNome());
-
     clearLayout();
 
     QWidget *container = new QWidget();
@@ -459,7 +450,6 @@ void VisitorGUI::visit(const Artista *artista)
 void VisitorGUI::visit(const TShirt *tshirt)
 {
     clearLayout();
-    qDebug() << "VisitorGUI::visit(TShirt)";
 
     QWidget *mainWrapper = new QWidget;
     auto *mainLayout = new QHBoxLayout(mainWrapper);
@@ -543,7 +533,6 @@ void VisitorGUI::visit(const TShirt *tshirt)
 void VisitorGUI::visit(const CD *cd)
 {
     clearLayout();
-    qDebug() << "VisitorGUI::visit(CD)";
 
     QWidget *mainWrapper = new QWidget();
     QHBoxLayout *mainLayout = new QHBoxLayout(mainWrapper);
@@ -638,7 +627,6 @@ void VisitorGUI::visit(const CD *cd)
 void VisitorGUI::visit(const Vinile *vinile)
 {
     clearLayout();
-    qDebug() << "VisitorGUI::visit(Vinile)";
 
     QWidget *mainWrapper = new QWidget();
     QHBoxLayout *mainLayout = new QHBoxLayout(mainWrapper);
@@ -752,7 +740,6 @@ void VisitorGUI::visit(const Vinile *vinile)
 void VisitorGUI::visit(const Singolo *singolo)
 {
     clearLayout();
-    qDebug() << "VisitorGUI::visit(Singolo)";
 
     QWidget *mainWrapper = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainWrapper);
@@ -839,7 +826,6 @@ void VisitorGUI::visit(const Singolo *singolo)
 void VisitorGUI::visit(const Album *album)
 {
     clearLayout();
-    qDebug() << "VisitorGUI::visit(Album)";
 
     QWidget *mainWrapper = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainWrapper);
@@ -922,7 +908,6 @@ void VisitorGUI::visit(const Album *album)
 void VisitorGUI::visit(const Tour *tour)
 {
     clearLayout();
-    qDebug() << "VisitorGUI::visit(Tour)";
 
     QWidget *mainWrapper = new QWidget();
     QHBoxLayout *mainLayout = new QHBoxLayout(mainWrapper);
@@ -1019,5 +1004,4 @@ void VisitorGUI::visit(const Tour *tour)
     layout->setSpacing(12);
     layout->addWidget(mainWrapper);
 }
-
 // ------------------------------------

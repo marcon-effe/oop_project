@@ -26,7 +26,6 @@ public:
     explicit VisitorGUI(const std::unordered_map<unsigned int, Artista*>* artistsMap, QObject* parent = nullptr);
     QWidget* getWidget() const;
 
-    // Visitor methods
     void visit(const Artista* artista) override;
     void visit(const Album* album) override;
     void visit(const Singolo* singolo) override;
