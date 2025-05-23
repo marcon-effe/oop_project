@@ -97,6 +97,25 @@ int main(int argc, char *argv[]) {
     Q_INIT_RESOURCE(resources);
     qDebug() << "[DEBUG] Working directory:" << QDir::currentPath();
 
+    QString fullStyle;
+
+    QFile general(":/styles/style.qss");
+    if (general.open(QFile::ReadOnly | QFile::Text)) {
+        fullStyle += QLatin1String(general.readAll());
+    } else {
+        qDebug() << "style.qss non trovato!";
+    }
+
+    QFile dialogs(":/styles/dialog_styles.qss");
+    if (dialogs.open(QFile::ReadOnly | QFile::Text)) {
+        fullStyle += QLatin1String(dialogs.readAll());
+    } else {
+        qDebug() << "dialog_styles.qss non trovato!";
+    }
+
+    app.setStyleSheet(fullStyle);
+    qDebug() << "Tutti i fogli di stile applicati correttamente!";
+
     while (true) {
         std::cout << "\n==== Programma Gestione Artisti ====\n"
                   << "1. Esegui test di salvataggio/caricamento\n"
@@ -119,15 +138,6 @@ int main(int argc, char *argv[]) {
             break;
         }
         case 3: {
-            QFile styleFile(":/styles/style.qss");
-            if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
-                QTextStream ts(&styleFile);
-                app.setStyleSheet(ts.readAll());
-                qDebug() << "style.qss applicato correttamente!";
-            } else {
-                qDebug() << "style.qss non trovato!";
-            }
-
             MainWindow w;
             w.show();
             return app.exec();

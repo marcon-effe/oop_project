@@ -5,7 +5,6 @@
 #include <QSplitter>
 #include <QScrollArea>
 #include <QLineEdit>
-#include <QDebug>
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
@@ -15,7 +14,6 @@
 #include <QInputDialog>
 #include <QCloseEvent>
 #include <QToolButton>
-
 
 #include "../model/artisti/Artista.h"
 #include "../model/core/ArtistProduct.h"

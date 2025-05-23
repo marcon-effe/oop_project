@@ -2,9 +2,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
-#include <QFile>
-#include <QDir>
-#include "../../data/DataManager.h"
+#include <QPushButton> 
 
 ProdottoDeleteDialog::ProdottoDeleteDialog(
     std::unordered_map<unsigned int, Artista*>& artistiRef,
@@ -13,7 +11,9 @@ ProdottoDeleteDialog::ProdottoDeleteDialog(
 )
     : QDialog(parent), artisti(artistiRef), prodotti(prodottiRef)
 {
-    setWindowTitle("Elimina prodotto");
+    this->setObjectName("prodottoDeleteDialog");
+
+    setWindowTitle("Eliminazione");
 
     QVBoxLayout* layout = new QVBoxLayout(this);
 
@@ -32,6 +32,11 @@ ProdottoDeleteDialog::ProdottoDeleteDialog(
     aggiornaProdotti();
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    QPushButton* ok     = buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton* cancel = buttonBox->button(QDialogButtonBox::Cancel);
+    ok->setObjectName("okButton");
+    cancel->setObjectName("cancelButton");
+
     layout->addWidget(buttonBox);
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);

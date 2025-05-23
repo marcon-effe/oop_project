@@ -13,7 +13,6 @@
 #include <QTextEdit>
 #include <QLayoutItem>
 #include <QFrame>
-#include <QDebug>
 
 VisitorGUI::VisitorGUI(const std::unordered_map<unsigned int, Artista *> *artistsMap, QObject *parent)
     : QObject(parent), m_artists(artistsMap)
@@ -514,13 +513,19 @@ void VisitorGUI::visit(const TShirt *tshirt)
     unsigned int artistId = tshirt->getArtistId();
     unsigned int thisProductId = tshirt->getId();
 
-    QLabel *correlatiLabel = new QLabel("Prodotti correlati");
-    correlatiLabel->setStyleSheet("font-weight: bold; font-size: 14pt; margin-top: 30px; margin-bottom: 20px;");
-    correlatiLabel->setAlignment(Qt::AlignLeft);
-    productLayout->addWidget(correlatiLabel);
+    auto it = m_artists->find(artistId);
+    if (it != m_artists->end() && it->second->getProducts().size() > 1) {
+        QLabel *correlatiLabel = new QLabel("Prodotti correlati");
+        correlatiLabel->setStyleSheet(
+            "font-weight: bold; font-size: 14pt;"
+            "margin-top: 30px; margin-bottom: 20px;"
+        );
+        correlatiLabel->setAlignment(Qt::AlignLeft);
+        productLayout->addWidget(correlatiLabel);
 
-    QWidget *related = createRelatedProductsSection(artistId, thisProductId);
-    productLayout->addWidget(related);
+        QWidget *related = createRelatedProductsSection(artistId, thisProductId);
+        productLayout->addWidget(related);
+    }
 
     productLayout->addStretch();
 
@@ -607,13 +612,19 @@ void VisitorGUI::visit(const CD *cd)
     unsigned int artistId = cd->getArtistId();
     unsigned int thisProductId = cd->getId();
 
-    QLabel *correlatiLabel = new QLabel("Prodotti correlati");
-    correlatiLabel->setStyleSheet("font-weight: bold; font-size: 14pt; margin-top: 30px; margin-bottom: 20px;");
-    correlatiLabel->setAlignment(Qt::AlignLeft);
-    productLayout->addWidget(correlatiLabel);
+    auto it = m_artists->find(artistId);
+    if (it != m_artists->end() && it->second->getProducts().size() > 1) {
+        QLabel *correlatiLabel = new QLabel("Prodotti correlati");
+        correlatiLabel->setStyleSheet(
+            "font-weight: bold; font-size: 14pt;"
+            "margin-top: 30px; margin-bottom: 20px;"
+        );
+        correlatiLabel->setAlignment(Qt::AlignLeft);
+        productLayout->addWidget(correlatiLabel);
 
-    QWidget *related = createRelatedProductsSection(artistId, thisProductId);
-    productLayout->addWidget(related);
+        QWidget *related = createRelatedProductsSection(artistId, thisProductId);
+        productLayout->addWidget(related);
+    }
 
     productLayout->addStretch();
 
@@ -718,13 +729,19 @@ void VisitorGUI::visit(const Vinile *vinile)
     unsigned int artistId = vinile->getArtistId();
     unsigned int thisProductId = vinile->getId();
 
-    QLabel *correlatiLabel = new QLabel("Prodotti correlati");
-    correlatiLabel->setStyleSheet("font-weight: bold; font-size: 14pt; margin-top: 30px; margin-bottom: 20px;");
-    correlatiLabel->setAlignment(Qt::AlignLeft);
-    productLayout->addWidget(correlatiLabel);
+    auto it = m_artists->find(artistId);
+    if (it != m_artists->end() && it->second->getProducts().size() > 1) {
+        QLabel *correlatiLabel = new QLabel("Prodotti correlati");
+        correlatiLabel->setStyleSheet(
+            "font-weight: bold; font-size: 14pt;"
+            "margin-top: 30px; margin-bottom: 20px;"
+        );
+        correlatiLabel->setAlignment(Qt::AlignLeft);
+        productLayout->addWidget(correlatiLabel);
 
-    QWidget *related = createRelatedProductsSection(artistId, thisProductId);
-    productLayout->addWidget(related);
+        QWidget *related = createRelatedProductsSection(artistId, thisProductId);
+        productLayout->addWidget(related);
+    }
 
     productLayout->addStretch();
 
@@ -806,13 +823,19 @@ void VisitorGUI::visit(const Singolo *singolo)
     unsigned int artistId = singolo->getArtistId();
     unsigned int thisProductId = singolo->getId();
 
-    QLabel *correlatiLabel = new QLabel("Prodotti correlati");
-    correlatiLabel->setStyleSheet("font-weight: bold; font-size: 14pt; margin-top: 30px; margin-bottom: 20px;");
-    correlatiLabel->setAlignment(Qt::AlignLeft);
-    productLayout->addWidget(correlatiLabel);
+    auto it = m_artists->find(artistId);
+    if (it != m_artists->end() && it->second->getProducts().size() > 1) {
+        QLabel *correlatiLabel = new QLabel("Prodotti correlati");
+        correlatiLabel->setStyleSheet(
+            "font-weight: bold; font-size: 14pt;"
+            "margin-top: 30px; margin-bottom: 20px;"
+        );
+        correlatiLabel->setAlignment(Qt::AlignLeft);
+        productLayout->addWidget(correlatiLabel);
 
-    QWidget *related = createRelatedProductsSection(artistId, thisProductId);
-    productLayout->addWidget(related);
+        QWidget *related = createRelatedProductsSection(artistId, thisProductId);
+        productLayout->addWidget(related);
+    }
 
     productLayout->addStretch();
 
@@ -988,13 +1011,19 @@ void VisitorGUI::visit(const Tour *tour)
     unsigned int artistId = tour->getArtistId();
     unsigned int thisProductId = tour->getId();
 
-    QLabel *correlatiLabel = new QLabel("Prodotti correlati");
-    correlatiLabel->setStyleSheet("font-weight: bold; font-size: 14pt; margin-top: 30px; margin-bottom: 20px;");
-    correlatiLabel->setAlignment(Qt::AlignLeft);
-    productLayout->addWidget(correlatiLabel);
+    auto it = m_artists->find(artistId);
+    if (it != m_artists->end() && it->second->getProducts().size() > 1) {
+        QLabel *correlatiLabel = new QLabel("Prodotti correlati");
+        correlatiLabel->setStyleSheet(
+            "font-weight: bold; font-size: 14pt;"
+            "margin-top: 30px; margin-bottom: 20px;"
+        );
+        correlatiLabel->setAlignment(Qt::AlignLeft);
+        productLayout->addWidget(correlatiLabel);
 
-    QWidget *related = createRelatedProductsSection(artistId, thisProductId);
-    productLayout->addWidget(related);
+        QWidget *related = createRelatedProductsSection(artistId, thisProductId);
+        productLayout->addWidget(related);
+    }
 
     productLayout->addStretch();
 

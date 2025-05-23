@@ -29,7 +29,7 @@ private slots:
 private:
     void buildFields();
     void loadExisting();
-    void clearFields();
+    /* void clearFields(); */
 
     // modello
     Artista* m_original;  // se nullptr → creazione

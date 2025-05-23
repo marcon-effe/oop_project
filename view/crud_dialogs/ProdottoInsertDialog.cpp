@@ -126,7 +126,7 @@ void ProdottoInsertDialog::setupUI()
     if (screen) {
         QSize screenSize = screen->availableGeometry().size();
         int w = static_cast<int>(screenSize.width() * 0.3);
-        int h = static_cast<int>(screenSize.height() * 0.95);
+        int h = static_cast<int>(screenSize.height() * 0.85);
         resize(w, h);
         move((screenSize.width() - w) / 2, 5);
     }

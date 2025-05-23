@@ -1,6 +1,16 @@
 {
     "artisti": [
         {
+            "genere": "da definire",
+            "imageB64": "",
+            "imagePath": "",
+            "info": "prova",
+            "nome": "nuovo artista",
+            "prodotti": [
+            ],
+            "type": "artista"
+        },
+        {
             "genere": "hiphop",
             "imageB64": "",
             "imagePath": "",
@@ -38,6 +48,32 @@
             "info": "desc",
             "nome": "Artista_set_img",
             "prodotti": [
+                {
+                    "label": "",
+                    "musica": {
+                        "ArtistProduct": {
+                            "description": "prova",
+                            "imageB64": "",
+                            "imagePath": "",
+                            "title": "prova"
+                        },
+                        "dataUscita": {
+                            "anno": 2025,
+                            "giorno": 23,
+                            "mese": 5
+                        },
+                        "durata": {
+                            "minuti": 0,
+                            "ore": 0,
+                            "secondi": 0
+                        },
+                        "genere": "",
+                        "type": "musica"
+                    },
+                    "tracce": [
+                    ],
+                    "type": "album"
+                }
             ],
             "type": "artista"
         },

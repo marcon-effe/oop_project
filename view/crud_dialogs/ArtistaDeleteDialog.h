@@ -5,8 +5,6 @@
 #include <QComboBox>
 #include <QDialogButtonBox>
 
-#include <unordered_map>
-
 #include "../../model/artisti/Artista.h"
 #include "../../model/core/ArtistProduct.h"
 

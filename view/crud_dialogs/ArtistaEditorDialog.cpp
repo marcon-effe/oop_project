@@ -1,13 +1,18 @@
 #include "ArtistaEditorDialog.h"
 #include "../../data/DataManager.h"
 
-ArtistaEditorDialog::ArtistaEditorDialog(Artista* existing, QWidget* parent, const std::set<std::string>& nomiEsistenti)
-    : QDialog(parent),
-      m_original(existing),
-      m_artist(nullptr),
-      m_nomiEsistenti(nomiEsistenti)
+ArtistaEditorDialog::ArtistaEditorDialog(
+    Artista* existing,
+    QWidget* parent,
+    const std::set<std::string>& nomiEsistenti
+) : QDialog(parent),
+    m_original(existing),
+    m_artist(nullptr),
+    m_nomiEsistenti(nomiEsistenti)
 {
-    // se siamo in modifica, togliamo il nome attuale dal set (così non è considerato "duplicato")
+    this->setObjectName("artistaEditorDialog");
+
+    // tolgo il nome corrente dal set in modifica
     if (m_original) {
         m_nomiEsistenti.erase(m_original->getNome());
     }
@@ -19,10 +24,16 @@ ArtistaEditorDialog::ArtistaEditorDialog(Artista* existing, QWidget* parent, con
     mainLayout->addLayout(m_formLayout);
 
     buildFields();
-    if (m_original) { loadExisting(); }
+    if (m_original) loadExisting();
 
-    m_buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    m_buttons->button(QDialogButtonBox::Ok)->setEnabled(m_original || !m_leNome->text().trimmed().isEmpty());
+    m_buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    QAbstractButton* okBtn     = m_buttons->button(QDialogButtonBox::Ok);
+    QAbstractButton* cancelBtn = m_buttons->button(QDialogButtonBox::Cancel);
+    okBtn->setObjectName("okButton");
+    cancelBtn->setObjectName("cancelButton");
+
+    // disabilito Ok se nessun nome
+    okBtn->setEnabled(m_original || !m_leNome->text().trimmed().isEmpty());
 
     connect(m_buttons, &QDialogButtonBox::accepted, this, &ArtistaEditorDialog::saveValues);
     connect(m_buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
@@ -30,26 +41,27 @@ ArtistaEditorDialog::ArtistaEditorDialog(Artista* existing, QWidget* parent, con
 
     mainLayout->addWidget(m_buttons);
 
-    // abilita OK solo se il nome è non vuoto
+    // aggiorno lo stato di Ok al cambiare del testo
     connect(m_leNome, &QLineEdit::textChanged, this, [this](const QString& text) {
-        m_buttons->button(QDialogButtonBox::Ok)->setEnabled(!text.trimmed().isEmpty());
+        m_buttons->button(QDialogButtonBox::Ok)
+                 ->setEnabled(!text.trimmed().isEmpty());
     });
 }
 
-void ArtistaEditorDialog::clearFields()
+/* Inutile per il modo in cui è stato implementato, perché ogni dialog viene ricostruito da 0 */
+/* void ArtistaEditorDialog::clearFields()
 {
-    QLayoutItem *item;
-    while ((item = m_formLayout->takeAt(0)) != nullptr) {
-        if (auto *w = item->widget()) {
-            delete w;
-        }
+    while (m_formLayout->count() > 0) { 
+        QLayoutItem* item = m_formLayout->takeAt(0);
+        if (auto* w = item->widget()) 
+            delete w; 
         delete item;
     }
-}
+} */
 
 void ArtistaEditorDialog::buildFields()
 {
-    clearFields();
+    /* clearFields(); */
 
     m_leNome = new QLineEdit(this);
     m_leNome->setMaxLength(40);

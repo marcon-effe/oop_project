@@ -2,8 +2,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QMessageBox>
-#include <QFile>
-
+#include <QPushButton>
 #include "../../data/DataManager.h"
 
 ArtistaDeleteDialog::ArtistaDeleteDialog(
@@ -12,19 +11,34 @@ ArtistaDeleteDialog::ArtistaDeleteDialog(
     QWidget* parent
 ) : QDialog(parent), artisti(artistiRef), prodotti(prodottiRef)
 {
-    setWindowTitle("Elimina artista");
+    this->setObjectName("artistaDeleteDialog");
+
+    setWindowTitle("Eliminazione");
 
     QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->setContentsMargins(20,20,20,20);
+    layout->setSpacing(12);
 
-    layout->addWidget(new QLabel("Seleziona l'artista da eliminare:"));
+    QLabel* info = new QLabel("Seleziona l'artista da eliminare:", this);
+    layout->addWidget(info);
 
     artistaComboBox = new QComboBox(this);
+    artistaComboBox->setIconSize(QSize(32,32));
     for (const auto& [id, artista] : artisti) {
-        artistaComboBox->addItem(QString::fromStdString(artista->getNome()), QVariant::fromValue(id));
+        artistaComboBox->addItem(
+            QString::fromStdString(artista->getNome()),
+            QVariant::fromValue(id)
+        );
     }
     layout->addWidget(artistaComboBox);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+
+    QPushButton* ok = buttonBox->button(QDialogButtonBox::Ok);
+    ok->setObjectName("okButton");
+    QPushButton* cancel = buttonBox->button(QDialogButtonBox::Cancel);
+    cancel->setObjectName("cancelButton");
+
     layout->addWidget(buttonBox);
 
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);

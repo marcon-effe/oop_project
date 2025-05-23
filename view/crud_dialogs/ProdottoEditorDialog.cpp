@@ -25,6 +25,8 @@ ProdottoEditorDialog::ProdottoEditorDialog(
             artistaSelezionato = it->second;
     }
 
+    this->setObjectName("prodottoEditorDialog");
+
     setWindowTitle("Modifica prodotto");
     setMinimumWidth(500);
     setupUI();
@@ -44,7 +46,7 @@ void ProdottoEditorDialog::setupUI() {
     mainLayout->addWidget(scrollArea);
 
     // Contenitore per i campi specifici
-    campiSpecificiContainer = new QWidget;
+    campiSpecificiContainer = new QWidget(this);
     campiSpecificiLayout = new QVBoxLayout(campiSpecificiContainer);
     scrollLayout->addWidget(campiSpecificiContainer);
 
@@ -68,13 +70,11 @@ void ProdottoEditorDialog::setupUI() {
     connect(confermaBtn, &QPushButton::clicked, this, &ProdottoEditorDialog::confermaModifica);
 
     scrollLayout->addWidget(btnBox);
-
-    // Posizionamento e dimensione
     QScreen* screen = QGuiApplication::primaryScreen();
     if (screen) {
         QSize screenSize = screen->availableGeometry().size();
         int w = static_cast<int>(screenSize.width() * 0.3);
-        int h = static_cast<int>(screenSize.height() * 0.95);
+        int h = static_cast<int>(screenSize.height() * 0.85);
         resize(w, h);
         move((screenSize.width() - w) / 2, 5);
     }
@@ -90,6 +90,8 @@ void ProdottoEditorDialog::selezionaImmagine() {
 
 void ProdottoEditorDialog::buildArtistProduct() {
     QGroupBox* box = new QGroupBox("Dati generali");
+    box->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+
     QFormLayout* form = new QFormLayout;
 
     titoloEdit = new QLineEdit(this);
