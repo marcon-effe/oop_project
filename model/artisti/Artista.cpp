@@ -25,7 +25,12 @@ Artista::Artista(const std::string &n, const std::string &g, const std::string &
 }
 
 //DISTRUTTORE
-Artista::~Artista() {}
+Artista::~Artista() {
+    for (auto& pair : products) {
+        delete pair.second;
+    }
+    products.clear();  // pulisce la mappa
+}
 
 unsigned int Artista::generateId() {
     std::lock_guard<std::mutex> lock(idMutex);

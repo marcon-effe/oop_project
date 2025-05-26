@@ -203,3 +203,17 @@ std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const st
     file.close();
     return artisti;
 }
+
+void DataManager::cleanUpArtist(std::unordered_map<unsigned int, Artista*>& artisti) {
+    for(auto& pair : artisti) {
+        delete pair.second;
+    }
+    artisti.clear();
+}
+
+void DataManager::cleanUpProducts(std::unordered_map<unsigned int, ArtistProduct*>& products) {
+    for (auto& kv : products) {
+        delete kv.second;
+    }
+    products.clear();
+}

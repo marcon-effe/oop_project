@@ -48,6 +48,9 @@ public:
     static bool validateXmlWithSchema(const std::string& xmlFilePath, const std::string& schemaFilePath);
     static bool saveToFileXml(const std::unordered_map<unsigned int, Artista*>& artisti, const std::string& filePath, bool reduced=false);
     static std::unordered_map<unsigned int, Artista*> loadFromFileXml(const std::string& filePath);
+
+    static void cleanUpArtist(std::unordered_map<unsigned int, Artista*>& artisti);
+    static void cleanUpProducts(std::unordered_map<unsigned int, ArtistProduct*>& products);
 };
 
 #endif // DATAMANAGER_H

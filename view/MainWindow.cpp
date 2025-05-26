@@ -42,6 +42,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setupUI();
 }
 
+MainWindow::~MainWindow() {
+    DataManager::cleanUpArtist(artists);
+    prodotti.clear();
+}
+
 void MainWindow::resizeEvent(QResizeEvent *event) {
     QMainWindow::resizeEvent(event);
     if (centralWidget()) {
@@ -465,7 +470,7 @@ void MainWindow::clearAll() {
     artistListWidget->clear();
     productListFullWidget->clear();
     clearRightPanel();
-    artists.clear();
+    DataManager::cleanUpArtist(artists);
     prodotti.clear();
 }
 
@@ -523,7 +528,7 @@ void MainWindow::importData() {
 }
 
 void MainWindow::loadDataFromSaves(const std::string& path) {
-    artists.clear();
+    DataManager::cleanUpArtist(artists);
     prodotti.clear();
 
     if (endsWith(path, ".json")) {
