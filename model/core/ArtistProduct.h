@@ -18,7 +18,7 @@ class VisitorConsoleEditor;
 class Artista;
 
 class ArtistProduct {
-protected:
+private:
     const unsigned int ID;
     unsigned int id_artist; //volutamente non const, in quanto l'artista potrebbe essere cambiato
     std::string nomeArtista; // nome dell'artista, usato per il path dell'immagine
