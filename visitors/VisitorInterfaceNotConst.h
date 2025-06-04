@@ -8,7 +8,6 @@ class TShirt;
 class CD;
 class Vinile;
 class Tour;
-class Artista;
 class DataTour; // Aggiunto per DataTour
 class Traccia; // Aggiunto per Traccia
 

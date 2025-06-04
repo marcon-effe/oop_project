@@ -1,7 +1,6 @@
 #ifndef VISITORINTERFACECONST_H
 #define VISITORINTERFACECONST_H
 
-class Artista;
 class Album;
 class Singolo;
 class TShirt;
