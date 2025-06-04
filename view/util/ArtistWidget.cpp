@@ -15,6 +15,7 @@ ArtistWidget::ArtistWidget(const std::unordered_map<unsigned int, Artista*>* art
     : QObject(parent),
       m_artists(artistsMap)
 {
+    // Creo la parte scrollabile che conterrà tutto
     scrollContent = new QWidget();
     layout        = new QVBoxLayout(scrollContent);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -45,10 +46,11 @@ void ArtistWidget::clearLayout()
     }
 }
 
-void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
+void ArtistWidget::showArtista(const Artista* artista, QWidget* /*parent_unused*/)
 {
     clearLayout();
 
+    // Creo un nuovo container, figlio di scrollContent
     QWidget* container = new QWidget(scrollContent);
     container->setObjectName("artistContainer");
 
@@ -56,6 +58,7 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
     vbox->setContentsMargins(24, 30, 24, 12);
     vbox->setSpacing(12);
 
+    // Immagine rotonda dell’artista (200×200)
     QSize artistImgSize(200, 200);
     QLabel* imageLabel = createImageLabel(
         artista->getImagePath(),
@@ -66,16 +69,19 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
     imageLabel->setObjectName("artistImage");
     vbox->addWidget(imageLabel, 0, Qt::AlignHCenter);
 
+    // Nome
     QLabel* nameLabel = new QLabel(QString::fromStdString(artista->getNome()), container);
     nameLabel->setObjectName("artistName");
     nameLabel->setAlignment(Qt::AlignCenter);
     vbox->addWidget(nameLabel);
 
+    // Genere
     QLabel* genreLabel = new QLabel(QString::fromStdString(artista->getGenere()), container);
     genreLabel->setObjectName("artistGenre");
     genreLabel->setAlignment(Qt::AlignCenter);
     vbox->addWidget(genreLabel);
 
+    // Descrizione
     QGroupBox* descBox = new QGroupBox("Descrizione", container);
     descBox->setObjectName("artistDescBox");
     descBox->setAlignment(Qt::AlignCenter);
@@ -85,6 +91,7 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
     descLayout->addWidget(descLabel);
     vbox->addWidget(descBox);
 
+    // Prodotti
     QGroupBox* prodBox = new QGroupBox("Prodotti", container);
     prodBox->setObjectName("artistProdBox");
     QVBoxLayout* prodLayout = new QVBoxLayout(prodBox);
@@ -95,18 +102,22 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
     prodList->setUniformItemSizes(false);
     prodLayout->addWidget(prodList);
 
+    // Itero sui prodotti
     for (const auto& pair : artista->getProducts()) {
         ArtistProduct* p = pair.second;
 
+        // Item con altezza fissa 100px
         QListWidgetItem* item = new QListWidgetItem(prodList);
         item->setSizeHint(QSize(0, 100));
 
+        // Card interna
         QWidget* card = new QWidget();
         card->setObjectName("productCard");
         QHBoxLayout* h = new QHBoxLayout(card);
         h->setContentsMargins(10, 10, 10, 10);
         h->setSpacing(12);
 
+        // Thumbnail 80×80
         QSize thumbSize(80, 80);
         QLabel* thumb = createImageLabel(
             p->getImagePath(),
@@ -117,6 +128,7 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
         thumb->setObjectName("productThumb");
         h->addWidget(thumb);
 
+        // Info titolo + descrizione
         QVBoxLayout* info = new QVBoxLayout();
         QLabel* title = new QLabel(QString::fromStdString(p->getTitle()), card);
         title->setObjectName("productTitle");
@@ -132,6 +144,7 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
         info->addStretch();
         h->addLayout(info, /*stretch=*/1);
 
+        // Bottone “Dettagli”: emetto il segnale prodottoSelezionato(p)
         QPushButton* btn = new QPushButton("Dettagli", card);
         btn->setObjectName("productButton");
         btn->setCursor(Qt::PointingHandCursor);
@@ -140,6 +153,7 @@ void ArtistWidget::showArtista(const Artista* artista, QWidget* parent)
         });
         h->addWidget(btn, /*stretch=*/0, Qt::AlignVCenter);
 
+        // Associo la card all’item
         prodList->setItemWidget(item, card);
     }
 

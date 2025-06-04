@@ -72,6 +72,12 @@ void Traccia::editPartecipante(unsigned int index, const std::string& nuovoNome)
     partecipanti[index] = nuovoNome;
 }
 
+void Traccia::setPartecipanti(const std::vector<std::string>& parts) {
+    this->partecipanti.clear();
+    this->partecipanti.shrink_to_fit();
+    partecipanti = parts;
+}
+
 
 //JSON
 //Converte un oggetto JSON in un oggetto Traccia

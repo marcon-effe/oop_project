@@ -33,6 +33,7 @@
 #include "crud_dialogs/ProdottoDeleteDialog.h"
 #include "../view/util/ArtistWidget.h"
 #include "../view/util/ArtistFormBuilder.h"
+#include "../view/util/ProdottoFormBuilder.h"
 
 
 static bool endsWith(const std::string& str, const std::string& suffix) {
@@ -252,19 +253,23 @@ void MainWindow::setupUI() {
 // ------------ INSERIMENTO ARTISTA E PRODOTTO ------------
 void MainWindow::onInserisciArtista()
 {
+    // 1) Preparo i nomi sanitizzati
     std::set<std::string> nomiSan;
     for (const auto& pair : artists) {
         nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
     }
 
+    // 2) Pulisco il pannello di destra
     clearRightPanel();
 
+    // 3) Creo il builder in modalità “insert” (existing = nullptr)
     ArtistFormBuilder* builder =
         new ArtistFormBuilder(artists,    // unordered_map<unsigned,Artista*>&
                                nullptr,    // existing = nullptr → nuovo artista
                                nomiSan,
                                this);      // parent = MainWindow
 
+    // 4) Collegamenti ai segnali del builder
     connect(builder, &ArtistFormBuilder::editingAccepted,
             this, [this](Artista* /*nuovoArtista*/) {
         updateListWidgets();          // aggiorno la lista in MainWindow
@@ -276,6 +281,7 @@ void MainWindow::onInserisciArtista()
         clearRightPanel();            // solo chiudo il form se annullo
     });
 
+    // 5) Aggiungo il widget del builder al rightLayout
     rightLayout->addWidget(builder->getWidget());
 }
 
@@ -286,12 +292,24 @@ void MainWindow::onInserisciProdotto()
         return;
     }
 
-    ProdottoInsertDialog* dialog = new ProdottoInsertDialog(artists, prodotti, this);
-    dialog->exec();
-    updateListWidgets();
-    saveIfAutosaveEnabled();
+    // 1) Pulisco il pannello di destra
+    clearRightPanel();
+
+    // 2) Creo il ProdottoFormBuilder in modalità "inserimento" (prodottoEsistente = nullptr)
+    auto* builder = new ProdottoFormBuilder(artists, prodotti, /*prodottoEsistente=*/nullptr, this);
+
+    // 3) Collegamento: quando il form emette prodottoSalvato(), aggiorno e svuoto il pannello
+    connect(builder, &ProdottoFormBuilder::prodottoSalvato, this, [this, builder]() {
+        updateListWidgets();
+        saveIfAutosaveEnabled();
+        clearRightPanel();
+    });
+
+    // 4) Aggiungo il widget del builder al rightLayout
+    rightLayout->addWidget(builder);
 }
 // ------------------------------
+
 
 // ------------ MODIFICA ARTISTA E PRODOTTO ------------
 void MainWindow::onModificaArtista()
@@ -312,19 +330,23 @@ void MainWindow::onModificaArtista()
     }
     if (!artista) return;
 
+    // 1) Preparo il set dei nomi sanitizzati (tolgo quello corrente)
     std::set<std::string> nomiSan;
     for (const auto& pair : artists) {
         nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
     }
 
+    // 2) Pulisco il pannello di destra
     clearRightPanel();
 
+    // 3) Creo il builder in modalità “edit” (passo l’artista esistente)
     ArtistFormBuilder* builder =
         new ArtistFormBuilder(artists,
                                artista,   // existing ≠ nullptr → edit mode
                                nomiSan,
                                this);
 
+    // 4) Collegamenti ai segnali
     connect(builder, &ArtistFormBuilder::editingAccepted,
             this, [this](Artista* /*artistaAggiornato*/) {
         updateListWidgets();
@@ -336,12 +358,18 @@ void MainWindow::onModificaArtista()
         clearRightPanel();
     });
 
+    // 5) Aggiungo il widget del builder al rightLayout
     rightLayout->addWidget(builder->getWidget());
 }
 
-void MainWindow::onModificaProdotto() {
-    ArtistProduct* prodotto = nullptr;
+void MainWindow::onModificaProdotto()
+{
+    if (artists.empty()) {
+        QMessageBox::warning(this, "Attenzione", "Nessun artista disponibile.");
+        return;
+    }
 
+    // 1) Prendo l'item selezionato
     QListWidgetItem* item = productListFullWidget->currentItem();
     if (!item) {
         QMessageBox::warning(this, "Attenzione", "Seleziona un prodotto da modificare.");
@@ -354,64 +382,23 @@ void MainWindow::onModificaProdotto() {
         QMessageBox::critical(this, "Errore", "Prodotto non trovato.");
         return;
     }
+    ArtistProduct* prodotto = it->second;
 
-    prodotto = it->second;
+    // 2) Pulisco il pannello di destra
+    clearRightPanel();
 
-    if (!prodotto) {
-        QDialog sceltaDialog(this);
-        sceltaDialog.setWindowTitle("Seleziona prodotto da modificare");
-        QVBoxLayout* layout = new QVBoxLayout(&sceltaDialog);
+    // 3) Creo il ProdottoFormBuilder in modalità "modifica", passando l'oggetto esistente
+    auto* builder = new ProdottoFormBuilder(artists, prodotti, prodotto, this);
 
-        QComboBox* artistaCombo = new QComboBox(&sceltaDialog);
-        for (const auto& [id, artista] : artists) {
-            artistaCombo->addItem(QString::fromStdString(artista->getNome()), QVariant::fromValue(id));
-        }
-
-        QComboBox* prodottoCombo = new QComboBox(&sceltaDialog);
-
-        auto aggiornaProdotti = [&]() {
-            prodottoCombo->clear();
-            unsigned int id = artistaCombo->currentData().toUInt();
-            auto artista = artists.at(id);
-            for (const auto& [pid, prod] : artista->getProducts()) {
-                prodottoCombo->addItem(QString::fromStdString(prod->getTitle()), QVariant::fromValue(prod->getId()));
-            }
-        };
-
-        connect(artistaCombo, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), aggiornaProdotti);    // disambiguazione dell'overload della funzione
-        artistaCombo->setCurrentIndex(0);  // forza caricamento iniziale
-        aggiornaProdotti();
-
-        layout->addWidget(new QLabel("Artista:"));
-        layout->addWidget(artistaCombo);
-        layout->addWidget(new QLabel("Prodotto:"));
-        layout->addWidget(prodottoCombo);
-
-        QDialogButtonBox* btnBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, &sceltaDialog);
-        layout->addWidget(btnBox);
-        connect(btnBox, &QDialogButtonBox::accepted, &sceltaDialog, &QDialog::accept);
-        connect(btnBox, &QDialogButtonBox::rejected, &sceltaDialog, &QDialog::reject);
-
-        if (sceltaDialog.exec() == QDialog::Accepted) {
-            unsigned int id = prodottoCombo->currentData().toUInt();
-            auto it = prodotti.find(id);
-            if (it != prodotti.end()) {
-                prodotto = it->second;
-            } else {
-                QMessageBox::critical(this, "Errore", "Prodotto non trovato.");
-                return;
-            }
-        } else {
-            return;  // utente ha annullato
-        }
-    }
-
-    ProdottoEditorDialog dialog(prodotto, artists, prodotti, this);
-    if (dialog.exec() == QDialog::Accepted) {
+    // 4) Collegamento: quando il form emette prodottoSalvato(), aggiorno e svuoto il pannello
+    connect(builder, &ProdottoFormBuilder::prodottoSalvato, this, [this, builder]() {
         clearRightPanel();
         updateListWidgets();
         saveIfAutosaveEnabled();
-    }
+    });
+
+    // 5) Aggiungo il widget del builder al rightLayout
+    rightLayout->addWidget(builder);
 }
 // ------------------------------
 
@@ -647,13 +634,16 @@ void MainWindow::handleArtistSelection(QListWidgetItem* item)
     for (const auto& pair : artists) {
         Artista* a = pair.second;
         if (QString::fromStdString(a->getNome()) == item->text()) {
+            // 1) Creo l'ArtistWidget e lo metto nel right panel
             ArtistWidget* aw = new ArtistWidget(&artists, this);
             aw->showArtista(a, nullptr);
             rightLayout->addWidget(aw->getWidget());
 
+            // 2) Collego il segnale prodottoSelezionato(...) a una lambda di MainWindow
             connect(aw, &ArtistWidget::prodottoSelezionato,
                     this, [this](ArtistProduct* p) {
                 clearRightPanel();
+                // Creo VisitorGUI (passando &artists e this come parent)
                 VisitorGUI* visitor = new VisitorGUI(&artists, this);
                 p->accept(visitor);
                 rightLayout->addWidget(visitor->getWidget());

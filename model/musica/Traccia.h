@@ -37,6 +37,7 @@ public:
     void removePartecipante(const std::string &a);
     void removePartecipante(unsigned int index);
     void editPartecipante(unsigned int index, const std::string& nuovoNome);
+    void setPartecipanti(const std::vector<std::string>& parts);
 
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
