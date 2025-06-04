@@ -41,7 +41,6 @@ HEADERS += cli/ConsoleApp.h \
            model/util/Durata.h \
            model/util/Orario.h \
            view/crud_dialogs/ArtistaDeleteDialog.h \
-           view/crud_dialogs/ArtistaEditorDialog.h \
            view/crud_dialogs/ProdottoDeleteDialog.h \
            view/crud_dialogs/ProdottoEditorDialog.h \
            view/crud_dialogs/ProdottoInsertDialog.h \
@@ -77,7 +76,6 @@ SOURCES += main.cpp \
            model/util/Durata.cpp \
            model/util/Orario.cpp \
            view/crud_dialogs/ArtistaDeleteDialog.cpp \
-           view/crud_dialogs/ArtistaEditorDialog.cpp \
            view/crud_dialogs/ProdottoDeleteDialog.cpp \
            view/crud_dialogs/ProdottoEditorDialog.cpp \
            view/crud_dialogs/ProdottoInsertDialog.cpp \
