@@ -94,7 +94,6 @@ void ConsoleApp::modifyArtist() {
     }
 }
 
-
 void ConsoleApp::deleteArtist() {
     Artista* a = selectArtist();
     if (!a) return;

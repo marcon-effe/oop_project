@@ -8,4 +8,4 @@ public:
     static void modificaArtista(Artista* artista);
 };
 
-#endif // CONSOLEARTISTEDITOR_H
+#endif
