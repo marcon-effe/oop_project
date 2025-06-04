@@ -252,23 +252,19 @@ void MainWindow::setupUI() {
 // ------------ INSERIMENTO ARTISTA E PRODOTTO ------------
 void MainWindow::onInserisciArtista()
 {
-    // 1) Preparo i nomi sanitizzati
     std::set<std::string> nomiSan;
     for (const auto& pair : artists) {
         nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
     }
 
-    // 2) Pulisco il pannello di destra
     clearRightPanel();
 
-    // 3) Creo il builder in modalità “insert” (existing = nullptr)
     ArtistFormBuilder* builder =
         new ArtistFormBuilder(artists,    // unordered_map<unsigned,Artista*>&
                                nullptr,    // existing = nullptr → nuovo artista
                                nomiSan,
                                this);      // parent = MainWindow
 
-    // 4) Collegamenti ai segnali del builder
     connect(builder, &ArtistFormBuilder::editingAccepted,
             this, [this](Artista* /*nuovoArtista*/) {
         updateListWidgets();          // aggiorno la lista in MainWindow
@@ -280,7 +276,6 @@ void MainWindow::onInserisciArtista()
         clearRightPanel();            // solo chiudo il form se annullo
     });
 
-    // 5) Aggiungo il widget del builder al rightLayout
     rightLayout->addWidget(builder->getWidget());
 }
 
@@ -317,23 +312,19 @@ void MainWindow::onModificaArtista()
     }
     if (!artista) return;
 
-    // 1) Preparo il set dei nomi sanitizzati (tolgo quello corrente)
     std::set<std::string> nomiSan;
     for (const auto& pair : artists) {
         nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
     }
 
-    // 2) Pulisco il pannello di destra
     clearRightPanel();
 
-    // 3) Creo il builder in modalità “edit” (passo l’artista esistente)
     ArtistFormBuilder* builder =
         new ArtistFormBuilder(artists,
                                artista,   // existing ≠ nullptr → edit mode
                                nomiSan,
                                this);
 
-    // 4) Collegamenti ai segnali
     connect(builder, &ArtistFormBuilder::editingAccepted,
             this, [this](Artista* /*artistaAggiornato*/) {
         updateListWidgets();
@@ -345,7 +336,6 @@ void MainWindow::onModificaArtista()
         clearRightPanel();
     });
 
-    // 5) Aggiungo il widget del builder al rightLayout
     rightLayout->addWidget(builder->getWidget());
 }
 
@@ -657,16 +647,13 @@ void MainWindow::handleArtistSelection(QListWidgetItem* item)
     for (const auto& pair : artists) {
         Artista* a = pair.second;
         if (QString::fromStdString(a->getNome()) == item->text()) {
-            // 1) Creo l'ArtistWidget e lo metto nel right panel
             ArtistWidget* aw = new ArtistWidget(&artists, this);
             aw->showArtista(a, nullptr);
             rightLayout->addWidget(aw->getWidget());
 
-            // 2) Collego il segnale prodottoSelezionato(...) a una lambda di MainWindow
             connect(aw, &ArtistWidget::prodottoSelezionato,
                     this, [this](ArtistProduct* p) {
                 clearRightPanel();
-                // Creo VisitorGUI (passando &artists e this come parent)
                 VisitorGUI* visitor = new VisitorGUI(&artists, this);
                 p->accept(visitor);
                 rightLayout->addWidget(visitor->getWidget());

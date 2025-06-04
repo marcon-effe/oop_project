@@ -20,7 +20,6 @@ class ArtistFormBuilder : public QObject {
     Q_OBJECT
 
 public:
-    // Firma del costruttore: primi due parametri, il parent widget opzionale
     explicit ArtistFormBuilder(std::unordered_map<unsigned, Artista*>& artistsMap,
                                Artista* existing,
                                const std::set<std::string>& nomiEsistenti,
