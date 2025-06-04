@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include "VisitorGUI.h"
+#include "../visitors/VisitorGUI.h"
 
 #include <QVBoxLayout>
 #include <QSplitter>

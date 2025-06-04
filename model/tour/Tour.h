@@ -33,8 +33,8 @@ public:
     QJsonObject toJson(bool reduced=false) const override;
     QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
-    virtual void accept(VisitorGUI* v) const final;
-    virtual void accept(VisitorConsoleEditor* visitor) final;
+    virtual void accept(VisitorInterfaceConst* v) const final;
+    virtual void accept(VisitorInterfaceNotConst* visitor) final;
 
     friend bool operator==(const Tour& a, const Tour& b);
     friend bool operator!=(const Tour& a, const Tour& b);

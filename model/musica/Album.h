@@ -59,8 +59,8 @@ public:
     virtual void printInfo() const final;
 
     // Visitor
-    virtual void accept(VisitorGUI* visitor) const final;
-    virtual void accept(VisitorConsoleEditor* visitor) final;
+    virtual void accept(VisitorInterfaceConst* visitor) const final;
+    virtual void accept(VisitorInterfaceNotConst* visitor) final;
 
     // Overloading operatori
     friend bool operator==(const Album& a, const Album& b);

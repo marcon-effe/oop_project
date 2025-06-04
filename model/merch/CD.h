@@ -37,8 +37,8 @@ public:
     QDomElement toXml(QDomDocument& doc, bool reduced=false) const final override;
 
     // Visitor
-    void accept(VisitorGUI* visitor) const final override;
-    void accept(VisitorConsoleEditor* visitor) final override;
+    void accept(VisitorInterfaceConst* visitor) const final override;
+    void accept(VisitorInterfaceNotConst* visitor) final override;
 
     friend bool operator==(const CD& a, const CD& b);
     friend bool operator!=(const CD& a, const CD& b);

@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Vinile.h"
 
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 // Costruttori
 Vinile::Vinile(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile,
@@ -81,11 +81,11 @@ QDomElement Vinile::toXml(QDomDocument& doc, bool reduced) const {
 }
 
 
-void Vinile::accept(VisitorGUI* v) const {
+void Vinile::accept(VisitorInterfaceConst* v) const {
     v->visit(this);
 }
 
-void Vinile::accept(VisitorConsoleEditor* visitor) {
+void Vinile::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

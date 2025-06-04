@@ -1,7 +1,7 @@
 #include <iostream>
 #include "DataTour.h"
 
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 DataTour::DataTour(unsigned int g, unsigned int m, unsigned int a, unsigned int o, unsigned int min, unsigned int s, const std::string &l)
 : Data(g, m, a), Orario(o, min, s), luogo(l) {}
@@ -73,7 +73,7 @@ QDomElement DataTour::toXml(QDomDocument& doc) const {
     return xml;
 }
 
-void DataTour::accept(VisitorConsoleEditor* visitor) {
+void DataTour::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "CD.h"
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 
 CD::CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
@@ -62,11 +62,11 @@ QDomElement CD::toXml(QDomDocument& doc, bool reduced) const {
 }
 
 // Visitor
-void CD::accept(VisitorGUI* visitor) const {
+void CD::accept(VisitorInterfaceConst* visitor) const {
     visitor->visit(this);
 }
 
-void CD::accept(VisitorConsoleEditor* visitor) {
+void CD::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

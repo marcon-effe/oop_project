@@ -16,8 +16,8 @@
 #include "../core/ArtistProduct.h"
 
 class ArtistProduct;
-class VisitorGUI;
-class VisitorConsoleEditor;
+class VisitorInterfaceConst;
+class VisitorInterfaceNotConst;
 
 class Artista {
 private:
@@ -82,8 +82,8 @@ public:
     QDomElement toXml(QDomDocument& doc, bool reduced=false) const;
 
     //Visitor
-    void accept(VisitorGUI *visitor) const;
-    void accept(VisitorConsoleEditor *visitor);
+    void accept(VisitorInterfaceConst* visitor) const;
+    void accept(VisitorInterfaceNotConst* visitor);
 
     //OVERLOADING OPERATORI
     friend bool operator==(const Artista& a, const Artista& b);

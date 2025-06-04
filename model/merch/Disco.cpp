@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Disco.h"
-#include "../../view/VisitorGUI.h"
+#include "../../visitors/VisitorInterfaceConst.h"
 
 // COSTRUTTORI
 

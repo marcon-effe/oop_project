@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Musica.h"
-#include "../../view/VisitorGUI.h"
+#include "../../visitors/VisitorInterfaceConst.h"
 
 // COSTRUTTORI
 

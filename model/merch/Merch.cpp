@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Merch.h"
-#include "../../view/VisitorGUI.h"
+#include "../../visitors/VisitorInterfaceConst.h"
 
 // COSTRUTTORI
 Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice)

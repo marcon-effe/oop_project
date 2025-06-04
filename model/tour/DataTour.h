@@ -4,7 +4,7 @@
 #include "../util/Data.h"
 #include "../util/Orario.h"
 
-class VisitorConsoleEditor;
+class VisitorInterfaceNotConst;
 
 class DataTour : public Data, public Orario {
 private:
@@ -30,7 +30,7 @@ public:
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    void accept(VisitorConsoleEditor* visitor);
+    void accept(VisitorInterfaceNotConst* visitor);
 
     // OVERLOADING OPERATORI
     friend bool operator==(const DataTour& a, const DataTour& b);

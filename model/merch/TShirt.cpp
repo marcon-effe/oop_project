@@ -1,7 +1,7 @@
 #include <iostream>
 #include "TShirt.h"
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 // COSTRUTTORI
 TShirt::TShirt(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& taglia, const std::string& colore)
@@ -112,11 +112,11 @@ void TShirt::printInfo() const {
 }
 
 
-void TShirt::accept(VisitorGUI* visitor) const {
+void TShirt::accept(VisitorInterfaceConst* visitor) const {
     visitor->visit(this);
 }
 
-void TShirt::accept(VisitorConsoleEditor* visitor) {
+void TShirt::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

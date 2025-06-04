@@ -6,7 +6,7 @@
 
 #include "../data/DataManager.h"
 #include "../view/ErrorManager.h"
-#include "VisitorConsoleEditor.h"
+#include "../visitors/VisitorConsoleEditor.h"
 #include "ConsoleEditorHandler.h"
 
 ConsoleApp::ConsoleApp() {}

@@ -34,8 +34,8 @@ public:
     virtual QJsonObject toJson(bool reduced=false) const override;
     virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
-    virtual void accept(VisitorGUI* v) const final;
-    virtual void accept(VisitorConsoleEditor* visitor) final override;
+    virtual void accept(VisitorInterfaceConst* v) const final;
+    virtual void accept(VisitorInterfaceNotConst* visitor) final override;
 
     friend bool operator==(const TShirt& a, const TShirt& b);
     friend bool operator!=(const TShirt& a, const TShirt& b);

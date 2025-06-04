@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Traccia.h"
 
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 Traccia::Traccia(const std::string &n, const std::vector<std::string> &parts, const Durata &d, const std::string &t, bool ht)
 : nome(n), partecipanti(parts), durata(d), testo(t), hasTesto(ht){
@@ -142,7 +142,7 @@ QDomElement Traccia::toXml(QDomDocument& doc) const {
     return tracciaElem;
 }
 
-void Traccia::accept(VisitorConsoleEditor* visitor) {
+void Traccia::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

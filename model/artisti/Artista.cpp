@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Artista.h"
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 #include "../../view/ErrorManager.h"
 #include "../../data/DataManager.h"
 
@@ -412,11 +412,11 @@ QDomElement Artista::toXml(QDomDocument& doc, bool reduced) const {
 }
 
 // VISITOR
-void Artista::accept(VisitorGUI* visitor) const{
+void Artista::accept(VisitorInterfaceConst* visitor) const{
     visitor -> visit(this);
 }
 
-void Artista::accept(VisitorConsoleEditor* visitor) {
+void Artista::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

@@ -44,8 +44,8 @@ public:
 
     virtual void printInfo() const final;
 
-    virtual void accept(VisitorGUI* visitor) const final;
-    virtual void accept(VisitorConsoleEditor* visitor) final;
+    virtual void accept(VisitorInterfaceConst* visitor) const final;
+    virtual void accept(VisitorInterfaceNotConst* visitor) final;
 
     friend bool operator==(const Singolo& a, const Singolo& b);
     friend bool operator!=(const Singolo& a, const Singolo& b);

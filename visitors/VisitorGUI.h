@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QScrollArea>
 
-#include "./VistorInterface.h"
+#include "VisitorInterfaceConst.h"
 
 #include "../model/core/ArtistProduct.h"
 #include "../model/artisti/Artista.h"
@@ -18,9 +18,9 @@
 #include "../model/merch/Vinile.h"
 #include "../model/merch/TShirt.h"
 #include "../model/tour/Tour.h"
-#include "./util/ClickableLabel.h"
+#include "../view/util/ClickableLabel.h"
 
-class VisitorGUI : public QObject, public VisitorInterface {
+class VisitorGUI : public QObject, public VisitorInterfaceConst {
     Q_OBJECT        // uso di connect
 public:
     explicit VisitorGUI(const std::unordered_map<unsigned int, Artista*>* artistsMap, QObject* parent = nullptr);

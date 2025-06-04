@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Singolo.h"
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 // COSTRUTTORI
 Singolo::Singolo(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const Traccia& track, bool remix, int chartPos)
@@ -124,11 +124,11 @@ void Singolo::printInfo() const {
               << "\nPosizione in classifica: " << chartPosition << std::endl;
 }
 
-void Singolo::accept(VisitorGUI* visitor) const {
+void Singolo::accept(VisitorInterfaceConst* visitor) const {
     visitor->visit(this);
 }
 
-void Singolo::accept(VisitorConsoleEditor* visitor) {
+void Singolo::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

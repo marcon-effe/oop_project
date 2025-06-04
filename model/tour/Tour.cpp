@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Tour.h"
 
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 Tour::Tour(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita)
 : NotMusica(owner, t, desc, prezzo, disponibile, quantita) {}
@@ -127,11 +127,11 @@ QDomElement Tour::toXml(QDomDocument& doc, bool reduced) const {
 }
 
 
-void Tour::accept(VisitorGUI* v) const {
+void Tour::accept(VisitorInterfaceConst* v) const {
     v->visit(this);
 }
 
-void Tour::accept(VisitorConsoleEditor* visitor) {
+void Tour::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

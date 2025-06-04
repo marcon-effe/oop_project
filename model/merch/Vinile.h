@@ -33,8 +33,8 @@ public:
     QJsonObject toJson(bool reduced=false) const final;
     QDomElement toXml(QDomDocument& doc, bool reduced=false) const final;
 
-    virtual void accept(VisitorGUI* v) const final;
-    virtual void accept(VisitorConsoleEditor* v) final;
+    virtual void accept(VisitorInterfaceConst* v) const final;
+    virtual void accept(VisitorInterfaceNotConst* v) final;
 
     // OVERLOADING OPERATORI
     friend bool operator==(const Vinile& a, const Vinile& b);

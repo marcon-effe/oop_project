@@ -5,7 +5,7 @@
 
 #include "../util/Durata.h"
 
-class VisitorConsoleEditor;
+class VisitorInterfaceNotConst; // Forward declaration
 
 class Traccia {
 private:
@@ -41,7 +41,7 @@ public:
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    void accept(VisitorConsoleEditor* visitor);
+    void accept(VisitorInterfaceNotConst* visitor);
 
     friend bool operator==(const Traccia& a, const Traccia& b);
     friend bool operator!=(const Traccia& a, const Traccia& b);

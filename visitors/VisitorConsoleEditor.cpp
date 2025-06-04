@@ -14,7 +14,7 @@
 #include "../model/musica/Traccia.h"
 #include "../model/tour/DataTour.h"
 
-#include "ConsoleEditorHandler.h"
+#include "../cli/ConsoleEditorHandler.h"
 
 void VisitorConsoleEditor::visit(Artista* artista) {
     bool fine = false;

@@ -13,7 +13,7 @@
 #include "../model/musica/Traccia.h"
 #include "../model/tour/DataTour.h"
 
-#include "VisitorConsoleEditor.h"
+#include "../visitors/VisitorConsoleEditor.h"
 
 
 // ----- ARTISTA -----

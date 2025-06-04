@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Album.h"
-#include "../../view/VisitorGUI.h"
-#include "../../cli/VisitorConsoleEditor.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 // COSTRUTTORI
 Album::Album(Artista* owner, const std::string& t, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& lbl)
@@ -180,11 +180,11 @@ void Album::setTracce(const std::vector<Traccia>& t) {
 }
 
 
-void Album::accept(VisitorGUI* visitor) const {
+void Album::accept(VisitorInterfaceConst* visitor) const {
     visitor->visit(this);
 }
 
-void Album::accept(VisitorConsoleEditor* visitor) {
+void Album::accept(VisitorInterfaceNotConst* visitor) {
     visitor->visit(this);
 }
 

@@ -13,8 +13,8 @@
 #include <QDomDocument>
 
 
-class VisitorGUI;
-class VisitorConsoleEditor;
+class VisitorInterfaceConst;
+class VisitorInterfaceNotConst;
 class Artista;
 
 class ArtistProduct {
@@ -67,8 +67,8 @@ public:
     static ArtistProduct* createJson(Artista* owner, const QJsonObject& json);
     static ArtistProduct* createXml(Artista* owner, const QDomElement& xml);
 
-    virtual void accept(VisitorGUI* visitor) const = 0;
-    virtual void accept(VisitorConsoleEditor* visitor) = 0;
+    virtual void accept(VisitorInterfaceConst* visitor) const = 0;
+    virtual void accept(VisitorInterfaceNotConst* visitor) = 0;
 
     //OVERLOADING OPERATORI
     friend bool operator==(const ArtistProduct& a, const ArtistProduct& b);
