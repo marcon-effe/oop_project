@@ -1020,46 +1020,75 @@ void ProdottoFormBuilder::visit(Singolo* sing)
 
 void ProdottoFormBuilder::visit(Album* alb)
 {
+    // 1) Se non è stato ancora creato il gruppo “Dati musicali” e “Dettagli Album”, costruiscili
     if (!dataUscitaEdit) {
         buildCampoAlbum();
     }
+
+    // 2) Popola i campi base (data, genere, label)
     const auto& rd = alb->getDataUscita();
     dataUscitaEdit->setDate(rd.toQDate());
     genereEdit->setText(QString::fromStdString(alb->getGenere()));
     labelEdit->setText(QString::fromStdString(alb->getLabel()));
 
+    // 3) Prima di aggiungere nuovi widget, rimuovi ed elimina quelli precedenti
+    //    in modo che non si accumulino duplicati in tracceLayout e tracceEditors.
+    {
+        // Svuota eventuali TracciaEditor rimasti
+        for (auto* ed : tracceEditors) {
+            delete ed;
+        }
+        tracceEditors.clear();
+
+        // Rimuovi tutti i widget dal layout delle tracce
+        QLayoutItem* child;
+        while ((child = tracceLayout->takeAt(0)) != nullptr) {
+            if (child->widget()) {
+                child->widget()->deleteLater();
+            }
+            delete child;
+        }
+    }
+
+    // 4) Ricrea un TracciaEditor per ciascuna traccia già presente nell’album
     for (auto& tr : alb->getTracce()) {
+        // 4a) Crea un nuovo editor e inizializzane i widget
         auto* editor = new TracciaEditor;
         editor->nomeEdit = new QLineEdit(QString::fromStdString(tr.getNome()), this);
-        editor->oreDurata = new QSpinBox(this);
+
+        editor->oreDurata    = new QSpinBox(this);
         editor->minutiDurata = new QSpinBox(this);
-        editor->secondiDurata = new QSpinBox(this);
-        editor->oreDurata->setRange(0,23);
-        editor->minutiDurata->setRange(0,59);
-        editor->secondiDurata->setRange(0,59);
+        editor->secondiDurata= new QSpinBox(this);
+        editor->oreDurata->setRange(0, 23);
+        editor->minutiDurata->setRange(0, 59);
+        editor->secondiDurata->setRange(0, 59);
         editor->oreDurata->setValue(tr.getDurata().getOre());
         editor->minutiDurata->setValue(tr.getDurata().getMinuti());
         editor->secondiDurata->setValue(tr.getDurata().getSecondi());
+
         editor->hasTestoCheck = new QCheckBox("Ha testo", this);
         editor->hasTestoCheck->setChecked(tr.hasTestoPresent());
+
         editor->testoEdit = new QTextEdit(QString::fromStdString(tr.getTesto()), this);
         editor->testoEdit->setFixedHeight(50);
 
         editor->partecipantiWidget = new QWidget(this);
         editor->partecipantiLayout = new QVBoxLayout(editor->partecipantiWidget);
         editor->aggiungiPartecipanteBtn = new QPushButton("Aggiungi partecipante", this);
-        connect(editor->aggiungiPartecipanteBtn, &QPushButton::clicked, this, [this,editor]() {
+        connect(editor->aggiungiPartecipanteBtn, &QPushButton::clicked, this, [this, editor]() {
             auto* line = new QLineEdit(this);
             editor->partecipantiLayout->addWidget(line);
             editor->partecipantiLines.push_back(line);
         });
 
+        // 4b) Popola con i partecipanti correnti
         for (auto& p : tr.getPartecipanti()) {
             auto* line = new QLineEdit(QString::fromStdString(p), this);
             editor->partecipantiLayout->addWidget(line);
             editor->partecipantiLines.push_back(line);
         }
 
+        // 4c) Costruisci un form layout per raggruppare i campi dell’editor
         auto* formT = new QFormLayout;
         formT->addRow("Nome:", editor->nomeEdit);
 
@@ -1080,12 +1109,16 @@ void ProdottoFormBuilder::visit(Album* alb)
         partSec->addWidget(editor->aggiungiPartecipanteBtn);
         formT->addRow("Partecipanti:", partSec);
 
+        // 4d) Inserisci il gruppo “Traccia” nel layout principale delle tracce
         auto* gb = new QGroupBox("Traccia", this);
         gb->setLayout(formT);
         tracceLayout->addWidget(gb);
+
+        // 4e) Memorizza l’editor appena creato
         tracceEditors.push_back(editor);
     }
 
+    // 5) Infine applica eventuali modifiche specifiche all’album
     applicaModificheAlbum(alb);
 }
 
@@ -1290,8 +1323,9 @@ void ProdottoFormBuilder::applicaModificheAlbum(Album* alb)
                     par.push_back(line->text().toStdString());
             }
             newTracce.emplace_back(name, par, dur, testo, hasTesto);
-        }   
+        }
     }
+    qDebug() << "Tracce trovate: " << newTracce.size() << " // c " << debug_counter++;
     if (newTracce != alb->getTracce()) {
         alb->setTracce(newTracce);
         alb->updateDurata();

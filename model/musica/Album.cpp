@@ -177,6 +177,7 @@ Traccia& Album::getTracciaModificabile(unsigned int index) {
 
 void Album::setTracce(const std::vector<Traccia>& t) {
     this->tracce.clear();
+    this->tracce.shrink_to_fit();
     tracce = t;
 }
 
