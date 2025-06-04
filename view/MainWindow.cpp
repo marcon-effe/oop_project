@@ -33,6 +33,8 @@
 #include "crud_dialogs/ArtistaDeleteDialog.h"
 #include "crud_dialogs/ProdottoDeleteDialog.h"
 #include "../view/util/ArtistWidget.h"
+#include "../view/util/ArtistFormBuilder.h"
+
 
 static bool endsWith(const std::string& str, const std::string& suffix) {
     return str.size() >= suffix.size() &&
@@ -251,19 +253,36 @@ void MainWindow::setupUI() {
 // ------------ INSERIMENTO ARTISTA E PRODOTTO ------------
 void MainWindow::onInserisciArtista()
 {
+    // 1) Preparo i nomi sanitizzati
     std::set<std::string> nomiSan;
-    for (const auto& pair : artists)
+    for (const auto& pair : artists) {
         nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
-
-    ArtistaEditorDialog dialog(nullptr, this, nomiSan);
-    if (dialog.exec() == QDialog::Accepted) {
-        Artista* nuovo = dialog.artist();
-        if (nuovo) {
-            artists[nuovo->getId()] = nuovo;
-            updateListWidgets();
-        }
     }
-    saveIfAutosaveEnabled();
+
+    // 2) Pulisco il pannello di destra
+    clearRightPanel();
+
+    // 3) Creo il builder in modalità “insert” (existing = nullptr)
+    ArtistFormBuilder* builder =
+        new ArtistFormBuilder(artists,    // unordered_map<unsigned,Artista*>&
+                               nullptr,    // existing = nullptr → nuovo artista
+                               nomiSan,
+                               this);      // parent = MainWindow
+
+    // 4) Collegamenti ai segnali del builder
+    connect(builder, &ArtistFormBuilder::editingAccepted,
+            this, [this](Artista* /*nuovoArtista*/) {
+        updateListWidgets();          // aggiorno la lista in MainWindow
+        saveIfAutosaveEnabled();      // faccio l’autosave come prima
+        clearRightPanel();            // rimuovo il form dal right panel
+    });
+    connect(builder, &ArtistFormBuilder::editingCanceled,
+            this, [this]() {
+        clearRightPanel();            // solo chiudo il form se annullo
+    });
+
+    // 5) Aggiungo il widget del builder al rightLayout
+    rightLayout->addWidget(builder->getWidget());
 }
 
 void MainWindow::onInserisciProdotto()
@@ -291,27 +310,44 @@ void MainWindow::onModificaArtista()
 
     const QString nomeArtista = item->text();
     Artista* artista = nullptr;
-
     for (const auto& [id, ptr] : artists) {
         if (QString::fromStdString(ptr->getNome()) == nomeArtista) {
             artista = ptr;
             break;
         }
     }
-
     if (!artista) return;
 
+    // 1) Preparo il set dei nomi sanitizzati (tolgo quello corrente)
     std::set<std::string> nomiSan;
-    for (const auto& pair : artists)
+    for (const auto& pair : artists) {
         nomiSan.insert(DataManager::sanitizeForPath(pair.second->getNome()));
+    }
 
-    ArtistaEditorDialog dialog(artista, this, nomiSan);
+    // 2) Pulisco il pannello di destra
+    clearRightPanel();
 
-    if (dialog.exec() == QDialog::Accepted) {
-        clearRightPanel();
+    // 3) Creo il builder in modalità “edit” (passo l’artista esistente)
+    ArtistFormBuilder* builder =
+        new ArtistFormBuilder(artists,
+                               artista,   // existing ≠ nullptr → edit mode
+                               nomiSan,
+                               this);
+
+    // 4) Collegamenti ai segnali
+    connect(builder, &ArtistFormBuilder::editingAccepted,
+            this, [this](Artista* /*artistaAggiornato*/) {
         updateListWidgets();
         saveIfAutosaveEnabled();
-    }
+        clearRightPanel();
+    });
+    connect(builder, &ArtistFormBuilder::editingCanceled,
+            this, [this]() {
+        clearRightPanel();
+    });
+
+    // 5) Aggiungo il widget del builder al rightLayout
+    rightLayout->addWidget(builder->getWidget());
 }
 
 void MainWindow::onModificaProdotto() {

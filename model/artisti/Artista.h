@@ -81,9 +81,6 @@ public:
     void loadProductsFromXml(const QDomElement& prodottiElement);
     QDomElement toXml(QDomDocument& doc, bool reduced=false) const;
 
-/*     //Visitor
-    void accept(VisitorInterfaceConst* visitor) const;
-    void accept(VisitorInterfaceNotConst* visitor); */
 
     //OVERLOADING OPERATORI
     friend bool operator==(const Artista& a, const Artista& b);

@@ -49,7 +49,8 @@ HEADERS += cli/ConsoleApp.h \
            view/util/ClickableLabel.h \
            cli/ConsoleArtistEditor.h \
            view/util/ArtistWidget.h \
-           view/util/ImageHelper.h
+           view/util/ImageHelper.h \
+           view/util/ArtistFormBuilder.h
 SOURCES += main.cpp \
            cli/ConsoleApp.cpp \
            cli/ConsoleEditorHandler.cpp \
@@ -84,7 +85,8 @@ SOURCES += main.cpp \
            view/util/ClickableLabel.cpp \
            cli/ConsoleArtistEditor.cpp \
            view/util/ArtistWidget.cpp \
-           view/util/ImageHelper.cpp
+           view/util/ImageHelper.cpp \
+           view/util/ArtistFormBuilder.cpp
 RESOURCES += view/resources.qrc
 
 QT += core gui widgets xml
