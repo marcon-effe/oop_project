@@ -6,8 +6,9 @@
 
 #include "../data/DataManager.h"
 #include "../view/ErrorManager.h"
-#include "../visitors/VisitorConsoleEditor.h"
+#include "cli/ConsoleArtistEditor.h"
 #include "ConsoleEditorHandler.h"
+
 
 ConsoleApp::ConsoleApp() {}
 
@@ -87,12 +88,12 @@ void ConsoleApp::modifyArtist() {
     if (!a) return;
 
     try {
-        VisitorConsoleEditor visitor;
-        a->accept(&visitor);
+        ConsoleArtistEditor::modificaArtista(a);
     } catch (const std::exception& ex) {
         ErrorManager::showError(ex.what());
     }
 }
+
 
 void ConsoleApp::deleteArtist() {
     Artista* a = selectArtist();

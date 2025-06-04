@@ -32,6 +32,7 @@
 #include "crud_dialogs/ProdottoEditorDialog.h"
 #include "crud_dialogs/ArtistaDeleteDialog.h"
 #include "crud_dialogs/ProdottoDeleteDialog.h"
+#include "../view/util/ArtistWidget.h"
 
 static bool endsWith(const std::string& str, const std::string& suffix) {
     return str.size() >= suffix.size() &&
@@ -615,18 +616,32 @@ void MainWindow::exportData() {
 
 
 // LISTA ARTISTI E PRODOTTI ----
-void MainWindow::handleArtistSelection(QListWidgetItem* item) {
+void MainWindow::handleArtistSelection(QListWidgetItem* item)
+{
     clearRightPanel();
     for (const auto& pair : artists) {
         Artista* a = pair.second;
         if (QString::fromStdString(a->getNome()) == item->text()) {
-            VisitorGUI* visitor = new VisitorGUI(&artists, this);
-            a->accept(visitor);
-            rightLayout->addWidget(visitor->getWidget());
+            // 1) Creo l'ArtistWidget e lo metto nel right panel
+            ArtistWidget* aw = new ArtistWidget(&artists, this);
+            aw->showArtista(a, nullptr);
+            rightLayout->addWidget(aw->getWidget());
+
+            // 2) Collego il segnale prodottoSelezionato(...) a una lambda di MainWindow
+            connect(aw, &ArtistWidget::prodottoSelezionato,
+                    this, [this](ArtistProduct* p) {
+                clearRightPanel();
+                // Creo VisitorGUI (passando &artists e this come parent)
+                VisitorGUI* visitor = new VisitorGUI(&artists, this);
+                p->accept(visitor);
+                rightLayout->addWidget(visitor->getWidget());
+            });
+
             return;
         }
     }
 }
+
 
 void MainWindow::handleProductSelection(QListWidgetItem* item) {
     clearRightPanel();

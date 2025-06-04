@@ -15,7 +15,6 @@ class Traccia; // Aggiunto per Traccia
 class VisitorInterfaceNotConst {
     public:
         virtual ~VisitorInterfaceNotConst() = default;
-        virtual void visit(Artista* artista) =0;
         virtual void visit(Album* album) =0;
         virtual void visit(Singolo* singolo) =0;
         virtual void visit(TShirt* tshirt) =0;

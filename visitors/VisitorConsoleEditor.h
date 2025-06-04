@@ -11,7 +11,6 @@ class VisitorConsoleEditor : public VisitorInterfaceNotConst {
         VisitorConsoleEditor() = default;
         ~VisitorConsoleEditor() = default;
 
-        void visit(Artista* artista) override;
         void visit(Album* album) override;
         void visit(Singolo* singolo) override;
         void visit(Traccia* traccia) override;

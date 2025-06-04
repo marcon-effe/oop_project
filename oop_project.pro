@@ -46,7 +46,10 @@ HEADERS += cli/ConsoleApp.h \
            view/crud_dialogs/ProdottoEditorDialog.h \
            view/crud_dialogs/ProdottoInsertDialog.h \
            view/filters/FilterDialog.h \
-           view/util/ClickableLabel.h
+           view/util/ClickableLabel.h \
+           cli/ConsoleArtistEditor.h \
+           view/util/ArtistWidget.h \
+           view/util/ImageHelper.h
 SOURCES += main.cpp \
            cli/ConsoleApp.cpp \
            cli/ConsoleEditorHandler.cpp \
@@ -78,7 +81,10 @@ SOURCES += main.cpp \
            view/crud_dialogs/ProdottoEditorDialog.cpp \
            view/crud_dialogs/ProdottoInsertDialog.cpp \
            view/filters/FilterDialog.cpp \
-           view/util/ClickableLabel.cpp
+           view/util/ClickableLabel.cpp \
+           cli/ConsoleArtistEditor.cpp \
+           view/util/ArtistWidget.cpp \
+           view/util/ImageHelper.cpp
 RESOURCES += view/resources.qrc
 
 QT += core gui widgets xml

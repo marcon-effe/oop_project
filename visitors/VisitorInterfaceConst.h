@@ -13,7 +13,6 @@ class VisitorInterfaceConst {
 public:
     virtual ~VisitorInterfaceConst() = default;
 
-    virtual void visit(const Artista* artista) = 0;
     virtual void visit(const Album* album) = 0;
     virtual void visit(const Singolo* singolo) = 0;
     virtual void visit(const CD* cd) = 0;

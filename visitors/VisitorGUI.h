@@ -6,11 +6,9 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
-
-#include "VisitorInterfaceConst.h"
+#include <unordered_map>
 
 #include "../model/core/ArtistProduct.h"
-#include "../model/artisti/Artista.h"
 #include "../model/core/Musica.h"
 #include "../model/musica/Album.h"
 #include "../model/musica/Singolo.h"
@@ -19,14 +17,16 @@
 #include "../model/merch/TShirt.h"
 #include "../model/tour/Tour.h"
 #include "../view/util/ClickableLabel.h"
+#include "../view/util/ImageHelper.h"  
+#include "VisitorInterfaceConst.h"
+#include "../model/artisti/Artista.h"
 
 class VisitorGUI : public QObject, public VisitorInterfaceConst {
-    Q_OBJECT        // uso di connect
+    Q_OBJECT
 public:
     explicit VisitorGUI(const std::unordered_map<unsigned int, Artista*>* artistsMap, QObject* parent = nullptr);
     QWidget* getWidget() const;
 
-    void visit(const Artista* artista) override;
     void visit(const Album* album) override;
     void visit(const Singolo* singolo) override;
     void visit(const CD* cd) override;
@@ -39,18 +39,13 @@ public:
 private:
     void clearLayout();
     QWidget* createRelatedProductsSection(unsigned int artistId, unsigned int excludeProductId);
-    QPixmap loadPixmapOrPlaceholder(const QString& path) const;
-    QPixmap centerCropSquare(const QPixmap& src, const QSize& target) const;
-    QPixmap makeCircularPixmap(const QPixmap& src, int diameter) const;
-    QLabel* createImageLabel(const std::string& imagePathStr, const QSize& size, bool isArtist, QWidget* parent) const;
     QWidget* createTrackWidget(const Traccia& track);
     QWidget* createDateTourWidget(const DataTour& dt);
 
-    // Per scollbar
-    QScrollArea* scrollArea;
-    QWidget* scrollContent;      
-    QVBoxLayout* layout;
-    QWidget* widget;    // per getWidget
+    QScrollArea*   scrollArea;
+    QWidget*       scrollContent;
+    QVBoxLayout*   layout;
+    QWidget*       widget;
 
     const std::unordered_map<unsigned int, Artista*>* m_artists;
 };
