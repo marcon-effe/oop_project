@@ -121,7 +121,9 @@ void ArtistFormBuilder::onSaveValues()
     {
         std::set<std::string> tempNomi = m_nomiEsistenti;
         if (m_original) {
-            tempNomi.erase(m_original->getNome());
+            // Sanitizzo il nome in modo da cercare il nome corretto
+            std::string originaleSanitizzato = DataManager::sanitizeForPath(m_original->getNome());
+            tempNomi.erase(originaleSanitizzato);
         }
         if (tempNomi.count(DataManager::sanitizeForPath(qNome.toStdString()))) {
             QMessageBox::warning(m_widget,
