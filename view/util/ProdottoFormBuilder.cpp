@@ -890,8 +890,25 @@ void ProdottoFormBuilder::onConfermaSalvataggio()
 
         qDebug() << "Modifiche generali applicate per: " << titolo.c_str() << " // c " << debug_counter++;
 
-        // Dispatch automatico al visitor “non-const” per applicare modifiche specifiche
-        const_cast<ArtistProduct*>(prodottoCorrente)->accept(this);
+        // In base al tipo concreto, chiamiamo direttamente il metodo di applicaModifiche
+        if (auto* tsh = dynamic_cast<TShirt*>(const_cast<ArtistProduct*>(prodottoCorrente))) {
+            applicaModificheTShirt(tsh);
+        }
+        else if (auto* cd = dynamic_cast<CD*>(const_cast<ArtistProduct*>(prodottoCorrente))) {
+            applicaModificheCD(cd);
+        }
+        else if (auto* vin = dynamic_cast<Vinile*>(const_cast<ArtistProduct*>(prodottoCorrente))) {
+            applicaModificheVinile(vin);
+        }
+        else if (auto* tour = dynamic_cast<Tour*>(const_cast<ArtistProduct*>(prodottoCorrente))) {
+            applicaModificheTour(tour);
+        }
+        else if (auto* sing = dynamic_cast<Singolo*>(const_cast<ArtistProduct*>(prodottoCorrente))) {
+            applicaModificheSingolo(sing);
+        }
+        else if (auto* alb = dynamic_cast<Album*>(const_cast<ArtistProduct*>(prodottoCorrente))) {
+            applicaModificheAlbum(alb);
+        }
     }
 
     emit prodottoSalvato();
@@ -1345,4 +1362,3 @@ void ProdottoFormBuilder::visit(Traccia* /*tr*/)
 {
     // l'ho implementato in visit(Singolo*) e visit(Album*)
 }
-
