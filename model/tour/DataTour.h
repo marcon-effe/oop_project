@@ -26,6 +26,7 @@ public:
     void setOrario(const Orario &o);
 
     std::string toString() const;
+    std::string toStringFormat() const;
 
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;

@@ -227,7 +227,7 @@ QWidget *VisitorGUI::createDateTourWidget(const DataTour &dt)
 
     QLabel *timeLabel = new QLabel(
         QString("<b>Ora:</b> %1")
-            .arg(QString::fromStdString(dt.getOrario().toString())),
+            .arg(QString::fromStdString(dt.toStringFormat())),
         infoWidget);
     timeLabel->setObjectName("tourTimeLabel");
     infoLayout->addWidget(timeLabel);

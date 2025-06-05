@@ -36,6 +36,12 @@ std::string DataTour::toString() const {
     return "Data: " + Data::toString() + ", Orario: " + Orario::toString() + ", Luogo: " + luogo;
 }
 
+std::string DataTour::toStringFormat() const {
+    Orario orario = getOrario();
+    return (orario.getOre() < 10 ? "0" : "") + std::to_string(orario.getOre()) + ":" +
+           (orario.getMinuti() < 10 ? "0" : "") + std::to_string(orario.getMinuti());
+}
+
 
 //JSON
 // Converte un oggetto JSON in un oggetto DataTour
