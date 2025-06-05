@@ -27,8 +27,6 @@
 #include "ErrorManager.h"
 
 #include "filters/FilterDialog.h"
-#include "crud_dialogs/ProdottoInsertDialog.h"
-#include "crud_dialogs/ProdottoEditorDialog.h"
 #include "crud_dialogs/ArtistaDeleteDialog.h"
 #include "crud_dialogs/ProdottoDeleteDialog.h"
 #include "../view/util/ArtistWidget.h"

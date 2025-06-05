@@ -43,8 +43,6 @@ HEADERS += cli/ConsoleApp.h \
            model/util/Orario.h \
            view/crud_dialogs/ArtistaDeleteDialog.h \
            view/crud_dialogs/ProdottoDeleteDialog.h \
-           view/crud_dialogs/ProdottoEditorDialog.h \
-           view/crud_dialogs/ProdottoInsertDialog.h \
            view/filters/FilterDialog.h \
            view/util/ArtistFormBuilder.h \
            view/util/ArtistWidget.h \
@@ -79,8 +77,6 @@ SOURCES += main.cpp \
            model/util/Orario.cpp \
            view/crud_dialogs/ArtistaDeleteDialog.cpp \
            view/crud_dialogs/ProdottoDeleteDialog.cpp \
-           view/crud_dialogs/ProdottoEditorDialog.cpp \
-           view/crud_dialogs/ProdottoInsertDialog.cpp \
            view/filters/FilterDialog.cpp \
            view/util/ArtistFormBuilder.cpp \
            view/util/ArtistWidget.cpp \
@@ -90,7 +86,7 @@ SOURCES += main.cpp \
 RESOURCES += view/resources.qrc
 
 QT += core gui widgets xml
-CONFIG -= app_bundle
+CONFIG -= app_bundle debug
 RESOURCES += view/resources.qrc
 DESTDIR = .
 OBJECTS_DIR = build

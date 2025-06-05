@@ -71,7 +71,6 @@ ProdottoFormBuilder::ProdottoFormBuilder(
 
 void ProdottoFormBuilder::setupInserimento()
 {
-    // 1) Selezione artista
     selezioneContainer = new QWidget(this);
     auto* artistaLayout = new QHBoxLayout(selezioneContainer);
 
@@ -106,10 +105,8 @@ void ProdottoFormBuilder::onConfermaArtista()
     artistaComboBox->setEnabled(false);
     confermaArtistaBtn->deleteLater();
 
-    // 1) Creo l’area scrollabile
     setupScrollArea();
 
-    // 2) “Tipo di prodotto” come prima riga, senza stampare ancora i campi generali/di vendita
     tipoBox = new QGroupBox("Tipo di prodotto", this);
     auto* tipoLayout = new QHBoxLayout(tipoBox);
     tipoComboBox = new QComboBox(this);
@@ -118,16 +115,16 @@ void ProdottoFormBuilder::onConfermaArtista()
     tipoLayout->addWidget(tipoComboBox);
     scrollLayout->addWidget(tipoBox);
 
-    // 3) Contenitore vuoto per i campi (sarà popolato in onTipoChanged)
     campiSpecificiContainer = new QWidget(this);
     campiSpecificiLayout = new QVBoxLayout(campiSpecificiContainer);
     scrollLayout->addWidget(campiSpecificiContainer);
 
-    // 4) Collegamento: quando l’utente cambia la combo, chiamare onTipoChanged()
     connect(tipoComboBox, &QComboBox::currentTextChanged,
             this, &ProdottoFormBuilder::onTipoChanged);
 
-    // 5) Ridimensiona in base allo schermo e centra la finestra
+    onTipoChanged(tipoComboBox->currentText());
+
+
     if (auto* screen = QGuiApplication::primaryScreen()) {
         QSize s = screen->availableGeometry().size();
         int w = int(s.width() * 0.3), h = int(s.height() * 0.85);
@@ -135,7 +132,6 @@ void ProdottoFormBuilder::onConfermaArtista()
         move((s.width() - w) / 2, 5);
     }
 
-    // 6) Pulsanti Salva/Annulla fuori dallo scroll, in fondo al mainLayout
     auto* bottomLayout = new QHBoxLayout;
     annullaBtn = new QPushButton("Annulla", this);
     salvaBtn   = new QPushButton("Aggiungi prodotto", this);
@@ -151,24 +147,26 @@ void ProdottoFormBuilder::onConfermaArtista()
 void ProdottoFormBuilder::setupModifica()
 {
     qDebug() << "Modifica prodotto: " << prodottoCorrente->getTitle().c_str() << " // c " << debug_counter++;
-    // In modifica non mostro selezione artista né tipo
-    // Trovo l’artista tramite getArtistId()
     unsigned int artId = prodottoCorrente->getArtistId();
     artistaSelezionato = artisti.at(artId);
 
     setupScrollArea();
-    buildCampiBase();
-    buildCampoVendita();
 
-    // Contenitore per i campi specifici
     campiSpecificiContainer = new QWidget(this);
-    campiSpecificiLayout = new QVBoxLayout(campiSpecificiContainer);
+    campiSpecificiLayout    = new QVBoxLayout(campiSpecificiContainer);
     scrollLayout->addWidget(campiSpecificiContainer);
 
-    // Popola i campi chiamando accept(this) -> visitor “non const”
+    buildCampiBase();
+    if (   dynamic_cast<TShirt*> (const_cast<ArtistProduct*>(prodottoCorrente))
+        || dynamic_cast<CD*>     (const_cast<ArtistProduct*>(prodottoCorrente))
+        || dynamic_cast<Vinile*> (const_cast<ArtistProduct*>(prodottoCorrente))
+        || dynamic_cast<Tour*>   (const_cast<ArtistProduct*>(prodottoCorrente)))
+    {
+        buildCampoVendita();
+    }
+
     popolaCampiDaProdotto();
 
-    // Pulsanti Salva/Annulla
     auto* pulsLayout = new QHBoxLayout;
     annullaBtn = new QPushButton("Annulla", this);
     salvaBtn   = new QPushButton("Salva modifiche", this);
@@ -203,7 +201,7 @@ void ProdottoFormBuilder::buildCampiBase()
         qDebug() << "Costruzione campi base per prodotto: " << prodottoCorrente->getTitle().c_str() << " // c " << debug_counter++;
     else
         qDebug() << "Costruzione campi base per prodotto  // c " << debug_counter++;
-    // Dati generali: titolo, descrizione, immagine
+
     auto* box = new QGroupBox("Dati generali", this);
     auto* form = new QFormLayout(box);
 
@@ -223,7 +221,7 @@ void ProdottoFormBuilder::buildCampiBase()
     hImg->addWidget(sfoglia);
     form->addRow("Immagine:", hImg);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoVendita()
@@ -232,7 +230,7 @@ void ProdottoFormBuilder::buildCampoVendita()
         qDebug() << "Costruzione campi vend per prodotto: " << prodottoCorrente->getTitle().c_str() << " // c " << debug_counter++;
     else
         qDebug() << "Costruzione campi vend per prodotto  // c " << debug_counter++;
-    // Prezzo, Disponibile, Quantità, Codice prodotto
+
     auto* box = new QGroupBox("Dati di vendita", this);
     auto* form = new QFormLayout(box);
 
@@ -249,7 +247,7 @@ void ProdottoFormBuilder::buildCampoVendita()
     quantitaSpin->setRange(0, 100000);
     form->addRow("Quantità:", quantitaSpin);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoMerch()
@@ -265,7 +263,7 @@ void ProdottoFormBuilder::buildCampoMerch()
     codiceProdottoEdit = new QLineEdit(this);
     form->addRow("Codice prodotto:", codiceProdottoEdit);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 
 }
 
@@ -277,7 +275,7 @@ void ProdottoFormBuilder::buildCampoDisco()
         qDebug() << "Costruzione campi disc per prodotto  // c " << debug_counter++;
 
     buildCampoMerch();
-    // Dischi (CD + Vinile)
+
     auto* box = new QGroupBox("Dettagli supporto fisico", this);
     auto* form = new QFormLayout(box);
 
@@ -290,7 +288,7 @@ void ProdottoFormBuilder::buildCampoDisco()
     tipoProdottoEdit = new QLineEdit(this);
     form->addRow("Tipo prodotto:", tipoProdottoEdit);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoTShirt()
@@ -311,7 +309,7 @@ void ProdottoFormBuilder::buildCampoTShirt()
     coloreEdit = new QLineEdit(this);
     form->addRow("Colore:", coloreEdit);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoCD()
@@ -329,7 +327,7 @@ void ProdottoFormBuilder::buildCampoCD()
     formatoEdit = new QLineEdit(this);
     form->addRow("Formato:", formatoEdit);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoVinile()
@@ -352,7 +350,7 @@ void ProdottoFormBuilder::buildCampoVinile()
     diametroSpin->setRange(1, 100);
     form->addRow("Diametro:", diametroSpin);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoTour()
@@ -391,7 +389,7 @@ void ProdottoFormBuilder::buildCampoTour()
 
     layout->addWidget(dateTourWidget);
     layout->addWidget(aggiungiDataTourBtn);
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoMusica()
@@ -413,7 +411,7 @@ void ProdottoFormBuilder::buildCampoMusica()
     genereEdit = new QLineEdit(this);
     form->addRow("Genere:", genereEdit);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoSingolo()
@@ -475,7 +473,7 @@ void ProdottoFormBuilder::buildCampoSingolo()
     chartPosSpin->setRange(0,1000);
     form->addRow("Posizione in classifica:", chartPosSpin);
 
-    scrollLayout->addWidget(box);
+    campiSpecificiLayout->addWidget(box);
 }
 
 void ProdottoFormBuilder::buildCampoAlbum()
@@ -485,15 +483,16 @@ void ProdottoFormBuilder::buildCampoAlbum()
     else
         qDebug() << "Costruzione campi al per prodotto  // c " << debug_counter++;
 
-    buildCampoMusica();
+    buildCampoMusica();  
+
     auto* box = new QGroupBox("Dettagli Album", this);
     auto* form = new QFormLayout(box);
 
     labelEdit = new QLineEdit(this);
     form->addRow("Label discografica:", labelEdit);
-    scrollLayout->addWidget(box);
 
-    // Sezione tracce
+    campiSpecificiLayout->addWidget(box);
+
     auto* tracceBox = new QGroupBox("Tracce", this);
     auto* vTr = new QVBoxLayout(tracceBox);
 
@@ -503,13 +502,16 @@ void ProdottoFormBuilder::buildCampoAlbum()
     aggiungiTracciaBtn = new QPushButton("Aggiungi traccia", this);
     connect(aggiungiTracciaBtn, &QPushButton::clicked, this, [this]() {
         auto* editor = new TracciaEditor;
+
         editor->nomeEdit = new QLineEdit(this);
-        editor->oreDurata = new QSpinBox(this);
+
+        editor->oreDurata    = new QSpinBox(this);
         editor->minutiDurata = new QSpinBox(this);
-        editor->secondiDurata = new QSpinBox(this);
-        editor->oreDurata->setRange(0,23);
-        editor->minutiDurata->setRange(0,59);
-        editor->secondiDurata->setRange(0,59);
+        editor->secondiDurata= new QSpinBox(this);
+        editor->oreDurata->setRange(0, 23);
+        editor->minutiDurata->setRange(0, 59);
+        editor->secondiDurata->setRange(0, 59);
+
         editor->hasTestoCheck = new QCheckBox("Ha testo", this);
         editor->testoEdit = new QTextEdit(this);
         editor->testoEdit->setFixedHeight(50);
@@ -517,7 +519,7 @@ void ProdottoFormBuilder::buildCampoAlbum()
         editor->partecipantiWidget = new QWidget(this);
         editor->partecipantiLayout = new QVBoxLayout(editor->partecipantiWidget);
         editor->aggiungiPartecipanteBtn = new QPushButton("Aggiungi partecipante", this);
-        connect(editor->aggiungiPartecipanteBtn, &QPushButton::clicked, this, [this,editor]() {
+        connect(editor->aggiungiPartecipanteBtn, &QPushButton::clicked, this, [this, editor]() {
             auto* line = new QLineEdit(this);
             editor->partecipantiLayout->addWidget(line);
             editor->partecipantiLines.push_back(line);
@@ -546,12 +548,14 @@ void ProdottoFormBuilder::buildCampoAlbum()
         auto* gb = new QGroupBox("Traccia", this);
         gb->setLayout(formT);
         tracceLayout->addWidget(gb);
+
         tracceEditors.push_back(editor);
     });
 
     vTr->addWidget(tracceWidget);
     vTr->addWidget(aggiungiTracciaBtn);
-    scrollLayout->addWidget(tracceBox);
+
+    campiSpecificiLayout->addWidget(tracceBox);
 }
 
 void ProdottoFormBuilder::onTipoChanged(const QString& tipo)
@@ -571,7 +575,6 @@ void ProdottoFormBuilder::onTipoChanged(const QString& tipo)
     partecipantiSingoloLines.clear();
     tracceEditors.clear();
 
-    // --- 1) Ricrea i campi generali (titolo, descrizione, immagine) SOTTO campiSpecificiLayout
     {
         auto* box = new QGroupBox("Dati generali", this);
         auto* form = new QFormLayout(box);
@@ -595,31 +598,28 @@ void ProdottoFormBuilder::onTipoChanged(const QString& tipo)
         campiSpecificiLayout->addWidget(box);
     }
 
-    // --- 2) Ricrea i campi di vendita (prezzo, disponibile, quantità, codice prodotto)
-    {
+    if (tipo == "TShirt" || tipo == "CD" || tipo == "Vinile" || tipo == "Tour") {
         auto* box = new QGroupBox("Dati di vendita", this);
         auto* form = new QFormLayout(box);
-
         prezzoSpin = new QDoubleSpinBox(this);
         prezzoSpin->setRange(0, 10000);
         prezzoSpin->setDecimals(2);
         prezzoSpin->setPrefix("€ ");
         form->addRow("Prezzo:", prezzoSpin);
-
         disponibileCheck = new QCheckBox("Disponibile", this);
         form->addRow("", disponibileCheck);
-
         quantitaSpin = new QSpinBox(this);
         quantitaSpin->setRange(0, 100000);
         form->addRow("Quantità:", quantitaSpin);
 
-        codiceProdottoEdit = new QLineEdit(this);
-        form->addRow("Codice prodotto:", codiceProdottoEdit);
+        if (tipo == "TShirt" || tipo == "CD" || tipo == "Vinile") {
+            codiceProdottoEdit = new QLineEdit(this);
+            form->addRow("Codice prodotto:", codiceProdottoEdit);
+        }
 
         campiSpecificiLayout->addWidget(box);
     }
 
-    // --- 3) Solo adesso, a seconda del tipo scelto, aggiungo i campi specifici
     if (tipo == "TShirt") {
         buildCampoTShirt();    // verrà appeso sotto campiSpecificiLayout
     }
@@ -659,12 +659,10 @@ void ProdottoFormBuilder::popolaCampiDaProdotto()
     qDebug() << "Popola campi per : " << prodottoCorrente->getTitle().c_str() << " // c " << debug_counter++;
     
     if (!prodottoCorrente) return;
-    // Prima: popolo i campi comuni
     titoloEdit->setText(QString::fromStdString(prodottoCorrente->getTitle()));
     descrizioneEdit->setPlainText(QString::fromStdString(prodottoCorrente->getDescription()));
     imagePathEdit->setText(QString::fromStdString(prodottoCorrente->getImagePath()));
 
-    // Dispatch automatico al visitor “non-const”
     const_cast<ArtistProduct*>(prodottoCorrente)->accept(this);
 }
 
@@ -921,7 +919,6 @@ void ProdottoFormBuilder::onConfermaSalvataggio()
 
 void ProdottoFormBuilder::visit(TShirt* tsh)
 {
-    // Costruisco i widget se non esistono già
     if (!tagliaEdit) {
         buildCampoTShirt();
     }
@@ -1037,19 +1034,15 @@ void ProdottoFormBuilder::visit(Singolo* sing)
 
 void ProdottoFormBuilder::visit(Album* alb)
 {
-    // 1) Se non è stato ancora creato il gruppo “Dati musicali” e “Dettagli Album”, costruiscili
     if (!dataUscitaEdit) {
         buildCampoAlbum();
     }
 
-    // 2) Popola i campi base (data, genere, label)
     const auto& rd = alb->getDataUscita();
     dataUscitaEdit->setDate(rd.toQDate());
     genereEdit->setText(QString::fromStdString(alb->getGenere()));
     labelEdit->setText(QString::fromStdString(alb->getLabel()));
 
-    // 3) Prima di aggiungere nuovi widget, rimuovi ed elimina quelli precedenti
-    //    in modo che non si accumulino duplicati in tracceLayout e tracceEditors.
     {
         // Svuota eventuali TracciaEditor rimasti
         for (auto* ed : tracceEditors) {
@@ -1067,9 +1060,8 @@ void ProdottoFormBuilder::visit(Album* alb)
         }
     }
 
-    // 4) Ricrea un TracciaEditor per ciascuna traccia già presente nell’album
+    // Ricrea un TracciaEditor per ciascuna traccia già presente nell’album
     for (auto& tr : alb->getTracce()) {
-        // 4a) Crea un nuovo editor e inizializzane i widget
         auto* editor = new TracciaEditor;
         editor->nomeEdit = new QLineEdit(QString::fromStdString(tr.getNome()), this);
 
@@ -1098,14 +1090,12 @@ void ProdottoFormBuilder::visit(Album* alb)
             editor->partecipantiLines.push_back(line);
         });
 
-        // 4b) Popola con i partecipanti correnti
         for (auto& p : tr.getPartecipanti()) {
             auto* line = new QLineEdit(QString::fromStdString(p), this);
             editor->partecipantiLayout->addWidget(line);
             editor->partecipantiLines.push_back(line);
         }
 
-        // 4c) Costruisci un form layout per raggruppare i campi dell’editor
         auto* formT = new QFormLayout;
         formT->addRow("Nome:", editor->nomeEdit);
 
@@ -1126,16 +1116,13 @@ void ProdottoFormBuilder::visit(Album* alb)
         partSec->addWidget(editor->aggiungiPartecipanteBtn);
         formT->addRow("Partecipanti:", partSec);
 
-        // 4d) Inserisci il gruppo “Traccia” nel layout principale delle tracce
         auto* gb = new QGroupBox("Traccia", this);
         gb->setLayout(formT);
         tracceLayout->addWidget(gb);
 
-        // 4e) Memorizza l’editor appena creato
         tracceEditors.push_back(editor);
     }
 
-    // 5) Infine applica eventuali modifiche specifiche all’album
     applicaModificheAlbum(alb);
 }
 
