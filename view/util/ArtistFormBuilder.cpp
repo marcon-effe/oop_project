@@ -1,6 +1,9 @@
 #include "ArtistFormBuilder.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QFormLayout>
+#include <QFileDialog>
+#include <QMessageBox>
 #include "../../data/DataManager.h"
 
 ArtistFormBuilder::ArtistFormBuilder(std::unordered_map<unsigned, Artista*>& artistsMap,
@@ -21,28 +24,36 @@ ArtistFormBuilder::ArtistFormBuilder(std::unordered_map<unsigned, Artista*>& art
       m_btnSelectImg(nullptr),
       m_buttons(nullptr)
 {
+    // Creo il widget principale
     m_widget = new QWidget(parentWidget);
+    m_widget->setObjectName("artistForm_mainWidget");
 
+    // Layout principale
     m_mainLayout = new QVBoxLayout(m_widget);
     m_mainLayout->setContentsMargins(24, 24, 24, 24);
     m_mainLayout->setSpacing(12);
 
+    // Form layout per i campi
     m_formLayout = new QFormLayout;
+    m_formLayout->setObjectName("artistForm_formLayout");
     m_mainLayout->addLayout(m_formLayout);
 
+    // Costruisco i campi del form
     buildFormFields();
 
     if (m_original) {
         loadExistingValues();
     }
 
+    // Box dei pulsanti OK e Cancel
     m_buttons = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, m_widget);
+    m_buttons->setObjectName("artistForm_buttonBox");
     QAbstractButton* okBtn     = m_buttons->button(QDialogButtonBox::Ok);
     QAbstractButton* cancelBtn = m_buttons->button(QDialogButtonBox::Cancel);
-    okBtn->setObjectName("okButton");
-    cancelBtn->setObjectName("cancelButton");
+    okBtn->setObjectName("artistForm_okButton");
+    cancelBtn->setObjectName("artistForm_cancelButton");
 
-    // Disabilito “Ok” finché il nome è vuoto (in insert mode) o altri campi obbligatori mancanti
+    // Disabilito "Ok" se il nome è vuoto (in insert mode) o altri campi obbligatori mancanti
     okBtn->setEnabled(m_original != nullptr || !m_leNome->text().trimmed().isEmpty());
 
     connect(m_buttons, &QDialogButtonBox::accepted, this, &ArtistFormBuilder::onSaveValues);
@@ -57,27 +68,39 @@ ArtistFormBuilder::ArtistFormBuilder(std::unordered_map<unsigned, Artista*>& art
 
 void ArtistFormBuilder::buildFormFields()
 {
+    // Campo "Nome"
     m_leNome = new QLineEdit(m_widget);
+    m_leNome->setObjectName("artistForm_editNome");
     m_leNome->setMaxLength(40);
     m_leNome->setPlaceholderText("Inserisci il nome dell'artista");
     m_formLayout->addRow(tr("Nome:"), m_leNome);
 
+    // Campo "Genere"
     m_leGenere = new QLineEdit(m_widget);
+    m_leGenere->setObjectName("artistForm_editGenere");
     m_leGenere->setMaxLength(20);
     m_leGenere->setPlaceholderText("Inserisci il genere musicale");
     m_formLayout->addRow(tr("Genere:"), m_leGenere);
 
+    // Campo "Info"
     m_teInfo = new QTextEdit(m_widget);
+    m_teInfo->setObjectName("artistForm_txtInfo");
     m_formLayout->addRow(tr("Info:"), m_teInfo);
 
+    // Campo "Immagine" con QLineEdit + QPushButton
     m_leImagePath  = new QLineEdit(m_widget);
+    m_leImagePath->setObjectName("artistForm_editImagePath");
     m_leImagePath->setReadOnly(true);
+
     m_btnSelectImg = new QPushButton(tr("Scegli immagine…"), m_widget);
+    m_btnSelectImg->setObjectName("artistForm_btnSelectImage");
 
     auto* imgLayout = new QHBoxLayout;
     imgLayout->setContentsMargins(0, 0, 0, 0);
     imgLayout->addWidget(m_leImagePath);
     imgLayout->addWidget(m_btnSelectImg);
+    imgLayout->setObjectName("artistForm_imgLayout");
+
     m_formLayout->addRow(tr("Immagine:"), imgLayout);
 
     connect(m_btnSelectImg, &QPushButton::clicked, this, &ArtistFormBuilder::onSelectImage);

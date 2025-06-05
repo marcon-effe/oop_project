@@ -1,86 +1,203 @@
-QDialog#artistaDeleteDialog,
-QDialog#artistaEditorDialog,
-QDialog#prodottoDeleteDialog,
-QDialog#prodottoEditorDialog {
-    padding: 20px; 
-    font-family: sans-serif;
-    font-size: 10pt; 
+#artistForm_mainWidget,
+#prodottoForm_mainWidget {
+    background-color: #f5f5f5;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 12px;
 }
 
-QDialog QGroupBox {
-    font-size: 10pt;
-    font-weight: bold;
-    margin-top: 12px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
+#artistForm_editNome,
+#artistForm_editGenere,
+#artistForm_editImagePath,
+#artistForm_txtInfo,
+
+#prodottoForm_titoloEdit,
+#prodottoForm_imagePathEdit,
+#prodottoForm_descrizioneEdit,
+#prodottoForm_codiceProdottoEdit,
+#prodottoForm_produttoreStampeEdit,
+#prodottoForm_codiceRiconoscimentoEdit,
+#prodottoForm_tipoProdottoEdit,
+#prodottoForm_formatoEdit,
+#prodottoForm_tagliaEdit,
+#prodottoForm_coloreEdit,
+#prodottoForm_rpmSpin,
+#prodottoForm_diametroSpin,
+#prodottoForm_dataUscitaEdit,
+#prodottoForm_genereEdit,
+#prodottoForm_nomeTracciaEdit,
+#prodottoForm_testoTracciaEdit,
+#prodottoForm_labelEdit,
+#prodottoForm_tracciaNomeEdit,
+#prodottoForm_tracciaTestoEdit {
+    background-color: #ffffff;
+    border: 1px solid #aaaaaa;
+    border-radius: 3px;
+    padding: 4px 6px;
+    selection-background-color: #cce4ff;
+}
+
+#artistForm_txtInfo {
+    padding: 6px;
+}
+
+#artistForm_editNome:focus,
+#artistForm_editGenere:focus,
+#artistForm_editImagePath:focus,
+#artistForm_txtInfo:focus {
+    border: 1px solid #0055aa;
+}
+
+#prodottoForm_artistaComboBox,
+#prodottoForm_tipoComboBox {
+    background-color: #ffffff;
+    border: 1px solid #888888;
+    border-radius: 3px;
+    padding: 4px 6px;
+}
+
+#artistForm_btnSelectImage,
+#prodottoForm_confermaArtistaBtn,
+#prodottoForm_btnSfoglia,
+#prodottoForm_aggiungiPartecipanteSingoloBtn,
+#prodottoForm_aggiungiTracciaBtn,
+#prodottoForm_tracciaAggiungiPartecipanteBtn {
+    background-color: #007acc;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+#artistForm_btnSelectImage:hover,
+#prodottoForm_confermaArtistaBtn:hover,
+#prodottoForm_btnSfoglia:hover,
+#prodottoForm_aggiungiPartecipanteSingoloBtn:hover,
+#prodottoForm_aggiungiTracciaBtn:hover,
+#prodottoForm_tracciaAggiungiPartecipanteBtn:hover {
+    background-color: #005fa1;
+}
+#artistForm_btnSelectImage:pressed,
+#prodottoForm_confermaArtistaBtn:pressed,
+#prodottoForm_btnSfoglia:pressed,
+#prodottoForm_aggiungiPartecipanteSingoloBtn:pressed,
+#prodottoForm_aggiungiTracciaBtn:pressed,
+#prodottoForm_tracciaAggiungiPartecipanteBtn:pressed {
+    background-color: #004577;
+}
+
+#artistForm_okButton,
+#artistForm_cancelButton,
+#prodottoForm_annullaBtn {
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    min-width: 90px;
+    margin-left: 8px;
+}
+#artistForm_okButton {
+    background-color: #28a745;
+}
+#artistForm_okButton:disabled {
+    background-color: #a5d6a7;
+    color: #ececec;
+}
+#artistForm_okButton:hover:!disabled {
+    background-color: #218838;
+}
+#artistForm_okButton:pressed:!disabled {
+    background-color: #1e7e34;
+}
+#artistForm_cancelButton,
+#prodottoForm_annullaBtn {
+    background-color: #dc3545;
+}
+#artistForm_cancelButton:hover,
+#prodottoForm_annullaBtn:hover {
+    background-color: #c82333;
+}
+#artistForm_cancelButton:pressed,
+#prodottoForm_annullaBtn:pressed {
+    background-color: #bd2130;
+}
+
+#prodottoForm_salvaBtn,
+#prodottoForm_salvaModificheBtn {
+    background-color: #25a000;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    min-width: 90px;
+    margin-left: 8px;
+}
+#prodottoForm_salvaBtn:hover,
+#prodottoForm_salvaModificheBtn:hover {
+    background-color: #1e7e34;
+}
+#prodottoForm_salvaBtn:pressed,
+#prodottoForm_salvaModificheBtn:pressed {
+    background-color: #196e29;
+}
+
+#prodottoForm_boxDatiGenerali,
+#prodottoForm_boxVendita,
+#prodottoForm_boxMerch,
+#prodottoForm_boxDettagliSupporto,
+#prodottoForm_boxTShirt,
+#prodottoForm_boxDettagliCD,
+#prodottoForm_boxDettagliVinile,
+#prodottoForm_boxMusica,
+#prodottoForm_boxSingolo,
+#prodottoForm_boxAlbum,
+#prodottoForm_boxTracce,
+#prodottoForm_boxTracciaSingola {
+    background-color: #ffffff;
+    border: 1px solid #888888;
+    border-radius: 4px;
+    margin-top: 10px;
     padding: 8px;
 }
-QDialog QGroupBox::title {
+#prodottoForm_boxDatiGenerali:title,
+#prodottoForm_boxVendita:title,
+#prodottoForm_boxMerch:title,
+#prodottoForm_boxDettagliSupporto:title,
+#prodottoForm_boxTShirt:title,
+#prodottoForm_boxDettagliCD:title,
+#prodottoForm_boxDettagliVinile:title,
+#prodottoForm_boxMusica:title,
+#prodottoForm_boxSingolo:title,
+#prodottoForm_boxAlbum:title,
+#prodottoForm_boxTracce:title,
+#prodottoForm_boxTracciaSingola:title {
     subcontrol-origin: margin;
     subcontrol-position: top left;
-    padding: 0 6px;
-    background: #fafaff;
+    padding: 0 4px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    color: #333333;
 }
 
-QDialog QFormLayout label {
-    min-width: 100px;
-    font-size: 10pt;
-}
-
-QDialog QLineEdit,
-QDialog QTextEdit,
-QDialog QDateEdit,
-QDialog QTimeEdit {
-    border: 1px solid #888;
+#prodottoForm_campiSpecificiContainer {
+    background-color: #ffffff;
+    border: 1px dashed #cccccc;
     border-radius: 4px;
-    padding: 5px;
-    background: white;
-    min-height: 26px; 
-    font-size: 10pt;
+    padding: 8px;
+    margin-top: 8px;
 }
 
-QDialog QComboBox {
-    border: 1px solid #888;
+#prodottoForm_partecipantiSingoloWidget,
+#prodottoForm_tracceWidget {
+    background-color: #ffffff;
+    border: 1px dashed #cccccc;
     border-radius: 4px;
-    padding: 4px 8px;
-    min-height: 26px;
-    font-size: 10pt;
+    padding: 6px;
+    margin-bottom: 8px;
 }
 
-QDialog QSpinBox,
-QDialog QDoubleSpinBox {
-    border: 1px solid #888;
-    border-radius: 4px;
-    padding: 4px 8px;
-    min-height: 26px;
-    font-size: 10pt;
-    qproperty-buttonSymbols: 1;  
-
-}
-
-QDialog QCheckBox {
-    spacing: 6px;
-    font-size: 10pt;
-}
-
-QDialog QPushButton {
-    font-size: 10pt;
-    padding: 6px 12px;
-    border-radius: 6px;
-    min-height: 28px;
-}
-QDialog QPushButton#okButton {
-    background-color: #4CAF50;
-    color: white;
-}
-QDialog QPushButton#cancelButton {
-    background-color: #f44336;
-    color: white;
-}
-QDialog QPushButton {
-    background-color: #4285F4;
-    color: white;
-}
-QDialog QPushButton:hover {
-    opacity: 0.9;
+#prodottoForm_disponibileCheck,
+#prodottoForm_hasTestoTracciaCheck,
+#prodottoForm_remixCheck {
+    spacing: 4px;
+    padding: 2px;
 }
