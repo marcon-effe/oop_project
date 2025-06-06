@@ -76,7 +76,7 @@ QJsonObject Musica::toJson(bool reduced) const {
 // Converte un oggetto XML in un oggetto Musica
 Musica::Musica(Artista* owner, const QDomElement& xml)
 : ArtistProduct(owner, xml),
-  dataUscita(Data(xml.firstChildElement("dataUscita").firstChildElement("Data"))),
+  dataUscita(Data(xml.firstChildElement("dataUscita"))),
   durata(Durata(xml.firstChildElement("Durata"))),
   genere(xml.attribute("genere").toStdString())
 {

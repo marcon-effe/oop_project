@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Traccia.h"
+#include <QDebug>
 
 #include "../../visitors/VisitorInterfaceNotConst.h"
 
@@ -110,7 +111,7 @@ QJsonObject Traccia::toJson() const {
 //Converte un oggetto XML in un oggetto Traccia
 Traccia::Traccia(const QDomElement &xml)
 :   nome(xml.attribute("nome").toStdString()),
-    durata(Durata(xml.firstChildElement("durata"))),
+    durata(Durata(xml.firstChildElement("Durata"))),
     testo(xml.firstChildElement("testo").text().toStdString()),
     hasTesto(xml.attribute("has_testo").toInt())
     {
