@@ -14,6 +14,7 @@
 #include <QProcess>
 #include <QFileInfo>
 #include <QDir>
+#include <QCoreApplication>
 
 #include <unordered_map>
 #include <string>

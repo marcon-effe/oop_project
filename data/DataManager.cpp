@@ -167,14 +167,24 @@ bool DataManager::saveToFileXml(const std::unordered_map<unsigned int, Artista*>
     return true;
 }
 
-// Funzione per caricare i dati da un file XML
 std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const std::string& filePath) {
     std::unordered_map<unsigned int, Artista*> artisti;
 
     // Pulisce la cartella view/icons/ mantenendo solo placeholder.png e info.png
     DataManager::clearIconsDirectory();
 
-    const std::string schemaPath = filePath.substr(0, filePath.find_last_of("/\\") + 1) + "artisti.xsd";
+    // Costruisce un percorso relativo all'eseguibile (che nel progetto è la cartella "root")
+    // QCoreApplication::applicationDirPath() restituisce, di solito, la cartella dell'eseguibile.
+    QString exeDir = QCoreApplication::applicationDirPath();
+    QDir dir(exeDir);
+
+    // Se il binario si trova in build‐Debug/, saliamo di un livello per arrivare a root/
+    if (dir.dirName().startsWith("build")) {
+        dir.cdUp(); // ora dir punta a root del progetto
+    }
+    // A questo punto costruiamo il path completo per l’XSD sotto root/saves/xml/
+    QString schemaPathQt = dir.filePath("saves/xml/artisti.xsd");
+    std::string schemaPath = schemaPathQt.toStdString();
 
     if (!validateXmlWithSchema(filePath, schemaPath)) {
         throw std::runtime_error("File XML non valido secondo lo schema.");
@@ -196,13 +206,14 @@ std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const st
 
     for (int i = 0; i < artistiNodes.count(); ++i) {
         QDomElement artistaEl = artistiNodes.at(i).toElement();
-        Artista* a = Artista::createFromXml(artistaEl); 
+        Artista* a = Artista::createFromXml(artistaEl);
         artisti[a->getId()] = a;
     }
 
     file.close();
     return artisti;
 }
+
 
 void DataManager::cleanUpArtist(std::unordered_map<unsigned int, Artista*>& artisti) {
     for(auto& pair : artisti) {

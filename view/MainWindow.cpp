@@ -609,6 +609,8 @@ void MainWindow::exportData() {
     if (!fileName.endsWith(extension)) fileName += extension;
 
     bool success = false;
+    //qDebug() << "Esportazione in XML con riduzione:" << reduced;
+
     if (selectedFormat == "JSON") {
         success = DataManager::saveToFileJson(artists, fileName.toStdString(), reduced);
     } else {

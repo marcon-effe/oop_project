@@ -95,7 +95,7 @@
   <!-- partecipanti -->
   <xs:complexType name="partecipanti">
     <xs:sequence>
-      <xs:element name="partecipante" maxOccurs="unbounded">
+      <xs:element name="partecipante" minOccurs="0" maxOccurs="unbounded">
         <xs:complexType>
           <xs:attribute name="nome" type="xs:string" use="required"/>
         </xs:complexType>
