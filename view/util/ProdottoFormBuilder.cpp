@@ -79,7 +79,6 @@ void ProdottoFormBuilder::setupInserimento()
     artistaLabel->setObjectName("prodottoForm_artistaLabel");
 
     artistaComboBox = new QComboBox(this);
-    artistaComboBox->setObjectName("prodottoForm_artistaComboBox");
     for (const auto& kv : artisti) {
         artistaComboBox->addItem(
             QString::fromStdString(kv.second->getNome()),
@@ -122,7 +121,6 @@ void ProdottoFormBuilder::onConfermaArtista()
     tipoLayout->addWidget(tipoLabel);
 
     tipoComboBox = new QComboBox(this);
-    tipoComboBox->setObjectName("prodottoForm_tipoComboBox");
     tipoComboBox->addItems({ "TShirt", "CD", "Vinile", "Album", "Singolo", "Tour" });
     tipoLayout->addWidget(tipoComboBox);
 

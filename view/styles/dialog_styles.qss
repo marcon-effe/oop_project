@@ -48,14 +48,6 @@
     border: 1px solid #0055aa;
 }
 
-#prodottoForm_artistaComboBox,
-#prodottoForm_tipoComboBox {
-    background-color: #ffffff;
-    border: 1px solid #888888;
-    border-radius: 3px;
-    padding: 4px 6px;
-}
-
 #artistForm_btnSelectImage,
 #prodottoForm_confermaArtistaBtn,
 #prodottoForm_btnSfoglia,
@@ -140,7 +132,7 @@
     background-color: #196e29;
 }
 
-#prodottoForm_boxDatiGenerali,
+/* #prodottoForm_boxDatiGenerali,
 #prodottoForm_boxVendita,
 #prodottoForm_boxMerch,
 #prodottoForm_boxDettagliSupporto,
@@ -176,7 +168,7 @@
     background-color: #f0f0f0;
     font-weight: bold;
     color: #333333;
-}
+} */
 
 #prodottoForm_campiSpecificiContainer {
     background-color: #ffffff;
