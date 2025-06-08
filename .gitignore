@@ -4,8 +4,6 @@ oop_project
 .qmake.stash
 Makefile
 .DS_Store
-saves/xml/*.xml
-saves/json/*.json
 
 model/filtri.txt
 model/costruttori.txt
