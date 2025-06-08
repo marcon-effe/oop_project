@@ -712,7 +712,7 @@ void MainWindow::applyArtistGenreFilter(const QString& genere) {
     sortArtistListWidget();
 }
 
-void MainWindow::applyProductFilters(const std::vector<std::string>& tipi, const QString& genereMusica, bool disponibile, const QString& artistaId) 
+void MainWindow::applyProductFilters(const std::vector<std::string>& tipi, const QString& genereMusica, bool disponibile, unsigned int artistaId) 
 {
     productListFullWidget->clear();
 
@@ -746,8 +746,8 @@ void MainWindow::applyProductFilters(const std::vector<std::string>& tipi, const
                 continue;
         }
 
-        // Filtro per artista
-        if (artistaId != "Tutti" && QString::number(p->getArtistId()) != artistaId)
+        // Se artistaId == 0 significa “Tutti”
+        if (artistaId != 0 && p->getArtistId() != artistaId)
             continue;
 
         QListWidgetItem* item = new QListWidgetItem(QString::fromStdString(p->getTitle()));
@@ -775,8 +775,7 @@ void MainWindow::openProductFilterDialog() {
         std::vector<std::string> tipi = dialog.getSelectedTipoProdotto();
         QString genereMusica = dialog.getSelectedGenereMusica();  // per musica
         bool disponibile = dialog.isDisponibileChecked();   // per not musica
-        QString artistaId = dialog.getSelectedArtistaId();  // filtro artista
-
+        unsigned int artistaId = dialog.getSelectedArtistaId();  // filtro artista
         applyProductFilters(tipi, genereMusica, disponibile, artistaId);
     }
 }

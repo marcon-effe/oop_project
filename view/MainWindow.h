@@ -74,7 +74,7 @@ private slots:
     void applyArtistGenreFilter(const QString& genere);
     
     void openProductFilterDialog();
-    void applyProductFilters(const std::vector<std::string>& tipi, const QString& genereMusica, bool disponibile, const QString& artistaId);
+    void applyProductFilters(const std::vector<std::string>& tipi, const QString& genereMusica, bool disponibile, unsigned int artistaId);
 
 public slots:
     void importData();

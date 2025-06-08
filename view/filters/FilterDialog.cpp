@@ -48,14 +48,23 @@ void FilterDialog::setupForProdotti(const std::unordered_map<unsigned int, Artis
     // Sezione: artista
     QLabel* artistaLabel = new QLabel("Filtra per artista:", this);
     artistaCombo = new QComboBox(this);
-    artistaCombo->addItem("Tutti");
-    for (const auto& pair : artisti) {
-        QString nome = QString::fromStdString(pair.second->getNome());
-        artistaCombo->addItem(nome);
-        artistaNomeToId[nome] = pair.first;
+
+    // Aggiungo “Tutti” che corrisponde all’ID 0
+    artistaCombo->addItem("Tutti", QVariant::fromValue(0u));
+
+    // Pulisco la mappa e la ricompilo
+    artistaNomeToId.clear();
+    for (const auto& entry : artisti) {
+        unsigned int id   = entry.first;
+        Artista*    art   = entry.second;
+        QString nome      = QString::fromStdString(art->getNome());
+        artistaCombo->addItem(nome, QVariant::fromValue(id));
+        artistaNomeToId[nome] = id;
     }
+
     mainLayout->addWidget(artistaLabel);
     mainLayout->addWidget(artistaCombo);
+
 
     // Sezione: prodotti musicali
     QLabel* musicaLabel = new QLabel("Prodotti musicali:", this);
@@ -146,8 +155,7 @@ bool FilterDialog::isDisponibileChecked() const {
     return disponibileCheck ? disponibileCheck->isChecked() : false;
 }
 
-QString FilterDialog::getSelectedArtistaId() const {
-    if (!artistaCombo || artistaCombo->currentText() == "Tutti") return "Tutti";
-    auto it = artistaNomeToId.find(artistaCombo->currentText());
-    return QString::fromStdString(it != artistaNomeToId.end() ? it->second : "");
+unsigned int FilterDialog::getSelectedArtistaId() const {
+    if (!artistaCombo) return 0;
+    return artistaCombo->currentData().toUInt();
 }

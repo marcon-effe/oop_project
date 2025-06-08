@@ -6,6 +6,7 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <QGroupBox>
+#include <QVariant>
 #include <unordered_map>
 #include <string>
 
@@ -26,7 +27,7 @@ public:
     QString getSelectedGenereMusica() const;
     std::vector<std::string> getSelectedTipoProdotto() const;
     bool isDisponibileChecked() const;
-    QString getSelectedArtistaId() const;
+    unsigned int getSelectedArtistaId() const;
 
 private:
     QVBoxLayout* mainLayout = nullptr;
@@ -39,7 +40,7 @@ private:
     QComboBox* genereMusicaCombo = nullptr;
     QCheckBox* disponibileCheck = nullptr;
 
-    std::unordered_map<QString, std::string> artistaNomeToId;
+    std::unordered_map<QString, unsigned int> artistaNomeToId;
 
     QCheckBox* albumCheck = nullptr;
     QCheckBox* singoloCheck = nullptr;
