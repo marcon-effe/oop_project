@@ -9,5 +9,6 @@ model/filtri.txt
 model/costruttori.txt
 
 view/icons/*/
+saves/autosave.json
 
 relazione/

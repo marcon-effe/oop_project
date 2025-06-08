@@ -1284,6 +1284,15 @@ Nel 2020 la rivista Time lo ha inserito nella lista delle 100 personalità più 
     <Artista genere="rap" imagePath="view/icons/Club_Dogo/profilo.jpg" nome="Club Dogo">
         <info>I Club Dogo sono un trio hip hop nato a Milano nel 1999 come Sacre Scuole (Guè, Dargen D’Amico e Jake La Furia), poi riformatosi nel 2002 con Don Joe al posto di Dargen e adottando il nome attuale. Dopo l’esordio indipendente con Mi fist (2003) e il successo di Penna capitale (2006), hanno firmato con Virgin Records per Vile denaro (2007), ottenendo riconoscimenti di critica e una maggiore visibilità mediatica. Nel 2009 hanno pubblicato Dogocrazia per Universal, consolidando la loro posizione nella scena italiana nonostante una ricezione radiofonica ridotta. Tra il 2010 e il 2014 hanno sfornato gli album Che bello essere noi, Noi siamo il club e Non siamo più quelli di Mi fist, accompagnati da numerosi video, collaborazioni e certificazioni oro e platino. Dopo una pausa dal 2015 al 2023, durante la quale ciascun membro ha portato avanti progetti solisti, il gruppo ha annunciato il ritorno ufficiale nell’autunno 2023 e ha pubblicato l’album Club Dogo nel gennaio 2024, seguito da una serie di concerti sold-out al Mediolanum Forum di Assago.</info>
         <prodotti>
+            <Vinile diametro="30" rpm="33">
+                <Disco codiceRiconoscimento="1702378021" produttoreStampe="Universal Music" tipoProdotto="LP">
+                    <Merch codiceProdotto="1702378021">
+                        <NotMusica disponibile="0" prezzo="27.90" quantita="0">
+                            <ArtistProduct description="Il gruppo più influente della storia del rap italiano torna a sorpresa con un nuovo album.&#xa;Gué, Jake La Furia e Don Joe che con il loro sodalizio sono entrati nella leggenda della musica italiana, rivoluzionando le classifiche per come le conoscevamo e facendo da apripista a una generazione di giovani artisti hip hop, hanno deciso di rivedersi per tornare a fare musica insieme.&#xa;Club Dogo, il nuovo album. Fuori ora.&#xa;https://shop.universalmusic.it/products/club-dogo-club-dogo-vinile " imagePath="view/icons/Club_Dogo/Club_Dogo_-_LP.jpeg" title="Club Dogo - LP"/>
+                        </NotMusica>
+                    </Merch>
+                </Disco>
+            </Vinile>
             <Album label="Vibrarecords">
                 <tracce>
                     <Traccia has_testo="1" nome="Intro">

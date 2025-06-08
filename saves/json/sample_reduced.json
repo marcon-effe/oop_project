@@ -2175,6 +2175,32 @@
             "nome": "Club Dogo",
             "prodotti": [
                 {
+                    "diametro": 30,
+                    "disco": {
+                        "codiceRiconoscimento": "1702378021",
+                        "merch": {
+                            "codiceProdotto": "1702378021",
+                            "not_musica": {
+                                "ArtistProduct": {
+                                    "description": "Il gruppo più influente della storia del rap italiano torna a sorpresa con un nuovo album.\nGué, Jake La Furia e Don Joe che con il loro sodalizio sono entrati nella leggenda della musica italiana, rivoluzionando le classifiche per come le conoscevamo e facendo da apripista a una generazione di giovani artisti hip hop, hanno deciso di rivedersi per tornare a fare musica insieme.\nClub Dogo, il nuovo album. Fuori ora.\nhttps://shop.universalmusic.it/products/club-dogo-club-dogo-vinile ",
+                                    "imagePath": "view/icons/Club_Dogo/Club_Dogo_-_LP.jpeg",
+                                    "title": "Club Dogo - LP"
+                                },
+                                "disponibile": false,
+                                "prezzo": 27.9,
+                                "quantita": 0,
+                                "type": "notmusica"
+                            },
+                            "type": "merch"
+                        },
+                        "produttoreStampe": "Universal Music",
+                        "tipoProdotto": "LP",
+                        "type": "disco"
+                    },
+                    "rpm": 33,
+                    "type": "vinile"
+                },
+                {
                     "label": "Vibrarecords",
                     "musica": {
                         "ArtistProduct": {
