@@ -36,6 +36,7 @@ void ConsoleArtistEditor::modificaArtista(const std::unordered_map<unsigned int,
                     }
 
                     for (const auto& [id, a] : artisti) {
+                        if(id == artista->getId()) continue; // salta l'artista corrente
                         std::cout << "Controllo nome: " << a->getNome() << "\n";
                         if (a->getNome() == nuvonome) {
                             std::cout << "Nome già in uso da un altro artista.\n";
