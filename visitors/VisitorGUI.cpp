@@ -184,7 +184,7 @@ QWidget *VisitorGUI::createTrackWidget(const Traccia &track)
         testoBtn->setCursor(Qt::PointingHandCursor);
         layout->addWidget(testoBtn, 0, Qt::AlignVCenter);
 
-        connect(testoBtn, &QPushButton::clicked, this, [this, track, trackContainer]()
+        connect(testoBtn, &QPushButton::clicked, this, [track, trackContainer]()
                 {
             QDialog dlg(trackContainer);   // mantengo scollegato -> obbliga la chiusura del dialog prima della chiusura della pagina
             dlg.setWindowTitle("Testo: " + QString::fromStdString(track.getNome()));

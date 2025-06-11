@@ -7,6 +7,10 @@
 #include "../view/ErrorManager.h"
 #include "../visitors/VisitorConsoleEditor.h"
 
+// so che il blocco di codice seguente contiene molti controlli annidati ma si è reso necessario questo approccio
+// per implementare l'assoluta uncità (speriamo) di nomi di artisti e nomi prodotti in seguito alla progettazione
+// del sistema di gestione delle immagini 
+
 void ConsoleArtistEditor::modificaArtista(const std::unordered_map<unsigned int, Artista*>& artisti, Artista* artista) {
     bool fine = false;
     while (!fine) {

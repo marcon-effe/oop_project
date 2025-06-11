@@ -297,7 +297,7 @@ void MainWindow::onInserisciProdotto()
     auto* builder = new ProdottoFormBuilder(artists, prodotti, /*prodottoEsistente=*/nullptr, this);
 
     // 3) Collegamento: quando il form emette prodottoSalvato(), aggiorno e svuoto il pannello
-    connect(builder, &ProdottoFormBuilder::prodottoSalvato, this, [this, builder]() {
+    connect(builder, &ProdottoFormBuilder::prodottoSalvato, this, [this]() {
         updateListWidgets();
         saveIfAutosaveEnabled();
         clearRightPanel();
@@ -389,7 +389,7 @@ void MainWindow::onModificaProdotto()
     auto* builder = new ProdottoFormBuilder(artists, prodotti, prodotto, this);
 
     // 4) Collegamento: quando il form emette prodottoSalvato(), aggiorno e svuoto il pannello
-    connect(builder, &ProdottoFormBuilder::prodottoSalvato, this, [this, builder]() {
+    connect(builder, &ProdottoFormBuilder::prodottoSalvato, this, [this]() {
         clearRightPanel();
         updateListWidgets();
         saveIfAutosaveEnabled();

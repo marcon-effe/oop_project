@@ -1,102 +1,95 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
+# Rileva sistema operativo e comando qmake
 OS_TYPE="$(uname)"
-QMAKE_OVERRIDE="$1"
+QMAKE="${1:-qmake}"
 
-# Controllo validatore XML
-if ! command -v xmllint &>/dev/null; then
-    echo "Errore: 'xmllint' non è installato. Installa libxml2 (es: 'sudo apt install libxml2-utils' o 'brew install libxml2')."
-    exit 1
-fi
+# Pulisce build, file temporanei e cartelle icone artisti
+cleanup() {
+    echo "Pulizia directory build e file temporanei..."
+    rm -rf build/ oop_project oop_project.pro .qmake.stash Makefile
+    echo "Rimozione cartelle artisti in view/icons/..."
+    rm -rf view/icons/*/
+    echo "Rimozione file di autosave..."
+    rm -f saves/autosave.json
+}
 
-# Test supporto --schema
-TMP_XML="__tmp_check__.xml"
-TMP_XSD="__tmp_check__.xsd"
+# Verifica xmllint e supporto schema
+check_xmllint() {
+    if ! command -v xmllint &>/dev/null; then
+        echo "Errore: xmllint non trovato. Installa libxml2." >&2
+        exit 1
+    fi
 
-cat <<EOF > "$TMP_XML"
-<?xml version="1.0"?><root/>
-EOF
-
-cat <<EOF > "$TMP_XSD"
+  # Test schema
+    local xml=$(mktemp tmpXXXX.xml)
+    local xsd=$(mktemp tmpXXXX.xsd)
+    echo '<?xml version="1.0"?><root/>' > "$xml"
+    cat > "$xsd" <<EOF
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="root" type="xs:string"/>
+<xs:element name="root" type="xs:string"/>
 </xs:schema>
 EOF
 
-if ! xmllint --noout --schema "$TMP_XSD" "$TMP_XML" &>/dev/null; then
-    echo "Errore: 'xmllint' è installato ma non supporta '--schema'."
-    echo "Verifica la tua installazione di libxml2."
-    rm -f "$TMP_XML" "$TMP_XSD"
+  if ! xmllint --noout --schema "$xsd" "$xml" &>/dev/null; then
+    echo "Errore: xmllint senza supporto --schema." >&2
+    rm -f "$xml" "$xsd"
     exit 1
-fi
+  fi
 
-rm -f "$TMP_XML" "$TMP_XSD"
+    rm -f "$xml" "$xsd"
+}
 
-# Comando qmake (override se fornito)
-if [ -n "$QMAKE_OVERRIDE" ]; then
-    QMAKE="$QMAKE_OVERRIDE"
-else
-    QMAKE="qmake"
-fi
+# Compilazione su Linux
+build_linux() {
+    echo "Pulizia..."
+    cleanup
+    mkdir -p build && cd build
 
-# Build process
-if [ "$OS_TYPE" == "Linux" ]; then
-    rm -rf build oop_project
+    echo "qmake..."
+    "$QMAKE" ../oop_project.pro
 
-    mkdir -p build
-    cd build || exit 1
+    echo "Compilazione..."
+    make -j"$(nproc)"
 
-    $QMAKE ../oop_project.pro
-    if [ $? -ne 0 ]; then
-        echo "Errore: qmake fallito"
-        exit 1
-    fi
-
-    make -j$(nproc)
-    if [ $? -ne 0 ]; then
-        echo "Errore: compilazione fallita"
-        exit 2
-    fi
-
-    mv ./oop_project ../
+    echo "Sposto eseguibile..."
+    mv oop_project ../
     cd ..
+
+    echo "Avvio applicazione..."
     ./oop_project
+}
 
-elif [ "$OS_TYPE" == "Darwin" ]; then
-    rm -rf build/ oop_project oop_project.pro .qmake.stash Makefile
+# Compilazione su macOS
+build_macos() {
+    echo "Pulizia..."
+    cleanup
 
-    $QMAKE -project -o oop_project.pro
-    if [ $? -ne 0 ]; then
-        echo "Errore: qmake -project fallito"
-        exit 1
-    fi
+    echo "qmake -project..."
+    "$QMAKE" -project -o oop_project.pro
 
-    echo -e "\nQT += core gui widgets xml\nCONFIG -= app_bundle" >> oop_project.pro
-    echo "RESOURCES += view/resources.qrc" >> oop_project.pro
-    echo "DESTDIR = ." >> oop_project.pro
-    echo "OBJECTS_DIR = build" >> oop_project.pro
-    echo "MOC_DIR = build" >> oop_project.pro
-    echo "RCC_DIR = build" >> oop_project.pro
-    echo "UI_DIR = build" >> oop_project.pro
+    echo "Aggiungo moduli Qt e configurazioni..."
+    printf "\nQT += core gui widgets xml\nCONFIG -= app_bundle\nRESOURCES += view/resources.qrc\nDESTDIR = .\nOBJECTS_DIR = build\nMOC_DIR = build\nRCC_DIR = build\nUI_DIR = build\n" >> oop_project.pro
 
     mkdir -p build
 
-    $QMAKE oop_project.pro
-    if [ $? -ne 0 ]; then
-        echo "Errore: qmake fallito"
-        exit 1
-    fi
+    echo "qmake..."
+    "$QMAKE" oop_project.pro
 
-    make -j$(sysctl -n hw.ncpu)
-    if [ $? -ne 0 ]; then
-        echo "Errore: compilazione fallita"
-        exit 2
-    fi
+    echo "Compilazione..."
+    make -j"$(sysctl -n hw.ncpu)"
 
+    echo "Avvio applicazione..."
     ./oop_project
+}
 
-else
-    echo "Sistema operativo non supportato: $OS_TYPE"
-    exit 3
-fi
+# Esecuzione principale
+check_xmllint
+case "$OS_TYPE" in
+    Linux)   build_linux ;;  
+    Darwin)  build_macos ;;  
+    *)       echo "OS non supportato: $OS_TYPE" >&2; exit 3 ;;  
+ esac
