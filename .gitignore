@@ -12,3 +12,6 @@ view/icons/*/
 saves/autosave.json
 
 relazione/
+
+saves/json/test_completo.json
+saves/xml/test_completo.xml

@@ -36,7 +36,6 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
     echo "macOS detected - eseguo comandi alternativi"
 
     echo "Specifica del path per qmake..."
-    QMAKE_PATH="/Users/leonardo/Qt/6.8.2/macos/bin/qmake"
 
     rm -rf build/
     rm -rf oop_project
@@ -45,7 +44,7 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
     rm -rf Makefile
 
     echo "Rigenerazione del file .pro..."
-    "$QMAKE_PATH" -project -o oop_project.pro
+    qmake -project -o oop_project.pro
 
     echo "Aggiunta moduli Qt e disattivazione del bundle..."
     echo -e "\nQT += core gui widgets xml\nCONFIG -= app_bundle" >> oop_project.pro
@@ -60,7 +59,7 @@ elif [ "$OS_TYPE" == "Darwin" ]; then
     mkdir -p build
 
     echo "Running qmake..."
-    "$QMAKE_PATH" oop_project.pro
+    qmake oop_project.pro
     if [ $? -ne 0 ]; then
         echo "!! qmake failed"
         exit 1

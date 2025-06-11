@@ -16,8 +16,9 @@ unsigned int ArtistProduct::nextProductId = 1;
 std::mutex ArtistProduct::idMutex;
 
 ArtistProduct::ArtistProduct(Artista* owner, const std::string& t, const std::string& desc)
-    : ID(generateId()), title(t), description(desc), imagePath(""), imageB64("")
+    : ID(generateId()), description(desc), imagePath(""), imageB64("")
 {
+    setTitle(t);
     if (!owner) {
         assert(false && "Artista pointer must not be nullptr");
         throw std::invalid_argument("ArtistProduct constructor received nullptr Artista pointer.");
@@ -27,8 +28,9 @@ ArtistProduct::ArtistProduct(Artista* owner, const std::string& t, const std::st
 }
 
 ArtistProduct::ArtistProduct(Artista* owner, const std::string& t, const std::string& d, const std::string& i)
-    : ID(generateId()), title(t), description(d), imagePath(""), imageB64("")
+    : ID(generateId()), description(d), imagePath(""), imageB64("")
 {
+    setTitle(t);
     if (!owner) {
         assert(false && "Artista pointer must not be nullptr");
         throw std::invalid_argument("ArtistProduct constructor received nullptr Artista pointer.");
@@ -46,9 +48,9 @@ ArtistProduct::ArtistProduct(const ArtistProduct* p)
         throw std::invalid_argument("ArtistProduct copy constructor received nullptr.");
     }
 
-    title = p->getTitle();
+    setTitle(p->getTitle());
     description = p->getDescription();
-    imagePath = p->getImagePath();
+    setImagePath(p->getImagePath());
     imageB64 = p->imageB64;
     nomeArtista = p->nomeArtista;
     id_artist = p->getArtistId();
@@ -295,7 +297,6 @@ static std::string restoreProductImageFromB64(const std::string& artistName, con
 // Converte un oggetto JSON in un oggetto ArtistProduct
 ArtistProduct::ArtistProduct(Artista* owner, const QJsonObject& json)
     : ID(generateId()),
-      title(json["title"].toString().toStdString()),
       description(json["description"].toString().toStdString()),
       imagePath("")
 {
@@ -303,6 +304,8 @@ ArtistProduct::ArtistProduct(Artista* owner, const QJsonObject& json)
         assert(false && "ArtistProduct JSON constructor received nullptr owner");
         throw std::invalid_argument("ArtistProduct JSON constructor received nullptr owner.");
     }
+
+    setTitle(json["title"].toString().toStdString());
 
     setOwner(owner); // imposta id_artist e nomeArtista
 
@@ -362,7 +365,7 @@ ArtistProduct::ArtistProduct(Artista* owner, const QDomElement& xml)
         throw std::invalid_argument("ArtistProduct XML constructor: tag <ArtistProduct> mancante o malformato.");
     }
 
-    title = apElem.attribute("title").toStdString();
+    setTitle(apElem.attribute("title").toStdString());
     description = apElem.attribute("description").toStdString();
     imagePath = apElem.attribute("imagePath").toStdString();
 

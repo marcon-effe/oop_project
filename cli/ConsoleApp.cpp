@@ -1,6 +1,6 @@
 #include "ConsoleApp.h"
+#include "SafeInput.h"
 #include <iostream>
-#include <limits>
 #include <filesystem>
 #include <QDir>
 
@@ -8,7 +8,6 @@
 #include "../view/ErrorManager.h"
 #include "cli/ConsoleArtistEditor.h"
 #include "ConsoleEditorHandler.h"
-
 
 ConsoleApp::ConsoleApp() {}
 
@@ -20,10 +19,7 @@ ConsoleApp::~ConsoleApp() {
 void ConsoleApp::run() {
     while (true) {
         showMenu();
-        int choice;
-        std::cout << "Scegli: ";
-        std::cin >> choice;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int choice = SafeInput::read<int>("Scegli: ");
 
         try {
             switch (choice) {
@@ -73,7 +69,22 @@ void ConsoleApp::printAllArtists() const {
 
 void ConsoleApp::insertArtist() {
     try {
-        Artista* nuovo = ConsoleEditorHandler::creaArtista();
+        std::string nome;
+        std::cout << "Inserimento il nome dell'artista: ";
+        std::getline(std::cin, nome);
+        if (nome.empty()) {
+            std::cout << "Nome non valido. Riprova.\n";
+            return;
+        }
+
+        for (const auto& [id, artista] : artisti) {
+            if (artista->getNome() == nome) {
+                std::cout << "Artista con nome '" << nome << "' già esistente.\n";
+                return;
+            }
+        }
+        
+        Artista* nuovo = ConsoleEditorHandler::creaArtista(nome);
         if (nuovo) {
             artisti[nuovo->getId()] = nuovo;
             std::cout << "Artista inserito con ID: " << nuovo->getId() << "\n";
@@ -88,7 +99,7 @@ void ConsoleApp::modifyArtist() {
     if (!a) return;
 
     try {
-        ConsoleArtistEditor::modificaArtista(a);
+        ConsoleArtistEditor::modificaArtista(artisti, a);
     } catch (const std::exception& ex) {
         ErrorManager::showError(ex.what());
     }
@@ -105,13 +116,7 @@ void ConsoleApp::deleteArtist() {
 
 void ConsoleApp::saveData() {
     try {
-        std::cout << "Formato di salvataggio:\n";
-        std::cout << "1. JSON\n";
-        std::cout << "2. XML\n";
-        std::cout << "Scelta: ";
-        int formato;
-        std::cin >> formato;
-        std::cin.ignore();
+        int formato = SafeInput::read<int>("Formato di salvataggio (1=JSON, 2=XML): ");
 
         std::string name;
         std::cout << "Nome file da salvare (senza estensione) [default: cli_save]: ";
@@ -136,13 +141,7 @@ void ConsoleApp::saveData() {
 
 void ConsoleApp::loadData() {
     try {
-        std::cout << "Formato di caricamento:\n";
-        std::cout << "1. JSON\n";
-        std::cout << "2. XML\n";
-        std::cout << "Scelta: ";
-        int formato;
-        std::cin >> formato;
-        std::cin.ignore();
+        int formato = SafeInput::read<int>("Formato di caricamento (1=JSON, 2=XML): ");
 
         std::string pathBase = (formato == 1) ? "saves/json/" : "saves/xml/";
         QStringList filtro = (formato == 1) ? QStringList() << "*.json" : QStringList() << "*.xml";
@@ -160,11 +159,7 @@ void ConsoleApp::loadData() {
             std::cout << " " << i + 1 << ". " << files[i].toStdString() << "\n";
         }
 
-        std::cout << "Seleziona file (numero): ";
-        int choice;
-        std::cin >> choice;
-        std::cin.ignore();
-
+        int choice = SafeInput::read<int>("Seleziona file (numero): ");
         if (choice < 1 || choice > files.size()) {
             std::cout << "Scelta non valida.\n";
             return;
@@ -172,12 +167,10 @@ void ConsoleApp::loadData() {
 
         std::string fileChosen = pathBase + files[choice - 1].toStdString();
 
-        // Pulisce dati vecchi
         for (auto& p : artisti)
             delete p.second;
         artisti.clear();
 
-        // Caricamento
         if (formato == 1) {
             artisti = DataManager::loadFromFileJson(fileChosen);
         } else if (formato == 2) {
@@ -195,7 +188,6 @@ void ConsoleApp::loadData() {
     }
 }
 
-
 void ConsoleApp::clearAll() {
     for (auto& p : artisti)
         delete p.second;
@@ -210,15 +202,11 @@ Artista* ConsoleApp::selectArtist() {
     }
 
     std::cout << "ID artisti disponibili:\n";
-    for (auto& [id, a] : artisti) {
+    for (const auto& [id, a] : artisti) {
         std::cout << "ID " << id << ": " << a->getNome() << "\n";
     }
 
-    std::cout << "Inserisci ID artista: ";
-    unsigned int id;
-    std::cin >> id;
-    std::cin.ignore();
-
+    unsigned int id = SafeInput::read<unsigned int>("Inserisci ID artista: ");
     if (artisti.find(id) != artisti.end())
         return artisti[id];
 

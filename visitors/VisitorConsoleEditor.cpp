@@ -19,13 +19,10 @@ void VisitorConsoleEditor::visit(Album* album) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica Album: " << album->getTitle() << " ---\n";
-        std::cout << "1. Modifica titolo\n";
-        std::cout << "2. Modifica descrizione\n";
-        std::cout << "3. Modifica immagine\n";
-        std::cout << "4. Modifica genere\n";
-        std::cout << "5. Modifica data di uscita\n";
-        std::cout << "6. Modifica etichetta\n";
-        std::cout << "7. Gestisci tracce\n";
+        std::cout << "1. Modifica genere\n";
+        std::cout << "2. Modifica data di uscita\n";
+        std::cout << "3. Modifica etichetta\n";
+        std::cout << "4. Gestisci tracce\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -35,13 +32,10 @@ void VisitorConsoleEditor::visit(Album* album) {
 
         try {
             switch (scelta) {
-                case 1: ConsoleEditorHandler::editTitoloProduct(album); break;
-                case 2: ConsoleEditorHandler::editDescrizioneProduct(album); break;
-                case 3: ConsoleEditorHandler::editImagePathProduct(album); break;
-                case 4: ConsoleEditorHandler::editGenereMusica(album); break;
-                case 5: ConsoleEditorHandler::editDataUscitaMusica(album); break;
-                case 6: ConsoleEditorHandler::editEtichettaAlbum(album); break;
-                case 7: {
+                case 1: ConsoleEditorHandler::editGenereMusica(album); break;
+                case 2: ConsoleEditorHandler::editDataUscitaMusica(album); break;
+                case 3: ConsoleEditorHandler::editEtichettaAlbum(album); break;
+                case 4: {
                     bool fineTracce = false;
                     while (!fineTracce) {
                         std::cout << "\n--- Gestione Tracce ---\n";
@@ -109,7 +103,7 @@ void VisitorConsoleEditor::visit(Album* album) {
                     break;
                 }
                 case 0: fine = true; break;
-                default: std::cout << "Scelta non valida.\n";
+                default: std::cout << "Scelta non valida.\n"; fine=true; break;
             }
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
@@ -123,14 +117,11 @@ void VisitorConsoleEditor::visit(Singolo* singolo) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica Singolo: " << singolo->getTitle() << " ---\n";
-        std::cout << "1. Modifica titolo\n";
-        std::cout << "2. Modifica descrizione\n";
-        std::cout << "3. Modifica immagine\n";
-        std::cout << "4. Modifica genere\n";
-        std::cout << "5. Modifica data di uscita\n";
-        std::cout << "6. Modifica posizione in classifica\n";
-        std::cout << "7. Modifica se è un remix\n";
-        std::cout << "8. Modifica traccia principale\n";
+        std::cout << "1. Modifica genere\n";
+        std::cout << "2. Modifica data di uscita\n";
+        std::cout << "3. Modifica posizione in classifica\n";
+        std::cout << "4. Modifica se è un remix\n";
+        std::cout << "5. Modifica traccia principale\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -141,27 +132,18 @@ void VisitorConsoleEditor::visit(Singolo* singolo) {
         try {
             switch (scelta) {
                 case 1:
-                    ConsoleEditorHandler::editTitoloProduct(singolo);
-                    break;
-                case 2:
-                    ConsoleEditorHandler::editDescrizioneProduct(singolo);
-                    break;
-                case 3:
-                    ConsoleEditorHandler::editImagePathProduct(singolo);
-                    break;
-                case 4:
                     ConsoleEditorHandler::editGenereMusica(singolo);
                     break;
-                case 5:
+                case 2:
                     ConsoleEditorHandler::editDataUscitaMusica(singolo);
                     break;
-                case 6:
+                case 3:
                     ConsoleEditorHandler::editChartPositionSingolo(singolo);
                     break;
-                case 7:
+                case 4:
                     ConsoleEditorHandler::editIsRemixSingolo(singolo);
                     break;
-                case 8:
+                case 5:
                     ConsoleEditorHandler::editMainTrackSingolo(singolo);
                     break;
                 case 0:
@@ -183,10 +165,9 @@ void VisitorConsoleEditor::visit(Traccia* traccia) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica Traccia: " << traccia->getNome() << " ---\n";
-        std::cout << "1. Modifica nome\n";
-        std::cout << "2. Modifica durata\n";
-        std::cout << "3. Modifica testo\n";
-        std::cout << "4. Gestisci partecipanti\n";
+        std::cout << "1. Modifica durata\n";
+        std::cout << "2. Modifica testo\n";
+        std::cout << "3. Gestisci partecipanti\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -196,25 +177,11 @@ void VisitorConsoleEditor::visit(Traccia* traccia) {
 
         try {
             switch (scelta) {
-                case 1:
-                    ConsoleEditorHandler::editNomeTraccia(traccia);
-                    break;
-                case 2:
-                    ConsoleEditorHandler::editDurataTraccia(traccia);
-                    break;
-                case 3:
-                    ConsoleEditorHandler::editTestoTraccia(traccia);
-                    break;
-                case 4:
-                    // Nuovo metodo centralizzato per gestione partecipanti
-                    ConsoleEditorHandler::gestisciPartecipantiTraccia(traccia);
-                    break;
-                case 0:
-                    fine = true;
-                    break;
-                default:
-                    std::cout << "Scelta non valida.\n";
-                    break;
+                case 1: ConsoleEditorHandler::editDurataTraccia(traccia); break;
+                case 2: ConsoleEditorHandler::editTestoTraccia(traccia); break;
+                case 3: ConsoleEditorHandler::gestisciPartecipantiTraccia(traccia); break;
+                case 0: fine = true; break;
+                default: std::cout << "Scelta non valida.\n"; break;
             }
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
@@ -228,13 +195,10 @@ void VisitorConsoleEditor::visit(CD* cd) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica CD: " << cd->getTitle() << " ---\n";
-        std::cout << "1. Modifica titolo\n";
-        std::cout << "2. Modifica descrizione\n";
-        std::cout << "3. Modifica immagine\n";
-        std::cout << "4. Modifica prezzo\n";
-        std::cout << "5. Modifica disponibilità\n";
-        std::cout << "6. Modifica quantità\n";
-        std::cout << "7. Modifica formato\n";
+        std::cout << "1. Modifica prezzo\n";
+        std::cout << "2. Modifica disponibilità\n";
+        std::cout << "3. Modifica quantità\n";
+        std::cout << "4. Modifica formato\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -244,15 +208,12 @@ void VisitorConsoleEditor::visit(CD* cd) {
 
         try {
             switch (scelta) {
-                case 1: ConsoleEditorHandler::editTitoloProduct(cd); break;
-                case 2: ConsoleEditorHandler::editDescrizioneProduct(cd); break;
-                case 3: ConsoleEditorHandler::editImagePathProduct(cd); break;
-                case 4: ConsoleEditorHandler::editPrezzoMerch(cd); break;
-                case 5: ConsoleEditorHandler::editDisponibileMerch(cd); break;
-                case 6: ConsoleEditorHandler::editQuantitaMerch(cd); break;
-                case 7: ConsoleEditorHandler::editFormatoCD(cd); break;
+                case 1: ConsoleEditorHandler::editPrezzoMerch(cd); break;
+                case 2: ConsoleEditorHandler::editDisponibileMerch(cd); break;
+                case 3: ConsoleEditorHandler::editQuantitaMerch(cd); break;
+                case 4: ConsoleEditorHandler::editFormatoCD(cd); break;
                 case 0: fine = true; break;
-                default: std::cout << "Scelta non valida.\n";
+                default: std::cout << "Scelta non valida.\n"; break;
             }
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
@@ -266,14 +227,11 @@ void VisitorConsoleEditor::visit(Vinile* vinile) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica Vinile: " << vinile->getTitle() << " ---\n";
-        std::cout << "1. Modifica titolo\n";
-        std::cout << "2. Modifica descrizione\n";
-        std::cout << "3. Modifica immagine\n";
-        std::cout << "4. Modifica prezzo\n";
-        std::cout << "5. Modifica disponibilità\n";
-        std::cout << "6. Modifica quantità\n";
-        std::cout << "7. Modifica RPM\n";
-        std::cout << "8. Modifica diametro\n";
+        std::cout << "1. Modifica prezzo\n";
+        std::cout << "2. Modifica disponibilità\n";
+        std::cout << "3. Modifica quantità\n";
+        std::cout << "4. Modifica RPM\n";
+        std::cout << "5. Modifica diametro\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -283,14 +241,11 @@ void VisitorConsoleEditor::visit(Vinile* vinile) {
 
         try {
             switch (scelta) {
-                case 1: ConsoleEditorHandler::editTitoloProduct(vinile); break;
-                case 2: ConsoleEditorHandler::editDescrizioneProduct(vinile); break;
-                case 3: ConsoleEditorHandler::editImagePathProduct(vinile); break;
-                case 4: ConsoleEditorHandler::editPrezzoMerch(vinile); break;
-                case 5: ConsoleEditorHandler::editDisponibileMerch(vinile); break;
-                case 6: ConsoleEditorHandler::editQuantitaMerch(vinile); break;
-                case 7: ConsoleEditorHandler::editRPMVinile(vinile); break;
-                case 8: ConsoleEditorHandler::editDiametroVinile(vinile); break;
+                case 1: ConsoleEditorHandler::editPrezzoMerch(vinile); break;
+                case 2: ConsoleEditorHandler::editDisponibileMerch(vinile); break;
+                case 3: ConsoleEditorHandler::editQuantitaMerch(vinile); break;
+                case 4: ConsoleEditorHandler::editRPMVinile(vinile); break;
+                case 5: ConsoleEditorHandler::editDiametroVinile(vinile); break;
                 case 0: fine = true; break;
                 default: std::cout << "Scelta non valida.\n";
             }
@@ -306,14 +261,11 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica TShirt: " << tshirt->getTitle() << " ---\n";
-        std::cout << "1. Modifica titolo\n";
-        std::cout << "2. Modifica descrizione\n";
-        std::cout << "3. Modifica immagine\n";
-        std::cout << "4. Modifica prezzo\n";
-        std::cout << "5. Modifica disponibilità\n";
-        std::cout << "6. Modifica quantità\n";
-        std::cout << "7. Modifica taglia\n";
-        std::cout << "8. Modifica colore\n";
+        std::cout << "1. Modifica prezzo\n";
+        std::cout << "2. Modifica disponibilità\n";
+        std::cout << "3. Modifica quantità\n";
+        std::cout << "4. Modifica taglia\n";
+        std::cout << "5. Modifica colore\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -323,14 +275,11 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
 
         try {
             switch (scelta) {
-                case 1: ConsoleEditorHandler::editTitoloProduct(tshirt); break;
-                case 2: ConsoleEditorHandler::editDescrizioneProduct(tshirt); break;
-                case 3: ConsoleEditorHandler::editImagePathProduct(tshirt); break;
-                case 4: ConsoleEditorHandler::editPrezzoMerch(tshirt); break;
-                case 5: ConsoleEditorHandler::editDisponibileMerch(tshirt); break;
-                case 6: ConsoleEditorHandler::editQuantitaMerch(tshirt); break;
-                case 7: ConsoleEditorHandler::editTagliaTShirt(tshirt); break;
-                case 8: ConsoleEditorHandler::editColoreTShirt(tshirt); break;
+                case 1: ConsoleEditorHandler::editPrezzoMerch(tshirt); break;
+                case 2: ConsoleEditorHandler::editDisponibileMerch(tshirt); break;
+                case 3: ConsoleEditorHandler::editQuantitaMerch(tshirt); break;
+                case 4: ConsoleEditorHandler::editTagliaTShirt(tshirt); break;
+                case 5: ConsoleEditorHandler::editColoreTShirt(tshirt); break;
                 case 0: fine = true; break;
                 default:
                     std::cout << "Scelta non valida.\n";
@@ -347,10 +296,7 @@ void VisitorConsoleEditor::visit(Tour* tour) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica Tour: " << tour->getTitle() << " ---\n";
-        std::cout << "1. Modifica titolo\n";
-        std::cout << "2. Modifica descrizione\n";
-        std::cout << "3. Modifica immagine\n";
-        std::cout << "4. Gestisci date del tour\n";
+        std::cout << "1. Gestisci date del tour\n";
         std::cout << "0. Torna indietro\n";
         std::cout << "Scelta: ";
 
@@ -360,10 +306,7 @@ void VisitorConsoleEditor::visit(Tour* tour) {
 
         try {
             switch (scelta) {
-                case 1: ConsoleEditorHandler::editTitoloProduct(tour); break;
-                case 2: ConsoleEditorHandler::editDescrizioneProduct(tour); break;
-                case 3: ConsoleEditorHandler::editImagePathProduct(tour); break;
-                case 4: {
+                case 1: {
                     bool fineDate = false;
                     while (!fineDate) {
                         std::cout << "\n--- Gestione Date del Tour ---\n";

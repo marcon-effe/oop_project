@@ -411,15 +411,6 @@ QDomElement Artista::toXml(QDomDocument& doc, bool reduced) const {
     return artistaElem;
 }
 
-// VISITOR
-/* void Artista::accept(VisitorInterfaceConst* visitor) const{
-    visitor -> visit(this);
-}
-
-void Artista::accept(VisitorInterfaceNotConst* visitor) {
-    visitor->visit(this);
-} */
-
 
 // OVERLOADING OPERATORI
 bool operator==(const Artista& a, const Artista& b) {

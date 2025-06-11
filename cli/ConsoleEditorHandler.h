@@ -1,6 +1,8 @@
 #ifndef CONSOLEEDITORHANDLER_H
 #define CONSOLEEDITORHANDLER_H
 
+#include<string>
+
 class Artista;
 class ArtistProduct;
 class Musica;
@@ -18,7 +20,7 @@ class Traccia;
 class ConsoleEditorHandler {
 public:
     // ARTISTA
-    static void editNomeArtista(Artista* a);
+    static void editNomeArtista(Artista* a, const std::string& nuovoNome);
     static void editGenereArtista(Artista* a);
     static void editInfoArtista(Artista* a);
     static void editImagePathArtista(Artista* a);
@@ -82,7 +84,7 @@ public:
     // CREAZIONE NUOVI
     static Traccia creaTraccia();
     static DataTour creaDataTour();
-    static Artista* creaArtista();
+    static Artista* creaArtista(const std::string& nome);
     static void aggiungiProdottoArtista(Artista* artista);
 };
 
