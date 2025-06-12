@@ -26,17 +26,20 @@ void ConsoleArtistEditor::modificaArtista(const std::unordered_map<unsigned int,
 
         try {
             switch (scelta) {
-                case 1:{
-                    std::cout << "Modifica nome dell'artista: ";
-                    std::string nuvonome;
-                    std::getline(std::cin, nuvonome);
+                case 1: {
+                    std::string nuvonome = SafeInput::read("Modifica nome dell'artista: ");
                     if (nuvonome.empty()) {
                         std::cout << "Nome non valido. Riprova.\n";
                         break;
                     }
 
+                    if(nuvonome == artista->getNome()) {
+                        std::cout << "Il nome è già quello corrente.\n";
+                        break;
+                    }
+
                     for (const auto& [id, a] : artisti) {
-                        if(id == artista->getId()) continue; // salta l'artista corrente
+                        if (id == artista->getId()) continue; // salta l'artista corrente
                         std::cout << "Controllo nome: " << a->getNome() << "\n";
                         if (a->getNome() == nuvonome) {
                             std::cout << "Nome già in uso da un altro artista.\n";
@@ -77,30 +80,28 @@ void ConsoleArtistEditor::modificaArtista(const std::unordered_map<unsigned int,
                                         std::cout << "Nessun prodotto da editare.\n";
                                         break;
                                     }
-                                    std::cout << "Prodotti disponibili:\n";
+                                    std::cout << "\n--- Prodotti disponibili ---\n";
                                     for (const auto& [id, prod] : prodotti)
                                         std::cout << "ID " << id << ": " << prod->getTitle() << "\n";
 
                                     unsigned int pid = SafeInput::read<unsigned int>("ID prodotto da editare: ");
                                     auto it = prodotti.find(pid);
                                     if (it != prodotti.end()) {
-                                        std::cout << "Scegli il tipo di modifica:\n"
+                                        std::cout << "\n--- Scegli il tipo di modifica ---\n"
                                                   << "1. Modifica campi comuni\n"
                                                   << "2. Modifica campi specifici del prodotto\n"
                                                   << "0. Annulla\n";
                                         int sceltaModifica = SafeInput::read<int>("Scelta: ");
-                                        switch(sceltaModifica) {
-                                            case 1:{
-                                                std::cout << "Scegli il campo da modificare:\n"
+                                        switch (sceltaModifica) {
+                                            case 1: {
+                                                std::cout << "\n--- Scegli il campo da modificare ---\n"
                                                           << "1. Modifica titolo\n"
                                                           << "2. Modifica descrizione\n"
                                                           << "3. Modifica immagine\n";
                                                 int campo = SafeInput::read<int>("Scelta: ");
-                                                switch(campo) {
-                                                    case 1:{
-                                                        std::string nuovoTitolo;
-                                                        std::cout << "Inserisci il nuovo titolo: ";
-                                                        std::getline(std::cin, nuovoTitolo);
+                                                switch (campo) {
+                                                    case 1: {
+                                                        std::string nuovoTitolo = SafeInput::read("Inserisci il nuovo titolo: ");
                                                         if (nuovoTitolo.empty()) {
                                                             std::cout << "Titolo non valido.\n";
                                                             break;
@@ -169,9 +170,9 @@ void ConsoleArtistEditor::modificaArtista(const std::unordered_map<unsigned int,
                                     break;
                             }
                         } catch (const std::exception& ex) {
-                            ErrorManager::showError(ex.what());
+                            ErrorManager::logError(ex.what());
                         } catch (...) {
-                            ErrorManager::showError("Errore sconosciuto nella gestione prodotti.");
+                            ErrorManager::logError("Errore sconosciuto nella gestione prodotti.");
                         }
                     }
                     break;
@@ -183,9 +184,9 @@ void ConsoleArtistEditor::modificaArtista(const std::unordered_map<unsigned int,
                     std::cout << "Scelta non valida.\n";
             }
         } catch (const std::exception& ex) {
-            ErrorManager::showError(ex.what());
+            ErrorManager::logError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto nella modifica artista.");
+            ErrorManager::logError("Errore sconosciuto nella modifica artista.");
         }
     }
 }

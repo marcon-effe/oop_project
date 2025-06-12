@@ -19,17 +19,9 @@
 
 // ----- ARTISTA -----
 Artista* ConsoleEditorHandler::creaArtista(const std::string& nome) {
-    std::string info, imagePath, genere;
-
-    std::cout << "Inserisci il genere musicale dell'artista: ";
-    std::getline(std::cin, genere);
-
-    std::cout << "Inserisci una breve descrizione/info: ";
-    std::getline(std::cin, info);
-
-    std::cout << "Inserisci il path dell'immagine: ";
-    std::getline(std::cin, imagePath);
-
+    std::string genere = SafeInput::read("Inserisci il genere musicale dell'artista: ");
+    std::string info = SafeInput::read("Inserisci una breve descrizione/info: ");
+    std::string imagePath = SafeInput::read("Inserisci il path dell'immagine: ");
     return new Artista(nome, genere, info, imagePath);
 }
 
@@ -38,246 +30,276 @@ void ConsoleEditorHandler::editNomeArtista(Artista* a, const std::string& nuovoN
 }
 
 void ConsoleEditorHandler::editGenereArtista(Artista* a) {
-    std::cout << "Nuovo genere: ";
-    std::string nuovo;
-    std::getline(std::cin, nuovo);
+    std::string nuovo = SafeInput::read("Nuovo genere: ");
     a->setGenere(nuovo);
 }
 
 void ConsoleEditorHandler::editInfoArtista(Artista* a) {
-    std::cout << "Nuova descrizione/biografia: ";
-    std::string nuova;
-    std::getline(std::cin, nuova);
+    std::string nuova = SafeInput::read("Nuova descrizione/biografia: ");
     a->setInfo(nuova);
 }
 
 void ConsoleEditorHandler::editImagePathArtista(Artista* a) {
-    std::cout << "Nuovo path immagine: ";
-    std::string nuovo;
-    std::getline(std::cin, nuovo);
+    std::string nuovo = SafeInput::read("Nuovo path immagine: ");
     a->setImagePath(nuovo);
 }
 
 void ConsoleEditorHandler::aggiungiProdottoArtista(Artista* artista) {
-    std::cout << "Seleziona il tipo di prodotto da aggiungere:\n";
-    std::cout << "1. TShirt\n";
-    std::cout << "2. CD\n";
-    std::cout << "3. Vinile\n";
-    std::cout << "4. Album\n";
-    std::cout << "5. Singolo\n";
-    std::cout << "6. Tour\n";
-    std::cout << "0. Annulla\n";
+    std::cout << "\n--- Seleziona il tipo di prodotto da aggiungere ---\n"
+              << "1. TShirt\n"
+              << "2. CD\n"
+              << "3. Vinile\n"
+              << "4. Album\n"
+              << "5. Singolo\n"
+              << "6. Tour\n"
+              << "0. Annulla\n";
 
     int scelta = SafeInput::read<int>("Scelta: ");
-    if (scelta < 1 || scelta > 6) { std::cout << "Scelta non valida." << std::endl; return; }
-    if(scelta == 0) return;
-
-    std::string title, description;
-    std::cout << "Titolo: ";
-    std::getline(std::cin >> std::ws, title);
-
-    if(title.empty()) {
-        std::cout << "Titolo non valido." << std::endl;
+    if (scelta == 0) {
         return;
     }
 
-    //controlliamo nella mappa che il titolo non sia già in uso
+    if (scelta < 1 || scelta > 6) {
+        std::cout << "Scelta non valida.\n";
+        return;
+    }
+
+    std::string title = SafeInput::read("Titolo: ");
+    if (title.empty()) {
+        std::cout << "Titolo non valido.\n";
+        return;
+    }
+
     for (const auto& [id, p] : artista->getProducts()) {
         if (p->getTitle() == title) {
-            std::cout << "Titolo già in uso da un altro prodotto." << std::endl;
+            std::cout << "Titolo già in uso da un altro prodotto.\n";
             return;
         }
     }
 
-    std::cout << "Descrizione: ";
-    std::getline(std::cin >> std::ws, description);
+    std::string description = SafeInput::read("Descrizione: ");
 
     if (scelta == 1) {
         double prezzo = SafeInput::read<double>("Prezzo: ");
-        bool disponibile = SafeInput::readBool("Disponibile");
+        bool disponibile = SafeInput::readBool("Disponibile (1=sì, 0=no): ");
         unsigned int quantita = SafeInput::read<unsigned int>("Quantita: ");
+        std::string codiceProdotto = SafeInput::read("Codice prodotto: ");
+        std::string taglia = SafeInput::read("Taglia: ");
+        std::string colore = SafeInput::read("Colore: ");
 
-        std::string codiceProdotto, taglia, colore;
-        std::cout << "Codice prodotto: "; std::getline(std::cin >> std::ws, codiceProdotto);
-        std::cout << "Taglia: "; std::getline(std::cin >> std::ws, taglia);
-        std::cout << "Colore: "; std::getline(std::cin >> std::ws, colore);
-
-        artista->addProduct(new TShirt(artista, title, description, prezzo, disponibile, quantita, codiceProdotto, taglia, colore));
-    
-    } else if (scelta == 2) {
+        artista->addProduct(new TShirt(
+            artista,
+            title,
+            description,
+            prezzo,
+            disponibile,
+            quantita,
+            codiceProdotto,
+            taglia,
+            colore
+        ));
+    }
+    else if (scelta == 2) {
         double prezzo = SafeInput::read<double>("Prezzo: ");
-        bool disponibile = SafeInput::readBool("Disponibile");
+        bool disponibile = SafeInput::readBool("Disponibile (1=sì, 0=no): ");
         unsigned int quantita = SafeInput::read<unsigned int>("Quantita: ");
+        std::string codiceProdotto = SafeInput::read("Codice prodotto: ");
+        std::string produttoreStampe = SafeInput::read("Produttore stampe: ");
+        std::string codiceRiconoscimento = SafeInput::read("Codice riconoscimento: ");
+        std::string tipoProdotto = SafeInput::read("Tipo prodotto: ");
+        std::string formato = SafeInput::read("Formato: ");
 
-        std::string codiceProdotto, produttoreStampe, codiceRiconoscimento, tipoProdotto, formato;
-        std::cout << "Codice prodotto: "; std::getline(std::cin >> std::ws, codiceProdotto);
-        std::cout << "Produttore stampe: "; std::getline(std::cin >> std::ws, produttoreStampe);
-        std::cout << "Codice riconoscimento: "; std::getline(std::cin >> std::ws, codiceRiconoscimento);
-        std::cout << "Tipo prodotto: "; std::getline(std::cin >> std::ws, tipoProdotto);
-        std::cout << "Formato: "; std::getline(std::cin >> std::ws, formato);
-
-        artista->addProduct(new CD(artista, title, description, prezzo, disponibile, quantita, codiceProdotto, produttoreStampe, codiceRiconoscimento, tipoProdotto, formato));
-    
-    } else if (scelta == 3) {
+        artista->addProduct(new CD(
+            artista,
+            title,
+            description,
+            prezzo,
+            disponibile,
+            quantita,
+            codiceProdotto,
+            produttoreStampe,
+            codiceRiconoscimento,
+            tipoProdotto,
+            formato
+        ));
+    }
+    else if (scelta == 3) {
         double prezzo = SafeInput::read<double>("Prezzo: ");
-        bool disponibile = SafeInput::readBool("Disponibile");
+        bool disponibile = SafeInput::readBool("Disponibile (1=sì, 0=no): ");
         unsigned int quantita = SafeInput::read<unsigned int>("Quantita: ");
-
-        std::string codiceProdotto, produttoreStampe, codiceRiconoscimento, tipoProdotto;
-        std::cout << "Codice prodotto: "; std::getline(std::cin >> std::ws, codiceProdotto);
-        std::cout << "Produttore stampe: "; std::getline(std::cin >> std::ws, produttoreStampe);
-        std::cout << "Codice riconoscimento: "; std::getline(std::cin >> std::ws, codiceRiconoscimento);
-        std::cout << "Tipo prodotto: "; std::getline(std::cin >> std::ws, tipoProdotto);
-
+        std::string codiceProdotto = SafeInput::read("Codice prodotto: ");
+        std::string produttoreStampe = SafeInput::read("Produttore stampe: ");
+        std::string codiceRiconoscimento = SafeInput::read("Codice riconoscimento: ");
+        std::string tipoProdotto = SafeInput::read("Tipo prodotto: ");
         unsigned int rpm = SafeInput::read<unsigned int>("RPM: ");
         unsigned int diametro = SafeInput::read<unsigned int>("Diametro: ");
-        artista->addProduct(new Vinile(artista, title, description, prezzo, disponibile, quantita, codiceProdotto, produttoreStampe, codiceRiconoscimento, tipoProdotto, rpm, diametro));
-    
-    } else if (scelta == 4) {
-        unsigned int giorno = SafeInput::read<unsigned int>("Data di uscita - giorno: ");
-        unsigned int mese   = SafeInput::read<unsigned int>("Data di uscita - mese: ");
-        unsigned int anno   = SafeInput::read<unsigned int>("Data di uscita - anno: ");
 
+        artista->addProduct(new Vinile(
+            artista,
+            title,
+            description,
+            prezzo,
+            disponibile,
+            quantita,
+            codiceProdotto,
+            produttoreStampe,
+            codiceRiconoscimento,
+            tipoProdotto,
+            rpm,
+            diametro
+        ));
+    }
+    else if (scelta == 4) {
+        unsigned int giorno = SafeInput::read<unsigned int>("Data di uscita - giorno: ");
+        unsigned int mese = SafeInput::read<unsigned int>("Data di uscita - mese: ");
+        unsigned int anno = SafeInput::read<unsigned int>("Data di uscita - anno: ");
         Data dataUscita(giorno, mese, anno);
-        std::string genere, label;
-        std::cout << "Genere: "; std::getline(std::cin >> std::ws, genere);
-        std::cout << "Label discografica: "; std::getline(std::cin >> std::ws, label);
-        std::vector<Traccia> tracce;
+
+        std::string genere = SafeInput::read("Genere: ");
+        std::string label = SafeInput::read("Label discografica: ");
         unsigned int numTracce = SafeInput::read<unsigned int>("Numero tracce: ");
-        for (unsigned int i=0; i<numTracce; ++i) {
-            std::string nome, testo;
-            bool hasTesto;
+        std::vector<Traccia> tracce;
+        for (unsigned int i = 0; i < numTracce; ++i) {
             unsigned int ore = SafeInput::read<unsigned int>("Durata traccia - ore: ");
             unsigned int minuti = SafeInput::read<unsigned int>("Durata traccia - minuti: ");
             unsigned int sec = SafeInput::read<unsigned int>("Durata traccia - secondi: ");
-
-            std::cout<<"Nome traccia "<<i+1<<": "; std::getline(std::cin>>std::ws,nome);
-            hasTesto = SafeInput::readBool("Ha testo");
-            if (hasTesto) { std::cout<<"Testo: "; std::getline(std::cin>>std::ws,testo);} else testo="";
-            
-            std::vector<std::string> partecipanti;
-            unsigned int numPartecipanti = SafeInput::read<unsigned int>("Partecipanti: ");
-            for(unsigned int j=0; j<numPartecipanti; ++j){
-                std::string p;
-                std::cout<<"Partecipante "<<j+1<<": "; std::getline(std::cin>>std::ws,p);
-                partecipanti.push_back(p);
+            std::string nome = SafeInput::read("Nome traccia " + std::to_string(i+1) + ": ");
+            bool hasTesto = SafeInput::readBool("Ha testo (1=sì, 0=no): ");
+            std::string testo;
+            if (hasTesto) {
+                testo = SafeInput::read("Testo: ");
             }
-            tracce.emplace_back(nome, partecipanti, Durata(ore,minuti,sec), testo, hasTesto);
+            unsigned int numPartecipanti = SafeInput::read<unsigned int>("Partecipanti: ");
+            std::vector<std::string> partecipanti;
+            for (unsigned int j = 0; j < numPartecipanti; ++j) {
+                partecipanti.push_back(SafeInput::read("Partecipante " + std::to_string(j+1) + ": "));
+            }
+            tracce.emplace_back(nome, partecipanti, Durata(ore, minuti, sec), testo, hasTesto);
         }
-        Album* album = new Album(artista, title, description, dataUscita, Durata(0,0,0), genere, tracce, label);
-        album->updateDurata(); artista->addProduct(album);
-    } else if (scelta==5) {
-        unsigned int giorno=SafeInput::read<unsigned int>("Data di uscita - giorno: ");
+        Album* album = new Album(
+            artista,
+            title,
+            description,
+            dataUscita,
+            Durata(0,0,0),
+            genere,
+            tracce,
+            label
+        );
+        album->updateDurata();
+        artista->addProduct(album);
+    }
+    else if (scelta == 5) {
+        unsigned int giorno = SafeInput::read<unsigned int>("Data di uscita - giorno: ");
         unsigned int mese = SafeInput::read<unsigned int>("Data di uscita - mese: ");
         unsigned int anno = SafeInput::read<unsigned int>("Data di uscita - anno: ");
+        Data dataUscita(giorno, mese, anno);
 
-        Data dataUscita(giorno,mese,anno);
-        std::string genere;
-        std::cout<<"Genere: "; std::getline(std::cin>>std::ws,genere);
-        std::string nome,testo; bool hasTesto;
-        unsigned int ore=SafeInput::read<unsigned int>("Durata principale - ore: ");
-        unsigned int minuti=SafeInput::read<unsigned int>("Durata principale - minuti: ");
-        unsigned int secondi=SafeInput::read<unsigned int>("Durata principale - secondi: ");
-
-        std::cout<<"Nome traccia principale: "; std::getline(std::cin>>std::ws,nome);
-        hasTesto=SafeInput::readBool("Ha testo");
-        if(hasTesto){ std::cout<<"Testo: "; std::getline(std::cin>>std::ws,testo);} else testo="";
-
-        std::vector<std::string> partecipanti;
-        unsigned int numP=SafeInput::read<unsigned int>("Partecipanti: ");
-        for(unsigned int j=0;j<numP;++j){
-            std::string p; std::cout<<"Partecipante "<<j+1<<": "; std::getline(std::cin>>std::ws,p);
-            partecipanti.push_back(p);
+        std::string genere = SafeInput::read("Genere: ");
+        unsigned int ore = SafeInput::read<unsigned int>("Durata principale - ore: ");
+        unsigned int minuti = SafeInput::read<unsigned int>("Durata principale - minuti: ");
+        unsigned int secondi = SafeInput::read<unsigned int>("Durata principale - secondi: ");
+        std::string nome = SafeInput::read("Nome traccia principale: ");
+        bool hasTesto = SafeInput::readBool("Ha testo (1=sì, 0=no): ");
+        std::string testo;
+        if (hasTesto) {
+            testo = SafeInput::read("Testo: ");
         }
-        Traccia mainTrack(nome,partecipanti,Durata(ore,minuti,secondi),testo,hasTesto);
-        bool isRemix=SafeInput::readBool("E' un remix");
-        int chartPosition=SafeInput::read<int>("Posizione in classifica: ");
+        unsigned int numP = SafeInput::read<unsigned int>("Partecipanti: ");
+        std::vector<std::string> partecipanti;
+        for (unsigned int j = 0; j < numP; ++j) {
+            partecipanti.push_back(SafeInput::read("Partecipante " + std::to_string(j+1) + ": "));
+        }
+        Traccia mainTrack(nome, partecipanti, Durata(ore, minuti, secondi), testo, hasTesto);
+        bool isRemix = SafeInput::readBool("E' un remix (1=sì, 0=no): ");
+        int chartPosition = SafeInput::read<int>("Posizione in classifica: ");
 
-        Singolo* singolo=new Singolo(artista,title,description,dataUscita,Durata(0,0,0),genere,mainTrack,isRemix,chartPosition);
-        singolo->updateDurata(); artista->addProduct(singolo);
-    } else {
+        Singolo* singolo = new Singolo(
+            artista,
+            title,
+            description,
+            dataUscita,
+            Durata(0,0,0),
+            genere,
+            mainTrack,
+            isRemix,
+            chartPosition
+        );
+        singolo->updateDurata();
+        artista->addProduct(singolo);
+    }
+    else {
         unsigned int numDate = SafeInput::read<unsigned int>("Date tour: ");
         double prezzo = SafeInput::read<double>("Prezzo: ");
-        bool disponibile = SafeInput::readBool("Disponibile");
+        bool disponibile = SafeInput::readBool("Disponibile (1=sì, 0=no): ");
         unsigned int quantita = SafeInput::read<unsigned int>("Quantita: ");
 
-        Tour* tour = new Tour(artista,title,description,prezzo,disponibile,quantita);
-
-        for(unsigned int i=0;i<numDate;++i){
-            unsigned int g=SafeInput::read<unsigned int>("Data - giorno: ");
-            unsigned int m=SafeInput::read<unsigned int>("Data - mese: ");
-            unsigned int a=SafeInput::read<unsigned int>("Data - anno: ");
-            unsigned int h=SafeInput::read<unsigned int>("Orario - ore: ");
-            unsigned int min=SafeInput::read<unsigned int>("Orario - minuti: ");
-            unsigned int sec=SafeInput::read<unsigned int>("Orario - secondi: ");
-            std::cout<<"Luogo: "; std::string luogo; std::getline(std::cin>>std::ws,luogo);
-            tour->addDataTour(DataTour(g,m,a,h,min,sec,luogo));
+        Tour* tour = new Tour(
+            artista,
+            title,
+            description,
+            prezzo,
+            disponibile,
+            quantita
+        );
+        for (unsigned int i = 0; i < numDate; ++i) {
+            unsigned int g = SafeInput::read<unsigned int>("Data - giorno: ");
+            unsigned int m = SafeInput::read<unsigned int>("Data - mese: ");
+            unsigned int a = SafeInput::read<unsigned int>("Data - anno: ");
+            unsigned int h = SafeInput::read<unsigned int>("Orario - ore: ");
+            unsigned int mi = SafeInput::read<unsigned int>("Orario - minuti: ");
+            unsigned int s = SafeInput::read<unsigned int>("Orario - secondi: ");
+            std::string luogo = SafeInput::read("Luogo: ");
+            tour->addDataTour(DataTour(g, m, a, h, mi, s, luogo));
         }
         artista->addProduct(tour);
     }
 }
 
 // ----- ARTIST PRODUCT -----
-
-void ConsoleEditorHandler::editTitoloProduct(ArtistProduct* p) {
-    std::cout << "Nuovo titolo: ";
-    std::string nuovo;
-    std::getline(std::cin, nuovo);
-    if (!nuovo.empty()) p->setTitle(nuovo);
-}
-
 void ConsoleEditorHandler::editDescrizioneProduct(ArtistProduct* p) {
-    std::cout << "Nuova descrizione: ";
-    std::string nuova;
-    std::getline(std::cin, nuova);
-    p->setDescription(nuova);
+    std::string descrizione = SafeInput::read("Nuova descrizione: ");
+    p->setDescription(descrizione);
 }
 
 void ConsoleEditorHandler::editImagePathProduct(ArtistProduct* p) {
-    std::cout << "Nuovo path immagine: ";
-    std::string nuovo;
-    std::getline(std::cin, nuovo);
-    p->setImagePath(nuovo);
+    std::string path = SafeInput::read("Nuovo path immagine: ");
+    p->setImagePath(path);
 }
 
 // ----- MUSICA -----
-
 void ConsoleEditorHandler::editGenereMusica(Musica* m) {
-    std::cout << "Nuovo genere: ";
-    std::string nuovo;
-    std::getline(std::cin, nuovo);
-    m->setGenere(nuovo);
+    std::string genere = SafeInput::read("Nuovo genere: ");
+    m->setGenere(genere);
 }
 
 void ConsoleEditorHandler::editDataUscitaMusica(Musica* m) {
-    unsigned int g = SafeInput::read<unsigned int>("Nuova data uscita - giorno: ");
-    unsigned int mth = SafeInput::read<unsigned int>("Nuova data uscita - mese: ");
-    unsigned int a = SafeInput::read<unsigned int>("Nuova data uscita - anno: ");
-    m->setDataUscita(Data(g,mth,a));
+    unsigned int giorno = SafeInput::read<unsigned int>("Nuova data uscita - giorno: ");
+    unsigned int mese   = SafeInput::read<unsigned int>("Nuova data uscita - mese: ");
+    unsigned int anno   = SafeInput::read<unsigned int>("Nuova data uscita - anno: ");
+    m->setDataUscita(Data(giorno, mese, anno));
 }
 
 // ----- MERCH -----
-
 void ConsoleEditorHandler::editPrezzoMerch(Merch* m) {
-    double prezzo=SafeInput::read<double>("Nuovo prezzo: ");
+    double prezzo = SafeInput::read<double>("Nuovo prezzo: ");
     m->setPrezzo(prezzo);
 }
 
 void ConsoleEditorHandler::editDisponibileMerch(Merch* m) {
-    bool disp=SafeInput::readBool("Disponibile");
-    m->setDisponibile(disp);
+    bool disponibile = SafeInput::readBool("Disponibile (1=sì, 0=no): ");
+    m->setDisponibile(disponibile);
 }
 
 void ConsoleEditorHandler::editQuantitaMerch(Merch* m) {
-    unsigned int q=SafeInput::read<unsigned int>("Nuova quantita: ");
-    m->setQuantita(q);
+    unsigned int quantita = SafeInput::read<unsigned int>("Nuova quantita: ");
+    m->setQuantita(quantita);
 }
 
 // ----- ALBUM -----
-
 void ConsoleEditorHandler::editEtichettaAlbum(Album* album) {
-    std::cout << "Nuova etichetta: "; std::string et; std::getline(std::cin>>std::ws,et);
-    album->setLabel(et);
+    std::string label = SafeInput::read("Nuova etichetta: ");
+    album->setLabel(label);
 }
 
 void ConsoleEditorHandler::aggiungiTracciaAlbum(Album* album) {
@@ -298,15 +320,15 @@ void ConsoleEditorHandler::editTracciaAlbum(Album* album, unsigned int index) {
     const auto& tracce = album->getTracce();
     if (index < tracce.size()) {
         Traccia& t = album->getTracciaModificabile(index);
-        VisitorConsoleEditor v; t.accept(&v);
+        VisitorConsoleEditor visitor;
+        t.accept(&visitor);
         album->updateDurata();
     }
 }
 
 // ----- SINGOLO -----
-
 void ConsoleEditorHandler::editIsRemixSingolo(Singolo* s) {
-    bool remix = SafeInput::readBool("E' un remix");
+    bool remix = SafeInput::readBool("E' un remix (1=sì, 0=no): ");
     s->setIsRemix(remix);
 }
 
@@ -316,45 +338,44 @@ void ConsoleEditorHandler::editChartPositionSingolo(Singolo* s) {
 }
 
 void ConsoleEditorHandler::editMainTrackSingolo(Singolo* s) {
-    VisitorConsoleEditor v; Traccia& t = s->getTracciaModificabile(); t.accept(&v);
+    VisitorConsoleEditor visitor;
+    Traccia& t = s->getTracciaModificabile();
+    t.accept(&visitor);
     s->setDurata(t.getDurata());
 }
 
 // ----- CD -----
-
 void ConsoleEditorHandler::editFormatoCD(CD* cd) {
-    std::cout << "Nuovo formato: "; std::string f; std::getline(std::cin, f);
-    cd->setFormato(f);
+    std::string formato = SafeInput::read("Nuovo formato: ");
+    cd->setFormato(formato);
 }
 
 // ----- VINILE -----
-
 void ConsoleEditorHandler::editRPMVinile(Vinile* v) {
     int rpm = SafeInput::read<int>("Nuovi RPM: ");
     v->setRpm(rpm);
 }
 
 void ConsoleEditorHandler::editDiametroVinile(Vinile* v) {
-    int d = SafeInput::read<int>("Nuovo diametro (pollici): ");
-    v->setDiametro(d);
+    int diametro = SafeInput::read<int>("Nuovo diametro (pollici): ");
+    v->setDiametro(diametro);
 }
 
 // ----- TSHIRT -----
-
 void ConsoleEditorHandler::editTagliaTShirt(TShirt* tshirt) {
-    std::cout << "Nuova taglia: "; std::string taglia; std::getline(std::cin, taglia);
+    std::string taglia = SafeInput::read("Nuova taglia: ");
     tshirt->setTaglia(taglia);
 }
 
 void ConsoleEditorHandler::editColoreTShirt(TShirt* tshirt) {
-    std::cout << "Nuovo colore: "; std::string colore; std::getline(std::cin, colore);
+    std::string colore = SafeInput::read("Nuovo colore: ");
     tshirt->setColore(colore);
 }
 
 // ----- TOUR -----
-
 void ConsoleEditorHandler::aggiungiDataTour(Tour* tour) {
-    DataTour dt = creaDataTour(); tour->addDataTour(dt);
+    DataTour dt = creaDataTour();
+    tour->addDataTour(dt);
 }
 
 void ConsoleEditorHandler::rimuoviDataTour(Tour* tour, unsigned int index) {
@@ -362,28 +383,34 @@ void ConsoleEditorHandler::rimuoviDataTour(Tour* tour, unsigned int index) {
 }
 
 void ConsoleEditorHandler::editDataTour(Tour* tour, unsigned int index) {
-    auto& date = tour->getDateTourModificabile(); if (index < date.size()) { VisitorConsoleEditor v; date[index].accept(&v); }
+    auto& date = tour->getDateTourModificabile();
+    if (index < date.size()) {
+        VisitorConsoleEditor v;
+        date[index].accept(&v);
+    }
 }
 
 // ----- TRACCIA -----
-
 void ConsoleEditorHandler::editNomeTraccia(Traccia* t) {
-    std::cout << "Nuovo nome: "; std::string nuovo; std::getline(std::cin, nuovo); t->setNome(nuovo);
+    std::string nuovo = SafeInput::read("Nuovo nome: ");
+    t->setNome(nuovo);
 }
 
 void ConsoleEditorHandler::editDurataTraccia(Traccia* t) {
-    int min = SafeInput::read<int>("Durata (minuti): ");
-    int sec = SafeInput::read<int>("Durata (secondi): ");
-    t->setDurata(Durata(0, min, sec));
+    int minuti = SafeInput::read<int>("Durata (minuti): ");
+    int secondi = SafeInput::read<int>("Durata (secondi): ");
+    t->setDurata(Durata(0, minuti, secondi));
 }
 
 void ConsoleEditorHandler::editTestoTraccia(Traccia* t) {
-    std::cout << "Nuovo testo (vuoto se strumentale): "; std::string testo; std::getline(std::cin, testo);
-    t->setTesto(testo); t->setHasTesto(!testo.empty());
+    std::string testo = SafeInput::read("Nuovo testo (vuoto se strumentale): ");
+    t->setTesto(testo);
+    t->setHasTesto(!testo.empty());
 }
 
 void ConsoleEditorHandler::aggiungiPartecipanteTraccia(Traccia* t) {
-    std::cout << "Nome partecipante: "; std::string p; std::getline(std::cin, p); t->addPartecipante(p);
+    std::string p = SafeInput::read("Nome partecipante: ");
+    t->addPartecipante(p);
 }
 
 void ConsoleEditorHandler::rimuoviPartecipanteTraccia(Traccia* t, unsigned int index) {
@@ -391,7 +418,8 @@ void ConsoleEditorHandler::rimuoviPartecipanteTraccia(Traccia* t, unsigned int i
 }
 
 void ConsoleEditorHandler::editPartecipanteTraccia(Traccia* t, unsigned int index) {
-    std::cout << "Nuovo nome partecipante: "; std::string nuovo; std::getline(std::cin, nuovo); t->editPartecipante(index, nuovo);
+    std::string nuovo = SafeInput::read("Nuovo nome partecipante: ");
+    t->editPartecipante(index, nuovo);
 }
 
 void ConsoleEditorHandler::gestisciPartecipantiTraccia(Traccia* t) {
@@ -399,35 +427,56 @@ void ConsoleEditorHandler::gestisciPartecipantiTraccia(Traccia* t) {
     while (scelta != 0) {
         std::cout << "\n--- Gestione Partecipanti ---\n";
         const auto& partecipanti = t->getPartecipanti();
-        if (partecipanti.empty()) std::cout << "Nessun partecipante.\n";
-        else {
-            for (size_t i = 0; i < partecipanti.size(); ++i)
-                std::cout << i+1 << ") " << partecipanti[i] << "\n";
+        if (partecipanti.empty()) {
+            std::cout << "Nessun partecipante.\n";
         }
-        std::cout << "\nOpzioni:\n1. Aggiungi\n2. Modifica\n3. Rimuovi\n0. Torna indietro\nScelta: ";
-        scelta = SafeInput::read<int>("");
+        else {
+            for (size_t i = 0; i < partecipanti.size(); ++i) {
+                std::cout << i + 1 << ") " << partecipanti[i] << "\n";
+            }
+        }
+        std::cout << "\nOpzioni:\n"
+                  << "1. Aggiungi\n"
+                  << "2. Modifica\n"
+                  << "3. Rimuovi\n"
+                  << "0. Torna indietro\n";
+        scelta = SafeInput::read<int>("Scelta: ");
+
         switch (scelta) {
-            case 1: aggiungiPartecipanteTraccia(t); break;
+            case 1:
+                aggiungiPartecipanteTraccia(t);
+                break;
             case 2: {
                 unsigned int idx = SafeInput::read<unsigned int>("Indice da modificare: ");
-                if (idx>=1 && idx<=partecipanti.size()) editPartecipanteTraccia(t, idx-1);
-                else std::cout<<"Indice non valido.\n";
+                if (idx >= 1 && idx <= partecipanti.size()) {
+                    editPartecipanteTraccia(t, idx - 1);
+                }
+                else {
+                    std::cout << "Indice non valido.\n";
+                }
                 break;
             }
             case 3: {
                 unsigned int idx = SafeInput::read<unsigned int>("Indice da rimuovere: ");
-                if (idx>=1 && idx<=partecipanti.size()) rimuoviPartecipanteTraccia(t, idx-1);
-                else std::cout<<"Indice non valido.\n";
+                if (idx >= 1 && idx <= partecipanti.size()) {
+                    rimuoviPartecipanteTraccia(t, idx - 1);
+                }
+                else {
+                    std::cout << "Indice non valido.\n";
+                }
                 break;
             }
-            case 0: std::cout<<"Uscita gestione partecipanti.\n"; break;
-            default: std::cout<<"Scelta non valida.\n"; break;
+            case 0:
+                std::cout << "Uscita gestione partecipanti.\n";
+                break;
+            default:
+                std::cout << "Scelta non valida.\n";
+                break;
         }
     }
 }
 
 // ----- DATATOUR -----
-
 void ConsoleEditorHandler::editDataDataTour(DataTour* d) {
     unsigned int g = SafeInput::read<unsigned int>("Nuova data - giorno: ");
     unsigned int m = SafeInput::read<unsigned int>("Nuova data - mese: ");
@@ -443,23 +492,33 @@ void ConsoleEditorHandler::editOrarioDataTour(DataTour* d) {
 }
 
 void ConsoleEditorHandler::editLuogoDataTour(DataTour* d) {
-    std::cout<<"Nuovo luogo: "; std::string l; std::getline(std::cin>>std::ws,l); d->setLuogo(l);
+    std::string luogo = SafeInput::read("Nuovo luogo: ");
+    if(luogo.empty()) {
+        std::cout << "Luogo non valido, non può essere vuoto.\n";
+        return;
+    }
+    else
+        d->setLuogo(luogo);
 }
+
 
 // ----- CREAZIONE OGGETTI -----
 
 Traccia ConsoleEditorHandler::creaTraccia() {
-    std::string nome, testo;
     unsigned int minuti = SafeInput::read<unsigned int>("Durata - minuti: ");
     unsigned int secondi = SafeInput::read<unsigned int>("Durata - secondi: ");
-    std::cin.ignore();
-    std::cout<<"Nome traccia: "; std::getline(std::cin, nome);
-    std::cout<<"Testo (vuoto se strumentale): "; std::getline(std::cin, testo);
+    std::string nome;
+    do{
+        nome = SafeInput::read("Nome traccia: ");
+        if(nome.empty())
+            std::cout << "Il nome della traccia non può essere vuoto. Riprova.\n";
+    }while(nome.empty());
+    
+    std::string testo = SafeInput::read("Testo (vuoto se strumentale): ");
     bool hasTesto = !testo.empty();
     std::vector<std::string> partecipanti;
     while (true) {
-        std::string p;
-        std::cout<<"Aggiungi partecipante (vuoto fine): "; std::getline(std::cin, p);
+        std::string p = SafeInput::read("Aggiungi partecipante (vuoto fine): ");
         if (p.empty()) break;
         partecipanti.push_back(p);
     }
@@ -471,9 +530,13 @@ DataTour ConsoleEditorHandler::creaDataTour() {
     unsigned int m = SafeInput::read<unsigned int>("Data - mese: ");
     unsigned int a = SafeInput::read<unsigned int>("Data - anno: ");
     unsigned int h = SafeInput::read<unsigned int>("Orario - ore: ");
-    unsigned int mi= SafeInput::read<unsigned int>("Minuti: ");
-    unsigned int s = SafeInput::read<unsigned int>("Secondi: ");
-    std::cin.ignore();
-    std::cout<<"Luogo: "; std::string luogo; std::getline(std::cin, luogo);
+    unsigned int mi = SafeInput::read<unsigned int>("Orario - minuti: ");
+    unsigned int s = SafeInput::read<unsigned int>("Orario - secondi: ");
+    std::string luogo;
+    do{
+        luogo = SafeInput::read("Luogo: ");
+        if(luogo.empty())
+            std::cout << "Il luogo non può essere vuoto. Riprova.\n";
+    }while(luogo.empty());
     return DataTour(g, m, a, h, mi, s, luogo);
 }

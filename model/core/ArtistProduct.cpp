@@ -56,7 +56,26 @@ ArtistProduct::ArtistProduct(const ArtistProduct* p)
     id_artist = p->getArtistId();
 }
 
-ArtistProduct::~ArtistProduct() {}
+ArtistProduct::~ArtistProduct() {
+    QString san_artist = QString::fromStdString(DataManager::sanitizeForPath(nomeArtista));
+    QString san_title  = QString::fromStdString(DataManager::sanitizeForPath(title));
+
+    QDir dir("view/icons/" + san_artist);
+    if(!dir.exists()) {
+        return; 
+    }
+    QString ext = QFileInfo(QString::fromStdString(imagePath)).suffix();
+    QString iconFile = dir.filePath(san_title + "." + ext);
+
+    if (QFile::exists(iconFile)) {
+        if (!QFile::remove(iconFile)) {
+            ErrorManager::logError(
+                "Impossibile cancellare icona prodotto: " +
+                iconFile.toStdString()
+            );
+        }
+    }
+}
 
 unsigned int ArtistProduct::generateId() {
     std::lock_guard<std::mutex> lock(idMutex);
@@ -81,10 +100,10 @@ void ArtistProduct::setOwner(Artista* nuovoArtista) {
     QString sanitizedNew = QString::fromStdString(DataManager::sanitizeForPath(nuovoNome));
     QString sanitizedOld = QString::fromStdString(DataManager::sanitizeForPath(nomeArtista));
 
-    id_artist = nuovoArtista->getId(); // aggiorna sempre l'ID
+    id_artist = nuovoArtista->getId();
 
     if (nomeArtista == nuovoNome) {
-        return; // già aggiornato
+        return;
     }
 
     // Aggiorna solo nome se non c'è immagine

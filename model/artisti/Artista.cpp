@@ -29,7 +29,18 @@ Artista::~Artista() {
     for (auto& pair : products) {
         delete pair.second;
     }
-    products.clear();  // pulisce la mappa
+    products.clear();
+
+    QString san_name = QString::fromStdString(DataManager::sanitizeForPath(nome));
+    QDir dir("view/icons/" + san_name);
+    if (dir.exists()) {
+        if (!dir.removeRecursively()) {
+            ErrorManager::logError(
+                "Impossibile cancellare cartella icone artista: " +
+                dir.path().toStdString()
+            );
+        }
+    }
 }
 
 unsigned int Artista::generateId() {
@@ -58,7 +69,6 @@ void Artista::setNome(const std::string& n) {
     // Controlla conflitto di directory
     if (QDir(newDir).exists()) {
         std::string errorMessage = "Impossibile rinominare artista: esiste già una directory con il nome \"" + n + "\" (o con lo stesso path dopo sanitizzazione).";
-        ErrorManager::showError(errorMessage);
         ErrorManager::logError(errorMessage);
         return;
     }
@@ -68,7 +78,6 @@ void Artista::setNome(const std::string& n) {
         QDir().mkpath(QFileInfo(newDir).path());
         if (!QDir().rename(oldDir, newDir)) {
             std::string errorMessage = "Rinomina cartella fallita: impossibile spostare \"icons/" + oldSanitized.toStdString() + "\" in \"icons/" + newSanitized.toStdString() + "\".";
-            ErrorManager::showError(errorMessage);
             ErrorManager::logError(errorMessage);
             return;
         }
@@ -141,7 +150,7 @@ void Artista::setImagePath(const std::string& userSelectedPath) {
     // Sovrascrive file locale
     QFile::remove(localPath);
     if (!file.copy(localPath)) {
-        ErrorManager::showError("Errore durante la copia dell'immagine in " + localPath.toStdString());
+        ErrorManager::logError("Errore durante la copia dell'immagine in " + localPath.toStdString());
         imagePath = "";
         imageB64 = "";
         return;
@@ -154,7 +163,7 @@ void Artista::setImagePath(const std::string& userSelectedPath) {
         imageB64 = data.toBase64().toStdString();
         imagePath = localPath.toStdString();
     } else {
-        ErrorManager::showError("Errore durante la lettura dell'immagine copiata.");
+        ErrorManager::logError("Errore durante la lettura dell'immagine copiata.");
         imagePath = "";
         imageB64 = "";
     }
@@ -201,7 +210,7 @@ void Artista::addProduct(ArtistProduct* p) {
                     p->setImageB64(data.toBase64().toStdString());
                     p->setImagePath(newLocalPath.toStdString());
                 } else {
-                    ErrorManager::showError("Errore durante la lettura dell'immagine spostata.");
+                    ErrorManager::logError("Errore durante la lettura dell'immagine spostata.");
                     p->setImagePath("");
                     p->setImageB64("");
                 }

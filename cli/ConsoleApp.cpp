@@ -34,9 +34,9 @@ void ConsoleApp::run() {
                 default: std::cout << "Scelta non valida.\n"; break;
             }
         } catch (const std::exception& ex) {
-            ErrorManager::showError(ex.what());
+            ErrorManager::logError(ex.what());
         } catch (...) {
-            ErrorManager::showError("Errore sconosciuto.");
+            ErrorManager::logError("Errore sconosciuto.");
         }
     }
 }
@@ -69,9 +69,7 @@ void ConsoleApp::printAllArtists() const {
 
 void ConsoleApp::insertArtist() {
     try {
-        std::string nome;
-        std::cout << "Inserimento il nome dell'artista: ";
-        std::getline(std::cin, nome);
+        std::string nome = SafeInput::read("Inserisci il nome dell'artista: ");
         if (nome.empty()) {
             std::cout << "Nome non valido. Riprova.\n";
             return;
@@ -90,7 +88,7 @@ void ConsoleApp::insertArtist() {
             std::cout << "Artista inserito con ID: " << nuovo->getId() << "\n";
         }
     } catch (const std::exception& ex) {
-        ErrorManager::showError(ex.what());
+        ErrorManager::logError(ex.what());
     }
 }
 
@@ -101,7 +99,7 @@ void ConsoleApp::modifyArtist() {
     try {
         ConsoleArtistEditor::modificaArtista(artisti, a);
     } catch (const std::exception& ex) {
-        ErrorManager::showError(ex.what());
+        ErrorManager::logError(ex.what());
     }
 }
 
@@ -118,26 +116,31 @@ void ConsoleApp::saveData() {
     try {
         int formato = SafeInput::read<int>("Formato di salvataggio (1=JSON, 2=XML): ");
 
-        std::string name;
-        std::cout << "Nome file da salvare (senza estensione) [default: cli_save]: ";
-        std::getline(std::cin, name);
-        if (name.empty()) name = "cli_save";
+        // Lettura del nome file, può tornare anche stringa vuota
+        std::string name = SafeInput::read("Nome file da salvare (senza estensione) [default: cli_save]: ");
+        if (name.empty()) {
+            name = "cli_save";
+        }
 
         if (formato == 1) {
             std::string path = "saves/json/" + name + ".json";
             DataManager::saveToFileJson(artisti, path);
             std::cout << "Dati salvati su " << path << "\n";
-        } else if (formato == 2) {
+        }
+        else if (formato == 2) {
             std::string path = "saves/xml/" + name + ".xml";
             DataManager::saveToFileXml(artisti, path);
             std::cout << "Dati salvati su " << path << "\n";
-        } else {
+        }
+        else {
             std::cout << "Scelta non valida.\n";
         }
-    } catch (const std::exception& ex) {
-        ErrorManager::showError(ex.what());
+    }
+    catch (const std::exception& ex) {
+        ErrorManager::logError(ex.what());
     }
 }
+
 
 void ConsoleApp::loadData() {
     try {
@@ -182,9 +185,9 @@ void ConsoleApp::loadData() {
 
         std::cout << "Dati caricati da " << fileChosen << "\n";
     } catch (const std::exception& ex) {
-        ErrorManager::showError(ex.what());
+        std::cout << "Errore durante il caricamento dati: " << ex.what() << "\n";
     } catch (...) {
-        ErrorManager::showError("Errore sconosciuto durante il caricamento dati.");
+        std::cout << "Errore sconosciuto durante il caricamento dati.\n";
     }
 }
 

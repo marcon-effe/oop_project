@@ -14,6 +14,7 @@
 #include "../model/tour/DataTour.h"
 
 #include "../cli/ConsoleEditorHandler.h"
+#include "../cli/SafeInput.h"
 
 void VisitorConsoleEditor::visit(Album* album) {
     bool fine = false;
@@ -24,11 +25,8 @@ void VisitorConsoleEditor::visit(Album* album) {
         std::cout << "3. Modifica etichetta\n";
         std::cout << "4. Gestisci tracce\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore();
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -44,18 +42,16 @@ void VisitorConsoleEditor::visit(Album* album) {
                             std::cout << "Nessuna traccia presente.\n";
                         } else {
                             for (size_t i = 0; i < tracce.size(); ++i)
-                                std::cout << i + 1 << ". " << tracce[i].getNome() << " (" 
-                                          << tracce[i].getDurata().toString() << ")\n";
+                                std::cout << i + 1 << ". " << tracce[i].getNome()
+                                          << " (" << tracce[i].getDurata().toString() << ")\n";
                         }
 
                         std::cout << "a. Aggiungi traccia\n";
                         std::cout << "m. Modifica traccia\n";
                         std::cout << "r. Rimuovi traccia\n";
                         std::cout << "x. Torna indietro\n";
-                        std::cout << "Scelta: ";
 
-                        std::string opzione;
-                        std::getline(std::cin, opzione);
+                        std::string opzione = SafeInput::read("Scelta: ");
 
                         try {
                             if (opzione == "a") {
@@ -64,10 +60,7 @@ void VisitorConsoleEditor::visit(Album* album) {
                                 if (tracce.empty()) {
                                     std::cout << "Non ci sono tracce da modificare.\n";
                                 } else {
-                                    int index;
-                                    std::cout << "Numero traccia da modificare: ";
-                                    std::cin >> index;
-                                    std::cin.ignore();
+                                    int index = SafeInput::read<int>("Numero traccia da modificare: ");
                                     if (index >= 1 && static_cast<size_t>(index) <= tracce.size()) {
                                         ConsoleEditorHandler::editTracciaAlbum(album, index - 1);
                                     } else {
@@ -78,10 +71,7 @@ void VisitorConsoleEditor::visit(Album* album) {
                                 if (tracce.empty()) {
                                     std::cout << "Non ci sono tracce da rimuovere.\n";
                                 } else {
-                                    int index;
-                                    std::cout << "Numero traccia da rimuovere: ";
-                                    std::cin >> index;
-                                    std::cin.ignore();
+                                    int index = SafeInput::read<int>("Numero traccia da rimuovere: ");
                                     if (index >= 1 && static_cast<size_t>(index) <= tracce.size()) {
                                         ConsoleEditorHandler::rimuoviTracciaAlbum(album, index - 1);
                                     } else {
@@ -93,7 +83,6 @@ void VisitorConsoleEditor::visit(Album* album) {
                             } else {
                                 std::cout << "Scelta non valida.\n";
                             }
-
                         } catch (const std::exception& ex) {
                             ErrorManager::showError(ex.what());
                         } catch (...) {
@@ -103,7 +92,10 @@ void VisitorConsoleEditor::visit(Album* album) {
                     break;
                 }
                 case 0: fine = true; break;
-                default: std::cout << "Scelta non valida.\n"; fine=true; break;
+                default:
+                    std::cout << "Scelta non valida.\n";
+                    fine = true;
+                    break;
             }
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
@@ -123,11 +115,8 @@ void VisitorConsoleEditor::visit(Singolo* singolo) {
         std::cout << "4. Modifica se è un remix\n";
         std::cout << "5. Modifica traccia principale\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -169,11 +158,8 @@ void VisitorConsoleEditor::visit(Traccia* traccia) {
         std::cout << "2. Modifica testo\n";
         std::cout << "3. Gestisci partecipanti\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -200,11 +186,8 @@ void VisitorConsoleEditor::visit(CD* cd) {
         std::cout << "3. Modifica quantità\n";
         std::cout << "4. Modifica formato\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -233,11 +216,8 @@ void VisitorConsoleEditor::visit(Vinile* vinile) {
         std::cout << "4. Modifica RPM\n";
         std::cout << "5. Modifica diametro\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -247,7 +227,7 @@ void VisitorConsoleEditor::visit(Vinile* vinile) {
                 case 4: ConsoleEditorHandler::editRPMVinile(vinile); break;
                 case 5: ConsoleEditorHandler::editDiametroVinile(vinile); break;
                 case 0: fine = true; break;
-                default: std::cout << "Scelta non valida.\n";
+                default: std::cout << "Scelta non valida.\n"; break;
             }
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
@@ -267,11 +247,8 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
         std::cout << "4. Modifica taglia\n";
         std::cout << "5. Modifica colore\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -281,8 +258,7 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
                 case 4: ConsoleEditorHandler::editTagliaTShirt(tshirt); break;
                 case 5: ConsoleEditorHandler::editColoreTShirt(tshirt); break;
                 case 0: fine = true; break;
-                default:
-                    std::cout << "Scelta non valida.\n";
+                default: std::cout << "Scelta non valida.\n"; break;
             }
         } catch (const std::exception& ex) {
             ErrorManager::showError(ex.what());
@@ -291,18 +267,14 @@ void VisitorConsoleEditor::visit(TShirt* tshirt) {
         }
     }
 }
-
 void VisitorConsoleEditor::visit(Tour* tour) {
     bool fine = false;
     while (!fine) {
         std::cout << "\n--- Modifica Tour: " << tour->getTitle() << " ---\n";
         std::cout << "1. Gestisci date del tour\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {
@@ -315,8 +287,7 @@ void VisitorConsoleEditor::visit(Tour* tour) {
                             std::cout << "Nessuna data attualmente.\n";
                         } else {
                             for (size_t i = 0; i < date.size(); ++i) {
-                                std::cout << i + 1 << ". ";
-                                std::cout << i << ") " << date[i].toString() << "\n";
+                                std::cout << i + 1 << ". " << date[i].toString() << "\n";
                             }
                         }
 
@@ -324,38 +295,42 @@ void VisitorConsoleEditor::visit(Tour* tour) {
                         std::cout << "m. Modifica data esistente\n";
                         std::cout << "r. Rimuovi data\n";
                         std::cout << "x. Torna indietro\n";
-                        std::cout << "Scelta: ";
 
-                        std::string opzione;
-                        std::getline(std::cin, opzione);
+                        std::string opzione = SafeInput::read("Scelta: ");
 
                         try {
                             if (opzione == "a") {
                                 ConsoleEditorHandler::aggiungiDataTour(tour);
-                            } else if (opzione == "m") {
-                                int index;
-                                std::cout << "Numero data da modificare: ";
-                                std::cin >> index;
-                                std::cin.ignore();
-                                if (index >= 1 && index <= static_cast<int>(date.size())) {
-                                    DataTour& data = const_cast<DataTour&>(date[index - 1]);
-                                    data.accept(this);
+                            } 
+                            else if (opzione == "m") {
+                                if (date.empty()) {
+                                    std::cout << "Non ci sono date da modificare.\n";
                                 } else {
-                                    std::cout << "Numero non valido.\n";
+                                    int index = SafeInput::read<int>("Numero data da modificare: ");
+                                    if (index >= 1 && static_cast<size_t>(index) <= date.size()) {
+                                        DataTour& data = const_cast<DataTour&>(date[index - 1]);
+                                        data.accept(this);
+                                    } else {
+                                        std::cout << "Numero non valido.\n";
+                                    }
                                 }
-                            } else if (opzione == "r") {
-                                int index;
-                                std::cout << "Numero data da rimuovere: ";
-                                std::cin >> index;
-                                std::cin.ignore();
-                                if (index >= 1 && index <= static_cast<int>(date.size())) {
-                                    ConsoleEditorHandler::rimuoviDataTour(tour, index - 1);
+                            } 
+                            else if (opzione == "r") {
+                                if (date.empty()) {
+                                    std::cout << "Non ci sono date da rimuovere.\n";
                                 } else {
-                                    std::cout << "Numero non valido.\n";
+                                    int index = SafeInput::read<int>("Numero data da rimuovere: ");
+                                    if (index >= 1 && static_cast<size_t>(index) <= date.size()) {
+                                        ConsoleEditorHandler::rimuoviDataTour(tour, index - 1);
+                                    } else {
+                                        std::cout << "Numero non valido.\n";
+                                    }
                                 }
-                            } else if (opzione == "x") {
+                            } 
+                            else if (opzione == "x") {
                                 fineDate = true;
-                            } else {
+                            } 
+                            else {
                                 std::cout << "Scelta non valida.\n";
                             }
                         } catch (const std::exception& ex) {
@@ -388,11 +363,8 @@ void VisitorConsoleEditor::visit(DataTour* dataTour) {
         std::cout << "2. Modifica orario (ore/minuti/secondi)\n";
         std::cout << "3. Modifica luogo\n";
         std::cout << "0. Torna indietro\n";
-        std::cout << "Scelta: ";
 
-        int scelta;
-        std::cin >> scelta;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int scelta = SafeInput::read<int>("Scelta: ");
 
         try {
             switch (scelta) {

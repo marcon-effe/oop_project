@@ -26,7 +26,6 @@ public:
     static void editImagePathArtista(Artista* a);
 
     // ARTIST PRODUCT (base)
-    static void editTitoloProduct(ArtistProduct* p);
     static void editDescrizioneProduct(ArtistProduct* p);
     static void editImagePathProduct(ArtistProduct* p);
 
