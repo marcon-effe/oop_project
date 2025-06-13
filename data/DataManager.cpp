@@ -178,11 +178,11 @@ std::unordered_map<unsigned int, Artista*> DataManager::loadFromFileXml(const st
     QString exeDir = QCoreApplication::applicationDirPath();
     QDir dir(exeDir);
 
-    // Se il binario si trova in build‐Debug/, saliamo di un livello per arrivare a root/
     if (dir.dirName().startsWith("build")) {
-        dir.cdUp(); // ora dir punta a root del progetto
+        dir.cdUp();
     }
-    // A questo punto costruiamo il path completo per l’XSD sotto root/saves/xml/
+
+    // costruiamo il path completo per l’XSD sotto root/saves/xml/
     QString schemaPathQt = dir.filePath("saves/xml/artisti.xsd");
     std::string schemaPath = schemaPathQt.toStdString();
 
