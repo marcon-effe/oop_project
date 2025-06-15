@@ -39,38 +39,33 @@ macOS:
 brew install libxml2
 ```
 
-Windows:
-- Qt 6.5+ installato (incluso `qmake`)
-- Git Bash o altro terminale Bash se si vuole usare lo script `installer.sh`
-- In alternativa, usare il **Qt Command Prompt** per compilare manualmente (vedi sezione successiva).
-
 ## Problemi con l’installer su Windows
 
-Lo script `installer.sh` è uno script Bash e **non** è eseguibile nativamente in PowerShell o nel prompt CMD.  
-Per compilare l’applicazione su Windows, è possibile:
+Oltre allo script Bash (`installer.sh`), è incluso anche uno script PowerShell (`installer.ps1`) per l’installazione su Windows. Tuttavia, **l’installer per Windows potrebbe fallire la compilazione** a causa di un **bug noto nel compilatore `g++` 11.2.0** incluso in alcune distribuzioni di Qt. Il bug si manifesta come errore interno (`internal compiler error`) durante la compilazione di `qfloat16.h`, un header usato internamente da Qt.
 
-1. **Usare Git Bash**  
-   - Aprire Git Bash nella cartella del progetto.  
-   - Eseguire lo script come su Linux/macOS:
-     ```bash
-     ./installer.sh [path_qmake]
-     ```
-   - Se `path_qmake` è omesso, lo script cercherà `qmake` nel `PATH` di Git Bash.
+Lo script `installer.ps1` è comunque corretto e completo: verifica `xmllint`, genera correttamente il file `.pro`, compila e avvia l’applicazione. Su ambienti Windows privi di questo bug, lo script funziona correttamente.
 
-2. **Compilazione manuale nel Qt Command Prompt**  
-   - Aprire il **Qt Command Prompt** fornito da Qt (o un terminale che ha `qmake` nel `PATH`).  
-   - Generare i makefile:
-     ```cmd
-     qmake oop_project.pro -r
-     ```
-   - Compilare:
-     ```cmd
-     nmake       # oppure jom se installato
-     ```
-   - Avviare l’eseguibile:
-     ```cmd
-     .\release\oop_project.exe
-     ```
+### Soluzioni alternative
+
+1. **Compilare con `installer.sh`** su Linux/macOS (o WSL)
+2. **Compilare manualmente in ambiente Qt Command Prompt**
+3. **Evitare temporaneamente il tipo `qfloat16`** disabilitando le macro, se si modifica il progetto
+
+### Compilazione manuale su Windows
+
+1. Aprire il **Qt Command Prompt** (incluso con l’installazione di Qt)
+2. Generare i Makefile:
+   ```cmd
+   qmake oop_project.pro -r
+   ```
+3. Compilare:
+   ```cmd
+   mingw32-make
+   ```
+4. Avviare:
+   ```cmd
+   .\oop_project.exe
+   ```
 
 ## Avvio rapido
 
@@ -81,9 +76,9 @@ git clone <url-repository>
 cd oop_project
 ```
 
-### Compilazione
+### Compilazione con Bash (Linux/macOS o Git Bash)
 
-Esegui lo script `installer.sh` (solo su Linux/macOS o su Git Bash):
+Esegui lo script `installer.sh`:
 
 ```bash
 ./installer.sh [path_qmake]
