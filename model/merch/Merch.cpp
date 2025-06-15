@@ -1,16 +1,85 @@
 #include <iostream>
 #include "Merch.h"
+#include "../../visitors/VisitorInterfaceConst.h"
 
-#include"../../view/VisitorGUI.h"
+// COSTRUTTORI
+Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice)
+: NotMusica(owner, t, desc, prezzo, disponibile, quantita), codiceProdotto(codice)
+{
+    if (!owner) {
+        assert(false && "Merch standard constructor received nullptr owner");
+        throw std::invalid_argument("Merch standard constructor received nullptr owner.");
+    }
+}
 
-Merch::Merch(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice)
-: NotMusica(t, desc, prezzo, disponibile, quantita), codiceProdotto(codice) {}
+Merch::Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& img)
+: NotMusica(owner, t, desc, prezzo, disponibile, quantita, img), codiceProdotto(codice)
+{
+    if (!owner) {
+        assert(false && "Merch constructor with imagePath received nullptr owner");
+        throw std::invalid_argument("Merch constructor with imagePath received nullptr owner.");
+    }
+}
 
-Merch::Merch(NotMusica* nm, std::string cp)
-: NotMusica(nm), codiceProdotto(cp) {}
+Merch::Merch(NotMusica* base, const std::string& codice)
+: NotMusica(base), codiceProdotto(codice)
+{
+    if (!base) {
+        assert(false && "Merch constructor from NotMusica received nullptr base");
+        throw std::invalid_argument("Merch constructor from NotMusica received nullptr base.");
+    }
+}
 
 Merch::Merch(const Merch* m)
-: NotMusica(m), codiceProdotto(m->getCodiceProdotto()) {}
+: NotMusica(m), codiceProdotto(m->getCodiceProdotto())
+{
+    if (!m) {
+        assert(false && "Merch copy constructor received nullptr Merch pointer");
+        throw std::invalid_argument("Merch copy constructor received nullptr Merch pointer.");
+    }
+}
+
+// JSON
+// Costruttore da JSON
+Merch::Merch(Artista* owner, const QJsonObject& json)
+: NotMusica(owner, json["not_musica"].toObject()),
+  codiceProdotto(json["codiceProdotto"].toString().toStdString())
+{
+    if (!owner) {
+        assert(false && "Merch JSON constructor received nullptr owner");
+        throw std::invalid_argument("Merch JSON constructor received nullptr owner.");
+    }
+}
+
+// Converte l'oggetto Merch in un oggetto JSON
+QJsonObject Merch::toJson(bool reduced) const {
+    QJsonObject json;
+    json["type"] = "merch";
+    json["not_musica"] = NotMusica::toJson(reduced);
+    json["codiceProdotto"] = QString::fromStdString(codiceProdotto);
+    return json;
+}
+
+// XML
+// Costruttore da XML
+Merch::Merch(Artista* owner, const QDomElement& xml)
+: NotMusica(owner, xml.firstChildElement("NotMusica")),
+  codiceProdotto(xml.attribute("codiceProdotto").toStdString())
+{
+    if (!owner) {
+        assert(false && "Merch XML constructor received nullptr owner");
+        throw std::invalid_argument("Merch XML constructor received nullptr owner.");
+    }
+}
+
+// Converte l'oggetto Merch in un oggetto XML
+QDomElement Merch::toXml(QDomDocument& doc, bool reduced) const {
+    QDomElement xml = doc.createElement("Merch");
+    xml.setAttribute("codiceProdotto", QString::fromStdString(codiceProdotto));
+
+    xml.appendChild(NotMusica::toXml(doc, reduced));
+    return xml;
+}
 
 Merch::~Merch() {}
 
@@ -18,52 +87,18 @@ std::string Merch::getCodiceProdotto() const {
     return codiceProdotto;
 }
 
-void Merch::setCodiceProdotto(const std::string &codice) {
+void Merch::setCodiceProdotto(const std::string& codice) {
     codiceProdotto = codice;
 }
 
 void Merch::printInfo() const {
-    std::cout << "Merch prodotto: " << title << "\nDescrizione: " << description
-              << "\nPrezzo: " << prezzo << "\nDisponibile: " << (disponibile ? "Si" : "No")
-              << "\nQuantita': " << quantita
-              << "\nCodice prodotto: " << codiceProdotto << std::endl;
+    NotMusica::printInfo();
+    std::cout << "--MERCH--" << std::endl;
+    std::cout << "Codice prodotto: " << codiceProdotto << std::endl;
 }
 
-
-//JSON
-// Converte un oggetto JSON in un oggetto Merch
-Merch::Merch(const QJsonObject& json)
-: NotMusica(json["not_musica"].toObject()),
-    codiceProdotto(json["codiceProdotto"].toString().toStdString()){}
-// Converte l'oggetto Merch in un oggetto JSON
-QJsonObject Merch::toJson() const{
-    QJsonObject json;
-    json["not_musica"] = NotMusica::toJson();
-    json["codiceProdotto"] = QString::fromStdString(codiceProdotto);
-    return json;
-}
-
-//XML
-// Converte un oggetto XML in un oggetto Merch
-Merch::Merch(const QDomElement& xml)
-: NotMusica(xml.firstChildElement("NotMusica")),
-    codiceProdotto(xml.attribute("codiceProdotto").toStdString()) {}
-// Converte l'oggetto Merch in un oggetto XML
-QDomElement Merch::toXml(QDomDocument& doc) const{
-    QDomElement xml = doc.createElement("Merch");
-    xml.setAttribute("codiceProdotto", QString::fromStdString(codiceProdotto));
-
-    xml.appendChild(NotMusica::toXml(doc));
-
-    return xml;
-}
-
-// OVERLOADING OPERATORI
 bool operator==(const Merch& a, const Merch& b) {
     if (!(static_cast<const NotMusica&>(a) == static_cast<const NotMusica&>(b))) return false;
-    if (a.prezzo != b.prezzo) return false;
-    if (a.disponibile != b.disponibile) return false;
-    if (a.quantita != b.quantita) return false;
     if (a.codiceProdotto != b.codiceProdotto) return false;
     return true;
 }

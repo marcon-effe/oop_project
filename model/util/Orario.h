@@ -1,7 +1,11 @@
 #ifndef ORARIO_H
 #define ORARIO_H
 
-#include "../../include/data_format.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDomElement>
+#include <QDomDocument>
+#include <QTime>
 
 class Orario {
 private:
@@ -24,12 +28,12 @@ public:
     void setSecondi(unsigned int s);
 
     std::string toString() const;
+    QTime toQTime() const;
 
     Orario getOrario() const;
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    //OVERLOADING OPERATORI
     friend bool operator==(const Orario& a, const Orario& b);
     friend bool operator!=(const Orario& a, const Orario& b);
     friend bool operator<(const Orario& a, const Orario& b);

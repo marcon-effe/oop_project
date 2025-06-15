@@ -1,39 +1,44 @@
 #ifndef DISCO_H
 #define DISCO_H
 
-#include <string>
-
 #include "Merch.h"
-#include "../../include/data_format.h"
 
 
 class Disco : public Merch {
 protected:
     std::string produttoreStampe;
     std::string codiceRiconoscimento;
-    std::string tipoProdotto;       // DA VEDERE SE MANTENERE
+    std::string tipoProdotto;  // potrebbe essere mantenuto o rimosso in base ai futuri filtri
+
 public:
-    Disco(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice, const std::string &produttoreStampe, const std::string &codiceRiconoscimento, const std::string &tipoProdotto);
-    Disco(Merch* m, std::string ps, std::string cr, std::string tp);
-    Disco(const Disco* d);
-    Disco(const QJsonObject& json);
-    Disco(const QDomElement& xml);
+    Disco(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto);
+
+    Disco(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto, const std::string& img);
+
+    Disco(Merch* base, const std::string& produttoreStampe, const std::string& codiceRiconoscimento, const std::string& tipoProdotto);
+
+    Disco(const Disco* disco);
+
+    Disco(Artista* owner, const QJsonObject& json);
+
+    Disco(Artista* owner, const QDomElement& xml);
+
     virtual ~Disco();
 
     std::string getProduttoreStampe() const;
-    void setProduttoreStampe(const std::string &ps);
+    void setProduttoreStampe(const std::string& produttoreStampe);
 
     std::string getCodiceRiconoscimento() const;
-    void setCodiceRiconoscimento(const std::string &cr);
+    void setCodiceRiconoscimento(const std::string& codiceRiconoscimento);
 
     std::string getTipoProdotto() const;
-    void setTipoProdotto(const std::string &tp);
+    void setTipoProdotto(const std::string& tipoProdotto);
 
+    // Funzioni di utility
     virtual void printInfo() const override;
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
+    virtual QJsonObject toJson(bool reduced=false) const override;
+    virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
-    // OVERLOADING OPERATORI
     friend bool operator==(const Disco& a, const Disco& b);
     friend bool operator!=(const Disco& a, const Disco& b);
 };

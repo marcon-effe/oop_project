@@ -1,18 +1,24 @@
 #include <iostream>
 #include "CD.h"
+#include "../../visitors/VisitorInterfaceConst.h"
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
-#include"../../view/VisitorGUI.h"
 
-CD::CD(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice, const std::string &produttoreStampe, const std::string &codiceRiconoscimento, const std::string &tipoProdotto, const std::string &formato)
-: Disco(t, desc, prezzo, disponibile, quantita, codice, produttoreStampe, codiceRiconoscimento, tipoProdotto), formato(formato) {}
+CD::CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
+       const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento,
+       const std::string& tipoProdotto, const std::string& formato)
+: Disco(owner, t, desc, prezzo, disponibile, quantita, codice, produttoreStampe, codiceRiconoscimento, tipoProdotto), formato(formato) {}
 
-CD::CD(Disco* d, std::string f)
-: Disco(d), formato(f) {}
+CD::CD(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita,
+       const std::string& codice, const std::string& produttoreStampe, const std::string& codiceRiconoscimento,
+       const std::string& tipoProdotto, const std::string& formato, const std::string& img)
+: Disco(owner, t, desc, prezzo, disponibile, quantita, codice, produttoreStampe, codiceRiconoscimento, tipoProdotto, img), formato(formato) {}
 
-CD::CD(const CD* c)
-: Disco(c), formato(c->getFormato()) {}
-  
+CD::CD(Disco* base, const std::string& formato)
+: Disco(base), formato(formato) {}
 
+CD::CD(const CD* other)
+: Disco(other), formato(other->getFormato()) {}
 
 CD::~CD() {}
 
@@ -20,53 +26,55 @@ std::string CD::getFormato() const {
     return formato;
 }
 
-void CD::setFormato(const std::string &f) {
+void CD::setFormato(const std::string& f) {
     formato = f;
 }
 
 void CD::printInfo() const {
     Disco::printInfo();
+    std::cout << "--CD--" << std::endl;
     std::cout << "Formato: " << formato << std::endl;
 }
 
+// JSON
+CD::CD(Artista* owner, const QJsonObject& json)
+: Disco(owner, json["disco"].toObject()),
+  formato(json["formato"].toString().toStdString()) {}
 
-//JSON
-//Converte un oggetto JSON in un oggetto CD
-CD::CD(const QJsonObject& json)
-: Disco(json["disco"].toObject()),
-    formato(json["formato"].toString().toStdString()){}
-//Converte l'oggetto CD in un oggetto JSON
-QJsonObject CD::toJson() const{
+QJsonObject CD::toJson(bool reduced) const {
     QJsonObject json;
     json["type"] = "cd";
-    json["disco"] = Disco::toJson();
+    json["disco"] = Disco::toJson(reduced);
     json["formato"] = QString::fromStdString(formato);
     return json;
 }
 
-//XML
-//Converte un oggetto XML in un oggetto CD
-CD::CD(const QDomElement& xml)
-: Disco(xml.firstChildElement("Disco")),
-    formato(xml.attribute("formato").toStdString()) {}
-//Converte l'oggetto CD in un oggetto XML
-QDomElement CD::toXml(QDomDocument& doc) const{
+// XML
+CD::CD(Artista* owner, const QDomElement& xml)
+: Disco(owner, xml.firstChildElement("Disco")),
+  formato(xml.attribute("formato").toStdString()) {}
+
+QDomElement CD::toXml(QDomDocument& doc, bool reduced) const {
     QDomElement xml = doc.createElement("CD");
     xml.setAttribute("formato", QString::fromStdString(formato));
-    xml.appendChild(Disco::toXml(doc));
+    xml.appendChild(Disco::toXml(doc, reduced));
     return xml;
 }
 
-
-void CD::accept(VisitorGUI* v) const {
-    v->visit(this);
+// Visitor
+void CD::accept(VisitorInterfaceConst* visitor) const {
+    visitor->visit(this);
 }
+
+void CD::accept(VisitorInterfaceNotConst* visitor) {
+    visitor->visit(this);
+}
+
 
 // OVERLOADING OPERATORI
 bool operator==(const CD& a, const CD& b) {
     if (!(static_cast<const Disco&>(a) == static_cast<const Disco&>(b))) return false;
-    if (a.formato != b.formato) return false;
-    return true;
+    return a.formato == b.formato;
 }
 
 bool operator!=(const CD& a, const CD& b) {

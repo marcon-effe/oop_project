@@ -1,12 +1,10 @@
 #ifndef MUSICA_H
 #define MUSICA_H
 
-#include <string>
-
-#include "ArtistProduct.h" // Include the full definition of ArtistProduct
+#include "ArtistProduct.h"
 #include "../util/Data.h"
 #include "../util/Durata.h"
-#include "../../include/data_format.h"
+
 
 class Musica : public ArtistProduct {
 private:
@@ -14,30 +12,37 @@ private:
     Durata durata;
     std::string genere;
 public:
-    Musica(const std::string &t, const std::string &desc, const Data &du, const Durata &dur, const std::string &g);
-    Musica(ArtistProduct* ap, const Data& du, const Durata& d, const std::string& g);
+    Musica(Artista* owner, const std::string& title, const std::string& desc, const Data& du, const Durata& dur, const std::string& g);
+
+    Musica(Artista* owner, const std::string& title, const std::string& desc, const Data& du, const Durata& dur, const std::string& g, const std::string& img);
+
+    Musica(ArtistProduct* base, const Data& du, const Durata& dur, const std::string& g);
+
     Musica(const Musica* m);
-    Musica(const QJsonObject &json);
-    Musica(const QDomElement &xml);
+
+    Musica(Artista* owner, const QJsonObject& json);
+
+    Musica(Artista* owner, const QDomElement& xml);
+
     virtual ~Musica();
 
     Data getDataUscita() const;
-    void setDataUscita(const Data &d);
+    void setDataUscita(const Data& d);
 
     Durata getDurata() const;
-    void setDurata(const Durata &d);
+    void setDurata(const Durata& d);
 
     std::string getGenere() const;
-    void setGenere(const std::string &g);
+    void setGenere(const std::string& g);
+
+    virtual void updateDurata() = 0;
 
     virtual void printInfo() const override;
-    
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
+    QJsonObject toJson(bool reduced=false) const override;
+    QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
 
-    // OVERLOADING OPERATORI
     friend bool operator==(const Musica& a, const Musica& b);
     friend bool operator!=(const Musica& a, const Musica& b);
 };
 
-#endif
+#endif // MUSICA_H

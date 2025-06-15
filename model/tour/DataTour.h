@@ -1,12 +1,10 @@
 #ifndef DATATOUR_H
 #define DATATOUR_H
 
-#include <string>
-
 #include "../util/Data.h"
 #include "../util/Orario.h"
-#include "../../include/data_format.h"
 
+class VisitorInterfaceNotConst;
 
 class DataTour : public Data, public Orario {
 private:
@@ -27,8 +25,13 @@ public:
     Orario getOrario() const;
     void setOrario(const Orario &o);
 
+    std::string toString() const;
+    std::string toStringFormat() const;
+
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
+
+    void accept(VisitorInterfaceNotConst* visitor);
 
     // OVERLOADING OPERATORI
     friend bool operator==(const DataTour& a, const DataTour& b);

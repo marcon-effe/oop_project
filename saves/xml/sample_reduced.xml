@@ -1,0 +1,1629 @@
+<artisti xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="artisti.xsd">
+    <Artista genere="rap" imagePath="view/icons/Noyz_Narcos/profilo.jpg" nome="Noyz Narcos">
+        <info>Noyz Narcos, pseudonimo di Emanuele Frasca (Roma, 15 dicembre 1979), è un rapper e produttore discografico italiano.
+Nato a Roma nel 1979 da padre siciliano, originario di Modica, è cresciuto nel quartiere Monte Sacro. Si è avvicinato all'hip hop nei primi anni novanta, iniziando come writer ed entrando a far parte dei TBF Crew e dei Savage Boys. Poco dopo ha conosciuto Fetz Darko, grazie al quale è entrato nel gruppo Erreaccanegativo, iniziando a fare i primi freestyle. Nel 1996 ha abbandonato il gruppo per continuare a dedicarsi alla scrittura. 
+Nel 2000 si è riavvicinato all'hip hop e nel corso di una jam session ha conosciuto i rapper Gel, Metal Carter, Cole e DJ Kimo, fondatori dei Truceboys. Insieme hanno intrapreso una collaborazione culminata nel 2003 con la pubblicazione dell'unico album in studio Sangue. 
+Il successivo periodo in cui i membri del gruppo percorrono strade soliste dopo la creazione del collettivo TruceKlan è molto positivo per Noyz Narcos, che nel 2005 pubblica il suo primo album da solista, intitolato Non dormire e che vede la partecipazione dei componenti dei Truceboys e di altri artisti della scena hip hop romana, le produzioni del disco sono quasi tutte di Noyz con la collaborazione di basso e chitarra di Steph Sound (Undertakers), il disco è stato pubblicato dall'etichetta indipendente Traffik Records, fondata da Noyz stesso.</info>
+        <prodotti>
+            <Album label="Columbia Records">
+                <tracce>
+                    <Traccia has_testo="1" nome="ANTHEM">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="18"/>
+                        <testo>[Intro]
+Just do it
+
+[Strofa: Noyz Narcos &amp; Salmo]
+Spesso mi chiedo perché ancora lo faccio
+Rispondo: "Devo spingerlo in fondo o ritorno allo spaccio"
+Ho la testa infognata, trovano il corpo nel ghiaccio
+Con la faccia blu e le labbra viola a terra con un laccio al braccio
+Mi basta un dito, co' 'sti stronzi sono imbastardito
+Magic Blue come Denzel, sono Michael Keaton
+Rappresento per il morto, nel mio hood rinato
+Al funerale nel mio suit dentro un SUV blindato
+Uno mi ha detto: "Fidati degli altri, devi camuffarti
+Bro, finisce che 'sti infami riescono a fregarti"
+Sto nascosto tra la folla come Banksy
+Sono diventato grande più di Gatsby, eoh
+Meme boys, influencer, tiktoker, subumani
+Solo con le mani vi facciamo fuori, Soleimani
+Impara prima di parlarе, fai, I die tryin'
+La vita scorre tra le dita comе un butterfly
+Se rimo, fondo il tempo come cooked crack
+Suono la pipa dentro al back su 'sta fast track
+Fanculo il tuo rap, faccio hit, David Guetta
+Moriremo da leggende come Elisabetta
+Io sputo solo merda cruda, resto most hated
+Nuoto in mezzo ai barracuda vestiti da cosplayer
+Vedo tagli sulla carne nuda, sembra un buon trailer
+Nessun dorma è un dogma come Lars Von Trier
+La prima volta, ricordo, era solo marijuana
+Seconda, poi continua, finiva sempre per "ina" (Ah)
+Gli anni del nero e l'albanese ammoniacata
+I tags sul bus col tre centimetri sulla fiancata (Ah)
+Tutti a casa quando piovono 'ste rime random (Ah)
+Esco dal buio delirando come Marlon Brando
+Giro su una Lambo nera come il black mamba
+Scusa, mamma, se ritardo, stavo shakerando
+Se tu fossi me, saresti già morto (Ah)
+Nella corsia dell'emergenza di un pronto soccorso
+O finiresti in una buca con sei colpi in corpo
+Saresti Brad Pitt che fa a pugni co' Ed Norton (Uh)
+Ogni stronzo su 'sto mondo dovrebbe ascoltarmi (Ah)
+Questa tranva taglia teste, lascia i corpi a galla
+Sarà scemo chi mi osanna
+Perché se faccio una canna sembro un cosmonauta su nei cieli, tipo Osanna
+
+[Outro: Noyz Narcos &amp; Salmo]
+1-9-7-9
+Viene al mondo Noyz Narcos
+Dio ti chiede: "Vuoi le prove?"
+Oh, basta, ba', e oh, basta</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="CRINGE">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="12"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="INCUBI">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="42"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="RESPIRA">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                            <partecipante nome="Marracash"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="43"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="MIRACOLO">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="54"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="CVLT">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                            <partecipante nome="Kid Yugi"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="46"/>
+                        <testo>[Intro: Salmo]
+Sine, drop that shit
+Yo
+
+[Strofa 1: Salmo]
+È colpa della luna quando è piena di sé
+Stanotte ho speso una fortuna a blackjack (Uh)
+Dal buco della serratura faccio un check su chi c'è
+Metto il ferro nella sacca, bevo grappa dalla tazza di caffè (Ah)
+Otto in punto, salgo in auto, Maserati
+Chilometri azzerati, borsa di diamanti rubati
+Documenti falsi, soldi contraffatti, contratti
+Maledetto il giorno che ci siamo incontrati (Uh)
+Aspetta, baby, non avere fretta (Ah)
+Che la vita è veloce, ma la via è un po' stretta (Yeah)
+Ti scipperò il cuore come quella borsetta (Ah)
+Ma vivi come vuoi, non come fossi costretta (A'ight)
+Nei sogni va a finire sempre male, per i soldi uguale
+Fatti una pistola nel cassetto fiscale (Pah), ehi
+Lascia il tempo scorrere
+Impara a camminare prima di correre, ehi
+
+[Ritornello: Salmo &amp; Noyz Narcos]
+Ma adesso prendi i soldi e scappa via di qui, non ci avranno mai
+In fuga con seicento K, io con lei come Bonnie e Clyde
+Sì, prendi tutti i soldi e scappa via di qui, lontano dai guai
+Avere tutto non mi basta, io con lei come Bonnie e Clyde (Uh)
+[Strofa 2: Noyz Narcos]
+Qua devi essere spietato come se vendi pezzi
+Mangiarti pure le ossa senza lascià i resti
+Senza la fame queste cene non le apprezzi
+Fregartene dei soldi quando cambiano i prezzi
+Al momento dei conti vuoi vedere chi resta?
+Al tuo entourage de merda je diciamo la messa (Ah)
+Coi gomiti nel panico mi spiano la ressa
+Muori co' 'n serramanico ficcato in testa (Uh)
+Ultimamente c'ho problemi nel gestire i rapporti
+Dentro i posti affollati vorrei tutti morti (Tu, tu, tu, tu)
+Se fossimo dotati qui del porto d'armi
+I nostri nomi stavano scolpiti sui marmi
+La mia visione è prendi tutti i soldi e corri (Oh)
+Un'altra croce sul mio corpo, mama, sorry (Ma-Mama, sorry)
+La sensazione che rimangono pochi giorni
+Questa vita veloce, non sai mai quando torni, se torni (Vaffanculo, va')
+
+[Ritornello: Salmo &amp; Noyz Narcos]
+Ma adesso prendi i soldi e scappa via di qui, non ci avranno mai
+In fuga con seicento K, io con lei come Bonnie e Clyde
+Sì, prendi tutti i soldi e scappa via di qui, lontano dai guai
+Avere tutto non mi basta, io con lei come Bonnie e Clyde (Uh)
+
+[Strofa 3: Kid Yugi]
+Prendi tutti i soldi e scappa, non è un Paese per vecchi
+Dal tramonto all'alba, l'alba dei morti viventi
+Y3p, siamo gli otto che detesti
+Per un pugno di euro ho fatto cose che tu non diresti
+'Sta musica droga la gente, fa danzare i teschi
+Siamo Bastardi senza gloria senza i tedeschi
+In Puglia con i veri narcos, con i capoclan
+Ora che sono una star e questa roba è un cult, ah
+Ho una troia un metro e ottanta che sembra una Bratz
+Mi muove solo la vendetta come in un Dumas
+Prima i soldi dal niente come una startup
+Il più forte finché non mi uccidono alla Buster Scruggs
+Mi chiamano Trinità, mi scolo un single malt
+Due ragazze addosso come delle pin-up, giriamo un Tinto Brass
+Per il salto che mi spetta non ci sono stunt, Kid Yugi
+
+[Ritornello: Salmo &amp; Noyz Narcos]
+Ma adesso prendi i soldi e scappa via di qui, non ci avranno mai
+In fuga con seicento K, io con lei come Bonnie e Clyde
+Sì, prendi tutti i soldi e scappa via di qui, lontano dai guai
+Avere tutto non mi basta, io con lei come Bonnie e Clyde (Uh)</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="BRUJERIA">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="12"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="CROCI € CRISTI">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="34"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="MY LOVE SONG 2">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                            <partecipante nome="Coez"/>
+                            <partecipante nome="Frah Quintale"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="54"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="KILOMETRI">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="25"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="MALEDETTI">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="46"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="GRINDHOUSE">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="36"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="MATRIOSKA">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="11"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="NIGHTCRAWLERS">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="12"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="LA FINE">
+                        <partecipanti>
+                            <partecipante nome="Salmo"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="21"/>
+                        <testo></testo>
+                    </Traccia>
+                </tracce>
+                <Musica genere="rap">
+                    <dataUscita anno="2023" giorno="3" mese="11"/>
+                    <Durata minuti="42" ore="0" secondi="46"/>
+                    <ArtistProduct description="“CVLT” è il primo album in studio interamente collaborativo di Salmo e Noyz Narcos, pubblicato il 3 novembre 2023 dalla Columbia Records e distribuito da Sony Music Entertainment Italy. La tracklist comprende quindici brani per un totale di 42 minuti e 46 secondi, confezionati in formato CD, vinile, download digitale e streaming.&#xa;Dal punto di vista sonoro, l’album si distingue per atmosfere più cupe e aggressive rispetto alle produzioni precedenti di entrambi gli artisti, abbracciando generi come l’hardcore hip hop e l’horrorcore. Non mancano tuttavia aperture sperimentali: tracce come “Brujeria” e “Nightcrawlers” esplorano paesaggi elettronici, mentre “My Love Song 2” con Coez e Frah Quintale aggiunge un tocco più melodico. In “Respira”, infine, la collaborazione con Marracash ruota attorno a un celebre sample di “Breathe” dei The Prodigy.&#xa;La varietà dei featuring e dei produttori conferisce ulteriore ricchezza all’album: oltre a Marracash, compaiono Kid Yugi in “Cult”, Coez e Frah Quintale in “My Love Song 2”, mentre nella versione deluxe “Hellraisers” appaiono Lazza, Gué Pequeno e Gemitaiz. A curare il suono sono Luciennn (produttore in sette tracce) e Sine (produttore in otto), con il missaggio e mastering affidati ad Andrea Suriani.&#xa;Al momento dell’uscita, “CVLT” ha conquistato subito la vetta della classifica FIMI, debuttando al primo posto nella settimana dal 3 all’9 novembre 2023, e si è guadagnato la certificazione di disco di platino per oltre 100.000 copie vendute in Italia. Sul lungo periodo si è confermato uno dei progetti italiani più incisivi del 2023, chiudendo l’anno al diciassettesimo posto nella classifica annuale FIMI.&#xa;La confezione fisica – disponibile in edizione standard e digibook in vinile – riprende il titolo stilizzato “CVLT” con grafica dark e richiami horror, in linea con il mood delle tracce. Il packaging cura nei dettagli il booklet interno e i crediti, sottolineando la natura ibrida dell’opera, costruita tanto per l’ascolto in streaming quanto come oggetto da collezione per appassionati." imagePath="view/icons/Noyz_Narcos/CVLT.jpg" title="CVLT"/>
+                </Musica>
+            </Album>
+            <CD formato="CD Audio">
+                <Disco codiceRiconoscimento="8051411746225" produttoreStampe="Thaurus Music" tipoProdotto="CD">
+                    <Merch codiceProdotto="8051411746225">
+                        <NotMusica disponibile="1" prezzo="18.84" quantita="1000">
+                            <ArtistProduct description="“Virus” è il sesto album in studio del rapper italiano Noyz Narcos, uscito il 14 gennaio 2022 su Thaurus Music e Believe Digital, con una scaletta di diciotto tracce che mescolano hardcore hip hop e trap ed è stato prodotto da Sine, Night Skinny, Drillionaire, Greg Willen e Mace. Il disco, impreziosito da collaborazioni con Sfera Ebbasta, Ketama126, Franco126, Raekwon, Coez, Geolier, Capo Plaza e Gué Pequeno, ha conquistato la vetta della classifica italiana ed è stato certificato disco di platino dalla FIMI per oltre 50.000 copie vendute &#xa;&#xa;Disponibile su: https://www.lafeltrinelli.it/virus-cd-noyz-narcos/e/8051411746225" imagePath="view/icons/Noyz_Narcos/Virus_CD.jpg" title="Virus CD"/>
+                        </NotMusica>
+                    </Merch>
+                </Disco>
+            </CD>
+            <Singolo chartPosition="0" isRemix="false">
+                <mainTrack has_testo="1" nome="GRAN TORINO">
+                    <partecipanti>
+                        <partecipante nome="Sine"/>
+                    </partecipanti>
+                    <Durata minuti="3" ore="0" secondi="57"/>
+                    <testo>[Intro]
+(Now, nearing the end of the day
+Look, never a moment too soon, or late)
+Eoh, Sine
+Drop that
+64 up in your ass, bih
+(Eoh)
+Mic
+
+[Strofa 1]
+Ho scritto sedici barre diec'anni fa
+Valgono quanto i fottuti dieci comandamenti del rap
+Ho visto canzonette pe' pischelle spacciate per trap
+Rap delle caramelle, rollo tre L da cinque gra'
+Datemi 'l coltello, 'no stiletto, me sento 2Pac
+Scommetti che sfiletto come 'n quarto de bue 'sta track
+Sine cor martello più pesantе nel generе rap
+Ancora con i fogli di contante dentro al Domopack
+Stesse J, stesso snapback, stessa hoodie black
+Narcos rap, Megadeth, institutional (Secco)
+Datemene 'na cattedra in Sapienza
+Sfondo la capienza del locale e perdi la licenza (Tu-tu)
+Non è con le puttanate che uscirai da questa merda (Ah)
+Non è co' 'na bella stretta che risolvi se nn'ce metti 'na lametta o i sordi
+Co 'na valigetta ammanettata al polso in aeroporto (Oh-oh)
+Io paro risorto, merda, voi puzzate già de morto (Ah)
+[Interludio 1]
+Ah, quanto me fa schifo ar cazzo 'sto Paese
+A volte penso che so' nato nel Texas
+Magari scoppia 'na bomba, ve sotterra a tutti
+King Noyz, hasta la muerte
+Eoh, check
+
+[Strofa 2]
+Vuoi il rapper più stiloso più rap de tutti
+Ritornelli cantati fanno rate al cazzo, mai contemplati
+Vuoi le barre? C'ho le barre de Regina e de Rebibbia
+Pe' le atrocità vissute ce riscriverò 'na Bibbia
+Mettete in ginocchio, casca l'ascia sopra al collo tuo
+Testa nella cesta de Natale per il culo tuo
+Pompate le braccia che rimani 'n pollo uguale
+Me te fumo ar davanzale (Ah), secco, niente de personale
+OG col rispetto dell'intera scena e non solo (Seh, seh)
+Te manco il rispetto de tu madre, trovate 'n lavoro
+Prendemi du spicci dopo quel che ho fatto pe l'hip hop (Ah, seh)
+Doppio platino, non so' contento che no (Ah)
+Non serviva Drake pe rilancià i Dipset nel 2023
+Serve un 64 targato Narcos rap
+Muta la tua corsa in una Gran Torino (Oh)
+Quando pompi questa merda Truce con le corna fuori al finestrino
+
+[Interludio 2]
+Quanto me fa rate 'sta wave nova
+Pochi se sarvano, rap è n'altra robba
+Fa' vibbrà 'ste barre come 'na vorta
+Pompa merda pe la zona, mori pe qualcosa
+
+[Strofa 3]
+Te ritrovi in giro in Cortez, canotta e Ben Davis (Sheesh)
+Se 'sto rap è ancora in giro, pensa a chi cazzo glielo devi (Eh)
+Te ne bevi quattro alla salute mia (Dai, dai, dai)
+E dei soldi che farò grazie a 'sta shit (Uh-uh)
+L'Italia pomperà 'na nuova hit (Uh-uh)
+Quando vedi il logo del mio clique cool come 'no swoosh Nike
+Dici: "Questo è avanti", dai, chicco
+Spicco tra i colori col mio bel nero
+Quando fai classifiche tra i nuovi rapper (Ah), cercando il più serio
+Doppia N, sai che vai sul sicuro (UH-uh)
+Come sceglie tra Mercedes e Audi
+Sai che fotti bene con entrambi
+Scrivi nei commenti, è come camomilla o Fentalyn, so' scelte (Seh)
+Basta che resti lontano da manette (Secco)
+Chicco, ne faccio sessantaquattro pe' davero, puoi contarle tutte
+Dalla corsa le auto ne escono distrutte
+Mi chiedevo oggi la tua merda e te a che cazzo servi?
+Clacson dentro l'auto in mezzo al traffico, Destruction Derby
+
+[Interludio 3]
+Secco, le rappo tutte pure dar vivo
+No playback, no voice over
+Get money, die rich
+NN, no snitches
+
+[Strofa 4]
+Me date i nervi, servi del potere (Ah)
+Inseguire questo senza avere niente da sapere a riguardo (Nah)
+Senti 'sto bastardo d'annata
+Dieci album (Ah), milioni di barre (Ah) massacrate e manco mezza cannata (Tu-tu)
+Senti 'sta mazzetta sulle costole come le incrina
+Lei canta a memoria ogni mia rima
+Fuma metedrina sotto al banco in aula magna
+C'ha 'na cagna pitbull che se chiama Giulia (Uh-uh)
+Come la mia bimba, chi te se incula
+Io so 'na leggenda (Secco) sia da bar che da star de rap
+Grande se m'ascolti, sennò cazzo me ne frega a me
+King sempre, barre sopra ai toy senza pensà
+Gang bangin' dentro 'na Macan nella tua città (Tu-tu-tu)
+Sono Buggin Out che strilla ammanettato dentro 'na volante
+Voi lo fate per il clout, noi per il vecchio contante (Seh, seh, seh)
+Non chiamà cantante questo MC, non lo è affatto
+Fai il saluto militare quando me vedi strafatto
+
+[Outro]
+Rispetto solo chi rappa il vero, no bullshit
+Figli di puttana, trovateve 'n lavoro serio
+Doppio N, triplo 6 nel pentagramma, let's get ready</testo>
+                </mainTrack>
+                <Musica genere="rap">
+                    <dataUscita anno="2024" giorno="2" mese="2"/>
+                    <Durata minuti="3" ore="0" secondi="57"/>
+                    <ArtistProduct description="“Gran Torino (Red Bull 64 Bars)” è un freestyle di sessantaquattro barre in cui Noyz Narcos si presenta nella sua forma più essenziale: nessun ritornello, nessuna sovraincisione, solo il suo flow ruvido articolato su un beat cupo prodotto da Sine. Il testo intreccia riferimenti autobiografici alle sue origini nel rap e alla sua reputazione consolidata, con versi taglienti che ribadiscono la sua determinazione sul fronte della credibilità artistica. Allo stesso tempo emerge uno spiccato senso di ribellione verso il contesto sociale, con intermezzi carichi di sarcasmo e richiami a un malessere collettivo che sfocia in immagini di violenza e denuncia. Infine, il titolo “Gran Torino” non evoca la città italiana ma la celebre muscle car americana, richiamata come simbolo di potenza, velocità e resistenza per sottolineare l’inarrestabile spinta del suo rap." imagePath="view/icons/Noyz_Narcos/GRAN_TORINO_(Red_Bull_64_Bars).jpg" title="GRAN TORINO (Red Bull 64 Bars)"/>
+                </Musica>
+            </Singolo>
+        </prodotti>
+    </Artista>
+    <Artista genere="thrash metal" imagePath="view/icons/Metallica/profilo.jpeg" nome="Metallica">
+        <info>I Metallica sono un gruppo musicale heavy metal statunitense, formatosi a Los Angeles nel 1981 e composto da James Hetfield, Lars Ulrich, Kirk Hammett e Robert Trujillo. 
+I loro primi lavori, grazie alla velocità dei pezzi, tecnicismi strumentali ed aggressività, li hanno portati ad entrare nei "Big Four" del thrash metal, accanto a Slayer, Megadeth ed Anthrax. Nel corso degli anni, il gruppo si è guadagnato in poco tempo un crescente seguito di fan e, con la pubblicazione di Master of Puppets nel 1986, ha raggiunto, secondo molti, l'apice della carriera. Il successo commerciale giunse nel 1991 con l'album omonimo, che esordì alla prima posizione della classifica statunitense degli album. Con questo lavoro i Metallica ampliarono notevolmente la loro direzione musicale, rivolgendosi non più ai soli fan del thrash e, grazie a sonorità più semplici ed orecchiabili, divennero una delle maggiori realtà musicali del periodo. In una classifica stilata nel 2010 dalla rivista Rolling Stone, il gruppo risulta al 61º posto tra i 100 migliori artisti di tutti i tempi.
+In carriera hanno vinto dieci Grammy Award ed hanno ottenuto cinque esordi consecutivi al primo posto nella Billboard 200. Inoltre, sono tra i pochissimi artisti musicali ad essersi esibiti in 48 Paesi e in tutti i continenti del mondo, Antartide compreso. 
+Con più di 100 milioni di dischi venduti, di cui 60 milioni nei soli Stati Uniti d'America, i Metallica sono annoverati come una delle formazioni di maggior successo nella storia dell'heavy metal e del rock contemporaneo, e sono stati spesso considerati la migliore band heavy metal della storia. 
+Nel novembre 2012 hanno fondato la propria etichetta discografica indipendente, la Blackened Recordings.</info>
+        <prodotti>
+            <Album label="Megaforce Records">
+                <tracce>
+                    <Traccia has_testo="0" nome="Hit The Lights">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="15"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="The Four Horsemen">
+                        <partecipanti/>
+                        <Durata minuti="7" ore="0" secondi="12"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Motorbreath">
+                        <partecipanti/>
+                        <Durata minuti="7" ore="0" secondi="12"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Jump In The Fire">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="41"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="(Anesthesia) Pulling Teeth">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="14"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Whiplash">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="8"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Phantom Lord">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="1"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="No Remorse">
+                        <partecipanti/>
+                        <Durata minuti="6" ore="0" secondi="26"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Seek&amp;Destroy">
+                        <partecipanti/>
+                        <Durata minuti="6" ore="0" secondi="54"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Metal Militia">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="11"/>
+                        <testo></testo>
+                    </Traccia>
+                </tracce>
+                <Musica genere="thrash metal">
+                    <dataUscita anno="1983" giorno="25" mese="7"/>
+                    <Durata minuti="55" ore="0" secondi="14"/>
+                    <ArtistProduct description="Kill 'Em All è il primo album in studio del gruppo musicale statunitense Metallica, pubblicato il 25 luglio 1983 dalla Megaforce Records. &#xa;L'album è considerato da molti critici come uno dei più importanti e influenti della musica heavy metal e del rock in generale.&#xa;Nel giugno del 2017 la rivista Rolling Stone ha collocato l'album alla trentacinquesima posizione dei 100 migliori album metal di tutti i tempi. " imagePath="view/icons/Metallica/Kill_'Em_All.jpg" title="Kill 'Em All"/>
+                </Musica>
+            </Album>
+            <Vinile diametro="30" rpm="33">
+                <Disco codiceRiconoscimento="dwd59e0280" produttoreStampe="Gateway Mastering" tipoProdotto="2LP">
+                    <Merch codiceProdotto="dwd59e0280">
+                        <NotMusica disponibile="1" prezzo="29.98" quantita="1000">
+                            <ArtistProduct description="Metallica’s eponymous album, better known as The Black Album, is remastered! The Black Album is one of the most commercially successful and critically acclaimed records of all time, with global sales of over 35 million, and contains a series of unrelenting singles, Enter Sandman, The Unforgiven, Nothing Else Matters, Wherever I May Roam, and Sad But True.&#xa;&#xa;https://www.metallica.com/store/metallica-the-black-album-remastered-vinyl/REBAVYNL.html?cgid=Vinyl" imagePath="view/icons/Metallica/Metallica_(The_Black_Album)_Remastered_-_Vinyl_(2LP).jpg" title="Metallica (The Black Album) Remastered - Vinyl (2LP)"/>
+                        </NotMusica>
+                    </Merch>
+                </Disco>
+            </Vinile>
+            <Album label="Megaforce Records">
+                <tracce>
+                    <Traccia has_testo="0" nome="Fight Fire With Fire">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="44"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Ride The Lightning">
+                        <partecipanti/>
+                        <Durata minuti="6" ore="0" secondi="36"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="For Whom The Bells Tolls">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="9"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Fade To Black">
+                        <partecipanti/>
+                        <Durata minuti="6" ore="0" secondi="57"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Trapped Under Ice">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="4"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Escape">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="23"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Creeping Death">
+                        <partecipanti/>
+                        <Durata minuti="6" ore="0" secondi="35"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="The Call Of Ktulu">
+                        <partecipanti/>
+                        <Durata minuti="8" ore="0" secondi="53"/>
+                        <testo></testo>
+                    </Traccia>
+                </tracce>
+                <Musica genere="thrash metal">
+                    <dataUscita anno="1984" giorno="27" mese="7"/>
+                    <Durata minuti="47" ore="0" secondi="21"/>
+                    <ArtistProduct description="Ride the Lightning è il secondo album in studio del gruppo musicale statunitense Metallica, pubblicato il 27 luglio 1984 dalla Megaforce Records.&#xa;Si tratta dell'ultimo disco pubblicato con la Megaforce Records, dopodiché il gruppo firmò per la Elektra Records il 12 settembre dello stesso anno, la quale ripubblicò il disco il 19 novembre.&#xa;Nel giugno del 2017 la rivista Rolling Stone ha collocato l'album alla undicesima posizione dei 100 migliori album metal di tutti i tempi. " imagePath="view/icons/Metallica/Ride_The_Lighting.jpg" title="Ride The Lighting"/>
+                </Musica>
+            </Album>
+        </prodotti>
+    </Artista>
+    <Artista genere="rap" imagePath="view/icons/Fabri_Fibra/profilo.jpg" nome="Fabri Fibra">
+        <info>Fabri Fibra, pseudonimo di Fabrizio Tarducci (Senigallia, 17 ottobre 1976), è un rapper italiano. 
+Fabri Fibra esordisce nell'ambiente dell'hip hop underground a metà degli anni novanta con il nome Fabbri Fil, facendo parte per diversi anni degli Uomini di Mare e dei gruppi derivati da questi ultimi: i Qustodi del tempo e il collettivo Teste Mobili. Debutta come solista con il nome d'arte di Fabri Fibra nel 2002 con l'album Turbe giovanili. Significativo per la svolta della sua carriera è invece l'album Mr. Simpatia, pubblicato nel 2004, con cui lascia il suo marchio indelebile nella scena musicale di allora e con cui spiana il terreno al contratto, nel 2006, con la major discografica Universal, con la quale pubblica nello stesso anno l'album Tradimento, il passo decisivo verso la notorietà di critica e di pubblico.</info>
+        <prodotti>
+            <CD formato="CD Audio">
+                <Disco codiceRiconoscimento="88235294117647" produttoreStampe="Universal Music" tipoProdotto="CD">
+                    <Merch codiceProdotto="0602527492001">
+                        <NotMusica disponibile="1" prezzo="9.60" quantita="1000">
+                            <ArtistProduct description="Copie disponibili su: https://www.discotecalaziale.com/0602527492001_controcultura-fabri-fibra" imagePath="view/icons/Fabri_Fibra/Controcultura_CD.jpg" title="Controcultura CD"/>
+                        </NotMusica>
+                    </Merch>
+                </Disco>
+            </CD>
+            <Vinile diametro="30" rpm="33">
+                <Disco codiceRiconoscimento="1683728717" produttoreStampe="Universal Music" tipoProdotto="LP Numerato">
+                    <Merch codiceProdotto="0602455489111">
+                        <NotMusica disponibile="0" prezzo="39.90" quantita="0">
+                            <ArtistProduct description="Versione Esclusiva stampata in Tiratura Limitata su Doppio Vinile Numerato, solo 2006 copie disponibili.&#xa;&#xa;https://shop.universalmusic.it/products/fabri-fibra-tradimento-doppio-vinile-numerato" imagePath="view/icons/Fabri_Fibra/Tradimento_Doppio_Vinile.jpg" title="Tradimento Doppio Vinile"/>
+                        </NotMusica>
+                    </Merch>
+                </Disco>
+            </Vinile>
+            <TShirt colore="Bianco" taglia="L">
+                <Merch codiceProdotto="KD1HA3JCZ16">
+                    <NotMusica disponibile="1" prezzo="35.00" quantita="1000">
+                        <ArtistProduct description="T-shirt bianca, manica corta, unisex, 100% cotone, 190 gr.&#xa;Stampa fronte e retro&#xa;&#xa;Disponibile su: https://rockdream.it/artisti-italiani/fabri-fibra/t-shirt-caos-bianca-fabri-fibra" imagePath="view/icons/Fabri_Fibra/Tshirt_CAOS.jpg" title="Tshirt CAOS"/>
+                    </NotMusica>
+                </Merch>
+            </TShirt>
+            <Tour>
+                <dateTour>
+                    <DataTour luogo="Trento - Trentino Music Arena">
+                        <Data anno="2025" giorno="3" mese="7"/>
+                        <Orario minuti="0" ore="18" secondi="29"/>
+                    </DataTour>
+                    <DataTour luogo="Roma - Circo Massimo">
+                        <Data anno="2025" giorno="7" mese="6"/>
+                        <Orario minuti="0" ore="21" secondi="51"/>
+                    </DataTour>
+                    <DataTour luogo="Bologna - Sequoie Music Park">
+                        <Data anno="2025" giorno="10" mese="6"/>
+                        <Orario minuti="0" ore="22" secondi="16"/>
+                    </DataTour>
+                    <DataTour luogo="Servigliano - Parco della Pace">
+                        <Data anno="2025" giorno="11" mese="6"/>
+                        <Orario minuti="30" ore="21" secondi="37"/>
+                    </DataTour>
+                    <DataTour luogo="Collegno - Parco Certosa Reale">
+                        <Data anno="2025" giorno="14" mese="6"/>
+                        <Orario minuti="0" ore="22" secondi="11"/>
+                    </DataTour>
+                    <DataTour luogo="Piacenza - Palazzo Farnese">
+                        <Data anno="2025" giorno="16" mese="6"/>
+                        <Orario minuti="15" ore="21" secondi="9"/>
+                    </DataTour>
+                    <DataTour luogo="Roma - Circo Massimo">
+                        <Data anno="2025" giorno="7" mese="7"/>
+                        <Orario minuti="0" ore="21" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Bologna - Sequoie Music Park">
+                        <Data anno="2025" giorno="10" mese="7"/>
+                        <Orario minuti="0" ore="22" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Collegno - Parco Certosa Reale">
+                        <Data anno="2025" giorno="14" mese="7"/>
+                        <Orario minuti="0" ore="22" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Este - Castello Carrarese">
+                        <Data anno="2025" giorno="26" mese="7"/>
+                        <Orario minuti="30" ore="21" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Vieste - Piazza Marina Piccola">
+                        <Data anno="2025" giorno="3" mese="8"/>
+                        <Orario minuti="30" ore="21" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Pescara - Porto Turistico">
+                        <Data anno="2025" giorno="10" mese="8"/>
+                        <Orario minuti="30" ore="21" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Barletta - Fossato del Castello">
+                        <Data anno="2025" giorno="18" mese="8"/>
+                        <Orario minuti="0" ore="21" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Napoli - Ex Base">
+                        <Data anno="2025" giorno="5" mese="9"/>
+                        <Orario minuti="0" ore="21" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Assago - Unipol Forum">
+                        <Data anno="2025" giorno="30" mese="9"/>
+                        <Orario minuti="0" ore="21" secondi="0"/>
+                    </DataTour>
+                </dateTour>
+                <NotMusica disponibile="1" prezzo="46.00" quantita="100000">
+                    <ArtistProduct description="Biglietti su ticketone: https://www.ticketone.it/artist/fabri-fibra/fabri-fibra-3371264/" imagePath="view/icons/Fabri_Fibra/Festival_Tour.jpg" title="Festival Tour"/>
+                </NotMusica>
+            </Tour>
+            <Singolo chartPosition="0" isRemix="true">
+                <mainTrack has_testo="1" nome="Bugiardo">
+                    <partecipanti/>
+                    <Durata minuti="4" ore="0" secondi="7"/>
+                    <testo>[Intro]
+L'Italia è piccola
+Non avrai creduto a tutto
+Era tutto finto
+Io neanche fumo più, ho smesso
+Bugiardo
+
+[Strofa 1]
+Bugiardo
+Con questa faccia da bugiardo
+Era tutto uno scherzo, sono un bugiardo
+La tua ragazza ha capito, sono un bugiardo
+Per come parlo, per commentarlo
+Ho uno stile di vita anti-Montecarlo
+Capitan Harlock del rap in ballo
+Mi vesto giallo come il catarro
+Oh no, adesso ti lamenti per il testo
+Poi per la base perché sembra un poliziesco
+Io sono zero se mi paragoni al resto
+Vorrei il tuo conto in banca, DJ Francesco[Pre-Ritornello]
+Brr Fibra, ah, ah, ah, Fibra
+Ti tolgo dal mio stereo perché porti sfiga
+Brr Fibra, ah, ah, ah, Fibra
+Ti tolgo dal mio stereo perché porti sfiga[Ritornello]
+Io vengo in pace (Bugiardo)
+Non mento mai (Bugiardo)
+Non son capace (Bugiardo)
+Non ce la fai (Bugiardo)
+Ho mille amici (Bugiardo)
+Non voglio guai (Bugiardo)
+Tu sei tra questi (Bugiardo)
+Ma non lo sai (Bugiardo)
+
+[Strofa 2]
+Fibra è conosciuto come un gran bugiardo
+Alle assemblee di istituto parlavo in sardo (Ajò)
+Non mi presento in pubblico, ci mando un altro
+Non mi assomiglia, è grasso e un po' più alto
+Tengo i ritmi serrati in venti metri quadrati
+Ho la morte negli occhi e tengo i giorni contati
+Tocco temi scontati, non chiamatemi artista
+Io ti creo un altro mondo, lo sa anche il mio analista
+La realtà mi spaventa da ogni punto di vista
+Il mio sogno in verità era fare il giornalista
+Ho il rap emo-drammatico da crisi domestica
+In camera c'ho un water, a letto un'anoressica
+
+[Pre-Ritornello]
+Brr Fibra, ah, ah, ah, Fibra
+Ti tolgo dal mio stereo perché porti sfiga
+Brr Fibra, ah, ah, ah, Fibra
+Ti tolgo dal mio stereo perché porti sfiga
+
+[Ritornello]
+Io vengo in pace (Bugiardo)
+Non mento mai (Bugiardo)
+Non son capace (Bugiardo)
+Non ce la fai (Bugiardo)
+Ho mille amici (Bugiardo)
+Non voglio guai (Bugiardo)
+Tu sei tra questi (Bugiardo)
+Ma non lo sai (Bugiardo)
+
+[Strofa 3]
+Voglio sentirmi supersonico
+Dà un'occhiata al mio tasso alcolico
+Non ho un soldo, ridotto al lastrico
+Entro in banca con un Kalashnikov
+Tutti su le mani perché questa è una rapina
+Io sono Fabri Fibra, ho appena ucciso la vicina
+E dato fuoco alla cucina con un litro di benzina
+È crollata la palazzina, stai attenta, ragazzina
+Oh no, adesso ti lamenti per il testo
+Poi per la base perché sembra un poliziesco
+Io francamente non sopporto neanche il resto
+Se vuoi insultarmi fallo adesso, il coro è questo
+
+[Pre-Ritornello]
+Brr Fibra, ah ah ah Fibra
+Ti tolgo dal mio stereo perché porti sfiga
+Brr Fibra, ah ah ah Fibra
+Ti tolgo dal mio stereo perché porti sfiga
+Ti tolgo dal mio stereo perché porti sfiga
+Ti tolgo dal mio stereo perché porti sfiga
+Tu mi porti sfiga
+Tu mi porti sfiga
+Ti tolgo dal mio stereo perché porti sfiga
+
+[Ritornello]
+Io vengo in pace (Bugiardo)
+Non mento mai (Bugiardo)
+Non son capace (Bugiardo)
+Non ce la fai (Bugiardo)
+Ho mille amici (Bugiardo)
+Non voglio guai (Bugiardo)
+Tu sei tra questi (Bugiardo)
+Ma non lo sai (Bugiardo)
+Io vengo in pace (Bugiardo)
+Non mento mai (Bugiardo)
+Non son capace (Bugiardo)
+Non ce la fai (Bugiardo)
+Ho mille amici (Bugiardo)
+Non voglio guai (Bugiardo)
+Tu sei tra questi (Bugiardo)
+Ma non lo sai (Bugiardo)
+
+[Outro]
+"Muchacho! Es ahora el momento mas caliente de la vida, sienti, sienti!"
+Parte "Applausi Per Fibra"
+(Applausi per Fibra Fibra Fibra Fibra Fibra
+Applausi applausi applausi per Fibra
+Fibra Fibra Fibra Fibra
+Applausi applausi)
+"La sangre caliente de la vena como esta gran salsa, el senso del caminado! [...] la pista bailando la salsa con Fibra, Fibra, Fibra..."
+(Applausi per Fibra Fibra Fibra Fibra Fibra
+Applausi applausi applausi per Fibra
+Fibra Fibra Fibra Fibra
+Applausi applausi
+Applausi per)
+"...salsa internacional con toda la gente del mundo, dai ragazzi, venite, bailate, dai, con me!"
+(Perso la testa troppe volte da ragazzino)</testo>
+                </mainTrack>
+                <Musica genere="rap">
+                    <dataUscita anno="2007" giorno="26" mese="10"/>
+                    <Durata minuti="4" ore="0" secondi="7"/>
+                    <ArtistProduct description="“Bugiardo” è stato pubblicato il 26 ottobre 2007 come primo singolo estratto dall’omonimo quarto album di Fabri Fibra. Il brano, prodotto da Big Fish, si inserisce nel filone crunk e ha una durata di 4:05 minuti, ed è distribuito dall’etichetta Universal Records en.wikipedia.org. Il testo, scritto dallo stesso Fabri Fibra, rappresenta un momento di rottura rispetto alle tematiche tipiche del suo lavoro precedente, anticipando l’impatto mediatico e commerciale dell’album “Bugiardo”, uscito poi il 9 novembre 2007 en.wikipedia.org.&#xa;Nella settimana del 16–22 novembre 2007, “Bugiardo” ha raggiunto la posizione numero 25 nella classifica dei singoli FIMI, dimostrando un buon riscontro in radio e nelle vendite italiane en.wikipedia.org. Il videoclip, diretto da Cosimo Alemà, è uscito contestualmente al singolo e registra ad oggi milioni di visualizzazioni sulle principali piattaforme di streaming video, consolidando la presenza del brano nell’immaginario collettivo hip-hop italiano en.wikipedia.org.&#xa;Nel corso del 2008, “Bugiardo” è stato spesso trasmesso dalle radio e utilizzato nelle classifiche di fine anno come simbolo del rinnovamento di Fabri Fibra, contribuendo a portare l’album “Bugiardo” a certificazione di platino nel settembre dello stesso anno it.wikipedia.org. Ad oggi, il singolo resta uno dei più emblematici dell’artista, grazie anche alla proliferazione di ascolti in streaming che continuano a mantenere “Bugiardo” tra i brani più ascoltati di Fabri Fibra sui portali digitali." imagePath="view/icons/Fabri_Fibra/Bugiardo.png" title="Bugiardo"/>
+                </Musica>
+            </Singolo>
+            <Album label="Universal Music">
+                <tracce>
+                    <Traccia has_testo="1" nome="Rap in guerra">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="20"/>
+                        <testo>[Intro] Fibra? Ehm, sono io Fibra Sentitemi, eh, eheheh È in copertina il bollino devo dirlo? Sì Attenzione: questo non è un nuovo album di Fabri Fibra Questa è la morte di Mr. Simpatia Se trovate questa roba troppo volgare Censuratela e andatevene affanculo, ahahah [Ritornello] Il mio corpo è a terra, ma non mi sposti da qui Mi servirà una barella, ma non mi sposti da qui Ribalto le mie budella, ma non mi sposti da qui Finché il mio rap è in guerra, ma non mi sposti da qui Il mio corpo è a terra, ma non mi sposti da qui Mi servirà una barella, ma non mi sposti da qui Ribalto le mie budella, ma non mi sposti da qui Finché il mio rap è in guerra, ma non mi sposti da qui [Strofa 1] Se c'è una cosa che odio, è il rap positivo Quando penso che esisto, già mi nausea essere vivo Sono un morto apparente, un maniaco depressivo In me non c'è niente di umano, specie quando scrivo E quando arrivo, è lo shock più grande Come quando ti fai donna e inizi a perdere sangue Ma non cambi mutande e non vuoi l'assorbente C'hai un padre che ammazzava e sotterrava la gente? Sai, qui c'è un emittente che fa interviste in galera Perché la gente è interessata a chi ha la storia più vera Quindi ammazzo di sera, così poi il giorno sto a posto Come disse il professore che sedeva composto Mi sento strano, è il male che non va via Non sopporto me stesso e faccio Mr. Simpatia Basta, accusi il mio rap come fosse uno stupro in compagnia Vallo a dire un po' ai parenti della piccola Lucia [Ritornello] Il suo corpo è a terra, ma non mi sposti da qui Mi servirà una barella, ma non mi sposti da qui Ribalto le mie budella, ma non mi sposti da qui Finché il mio rap è in guerra, ma non mi sposti da qui Il mio corpo è a terra, ma non mi sposti da qui Mi servirà una barella, ma non mi sposti da qui Ribalto le mie budella, ma non mi sposti da qui Finché il mio rap è in guerra, ma non mi sposti da qui [Strofa 2] La stanza è questa, una puzza che impesta 'Sta ragazza è per terra, ma il corpo nudo e senza testa I capelli sparsi, le mie impronte sulle pareti Io mi nascondo mezzo nudo mentre piango tra i vetri Ma io non c'entro anche se guardi che ho un coltello a due metri Ed è una coincidenza la mia giacca in mezzo alle siepi Sarà un caso la mia fronte insanguinata macchiata Ma 'sta ragazza che mi è accanto non l'ho neanche toccata Mangio volgarità, non dico mai la verità Ma cazzo, froci, culo, figa, ciao mamma, ciao papà Qualcuno mi aiuti, ho solamente un collasso Non posso ammazzarmi, ho il balcone troppo basso Ma finché esisto brucerò ogni impianto Che piuttosto di calmarmi vado in cerca allo schianto Come il figlio otadicius id yroL leD otnaS Benvenuti al mio drive-in, son pazzo, questo è quanto [Ritornello] Il mio corpo è a terra, ma non mi sposti da qui Mi servirà una barella, ma non mi sposti da qui Ribalto le mie budella, ma non mi sposti da qui Finché il mio rap è in guerra, ma non mi sposti da qui Il mio corpo è a terra, ma non mi sposti da qui Mi servirà una barella, ma non mi sposti da qui Ribalto le mie budella, ma non mi sposti da qui Finché il mio rap è in guerra, ma non mi sposti da qui [Strofa 3] E mica è un caso che racconto di Carletto Giuliani O di altra gente che è scomparsa dall'oggi al domani Se ti immedesimassi in me, capiresti i miei piani Non sono poi così diverso dai tanti italiani Che la mattina vanno in bagno con le palle dei cani Al posto degli occhi per un turno e uno stipendio da infami In un sistema in cui è meglio se restiamo lontani Perché è la coca che distrugge un grande come Pantani Mica la gente che c'è intorno e vuole show da marziani Tutti vogliono sapere dei miei testi insani Tutti vogliono vedere con che faccia rimani Tutti vogliono allungare le mani Allungare le mani, allungare le mani [Outro] Ma non mi sposti da qui Ma non mi sposti da qui Ma non mi sposti da qui Ma non mi sposti da qui</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Su le mani">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="54"/>
+                        <testo>[Intro] Sono proprio curioso di sapere (Attenzione) Alla gente che è all'ascolto (Fibra!) Ma chi è il pazzo che si ascolta 'sta roba? (Attenzione) Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo (Fibra!) Ma c'è qualcuno? [Strofa 1] Ho ventott'anni, ragazze, contattatemi, scopatemi E se resta un po' di tempo, presentatevi Non conservatevi, datela a tutti anche ai cani Se non me la dai, io te la strappo come Pacciani Io, fossi nato donna, ascolterei Madonna Vestirei senza mutande ovunque e sempre in minigonna Così non mi ci vedo e neanche tu scommetto Allora cosa cazzo guardi nei bagni dal tuo armadietto? Il mio cazzo è in questione, ne vuoi un'illustrazione? Vorresti anche toccarlo brutto pezzo di un recchione Io sono un burattino che sta su senza fili Non mangio, non ingrasso, ma nemmeno perdo chili Mi sto solo gonfiando un po' di più, sarà lo stress Sarà per questa gente convinta che sia una messa in scena Oltretutto penosamente oscena E adesso mi chiedono quale sia il sistema Visto che ogni insulto lo comprendi appena Ti sei abituata a questo linguaggio in tema Dopo l'ultimo disco ho ancora il collo che trema E tu mi domandi qual è il problema? [Ritornello] Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo [Strofa 2] Non è poi un dramma il modo in cui io mi comporto Qui da me girava voce che fossi davvero morto E tutti che si aspettano che io davvero sfondi Tra cantanti che arrostiscono e esplodono in due secondi Ho l'impressione che stanotte io non dormirò Mi metto il cuore in pace, sono a ruota già da un po' Il mio conto corrente è profondo rosso Potessi rapinarti lo farei però non posso Indosso magliette larghe e firme da battone Le tue magliette strette le disegna un culattone Mi sveglio col cervello aperto in due come una foca Più fatto di un cavallo strafatto di coca Speravi questa roba non facesse più effetto Il bello è che rimango vero per un cerchio ristretto E fino a ieri tu di me non conoscevi mezza rima E quanti squali ho attirato con il mio sangue in copertina? [Ritornello] Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo [Strofa 3] Qualcuno è convinto che io dentro sia vuoto E se Dio mi sentisse penserebbe che sia un gioco Sul fianco ho stampata la Santa Croce che va a fuoco Eppure parlo della Chiesa capendone ben poco Non credo nel destino da quando ho visto Alfredino Ti assicuro quella storia mi ha scioccato da bambino Io scrivo per necessità, c'ho scosse emozionali Sfogandomi è la cura ai miei disturbi cerebrali Mr. Simpatia? A casa cazzi amari Ti cantano i fighetti, i punk, i dark e i metallari Io cazzo vuoi che dica, faccio rap per i maiali Canto in bunker, in tendoni, in covi morti e nei locali In piazza e in discoteca ma mai nei centri sociali Perché mi hanno minacciato di amputarmi tra i cinghiali Davvero tu pensavi che facessi degli affari? E che magari con un disco mi ci compro una Ferrari? [Ritornello] Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo Tira su le mani se anche tu sei un pazzo Di questa musica anche tu sei un pazzo</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Applausi per Fibra">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="54"/>
+                        <testo>[Intro] Oh, io non capisco perché, ma ogni periodo C'è qualcuno che se viene fuori dicendo Che io sono morto, ahahahah Raga applausi! [Ritornello] Applausi per Fibra, Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi per [Strofa 1] Io mangiavo lucertole aperte da ragazzino Tornavo a casa e vomitavo in mezzo al giardino Non ho mai smesso un giorno di fantasticare Non ho mai fatto grandi successi in generale Guardando gli altri mi sembravano così lontani Chiedendomi se a casa loro volassero i divani L'ultima volta che mio padre è andato a letto con mia madre Prese a calci una parete e in testa gli cadde una trave E mio fratello che mi chiese quanto fosse grave Fatto sta che litigando si divisero le strade Anche se restano le urla e rimangono le grida Per casa, per strada, raga [Ritornello] Applausi per Fibra, Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi, per [Strofa 2] Ho perso la testa troppe volte da ragazzino A ogni flash mi nascondevo in uno stanzino Ho ancora qualche problema a socializzare Ma tutto sommato non diresti che sto andando male Questo è Fibra, Fibra, l'anno scorso dove andava? Posso dire una cazzata? Mi son ripulito, raga Non c'è stata mai la strada da seguire in qualche modo Che sfiga, sfiga, è Fabri Fibra Hai comprato il mio CD e lo canti tutto a memoria È uno scandalo quando poi l'hai copiato a metà scuola Questo è il mio passaparola, questo è l'anno "abbasso Vibra!" Doppia F è la mia sigla, raga [Ritornello] Applausi per Fibra, Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per [Strofa 3] Ora se tu hai seguito il mio percorso come se fosse un concorso Allora fai l'ultimo sforzo e chiediti il perché È sempre il solito discorso ogni mattina col rimorso Almeno pagami il rimborso e vaffanculo anche a te Io non voglio Fibra in giro, non voglio Fibra ai party Non voglio che ha successo, non voglio quattro infarti Non voglio far del bene perché tu non vuoi bene Non si può stare insieme se m'ingorghi le vene Non domandarti come passano i giorni e le notti Non guardi mamma mentre piange e lacrima dagli occhi Cambio lavoro, cambio casa, cambio figa Cambio le amicizie, che sfiga! [Ritornello] Applausi per Fibra, Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi, per Fibra Fibra, Fibra, Fibra, Fibra Applausi, applausi, applausi per [Outro] Bum bum cha, Fibra, bum bum cha Applausi per la F-I la B la R-A Bum bum cha, Fibra, bum bum cha Applausi per la F-I la B la R-A Bum bum cha, Fibra, bum bum cha Applausi per la F-I la B la R-A Bum bum cha, Fibra, bum bum cha Appla-applausi per la F-I la B la R-A [Skit] Ciao, questa è la mia segreteria telefonica. Al momento non ci sono, ahahaha. Al momento non ci sono, ahahaha. Comunque lasciate un messaggio dopo il segnale e vi richiamo. *BIP!* Oh, bella Fibra! Ascolta, sono una persona ahahaha. No Fibra, stai attento. Ai testi. *BIP!* Cazzo, sto parlando da solo. Io parlo da solo ahahahaha</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Mal di stomaco">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="45"/>
+                        <testo>[Intro] (Fibra) Tutti quanti seguitemi, seguitemi, seguitemi, seguitemi Tutti quanti seguitemi, seguitemi, seguitemi Tutti quan-, tutti quan- tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Tutti quanti seguitemi Tutti quan-, tutti quan-, tutti quan-, tutti quan-, tutti quan- Tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Tutti quanti seguitemi, seguitemi, seguitemi Tutti quan-, tutti quan- tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Non mi passa il mal di stomaco Certi fatti mi danno al vo-vo-vomito [Strofa 1] Io non la chiamerei follia Ho una voglia di evadere che mi porta via Lavoro troppo e non sono mai a casa mia Accumulo stress, te l'ho detto è anche colpa mia Se avessi fatto il corso di farmacia A quest'ora avrei una laurea e comunque sia Dimmi quanti laureati hanno la garanzia Di non finire lavapiatti in pizzeria "Piacere mi chiamo Fibra, lei è la mamma? Lo sa che sua figlia a sedici anni è già una cagna? E gira in classe con la pancia mezza nuda Davanti a un professore che ha gli occhi di un barracuda" Il mio stipendio assomiglia a un'utopia Voglio andare in vacanza, me ne vado in Tunisia O magari in Mar Rosso, non dirmi che è vietato Sarò così sfigato da finire in mezzo a un attentato? [Ritornello] Tutti quanti seguitemi Ho voglia di sfogarmi, capitemi Non mi passa il mal di stomaco Certi fatti mi danno al vo-vo-vomito Tutti quanti seguitemi Ho voglia di sfogarmi, capitemi Non mi passa il mal di stomaco Certi fatti mi danno al vomito [Strofa 2] Quattro giorni a Canazei Neanche immagini le cose che potrei Potrei spararmi un colpo in testa Se mi sveglio una mattina di fianco a un gay Potrei, potrei perdere la memoria Se vedo la mia ex che si è fatta suora Potrei demolire questa vecchia scuola Potrei allagarla con la carta stagnola Potrei non avere compagnia Perché ho perso i milioni alla lotteria Ma dimmi, tu ci credi alla lotteria? Lo conosci uno che ha vinto alla lotteria? Ho chiamato Wanna Marchi in segreteria Per vedere quanti soldi mi vanno via Ma cosa faccio? Denuncio alla polizia o lo dico a Striscia? Lo vedi, questa è democrazia [Ritornello] Tutti quanti seguitemi Ho voglia di sfogarmi, capitemi Non mi passa il mal di stomaco Certi fatti mi danno al vo-vo-vomito Tutti quanti seguitemi Ho voglia di sfogarmi, capitemi Non mi passa il mal di stomaco Certi fatti mi danno al vomito [Strofa 3] Hai visto una ragazza scendere dalla moto? Il secondo dopo è morta cadendo nel vuoto Col ragazzo che pensava lei facesse per gioco Ma l'avviso di quel buco l'hanno messo un po' dopo Giro in macchina a faccia sfatta Mentre guido al telefono metto la cravatta Cinque morti su dieci per guida distratta Questa assurda statistica chi ce l'ha fatta? Eppure questo camion tra un po' mi schiaccia Non ho mica il van Gogh, a chi dai la caccia? La senti questa voce? La vedi questa faccia? Io sono Fabri Fibra, è carta straccia Non voglio figli e i miei lo sanno Perché non mi fido più delle scuole che fanno Questi tetti che crollano, ma dove vanno? Mica posso contare i bambini morti ogni anno [Ritornello] Tutti quanti seguitemi Ho voglia di sfogarmi, capitemi Non mi passa il mal di stomaco Certi fatti mi danno al vo-vo-vomito Tutti quanti seguitemi Ho voglia di sfogarmi, capitemi Non mi passa il mal di stomaco Certi fatti mi danno al vomito [Outro] Tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Tutti quanti seguitemi, seguitemi, seguitemi Tutti quan-, tutti quan- tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Tutti quanti seguitemi Tutti quan-, tutti quan-, tutti quan-, tutti quan-, tutti quan- Tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Tutti quanti seguitemi, seguitemi, seguitemi Tutti quan-, tutti quan- tutti quanti seguitemi, seguitemi, seguitemi (Seguitemi) Non mi passa il mal di stomaco Certi fatti mi danno al vo-vo-vomito [Skit] "[?]" "No, io devo to-, io... Stai..." "Eh? Che razza di lingua è quella?" "In questo momento devo toccare qualcosa" "Cosa?" "Cosa vorresti t-?" "Fatemi tocca-, fatevi toccare" "[?]" "Ma tu sei un uomo un po'!" "Si. Guarda" "Tu sei un uomo!" "C'hai il cazzo più grosso del mio" "Ahahaha"</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Ogni donna">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="38"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="La pula bussò">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="4"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Fai come noi">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="53"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Tutti in campana">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="47"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Rompiti il collo">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="29"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Sono un soldato">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="10"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Coccole">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="28"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Vaffan***o scemo">
+                        <partecipanti>
+                            <partecipante nome="Nesli"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="11"/>
+                        <testo>[Intro: Fabri Fibra] Con il mio Click Teste Mobili andiamo in galera Fumiamo in macchina e non torniamo mai la sera [Strofa 1: Nesli] Nel '99 col mio primo demo Appena diciottenne fidati un gran scemo Crescevo con il suono del sud in testa E la voglia di far rime come una tempesta E ancora non si arresta questa mossa Con una gran spinta nata dalla costa Resta la storia dei fratelli Tarducci Se hai buona memoria ti ricordi anche i fattacci Abbracci e baci, insulti feroci Una marea di amici, una marea di soci Un mare di stronzi, una massa di froci Alla fine siamo solamente e soltanto noi Con i nostri viaggi con i nostri eroi Poi con un altro demo Teste Mobili anche voi Che quando eravamo ancora tutti insieme Dite: "Cheese" per una foto ricordo da tenere Lì vicino ai tuoi CD, vicino ai nastri Quello che sarà di te lo sanno solo gli astri E tutti i passi mossi fino a qui Per conoscere più pazzi e per percorrere chilometri [Ritornello: Fabri Fibra] Sono anni che ti alleno a dire: "Oh vaffanculo scemo!" Canto del più e del meno e grido: "Oh vaffanculo scemo!" E quando mi vedi in giro grida: "Oh vaffanculo scemo!" "Oh vaffanculo scemo!" "Oh vaffanculo scemo!" [Strofa 2: Fabri Fibra] (Fibra), benvenuti a tutti nel mondo Fibra Dove ogni rima che senti è troppo figa Voglio dirti una cazzata e lo sanno i miei Ma le rime non mi mandano in hit-parade Quindi cosa ti agiti, che paura Se il mio rap più che rap è una montatura Il mio futuro non sa neanche se io ci sia La mia vita ha carenza di fantasia E questo nuovo disco è un flop sicuro Se lo compri, pulisci un po' di più il mio culo Sono troppo volgare e qui lo confesso Dico la parola "troia" in ogni testo In modo che quando la senti se canto in giro Dici: "Questo mi conosce! Cos'è un fachiro?" Non respiro, ah, che roba La gente mi domanda: "Cos'è 'sta moda?" [Ritornello: Fabri Fibra] Sono anni che ti alleno a dire: "Oh vaffanculo scemo!" Canto del più e del meno e grido: "Oh vaffanculo scemo!" E quando mi vedi in giro grida: "Oh vaffanculo scemo!" "Oh vaffanculo scemo!" "Oh vaffanculo scemo!" [Strofa 3: Fabri Fibra] Mi chiamo Fibra, Fabri Fibra Inverti le vocali ma sulla stessa riga Il mio nome fa rima con parole tipo libra, sigla, vibra, stronza grida Questa cazzo di musica mi porta sfiga Sto provando anche a smettere, è un po' una sfida Non so che fare (Fibra), voglio un microfono (Fibra) Perché ho uno stronzo che mi esce dall'esofago Non mi incitare che so fagocitare So come recitare (Mi sto per eccitare) Io non voglio una ragazza che mi rappa in bikini La mia donna più che rap deve farmi i bocchini La verità è che se avrò successo Questi fans che mi hanno seguito qui fino adesso Appena vedono che prendo il primo premio Mi diranno: "Vaffanculo Scemo!" [Ritornello: Fabri Fibra] Sono anni che ti alleno a dire: "Oh vaffanculo scemo!" Canto del più e del meno e grido: "Oh vaffanculo scemo!" E quando mi vedi in giro grida: "Oh vaffanculo scemo!" "Oh vaffanculo scemo!" "Oh vaffanculo scemo!" [Outro: Fabri Fibra] Con il mio Click Teste Mobili andiamo in galera</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Il triangolo sì">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="48"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Tutti matti">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="15"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Idee stupide">
+                        <partecipanti>
+                            <partecipante nome="Diego Mancino"/>
+                        </partecipanti>
+                        <Durata minuti="4" ore="0" secondi="47"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Che cazzata">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="0"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Cuore di latta">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="2"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Ah yeah Mr. Simpatia">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="58"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Troppi limiti">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="30"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Nella scena">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="22"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="A questo show">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="29"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Il tappo">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="8"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Che culo, che figa!">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="58"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Grandi viaggi">
+                        <partecipanti/>
+                        <Durata minuti="0" ore="0" secondi="49"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Tipe come te">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="32"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Capito tutto">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="44"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Che casino">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="51"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Strani pensieri">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="44"/>
+                        <testo></testo>
+                    </Traccia>
+                </tracce>
+                <Musica genere="rap">
+                    <dataUscita anno="2006" giorno="1" mese="12"/>
+                    <Durata minuti="45" ore="1" secondi="30"/>
+                    <ArtistProduct description="Il titolo è un esplicito riferimento al tradimento che il rapper commise agli occhi degli amanti del genere più hardcore, ovvero la firma con la major Universal Music Group, dopo diverse produzioni distribuite tramite l'etichetta indipendente Vibrarecords. Le basi del disco sono di Nesli, di Big Fish e di DJ Nais. Il disco è stato registrato tra il Teste Mobili Studio di Senigallia e il Doner Studio di Milano. &#xa;L'album è stato certificato disco di platino in Italia, entrando nella prima settimana direttamente alla prima posizione della classifica. Tradimento ha venduto oltre 180 000 copie ed è considerato uno tra i migliori album italiani del decennio dalle classifiche di Rockol." imagePath="view/icons/Fabri_Fibra/Tradimento_Platinum_Ed.jpg" title="Tradimento Platinum Ed"/>
+                </Musica>
+            </Album>
+            <Album label="Vibrarecords">
+                <tracce>
+                    <Traccia has_testo="1" nome="L'uomo nel mirino">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="16"/>
+                        <testo>[Intro] L'acquisto di questo CD è sconsigliato ai maggiori di diciott'anni I contenuti di questi testi non sono tuttavia rivolti a persone intelligenti Fabri Fibra, Fabri Fibra è completamente impazzito E non esiste alcun motivo al mondo per cui valga la pena starlo ad ascoltare (Mia colpa, mia colpa, mia grandissima colpa) Fabri Fibra? Fabri Sfiga (Mia colpa, mia grandissima colpa) (Io non ho fatto niente di male) (Mia grandissima colpa) [Ritornello] Io non rimo, inietto veleno in questo casino Lancio freccette sulla mia foto da bambino E se ancora non mi ammazzo È grazie al cazzo [Strofa 1] Il destino mio è fare l'uomo nel mirino Mi bagno di benzina, tu passami l'accendino Sono il disco macchina che investe il motorino con sopra Albertino Faccio marcia indietro e lo sopprimo Sono completamente impazzito Ho parlato col demonio in maschera e non m'ha capito Quando ero piccolo, mi hanno spinto in piscina Senza poi tornare a galla per quant'acqua ho inghiottito Ho il cervello bollito e un coglione indolenzito Ho un acido in circolo che ancora non ho smaltito Rinfaccio a mia madre il giorno in cui m'ha partorito Come auguro la morte ad ogni stronzo che m'ha tradito [Ritornello] Io non rimo, inietto veleno in questo casino Lancio freccette sulla mia foto da bambino E se ancora non mi ammazzo È grazie al cazzo Il destino mio è fare l'uomo nel mirino Mi bagno di benzina, tu passami l'accendino Se ancora non mi ammazzo È grazie al cazzo [Strofa 2] Ho un colpo in canna, col rap mi son firmato la condanna Se mi sparano ritorno perché sono un ologramma Sono un figlio di merda con in fiamme il diaframma Quando mangio un trip in casa e vesto come mia mamma Ho lo psyco-dramma, non vivo questo tempo Io non parlo come un gay come quel cazzo di Tormento Ho un crollo mentale sotto anestesia totale Ho un down che m'accompagna da qui fino al funerale M'addormento sognando che mi sveglio in una bara Mi masturbo con davanti i videoclip di Paola e Chiara Fumo venti grammi in venti minuti cara Dopo di che in bocca ho il deserto del Sahara Quindi è evidente che non scherzo in sala Da pranzo vengo verso di te con questa pala E una madonna se la sento brutta aria Che da un momento all'altro io qui salto in aria [Ritornello] Io non rimo, inietto veleno in questo casino Lancio freccette sulla mia foto da bambino E se ancora non mi ammazzo È grazie al cazzo Io non rimo, inietto veleno in questo casino Lancio freccette sulla mia foto da bambino Lancio freccette sulla mia foto da bambino E se ancora non mi ammazzo È grazie al cazzo</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Gonfio così">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="39"/>
+                        <testo>[Intro] E bentornati a Radio Simpatia 17 FM per voi Per la giornata che vi continui bene La prima telefonata, chi abbiamo in linea? "...passate qualsiasi musica ma non Fabri Fibra" Ma non ci credo "Non passate Fabri Fibra" E infatti hai indovinato perché questo è il primo pezzo: [Ritornello] Non ho mai visto una ragazza così Con una faccia da porca così Avanti esci dal locale con me Che non l'ho mai avuto gonfio così [Strofa 1] Ho incontrato una mia amica in giro senza il suo ragazzo Che mi ha chiesto se andavo a fumare con lei nel suo palazzo Avevo in tasca una bustina d'erba che ancora ringrazio Pensando: "Con una canna di troppo questa l'ammazzo" Comunque 'sta ragazza è strana, ha un culo che è un pallone Che sicuro quando scopa bagna più di un gavettone Questa classica sfigata che va in cerca d'attenzione Finirà un giorno stuprata nel bagno della stazione Così 'sta ritardata dopo i primi due cannoni S'addormenta e non s'accorge che le tolgo i pantaloni C'è nel muro una foto: lei da piccola col nonno Io mi abbasso le mutande e inizio a scoparci nel sonno Di scatto lei apre gli occhi, io stringendo le sue gambe Do un'occhiata al mio pisello: "Oh ma cazzo qua c'è il sangue! C'hai le mestruazioni? Dimmelo, cazzo, mi fai contento" "Sì ce le ho", "Meglio per me", "Perché?!", "Così ti sborro dentro" [Ritornello] Non ho mai visto una ragazza così (Non ci credo) Con una faccia da porca così (Non ci credo) Avanti esci dal locale con me Che non l'ho mai avuto gonfio così [Strofa 2] Quando ho scopato con te ho fatto finta che eri un'altra Ho chiuso gli occhi immaginando una ragazza un po' più alta Il primo bocchino tu me l'hai fatto usando i denti Il giorno dopo in macchina giravo andando ai venti Se mi piace una ragazza per starci darei un polmone Quando poi infine ci scopo non ricordo neanche il nome Ma ricordo tempo fa pranzavo con Non è la Rai Quando invece oggi mi dicono Ambra è lesbica e c'ha l'AIDS Resto fatto e come il Papa, quando parlo sembro un morto Ma se incontro la mia ex incinta le auguro un aborto E se invece c'ha già un figlio con un noviligurino Entro in casa dal giardino, uccido lei con il bambino Io con tutta la merda che ho consumato in vita mia Come minimo se faccio un figlio c'ha la distrofia E la tua è una figa infetta e visto che c'ho fatto buca Mi è venuta una ciste al cazzo che sembra una verruca [Ritornello] Non ho mai visto una ragazza così (Non ci credo) Con una faccia da porca così (Non ci credo) Avanti esci dal locale con me Che non l'ho mai avuto gonfio così [Strofa 3] Le ragazze son così, sono tutte molto strane Si dividono in due gruppi (le mignotte e le puttane) C'è che a volte io non scopo anche per otto settimane Così poi girando in centro m'eccito anche con un cane Ma quello che ci fotte cari miei in questa nazione È un lavaggio del cervello grazie a questa religione Ma se scopi con il culo brutto pezzo d'un recchione Ti chiamiamo un esorcista che ti mette in punizione Se in questo locale mi chiedi: "Canti una canzone? Facciamo una foto? Mi fai un freestyle con il mio nome?" "Va bene, tu però mi offri una consumazione" Così poi quando ti volti per raggiungere il bancone Ti ribalto con questa zampata in culo "Vaffanculo!", "Mi credi anche famoso? Vuoi prendermi per il culo?" Che poi quando ti bacio penso sempre a qualcos'altro Magari a quanta gente sta morendo di infarto [Ritornello] Non ho mai visto una ragazza così (Non ci credo) Con una faccia da porca così (Non ci credo) Avanti esci dal locale con me Che non l'ho mai avuto gonfio così</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Io non ti invidio">
+                        <partecipanti>
+                            <partecipante nome="Bassi Maestro"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="48"/>
+                        <testo>[Intro: Bassi Maestro] Signore e signori, Busdeez è lieto di presentarvi Dritto fuori dall'angolo più sinistro del ring Il rapper più figo di tutti i tempi Fabri, Fibra, kick it [Strofa 1] Il mio nome è Sfiber detto Fibroga Anche noto come il rapper che caga troppa roba Ho il naso bagnato come quello di un cane Io con il rap mi sfogo mentre tu crepi di fame Come Paola Barale in cerca di un contratto In giro a fare orge con lo sguardo sempre fatto Ti senti un divo? Io non ti invidio Io non ti invidio, io non ti invidio Finché sogni grilletti ma senza canne mozze Non basteranno fregne per queste rime zozze Sputo catarro, lascio chiazze marroni Io per evitare un figlio mi siringo nei coglioni Sono un licantropo, misogeno, misantropo Mi sputi dal terrazzo quando vedi che m'arrampico Alcolico al livello non sono tuo fratello Io faccio il rap solo per dare via un po' più di uccello Capisci questo è il bello e se tu sei un divo Allora mi domando io sono morto o sono vivo?[Ritornello] Ti senti un divo? Io non ti invidio Vorresti essere un divo? Io non ti invidio Vorresti andare in video? Io non ti invidio Io non ti invidio, io non ti invidio [Strofa 2] Buongiorno Italia che ti osserva la mattina Ma di notte c'è chi affetta fighe sotto formalina Chi mantiene i genitali in frigo dentro una lattina Quando pure il giorno prima ha anche stuprato la vicina (Ah) Io rapisco una velina e ne abuso fino al giorno del rilascio di Riina Ho letto che esistono madri con i figli handicappati Che li portano a puttane perché è giusto, vanno amati Lo ha suggerito il Papa, ma poi la cosa strana È che questi vanno a troie quattro volte a settimana Scopando più di me, sento lo schifo al cazzo Ma ti immagini ci fossero troie nel mio palazzo? [Ritornello] Vorresti essere un divo? Io non ti invidio Vorresti andare in video? Io non ti invidio Hai un morto dentro il frigo? Io non ti invidio Io non ti invidio, io non ti invidio Vorresti essere un divo? Io non ti invidio Vorresti andare in video? Io non ti invidio Hai un corpo dentro il frigo? Io non ti invidio Io non ti invidio, io non ti invidio [Strofa 3] Io mi sto per masturbare, non lasciatemi cantare Ma qualcuno ancora pensa che mi possa spaventare A scuola io ero un ritardato Le insegnanti di sostegno dopo un mese han rinunciato Quindi no, non venirmi a dire: “Mi interessa il rap” Io qui non faccio rime, io faccio russian roulette Voglio la fama, voglio gente che mi acclama E una bionda che mi sposa, mezza svizzera e italiana Che mi lascia perché sente di svoltare Dire barzellette in tele seminuda e la mia vita si sputtana "Quella è tua moglie?" Era questa puttana! Sto tritando marijuana su un piatto, Giovanni Rana Con Pannella che è in salotto balla e sbava come un lama Che fuma da cinquant'anni e muore tra una settimana "Io cazzo non sopporto questa musica elettronica" Ma ieri hai collassato al concerto dei Subsonica Io sto addestrando un plotone esecuzione Dai pantaloni larghi, Sambuca e Bacardi Andiamo a prostitute, ma c'è sempre Sgarbi "Voglio anche io essere famoso in mezzo a questi bastardi" [Ritornello] Vorresti essere un divo? Io non ti invidio Vorresti andare in video? Io non ti invidio Hai un morto dentro al frigo? Io non ti invidio Io non ti invidio, io non ti invidio Vorresti essere un divo? Io non ti invidio Vorresti andare in video? Io non ti invidio Hai un corpo dentro il frigo? Io non ti invidio Io non ti invidio, io non ti invidio [Outro] Dai... dai...ooh mega…grande oh! *Clacson* Oh, grande, Fabri! Oh, grande, mega, sei un grande veramente, come stai? Tutto bene? Grazie veramente che mi sei venuto a prendere. No già il fatto... No no, ti faccio vede 'sta cosa qua... Questa è seria</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Venerdì diciassette">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="35"/>
+                        <testo>[Intro] Yeah, Fabri Fibra (Ah) Froci, ricchioni di merda Puttane ruffiane complessate del cazzo Vado a morire Attenzione, le parole che seguono sono frutto di uno sfogo di Fabri Fibra Non vanno quindi prese seriamente Non vanno quindi prese finemente [Ritornello] Non ce la faccio più, io questa sera m'ammazzo Non vi sopporto più, solo a pensarvi mi incazzo Per non vedervi più, visto che io sono un pazzo Mi punto una pistola, questa sera m'ammazzo Non ce la faccio più, io questa sera m'ammazzo Non vi sopporto più, solo a pensarvi mi incazzo Per non vedervi più visto che io sono un pazzo Mi punto una pistola, questa sera m'ammazzo [Strofa 1] Entro in casa mia arrampicandomi dal terrazzo Punto un lanciafiamme sulla mia famiglia e l'ammazzo Così voglio vedere quando vado all'inferno Se il demonio c'ha la faccia di Erika o del suo ragazzo Ora sto con gente con cui mi devasto Ultimamente fumo eroina tabasco E ti assicuro è buona, ce la vende Vasco Per me il rap è uno stress perché ho fatto fiasco E adesso io lavoro nell'ufficio di un fallito Sogno ormai da anni di ucciderlo con armi di ogni tipo La mia ragazza mi ha detto: "Vattene che sei impazzito!" Ancora per lo shock io aspetto in chiesa con l'anello al dito E cazzo non capisco la Madonna piange sangue Quando giro con due grammi nascosti nelle mutande Poi ribalto le pupille dopo diciassette spini Smetto poi di respirare, ho visto farlo a Mia Martini Più-più-più che uno stile è uno strazio Questo mio rap ti fa schifo al cazzo Tutto ciò che resta a me mi ha reso pazzo Mi punto una pistola, questa sera m'ammazzo[Ritornello] Non ce la faccio più, io questa sera m'ammazzo Non vi sopporto più, solo a pensarvi mi incazzo Per non vedervi più, visto che io sono un pazzo Mi punto una pistola, questa sera m'ammazzo Non ce la faccio più, io questa sera m'ammazzo Non vi sopporto più, solo a pensarvi mi incazzo Per non vedervi più, visto che io sono un pazzo Mi punto una pistola, questa sera m'ammazzo [Strofa 2] Sono nato il diciassette di venerdì Odio Irene Lamedica e il suo cazzo di R&amp;B Per colpa sua non mi conosci, non esisto come MC Non sono qui (E passami 'sto cazzo di pezzo) Il fatto è che sto immaginando la faccia del tuo ragazzo Dietro le sbarre come una testa di cazzo Come quel tipo che è entrato in casa dei tuoi genitori Con una bottiglia di vino e un mazzo di fiori Andando col cappotto verso l'attaccapanni Parlando con la tua sorellina di dodic'anni Che è stata ritrovata il giorno dopo nello sgabuzzino Senza vestiti con un taglio nell'intestino E le budella nel cestino, la sborra sul cuscino Il sangue sul lavandino e cola sul tappetino Mi fermano e mi fanno la prova del palloncino È la merda che concimo e fumando mi allucino Mi strappo un altro filtro strappando 'sto cartoncino Degrado in paranoia come quando ascolto i Tiromancino Giro in casa con in mano questo uncino Ti ci strappo le ovaie e che cazzo me le cucino! Ma non sono il tipo che va pazzo per le foto È molto meglio bere fino a che non vedi il vuoto Poi guido ubriaco dopo quindici Peroni Mi schianto con la moto mentre canto Alex Baroni Così l'ipocrisia di queste generazioni Vi spingerà a cantare un paio delle mie canzoni Io spero che 'sto trip non mi dia allucinazioni Sui miei genitori incastrati in peggio situazioni Ma sai cosa è la sfiga? Chi manifesta Al G8 e poi finisce a terra con un colpo in testa E sai cosa è uno sbirro? Chi viene assolto In piazza con la divisa anche se poi gli parte un colpo [Ritornello] Non ce la faccio più, io questa sera m'ammazzo Non vi sopporto più, solo a pensarvi mi incazzo Per non vedervi più, visto che io sono un pazzo Mi punto una pistola, questa sera m'ammazzo [Outro] Non ce la faccio più</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Solo una botta">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="46"/>
+                        <testo>[Intro] E questa è Radio Simpatia per tutti voi Iniziamo la giornata con la prima canzone: Fabri Sfiga! Fibra... scusate! 'Sto giro ho fatto una cazzata tanto grossa... e dilla! [Strofa 1] Dopo l'ennesima grappa mi gratto una chiappa Entrando in un nightclub con in testa una zappa Ho bisogno di affetto finché 'sta pasta fa effetto Scendo in pista come il Piotta quando si veste da surfista Ho la mente del masochista quando ballo come un teppista Questo gay che mi si avvicina, cosa pensa tra noi esista?! Quindi io gli volto le spalle ma 'sto gay mi tocca le palle Io mi scanso verso l'uscita "Cazzo, che figa che è quella tipa!" E questa ragazza, sì, che mi ingrifa lecca la lingua della sua amica Poi mi ficca questa pasticca in bocca ma c'è un gay che mi è dietro e tocca Un altro gay che mi lecca il collo, fuggo in un corridoio E mi ritrovo una giapponese in un privé a luci rosse accese "Cinciulin cinciulin ciulino sembli avele un bel figulino Vuoi passale un bel momentino? Paga plima, non c'è scontlino Cento Eulo e ti fai il festino Tokyo, Pechino, culo e bocchino Cinque lagazze nel salottino: scegline una e paga bambino!" E non mi sembra vero, ma ce l'ho fatta Quindi prendo il portafoglio pago e svuoto la sacca Sono talmente ubriaco che sbaverei su queste fighe Ma con un cazzo atrofizzato dopo che ho fatto cinque righe Comunque svolto questa sera, mi sono scelto la più seria La giapponese in giarrettiera con una faccia che sembra a sfera Che mi tocca la bomboniera, la seconda pasta fa effetto Sette chili in sette giorni tipo la clinica di Pozzetto Io rimango in piedi eretto con in mano il mio biglietto E davanti un gabinetto in mezzo a due camere da letto La tipa entra in una e fa l'occhietto: "Avanti, vieni che t'aspetto" Mi fiondo dentro come il proiettile sparato in testa a Carletto Con un cazzo che è un carciofo e uno scroto che è uno scrofo Son due mesi che non scopo, quindi immaginami dopo Due secondi e son già nudo, questo è il vero sesso crudo Lei mi tampona la cappella con la bocca pronta a fare judo[Ritornello] E non mi sembra vero, ma ce l'ho fatta Non capisci voglio solamente darti una botta Voglio darti una botta, darti una botta, voglio darti una botta Molte ragazze per averle è una lotta Quando in fondo vorrei solamente dare una botta Voglio darti una botta, darti una botta, voglio darti una botta E se un domani mio figlio andrà con una mignotta Vorrà dire, anzi vorrà dare solo una botta Vorrà dare una botta, solo una botta, voglio darti una botta [Strofa 2] Seconda strofa: è la prima volta che pago ad una scrofa Che mi infila il profilattico lubrificato in modo tattico Questo è l'attimo idilliaco, aumenta il battito cardiaco Lei mi dice: "Vieni bello, avanti, spluzza quel pisello" Però il mio cuore è un tamburello, batte come uno scalpello Perché ho preso un po' di questo e perché ho fumato un po' di quello Ho la faccia come un fringuello, morto appeso a un ramoscello Dalle orecchie sto sborrando fuori mezzo mio cervello Ma non vengo, anzi rigetto, sbavo e corro in gabinetto La tipa che urla: "Lesta a letto", cazzo, è un incubo 'st'effetto Io mi getto sulla tazza cagnolando la mia razza Vomitandomi sul cazzo, la giapponese che si incazza Mentre nella stanza accanto stanno scopando come cinghiali Io collasso tra le urla di tutti quanti 'sti maiali Ma ormai il tempo è scaduto e io mi rivesto in cameretta Ma arriva il gay che apre la porta e urla: "Ti faccio una pugnetta" [Ritornello] Molte ragazze per averle è una lotta Quando in fondo vorrei solamente dare una botta Voglio darti una botta, darti una botta, voglio darti una botta E se un domani mio figlio andrà con una mignotta Vorrà dire, anzi vorrà dare solo una botta Vorrà dare una botta, solo una botta, voglio darti una botta! [Outro] Non ci credo, con questa faccia da mignotta Mi piace questo Fabri Fibra Mi è entrato in qualche maniera, è particolare</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Momenti no">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="19"/>
+                        <testo>[Strofa 1] Io sto nell'acqua in questa vasca in cui ci butto acceso un fon Vorrei incontrarti tra cent'anni appesa insieme a Ron Divento aggressivo, se non lo sono imparerò Nel caso in cui ti vedrò entrare in casa mia ti sparerò Un paio di anni fa ero troppo stupido, lo so Ma sto pagando un prezzo che non me lo scorderò Sono in down perciò il peggio è che peggiorerò Un uomo bomba, mi sfuggirò e mi autodistruggerò Il mio cuore ancora batte, ma soltanto per un po' Bevendo in macchina un frontale a cento con questa Renault E il mio nome è in questa lapide, mica in un borderò Il mio volto è ancora in lacrime da quando hai detto: "No" E quante donne incontrerò che ancora peggio tratterò Su questo chiodo la mia fronte tra un secondo sbatterò Ogni volta che mi domando quanto mi condannerò Fino al prossimo mese in casa con lo stipendio che c'ho, perciò [Ritornello] Quanti momenti no (No) Quanti progetti e poi (Poi) Nonostante ti amo non funziona tra di noi (Tra di noi) Ma se ti incontro per la strada con un altro, non lo so (Non lo so) Gli prenderò di scatto il collo, stringerò e lo strozzerò (Lo strozzerò) Quanti momenti no (No) Quanti progetti e poi (Poi) Nonostante ti amo non funziona tra di noi (Tra di noi) Ma se ti incontro per la strada con un altro, non lo so (Non lo so) Gli prenderò di scatto il collo, stringerò e lo strozzerò (Lo strozzerò) [Strofa 2] Sono circondato da pazzi che confondono il mio io Mia madre è in paranoia, prega e spera in questo Dio Son talmente confuso che non so più il nome mio Mi sfondo casa mentre guido il furgoncino di mio zio Perché sono in depressione, ho crisi di persecuzione Sono pronto all'ispezione quando scendo alla stazione Voglio più prostituzione intorno alla mia abitazione Prima che esploda in aria per difetti di progettazione Tengo una deformazione, la testa in ebollizione Non siamo una proiezione, siamo senza protezione Drogo la circolazione del mio sangue in secrezione E spingo fino all'infezione collassando a colazione Se andassi in televisione, sarei il tipo che accoltella Un taglio in pancia lacerando il corpo di Giucas Casella Io sputo sulla tomba di Pacciani morto in cella E strozzerò ogni tuo ragazzo: o sarai mia o sarai zitella [Ritornello] Quanti momenti no (No) Quanti progetti e poi (Poi) Nonostante ti amo non funziona tra di noi (Tra di noi) Ma se ti incontro per la strada con un altro, non lo so (Non lo so) Gli prenderò di scatto il collo, stringerò e lo strozzerò (Lo strozzerò) Quanti momenti no (No) Quanti progetti e poi (Poi) Nonostante ti amo non funziona tra di noi (Tra di noi) Ma se ti incontro per la strada con un altro, non lo so (Non lo so) Gli prenderò di scatto il collo, stringerò e lo strozzerò (Lo strozzerò) [Strofa 3] Non sono affatto interessato ai tuoi commenti, e sai perché? Di cattiverie ne ho pensate anche fin troppe su di me Io stavo andando in collegio quand'era il '93 Perché gli unici interessi miei non erano un granché Io, quando parlo con mio padre, sento il gelo dentro me Perché non parla con mia madre e lei non parla più con me Sono un pazzo vagante insano tanto quanto te Che diventa schizofrenico in classe (Che cazzo c'è?) Ho ancora i buchi nella schiena che gli amici han fatto a me Si sono chiesti: "Ma cos'è che fa? Pensa solo per sé?" Questo è egoismo, il mio nervoso non c'entra con il caffè E il pessimismo qui germoglia insieme all'odio che già c'è Io non c'ho cash, quindi non viaggio, al massimo faccio un bidet Ma chiedo un prestito a un collega e ci compro una 33 Da spararmi in testa in ufficio quando il mio capo non c'è Metà cervello, brutto stronzo, te lo spruzzo sul parquet [Ritornello] Quanti momenti no (No) Quanti progetti e poi (Poi) Nonostante ti amo non funziona tra di noi (Tra di noi) Ma se ti incontro per la strada con un altro, non lo so (Non lo so) Gli prenderò di scatto il collo, stringerò e lo strozzerò (Lo strozzerò) Quanti momenti no (No) Quanti progetti e poi (Poi) Nonostante ti amo non funziona tra di noi (Tra di noi) Ma se ti incontro per la strada con un altro, non lo so (Non lo so) Gli prenderò di scatto il collo, stringerò e lo strozzerò (Lo strozzerò) [Outro] Non lo so (Non lo so) Non lo so, non lo so (Non lo so) Non lo so, non lo so, non lo so (Non lo so) Non lo so (Non lo so) Non lo so, non lo so (Non lo so) Non lo so (Non lo so)</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Da questo locale">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="18"/>
+                        <testo>[Intro] Eh, Fabri Fibra coño, otra vez tronco me cago en la puta, otra vez en la puta calle, si es que Fabri Fibra eres lo peor de lo peores maricón, joder tronco tanta marijuana nos va a dejar en la calle todos los días hostia (Ahhhhhh) [Ritornello] Ecco perché ci sbattono fuori da questo locale Non lo vedi che se entri con me ci sbattono fuori da questo locale Che se fumi, che se bevi con me ci sbattono fuori da questo locale Da questo locale, da questo locale ci sbattono fuori da questo locale [Strofa 1] Io fumo come un disperato E mi faccio più pugnette di un carcerato Ho lo sguardo che è di un menomato E mi vesto come Jovanotti pensionato Ma non sono come lui, non sono sposato Con una che va con altri (Con chi hai scopato?) La mia ragazza quando m'ha lasciato Ha premuto sul mio nome e lo ha resettato Ma quando ha visto dove ho parcheggiato Con i pantaloni giù mi sono avvicinato Ma la madre che mi aveva pedinato Arriva urlando: "Lasciala in pace malato!" Non lo capisci sono frustrato Che facevi l'autostop e non ti ho accoppato Quando ero piccolo, sono annegato E ora giro come un ologramma proiettato Devo ridurre un mondo brevettato In mille pezzi come un aereo dirottato Ma non vedi che sono spiantato Dopo che respiri la pasticca che ho schiacciato! [Ritornello] Ecco perché ci sbattono fuori da questo locale Non lo vedi che se entri con me ci sbattono fuori da questo locale Che se fumi, che se bevi con me ci sbattono fuori da questo locale Da questo locale ci sbattono fuori da questo locale [Strofa 2] Faccio come il toro alla corrida Ti vengo addosso c'ho l'istinto suicida Quando cado a terra il pavimento vibra "Chiamate un'ambulanza per Fabri Fibra!" A questa ragazza che fa la diva Le faccio fumare erba radioattiva E poi ci scambiamo un po' di saliva In mezzo alla pista che ci assaliva Io mi nascondo con la refurtiva Io sono la merda che porta sfiga Resti nell'ombra della mia sigla Doppia F come fregna e figa Andiamo in bagno e ci facciamo una riga Così cambiamo pelle come i Litfiba E visto che ci siamo ti lecco la figa Ma cadi a terra e ti rompi la tibia [Ritornello] Ecco perché ci sbattono fuori da questo locale Non lo vedi che se entri con me ci sbattono fuori da questo locale Che se fumi, che se bevi con me ci sbattono fuori da questo locale Da questo locale ci sbattono fuori da questo locale [Strofa 3] Di ragazze ne vedo a decine "Ciao come stai? Siamo due cugine Ci passano i bicchieri con le bollicine Ci chiamano le cagne, le barboncine Dai, andiamo che facciamo le storie al cine" C'è la canna che puzza più del concime C'è la mia sborrata sulle poltroncine Rido in faccia al buttafuori ed è la fine [Ritornello] Ecco perché ci sbattono fuori da questo locale Non lo vedi che se entri con me ci sbattono fuori da questo locale Che se fumi, che se bevi con me ci sbattono fuori da questo locale Da questo locale ci sbattono fuori da questo locale [Outro] Fabri Fibra, Fa-Fabri Fibra!</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Rap in vena">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="47"/>
+                        <testo>[Intro] Ascolto prego: se ti piace il rap, scegliti un altro rapper, perché questo non è un buon momento per Fabri Fibra (Fibra) Diciamo che la sua è una crisi da ex-complessato, ex-complessato E questo è un esempio perfetto! [Ritornello] Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena (2004, Click Teste Mobili, il click maledetto) Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena ooh! [Strofa 1] Per essere un fallito uguale a me tu che fai? Piscio in classe e poi ti incolpo con la faccia che c'hai Scrivo "Troia la Madonna" su questo muro con lo spray Sborro sulla tastiera guardando i porno website Schizzo frasi, le sborro su queste basi Che escono dalle casse come il sangue dai vostri nasi Ho un incubo da realizzare, un corpo nel mio orto E io ho crampi allo stomaco se pretendi anche un rapporto Mi sveglio e vado al lavoro con l'umore storto Tanto che il primo stronzo che incontro lo vorrei morto Faccio benzina e già 'sto scemo guarda male "Cazzo vuoi? C'hai un lavoro di merda ed io uguale!" Arrivo tardi e comunque il mio capo è un pazzo Che spende soldi a troie vantandosi del suo cazzo Un giorno m'ha detto: "Tarducci, vieni in ufficio Ma quand'è che ti licenzi da 'sto cazzo d'edificio? Votavo Berlusconi prima della par-condicio E c'ho pure conoscenze nello Stato Pontificio Questa mia segretaria sta in bagno a risciacquarsi i denti E per questo motivo il mio uccello puzza di dentifricio Darti lavoro per me è soltanto un sacrificio Per quando te ne andrai faremo i fuochi d'artificio Quando parli coi clienti sembra che stai in galleria La saggia soluzione sarebbe mandarti via” Io contrattacco e gli mostro il pacco Dicendo: "Cazzo! Mi impegno sempre un sacco La sera quando stacco ripenso ma quanto ho fatto? 'Sta azienda del cazzo però è la tua io me ne sbatto"[Ritornello] Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena ooh! [Strofa 2] Il capo in un lampo perde il controllo (Boing) Si lancia apre le mani afferrandomi per il collo Mi spacca la collanina strozzandomi come un pollo Poi mi sbatte contro il muro scalciando finché non crollo Cazzo io non c'ho un lavoro in cui non sbotto in pianti Rimango lacrimante a terra con questo davanti Che mi strattona i capelli per tre minuti abbondanti Manco fossi un abbonato a una rivista di trapianti La segretaria entra dopo aver lavato i denti È divorziata con due figli e prende gli alimenti “Sono stata assunta guadagnandomi i compensi E mi scopo il dirigente fino a che non perde i sensi Ho visto che quando lavori gli altri li influenzi Incoraggiando a respirare odori che non sono incensi Il tuo posto di lavoro quindi non te l'assicuro Se tu vuoi restare qui, devi leccare qualche culo” Cazzo non ci vedo più e di scatto m'alzo in piedi Mi sento Chewbacca ne Il ritorno dello Jedi Afferro per i capelli questa donna e faccio effetto Cadendo a piedi in avanti la sbatto sull'armadietto E non ne vale la pena Se questo è un lavoro meglio farsi in vena Almeno per un po' non sentirò il problema Vorrei vedere il mio capo andare in cancrena [Ritornello] Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena Io me ne sbatto il cazzo di un lavoro in città Io spruzzo rap in vena Io spruzzo rap in vena ooh!</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Niente male">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="9"/>
+                        <testo>[Intro] Ascolta, è inutile che mi fai gli squilli Se vedi che non ti richiamo, secondo te cosa vuol dire? [Strofa 1] Mi chiudo in bagno a fumare, ma quando piscio fa male È un'infezione banale, che tanto sta per passare Ho letto anche sul giornale, comunque in tutti è normale È un discorso virale, io faccio il test, è vitale E tu fai: "Basta guardare!", potessi tornare Un anno indietro nel tempo, non staremmo a parlare E invece qui a quanto pare, manca un mese a Natale E io son già preso male, neanche ho più casa al mare Sto in città a lavorare, non passarmi a trovare Che ti immagino già rotolare giù per le scale E ti continui a incolpare, e continui a irritare E io vorrei che il tuo cuore cominciasse a gelare E ti continuo a dannare, sento in tele parlare Che la gente come noi dovrebbe sdrammatizzare Io e te non dobbiamo stare, neanche esistere insieme Abbiamo solo scopato e io neanche ti voglio bene Puoi tagliarti le vene, puoi donarmi anche un rene Tocchi solo 'sto pene che neanche ti appartiene Io ti strapperei gli occhi, mi smetterei di fissare Chiudi sta cazzo di bocca che neanche sai ingoiare[Ritornello] È un legame niente male È un legame niente male È un legame niente male Che ci porta all'ospedale È un legame niente male È un legame niente male È un legame niente male Che ci porta all'ospedale [Strofa 2] Sei una piccola stronza con la figa che è un pozzo Quindi stammi lontano che io ti impalo e ti sgozzo E poi ti infilo in un pacco del cazzo E lo spedisco al tuo ragazzo Che gli ho risparmiato soltanto spazio E cosa mi chiami? Cosa allunghi le mani? Hai macchiato di sangue anche i miei unici Armani Trombi peggio dei cani, andresti bene a Sabani O a un depravato qualunque dei programmi italiani Io quando ti ho incontrato ricordo abbiamo parlato Tu mi hai chiesto il mio nome, il mio segno e quando son nato Il tuo nome invece a me non mi è mai interessato Parli con un dialetto che sembra un colpo di Stato E se magari ti stupro neanche vengo arrestato Perché giri con gente che t'ha già molestato Quando parli fai lo sguardo provocante malato Qualunque razza di uomo ti porterebbe al mercato Quando poi t'ho spogliato c'era un tempo dannato Non ricordo un odore, un abbraccio, un bacio, il tuo fiato E non c'era atmosfera, solo il tuo culo sudato Cazzo parli quando scopi, mica sei in teatro Ho incontrato un mio amico e gliel'ho raccontato Così ogni volta che ti incontra lui ti guarda ingrifato Ti comporti da donna perché hai già sviluppato Ma io le ovaie te le attappo e te le strappo in un prato Perché volevi anche un figlio che mi assomigli in un lato E invece adesso se lo vuoi ti prendi un figlio adottato Che gli venderò il fumo in modo che cresca un drogato E poi gli insegno a cantare "Viva La Mamma" di Bennato Se facessimo un figlio nascerebbe handicappato E tu già lo sembri con quel culo deformato Cosa cazzo hai pensato quando hai detto: "C'ho un ritardo, guarda, sii preoccupato!" Ma non t'ho neanche toccato! [Ritornello] È un legame niente male È un legame niente male È un legame niente male Che ci porta all'ospedale È un legame niente male È un legame niente male È un legame niente male Che ci porta all'ospedale [Strofa 3] Sto pensando è un peccato perché in fondo mi piaci Ma sei squallida anche quando resti zitta nei baci Con gli stessi vestiti che ormai sembrano stracci Ti schiaffeggio con le scarpe e poi ti strozzo coi lacci Non c'è donna più triste della donna che abbracci Quando dopo un secondo con due parole la schiacci Quando noi stiamo insieme risultiamo pagliacci Meglio darsi un addio perché non fai al caso mio Io non sopporto le persone timorate di Dio Che hanno i rimorsi di coscienza e ogni discorso è un rinvio E sono i primi a nascondersi, non sanno rispondersi E quando stanno insieme devono corrispondersi Sì, ma non fila, che siamo anche oltre il duemila E se il mio cuore delira sembri mia nonna che stira È sepolta sottoterra da venti anni che non respira E tu farai la stessa fine, questa è l'aria che tira [Ritornello] È un legame niente male È un legame niente male È un legame niente male Che ci porta all'ospedale È un legame niente male È un legame niente male È un legame niente male Che ci porta all'ospedale</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Faccio sul serio">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="58"/>
+                        <testo>[Intro] "Bella prof (Fibra) Con questa, mi venite a prendere a casa (Attenzione, questo brano di Fabri Fibra non merita alcun...)" [Ritornello] Io, faccio sul serio Ragazzi faccio troppo sul serio Faccio sul serio Ragazze faccio troppo sul serio Sul serio, sul serio (Collega faccio troppo sul serio) Faccio sul serio, col rap Io, faccio sul serio Ragazzi faccio troppo sul serio Faccio sul serio Ragazze faccio troppo sul serio Sul serio, sul serio (Collega faccio troppo sul serio) Faccio sul serio, sul serio Io [Strofa 1] Prendere la vita come viene, riga Oppure prendere la vita come Fabri Fibra Se io mi fossi chiamato Fabrizio Tarducci Forse magari a quest'ora vestivo Gucci (Oh ma sei serio?) Ma l'euro è come il dollaro e sta merda non produce Anche se questi americani, c'hanno salvato dal duce Io sto senza un lavoro, in un appartamento al buio Perché per questo mese non c'ho un soldo per la luce Potessi andare in tele, spruzzerei due ragnatele Su ogni stronzo che rappa cantando al tempo delle mele Potessi andare in radio, punto a farti un tirocinio Sbudellando i testi idioti che fanno il Piotta e i Flaminio Mi sputo addosso, sul dito medio Io non connetto, ho la testa in stato di assedio Non merito un premio questo è il grilletto e lo premo Mi faccio un buco nel cranio ma prima alzo la mano Perché domandi chi non crede in questo rap italiano C'è ancora chi si legge Aelle di un parente lontano Non mi sono mai fatto donne come La Pina Che di tre dischi che ha fatto non ricordo una rima[Ritornello] Io, faccio sul serio Ragazzi faccio troppo sul serio Faccio sul serio Ragazze faccio troppo sul serio Sul serio, sul serio (Collega faccio troppo sul serio) Faccio sul serio, col rap Io, faccio sul serio Ragazzi faccio troppo sul serio Faccio sul serio Ragazze faccio troppo sul serio Sul serio, sul serio (Collega faccio troppo sul serio) Faccio sul serio, sul serio (Fabriiii Fibraaa) Io [Strofa 2] Faccio sul serio nove anni che scrivo ogni mio pensiero Nove anni sullo stesso stereo inietto un siero Ogni rima che faccio porta allo sclero colpa del clero Nell'underground sprofondai in un buco nero (Ooooooo...) Non sembra vero potrebbe essere un impero Quando invece accendo un cero ogni notte che mi dispero Resto in trance, ho il rap che non ha chance Le mie rime più belle le ho copiate dai miei fans Sono distrutto, perché il mio rap spacca di brutto Uccido la scena e vesto scuro in segno di lutto Per cominciare, mi hanno cacciato da ogni centro sociale Perché non esprimo idee politiche varie Attuo come se fosse terapia mi da impulsi alla schiena con delle scosse Io non descrivo rappresaglie e sommosse Non è rap quello dei 99 Posse Mi rendono le palle grosse Esploderanno come il cazzo di bombe delle Brigate Rosse E anche se fosse non sembra vero È un bolero dinero zero con il rap io faccio troppo sul serio [Ritornello] Io, faccio sul serio Ragazzi faccio troppo sul serio Faccio sul serio Ragazze faccio troppo sul serio Sul serio, sul serio (Collega faccio troppo sul serio) Faccio sul serio, col rap Io, faccio sul serio Ragazzi faccio troppo sul serio Faccio sul serio Ragazze faccio troppo sul serio Sul serio, sul serio (Collega faccio troppo sul serio) Faccio sul serio, sul serio Io</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Non crollo">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="42"/>
+                        <testo>[Intro] È qui, è qui, è tornato, è qui Go [Strofa 1] Stringo nel braccio questa cinghia Lascia che spinga rap in vena attraverso questa siringa Ho preso un ecstasy anche se non so l'effetto Canto in pubblico e dai colpi metto in testa questo elmetto E, quando poi chiudo gli occhi, mi immagino mille avvoltoi Qualunque porta è chiusa a chiave, quindi incendio i corridoi Quando il fuoco arriva ai piedi, la mia testa è in produzione Dietro me c'è troppa vita, ma davanti c'è un plotone Ricordi quando ho detto: "Su molti non fa effetto" Sbotto a ventott'anni schiacciato come un insetto infetto E adesso non provo più un affetto Ingoiando il mio rasoio, quando parlo, ora ti affetto Ricordi quando hai detto: "Adesso lui fa il ricco" Quando neanche immagini io quanto sono a picco Ma se poi c'avessi i soldi per cui tu mi incolpi ancora Io ci pagherei uno stronzo che ti spari nella gola [Ritornello] E questo è il motivo per cui non mollo (Ah) Anche se sto con i nervi a pezzi, fatto fino al midollo (Ah) Non crollo, mi stringono per il collo (Ah) Stanno strangolandomi impedendomi il decollo[Strofa 2] Ballo agli afterhours zuppo di sudore Nella strada del ritorno la metà di noi ci muore Mi prendo più droghe di quanto il mio organismo vuole Mi piantono un paletto d'adrenalina dritto al cuore Io sono il primo a dire: "Fabri è uno sfigato Qualunque sia il suo rap è un italiano ricopiato" La mia voce nei dischi sembra quella di un ritardato E di disco in disco io sono pure peggiorato Non ci voglio pensare, non mi son preso male E poi tu qui cosa ci fai? Questo è il mio funerale Mi sono ucciso un giorno fa impiccandomi in bagno Con la fune appesa alla caserma per non fare il militare E questa è la fune che appendo al collo Anche se sto con i nervi a pezzi fatto fino al midollo Non crollo mi stringono per il collo Stanno strangolandomi impedendomi il decollo [Ritornello] E questo è il motivo per cui non mollo Anche se sto con i nervi a pezzi, fatto fino al midollo Non crollo, mi stringono per il collo Stanno strangolandomi impedendomi il decollo [Strofa 3] Seconda strofa, magari anche la terza Magari la ascolti e magari poi mi dici: "È questa" Magari ti incontro e mi punti in testa una balestra Magari ti investo e la pattuglia non m'arresta Magari tua figlia (Ciao, papà) se la stuprano in palestra Magari fai il rap e ti presenti con l'orchestra Magari dico: "Preo", ma tu capisci "Ebreo" Dicendomi: "Nazista", quindi poi scatta l'inchiesta Magari vai in TV e, vedrai, cucchi di più Poi ti scopi un mega trans e ti becchi l'HIV Magari tu fai il rapper che fa l'università Quindi ti senti più figo perché stai in un'altra città Ma con i soldi di papà io a quindic'anni ho preso il fumo Hai comprato un CD vuoto perché io non son nessuno Sento voci che dicono: "Non ci scappi, pollo" Sto guidando una macchina senza averne il controllo [Ritornello] E questo è il motivo per cui non mollo Anche se sto con i nervi a pezzi, fatto fino al midollo Non crollo, mi stringono per il collo Stanno strangolandomi impedendomi il decollo E questo è il motivo per cui non mollo Anche se sto con i nervi a pezzi, fatto fino al midollo Non crollo, mi stringono per il collo Stanno strangolandomi impedendomi il decollo [Strofa 4] Ho il piacere di introdurre questo nuovo cantante Si chiama Fabri Fibra, il grillo parlante Bob Marley al confronto fuma che è un dilettante Le rime del Fibroga sono un trip agghiacciante Ma scusa, Fabri, tu cambi stile, che è 'sta roba? Cosa è 'sta moda? Starai scherzando con la droga? Rimango nel letto sbavando come Ambrogio Fogar E piango paralizzato col fiato di un vecchio in fuga Che poi, quando ero piccolo, ero grasso e disgustoso Ma con un po' di coca ho perso i chili dal nervoso Da piccolo sognavo che sarei andato lontano Guidando una macchina per investire Celentano E invece quando adesso vado in cerca a una festa Al massimo ci trovo gente che mi spacca la testa Io non faccio concerti ma propaganda molesta E non c'ho neanche la macchina se mamma non me la presta [Outro] -È vera 'sta storia che non c'hai la macchina se mamma non te la presta? -Eh sì, eh sì, purtroppo sì, diciamo che se c'era da fare la scelta giusta io ho fatto sempre la scelta sbagliata (Fibra) -Ma di cosa ti stai lamentando, dai, non fare così, ci sono tanti posti di lavoro Fabri... Te ne trovo uno io in ufficio [Skit] -Oh pronto Fibra, sono Italo -Italo! -Ho sentito il disco, ho sentito un paio di singoli ma è un po' strano, cioè... Sta cosa anche un po' dei crocefissi, sì o no? Ci sono così, fa un po' ridere, comunque... -Fa 'na sigaretta dai! -Eh? -Fa 'na sigaretta! -Si dai lasciami stare un attimo... -Chi c'è al telefono? -No dai, comunque sì no... Fatti vedere in giro perché comunque suonano tutti tranne te, non ti si vede... -Fibra! Oh, passami Fibra, passami! -Sì oh, aspetta un attimo dai... -Pa pa! Oh Fibra oh! Ma cos'è sta storia che ti pigli l'ecstasy a caso, ma che sei impazzito, oh? E tutti che sta' a canta', te fai vede' oh? Tutti che stare in giro... T'hanno visto in banca a fuma' un cannone vestito da tu madre con tanto d' parruccone! Gne, Fibra, vieni a canta', e non fare la puttana! Oh Fibra, non fare la puttana!</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Non fare la puttana">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="14"/>
+                        <testo>[Intro] Sei carino Sei simpatico Se vuoi, vieni a casa, ti presento i miei Tu mi presenti i tuoi Non fare la puttana [Ritornello] Canti alle jam? Non fare la puttana Fuggi da me? Non fare la puttana Ancora mi cerchi? Non fare la puttana E tu speri ci sia? Non fare la puttana Di meglio non hai, non fare la puttana Ma chi ti ascolta mai? Non fare la puttana Ti guardi alle spalle? Non fare la puttana Ti sparano alle palle! Non fare la puttana [Strofa 1] Io me ne sbatto della tua recensione Intorno al mio disco monti una recinzione Io faccio sci nautico sulla tua pozione Vorresti vedermi in ebollizione Ogni volta che c'è qualcuno che fa il rap Io prendo una fionda e mi lancio a lezioni di step Almeno guardo un po' di culi in vista con paillettes Al posto di 'sti culi ciccioni come una crêpe Non c'è bisogno che fai 'ste domande strazio Da sola ti accorgi che non parlo più di un cazzo Ruba un po' di soldi a papà e prendi la Saxo Che ci facciamo in macchina mentre sfondiamo il clacson Ho fatto un disco poi un altro anche il terzo Mi uccido col quarto per quanto fiato ho perso Non mi interessa se 'sta roba non ingrana Quando soffro di insonnia e non dormo da una settimana [Ritornello] Canti alle jam? Non fare la puttana Fuggi da me? Non fare la puttana Ancora mi cerchi? Non fare la puttana E tu speri ci sia? Non fare la puttana Di meglio non hai, non fare la puttana Ma chi ti ascolta mai? Non fare la puttana Ti guardi alle spalle? Non fare la puttana Ti sparano alle palle! Non fare la puttana [Strofa 2] Per questa roba ho pugnalato troppi amici Per questa roba ho preso merda in troppi uffici Ho fatto musica con i peggio falliti Che ora vendono vernici come fossero vestiti Ho visto Caparezza ribaltarsi in bici Dopo che gli ho rotto i freni con lo scardina radici Vado alle jam per raccogliere due spicci La gente mi passa le canne e poi mi dice: "Appicci?" Non vado ai party gay perché ci va anche Antonio Ricci Giro con un DJ che dice: "Fibra, cazzo dici?" Odio la gente che continua a promettere Che mi presenterà a qualcuno perché so trasmettere Quando in verità io sto cercando di smettere Cammino a gattoni, faccio fatica a connettere Che sono diec'anni che agli stessi ripetiamo "Continua a sostenere questo hip hop italiano" [Ritornello] Canti alle jam? Non fare la puttana Fuggi da me? Non fare la puttana Ancora mi cerchi? Non fare la puttana E tu speri ci sia? Non fare la puttana Di meglio non hai, non fare la puttana Ma chi ti ascolta mai? Non fare la puttana Ti guardi alle spalle? Non fare la puttana Ti sparano alle palle, non fare la puttana [Strofa 3] Il mio primo demo l'ho spedito a Frankie Il secondo a Bassi insieme ad altri centoventi L'ultimo demo che ho fatto invece non lo senti Perché sono impazzito tra indirizzi e mittenti Non alzo la cornetta per chiamare il mio collega Sentendomi dire: "Qui non si vende una sega" Sono costretto a riprendere la sambuca E nella cappella rimango con questa verruca Il mio cuore fa ciok insieme a quello di Luca Carboni ardenti dentro questo mio bazooka Punto la pista mentre passano Molella Non mi serve un passaggio perché io torno in barella [Bridge] Tutta la gente che prende l'ecstasy Ma in quanti siamo, quanta gente prende l'ecstasy?! [Ritornello] Canti alle jam? Non fare la puttana Fuggi da me? Non fare la puttana Ancora mi cerchi? Non fare la puttana E tu speri ci sia? Non fare la puttana Di meglio non hai, non fare la puttana Ma chi ti ascolta mai? Non fare la puttana Ti guardi alle spalle? Non fare la puttana Ti sparano alle palle! Non fare la puttana</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Voglio farti un regalo">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="9"/>
+                        <testo>[Ritornello] Ma io le mani non le metto via Se fai la stronza sparisci baby Se prendo a schiaffi la ragazza mia È perché mi fa impazzire baby E ti giuro se potessi io ammazzerei Quella stronza di Patrizia Pepe Così almeno quanti soldi risparmierei Voglio comprarti un regalo baby [Strofa 1] Non mi chiami mai per nome Mi dici “moo”, cosa è un cartone? Pago un mese in Spagna perché il tuo sogno è Valencia E poi mi annulli il viaggio il giorno prima alla partenza Santa pazienza, coi soldi non si gioca Io per quanti ne ho persi è come se mangiassi coca Ti ho preso un DVD con delle scene un po’ piccanti Lo vediamo e tua madre mi guarda brutto e sta davanti, che cazzo Mi sento libero adesso che mi sto lanciando giù dal tuo terrazzo Dici che mi lasci se puzzo di marijuana Così ho comprato quattro bocce di Dolce e Gabbana Ma questa relazione, infondo, di sesso è tossica Facciamo una scopata mentre pensiamo alla prossima Non prendi la pillola perché dici che ti ingrassa E ad ogni tuo ritardo la pressione mia si abbassa [Ritornello] Ma io le mani non le metto via Se fai la stronza sparisci baby Se prendo a schiaffi la ragazza mia È perché mi fa impazzire baby E ti giuro se potessi io ammazzerei Quella stronza di Patrizia Pepe Così almeno quanti soldi risparmierei Voglio comprarti un regalo baby [Strofa 2] Nel caso in cui dovessimo avere un problema Gli amici fanno il tiro al bersaglio sulla mia schiena E quante parole che a casa mia non ci si dice Io non voglio fare la fine dei miei: troppo infelice E quindi io mi impegno Cazzo m'auto-consegno Chiedendo il tuo sostegno Mi vesto come vuoi anche se poi mi sento un legno Cercando di esser degno Di stare col tuo gruppo: gente priva di ingegno Il tuo ex non ha contegno E ti chiama il giorno dopo Non vuole accettare che sono io ora che ti scopo E la cosa più triste è che tu non glielo dici Mentre ascolti le cazzate di quei falsi dei tuoi amici [Ritornello] Ma io le mani non le metto via Se fai la stronza sparisci baby Se prendo a schiaffi la ragazza mia È perché mi fa impazzire baby E ti giuro se potessi io ammazzerei Quella stronza di Patrizia Pepe Così almeno quanti soldi risparmierei Voglio comprarti un regalo baby [Strofa 3] Voglio farti un regalo, non mi sembra carino Per otto ore mi hai lasciato qui davanti al camino Dicendo che andavi a parlare un minuto col tuo vicino Quindi passami la pala perché andiamo in giardino Te lo ricordi quel giorno che ti è sparito il barboncino? Quel giorno in cui davvero hai pianto standomi vicino? Te l'ho sepolto qui, gli ho strangolato il corpicino E ogni volta che ci passi adesso pensa al tuo vicino [Ritornello] Ma io le mani non le metto via Se fai la stronza sparisci baby Se prendo a schiaffi la ragazza mia È perché mi fa impazzire baby E ti giuro se potessi io ammazzerei Quella stronza di Patrizia Pepe Così almeno quanti soldi risparmierei Voglio comprarti un regalo baby</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Palle piene">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="42"/>
+                        <testo>[Intro] Ah, cosa guardi? Sono il primo ad ammettere che sono uno sfigato, quindi cosa cazzo guardi? Sono nervoso? E perché dovrei tenermi tutta questa merda dentro?! [Strofa 1] Cominci a vedere che sono così Io sono veramente così Dio può baciarmi le palle qui Ma vai, siamo gli angeli barbari Lo vedi come copiano, guardali Ma tu che c'hai le palle bombardali Fai come me, traumatizzati, normalizzati Neutralizzati, scandalizzati Banalizzi i miei testi Mi detesti, non dovresti Mi uccideresti senza fatica Basta che vieni con la lama appuntita Ma questa morte mi è tipica Ti porto la pioggia artritica Soffocando con aria stitica Vengo da questa seduta spiritica Non ho paura, brutta cagna Vuoi il morto che parla come Castagna Ti posso leccare fino alle calcagna Ma la tua è una figa che non si bagna [Ritornello] Ho le palle piene Dalla faccia lo vedi che non dormo bene Ho le palle piene Di mille tentativi dimmi tu che si ottiene Ho le palle piene Della gente che vedo che gli è andata bene Ho le palle piene Che non passo in radio per colpa di Irene [Bridge] Io di notte non dormo più Io dagli occhi vedo blu E di certo non sei tu a descrivermi Gesù In Italia, nord e sud Fa la croce all'ovest e all'est E ti fottono con un test Una vita di merda e di stress [Strofa 2] Il mio sistema è nervoso Dato che è ridotto a uno stato pietoso Il mio cervello è corroso Così mi sparo prima che mi sposo Sono uno sbaglio clamoroso Una condanna allo stato velenoso Mi definisco un elemento odioso Non fare il rapper che è pericoloso [Ritornello] Ho le palle piene Dalla faccia lo vedi che non dormo bene Ho le palle piene Di mille tentativi dimmi tu che si ottiene Ho le palle piene Della gente che vedo che gli è andata bene Ho le palle piene Che non passo in radio per colpa di Irene [Strofa 3] L'educazione è la mia tragedia Quando ero a scuola in prima media Ci davano immagini gente che prega Un esorcista che legava alla sedia Un posseduto che si contorceva Era evidente che recitava Il professore invece si eccitava "Guarda questo demone come sbava" Sotto coca sono il primo che paga Per una puttana a caso che mi chiava Poi giro nudo in questa sagra Spacciando pillole di viagra Ogni rapporto che c'ho è una piaga Non me ne frega più un cazzo, raga Stasera in tele guardiamo insieme Francesco Nuti che si taglia le vene [Ritornello] Ho le palle piene Dalla faccia lo vedi che non dormo bene Ho le palle piene Di mille tentativi dimmi tu che si ottiene Ho le palle piene Della gente che vedo che gli è andata bene Ho le palle piene Che non passo in radio per colpa di Irene [Strofa 4] Se tu pensi che sia qua Ad avere opportunità Ho bruciato la mia identità E ora giro senza età Ta-bla-bra-blo-bro Io sto blosh, sono il prof del microf I ragazzi mi seguono in un gas tossico Dicono che sono il prossimo E c'è chi sparisce all'ossido Dicono che sono un classico Paranoico più dei Plastico [Bridge] Io di notte non dormo più Io dagli occhi vedo blu E di certo non sei tu che mi manderai in tv In Italia, Nord e Sud Fa la croce all'Ovest e all'Est E ti fottono con un test Una vita di merda e di stress [Ritornello: Fabri Fibra] Ho le palle piene Dalla faccia lo vedi che non dormo bene Ho le palle piene Di mille tentativi dimmi tu che si ottiene Ho le palle piene Della gente che vedo che gli è andata bene Ho le palle piene Che non passo in radio per colpa di Irene Ho le palle piene Dalla faccia lo vedi che non dormo bene Ho le palle piene Di mille tentativi dimmi tu che si ottiene Ho le palle piene Della gente che vedo che gli è andata bene Ho le palle piene Che non passo in radio per colpa di Irene [Outro] Ho le palle piene che non passo in radio Ho le palle piene che non dormo bene Perché ho due palle e un pene! Che testi del cazzo!</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Mr. Simpatia">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="3"/>
+                        <testo>[Intro] Ah, ah E questo (E questo) È ciò che tu speravi non potesse mai arrivare (È ciò che tu speravi non potesse mai arrivare) È colui che tu speravi non potesse mai ritornare (È colui che tu speravi non potesse mai ritornare) Questo è Fabri Fibra (Questo è Fabri Fibra) Fabri Fibra, e questa canzone non ti riguarda (Fabri Fibra, e questa canzone non ti riguarda) Cercati un'altra canzone bastarda (Cercati un'altra canzone bastarda) Perché questa roba non ti riguarda (Perché questa roba non ti riguarda) [Ritornello] (Io) Quando giro in città, c'è chi mi chiede curioso: "Ehi, Fibra, come mai non sei ancora famoso?" Lascia che ti dia questa spiegazione qua Io mica aspetto un treno che passò anni fa [Strofa 1] Questa vita è paranoica così com'è Io scrivo rime e senza queste ucciderei Vengo dal '76 con il suono assassino Io voto "Sì" per l'aborto al mio primo bambino Noi veniamo dal buio ed è lì che torneremo Con il rosso negli occhi ormai gonfi di veleno Sento la frustrazione, il sangue in ebollizione Piango in continuazione e senza motivazione Per questa educazione, ci mette in soggezione Sentendomi colpevole anche senza l'intenzione Cristo che religione, mi azzera ogni emozione Mi vedo in punizione dopo l'eiaculazione Se provo l'attrazione, ma quale protezione Coprendo il mio organo di riproduzione È la deformazione, bella consolazione Ragazza col pancione, madonna che impressione Mia madre è in depressione per questa concezione Dalla benedizione al peccato e confessione Ma in questa situazione aumenta la disperazione Per questa porc— di crocifissione [Interludio] Questo è ciò che tu speravi non potesse mai arrivare Questo è ciò che tu hai già fallito (Fallire) [Ritornello] Quando giro in città, c'è chi mi chiede curioso: "Ehi, Fibra, come mai non sei ancora famoso?" Lascia che ti dia questa spiegazione qua Io mica aspetto un treno che passò anni fa [Strofa 2] Questa Italia è paranoica impazzisco qui La Madonna quando piange che va al TG Questa Chiesa crea dei mostri per spaventarci Molte madri sono al mondo per soffocarci Molte volte questo Dio vuole arbitrarci Molte volte questo credere può limitarci Stando soli preghiamo, puntiamo ad incoraggiarci Quando invece il Vaticano può soltanto castrarci Questa Chiesa fa di tutto per addomesticarci Vuole terrorizzarci con bugie per congelarci I miei spermatozoi sono tutti marci Non conosco una sola persona che possa salvarci Qualunque canzone italiana punta a rattristarci Qualunque regista in Italia punta ad annoiarci Non passano i porno, potremmo almeno masturbarci Che andiamo a puttane ma non dobbiamo innamorarci In classe mettono un crocifisso per educarci Ti prendono a schiaffi se lo stacchi, tu non provarci Ma quante ragazze che all'estero sono diverse Intendo diverse nel senso dovresti scoparci In questa nazione spendiamo il tempo a complessarci Ma senza confrontarci, dovrebbero influenzarci Diverse culture, ma senza entrare e uscire a calci Ma siamo razzisti, per noi è un classico alienarci Da quanti pregiudizi cominciamo anche a spellarci Tanto vale a 'sto punto un bel sottovuoto ad intubarci Dovrebbero incollarci uno all'altro per poi drogarci Ma con le nuove leggi possiamo solo ubriacarci Possiamo intossicarci di alcolici e poi schiantarci Ma non legalizziamo o il Papa tende a denunciarci Mentre fumano questa erba per cui stanno ad arrestarci In questo mare di complessi in cui vogliono affogarci Con delle trasmissioni fatte per ipnotizzarci Come fossimo animali, non vorranno imbalsamarci? Vorranno massacrarci ancora un po' con l'inquinarci Con delle storie assurde come per addormentarci Cosa vuoi, paralizzarci? Solo per controllarci? Vorresti illuminarci? Vuoi sensibilizzarci? Non possono sfollarci, in questo mondo puoi restarci E invece d'aiutarci noi potremmo anche spararci [Outro] È inutile far finta chi vuoi che sia Ma dai, ma vai, Mr. Simpatia È inutile far finta chi vuoi che sia Ah, io non so esattamente se convenga dire tutte 'ste cose Se convenga dire 'ste cose (atoidi ad etnematelpmoc onos arbiF irbaF id emir el, enoiznettA .abor atseuq a osnes nu imavort ,abor atseuq a osnes nu imavorT) [Skit] -Senti, io volevo dirti questo: è chiaro che tu mi piaci, ma se mi fai sentire uno stupido, io dopo mi comporto come stupido e quindi faccio la figura dello stupido, quindi io devo soltanto sapere se tu mi vuoi, tu cos'è che ti piace? -Ma dai ma ti vedi, insomma, cazzo... sembri un chierichetto, insomma con quelle chiavi ti sei comprato una macchina che... - Ma io non ce la faccio più veramente, devo sapere come faccio a conquistarti, come faccio? Cos'è che ti piace? -A me mi piace Fabri Fibra, Mr. Simpatia -Mr. Simpatia, Fabri Fibra? Cazzo corro subito a comprarlo -Oh amico! -Ehi regà! Ma c'avete Mr. Simpatia, Fabri Fibra? -Fibra? -Fabri Fibra? -Qui non si conosce nessun Fibra, mi dispiace ma...</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Andiamo">
+                        <partecipanti>
+                            <partecipante nome="Nesli"/>
+                        </partecipanti>
+                        <Durata minuti="4" ore="0" secondi="53"/>
+                        <testo>[Intro: Fabri Fibra] Fibra! Con la sua voce da puttana Dove si va? Cosa si fa? Andiamo! A fare che? A fare i figli di puttana! [Strofa 1: Fabri Fibra] Ho comprato un tubo di Baci Perugina Il biglietto interno mi diceva: "Leccherai una vagina" Dopo di che ho visto in tele uno speciale sul cibo "La cucina dall'Italia all'Europa, all'Indocina" Ho preso una fettina di carne questa mattina, messa sulla padella Puzzava troppo di cappella E poi chissà perché, perché, chissà per come La moglie di Lorenzo se la fa un altro coglione Ho comprato il pane fatto senza farina E una bottiglia di latte che era scaduta il giorno prima Il lattaio mi ha detto: "Tranquillo mica è veleno Io bevo il latte di un mese fa" "Ma sei scemo?" [Ritornello: Fabri Fibra] Dove si va? Cosa si fa? Andiamo A bere che? Il latte di questa mungana Dove si va? Cosa si fa? Mangiamo Sì, ma cos'è questa dieta mediterranea? [Strofa 2: Fabri Fibra] Questi dottori italiani, americani Che inventano il nuovo mangiare degli esseri umani E magari domani mangiamo i gatti e anche i cani 'Sti poveri animali trattati come rottami Cavie della vivisezione sperimentale Ma qualcuno si cambia anche l'apparato genitale Vedi donne col cazzo che si vanno a masturbare Mentre pensano a un trans che si incula un omosessuale Tra pecore geneticamente modificate Minorenni deformate Stuprate carne bovina andata a male Però tranquillamente scaduta Che se aspetti una bambina nascerà sordomuta Ma chi rimane in classe all'ora di religione? Ragazzi avete fatto tutti la comunione? E chi vi insegna in parrocchia? Don Peppone? Vi dice di cos'è il peccato e la confessione? Papà e la mamma son contenti come insegna? Non è che a casa poi qualcuno bestemmia? "Ecco, oiD ocrop, ci risiamo" "Papà bestemmia quando la mamma va a dormire sul divano!" [Ritornello: Fabri Fibra] Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana Dove si va? Cosa si fa? Cantiamo Sì, ma com'è? Come dei figli di puttana Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana Dove si va? Cosa si fa? Mangiamo Sì, ma com'è? Come dei figli di puttana Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana Dove si va? Cosa si fa? Andiamo A fare che? A fare i figli di puttana [Strofa 3: Nesli] Lascio stare ogni mio problema Lascio che non mi porti giù Sarà come girare sulla schiena Per poi alzarsi e non pensarci più Su, su, fino alle stelle Il suono che amo di più dà brividi sulla pelle, boom Può cambiarti la giornata Il ritmo di una canzone finora mai ascoltata Ogni parola ha l'effetto di una fucilata Che uccide all'istante nel momento in cui è pronunciata Si, si, si risolve da sé Come un tipo che è ubriaco e che è pestato da tre Per te non c'è niente Neanche fra la tua gente Alla fine tutti dicono: "Tanto mi è indifferente" Che cambia se ti guardano con sospetto Se parlano sottovoce dicendo che sei matto Oggi, sì, sarà il giorno del riscatto Prendi un'arma da fuoco e fagli sentire il botto Paranoico, pensi sempre che sia un complotto In realtà è che per la maggior parte del tempo sei fatto No, è da non credere Non è permesso cedere Che vuoi fare? Come una femminuccia vuoi perdere? Fuori le palle, fuori la rabbia e il resto Fuori per poterle scrivere poi in ogni testo Rime senza fine descrivono un universo Che ci posso fare, ora è tardi, mi sono perso Come in un copione di un film che non ha senso Io penso alle mie battute comunque vada Ne ho visti di coglioni sciroccati per la strada O in discoteca strafatti con le mani al cielo E quello stupido senso di libertà che provan loro Li convince di essere una voce dello stesso coro Quello che so, per sempre lo difenderò, è quello che ho Ovunque andrò tanti stronzi so che incontrerò E li manderò a fanculo [Strofa 4: Fabri Fibra] Ogni volta che ascolto Syria Vorrei bruciare il suo guardaroba La madre non le ha detto come si stira Si veste e sembra un cane antidroga Ancora non capisco 'sta cosa strana Perché mamma piange quando pensa a Lady Diana E quando le ho chiesto: "Mamma, come ti butta?" "È morta anche Madre Teresa di Calcutta" [Strofa 5: Nesli] Lascio stare ogni mio problema Lascio che non mi porti giù Sarà come girare sulla schiena Per poi alzarsi e non pensarci più Su, su, fino alle stelle il suono che amo di più da brividi sulla pelle Su, su, fino alle stelle il suono che amo di più da brividi sulla pelle È solo un giorno di ordinaria follia Nel quale tutto è una bugia E nessuno ti fa compagnia Raduna le tue cose, amico, e scappa via Prima che venga a prenderti la polizia Che vuoi che sia? Un altro incubo che si materializza Sul nuovo piwat della tua mente che si masterizza Lo sguardo della gente non osserva, ma analizza L'ipocrisia che c'è nell'aria emana una gran puzza Mi dà la nausea, cazzo, voglio una pausa</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Tienila su">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="22"/>
+                        <testo>[Intro] Fibra! Tienila su! Oh adesso seguitemi [Strofa 1] Entro in questo negozio e chiedo Mr. Simpatia Ma non c’è un rivenditore che conosca chi sia Non faccio dischi con dei singoli da Chemical Brothers Ma con due plastiche facciali mi nascondo entrando in radio Parto col ciak, per te prevedo il crack Ancora dicono: "L’Italia è qui a due passi dall’Iraq" Ancora chiedono cosa è l’hip-hop, cosa è il bum-ciak E ci mancava un coglione che pensa di essere 2Pac Arrivo dallo scandalo del rap italiano E se qualcosa sta cambiando era parte del piano I ragazzi non mi seguono "Sei troppo negativo!" Sfondo l’obiettivo a calci perché i polsi me li segano Non fare il punk, non mi stappi sono un pro Non mi stacchi dalla metrica vedi vado a go-go Quando perdo l’entusiasmo e non ci vedo neanche più Dentro me sento una voce che mi urla: "Tienila su!" [Ritornello] Ogni volta che ti annoi Se prendi lo stesso che prendiamo noi Questa volta allora tienila su! Ogni canna che ti fai Se accendi comunque pure in mezzo ai guai Questa volta allora tienila su! Ogni volta che non sai Se credere ancora in tutto quel che fai Questa volta allora tienila su! Ogni lotta che non vuoi Se guardi allo specchio dentro gli occhi tuoi Questa volta allora tienila su! [Strofa 2] Mi diverto a parlare con gente mai sentita prima Quando chiamano a casa mia alle cinque e mezzo di mattina Con insulti e minacce, cazzo come sopporto Pronto? "Esci di casa che sei morto" Io sono il testimone oculare dello sconforto La prova evidente che qualcosa è andato storto Apri questo topic da scaricarti "Chi cerca Fabri Fibra anche nei topic degli altri?" Mi trovo il mio nome scritto sui flyer a ogni party Lo fanno perché viene più gente, ma per menarti Prego uno spirito che danza respirando un fumo blu E sento voci che mi urlano: "Tienila su!" [Ritornello] Ogni volta che ti annoi Se prendi lo stesso che prendiamo noi Questa volta allora tienila su! Ogni canna che ti fai Se accendi comunque pure in mezzo ai guai Questa volta allora tienila su! Ogni volta che non sai Se credere ancora in tutto quel che fai Questa volta allora tienila su! Ogni lotta che non vuoi Se guardi allo specchio dentro gli occhi tuoi Questa volta allora tienila su! [Outro] Tienila su! Tienila su! Tienila su! Fibra! Tienila su!</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Bonus Track">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="25"/>
+                        <testo>[Intro] When they play this in the club they go nuts When they play this in the club they go nuts When they play this- when they play this When they play this in the club they go nuts [Ritornello] Molta gente mi considera odioso Io so solo che al microfono son pericoloso Ascolto Master P, mi fa sentire mafioso Copio pure Dizzee Rascal, c'ho il rap velenoso [Strofa 1] Metti me che fumo crack, il colmo Io faccio strisce di scarsi fumandoci le Pall Mall Bevo Campari, Sambuca Molinari Quando ho fatto il marinaio il quarto giorno ero già a casa invalido Spengo i fanali così vi stendo a terra Un figlio come me è meglio perderlo in guerra Gli argomenti che tratto sono da vero sfigato E la sfiga mi chiama e dice: "Na-na-na-na-na-na" Via Fabri Fibra, fuori dal gioco Io ora qui gioco sporco "Dio il nome del morto è il mio?" Della mia vita non conosci un cazzo Te la racconto, ma prima io mi ammazzo Un colpo in testa cosa vuoi che sia? È morto Fibra, ma è risorto Mr. Simpatia Io copio Eminem perché non c'ho più fantasia E faccio 50 Cent a Fibra parodia Così ho un giubbotto che è verde militare Ho pagato un poliziotto per farmi sparare Ho avuto pure un figlio, ma l'ho fatto ammazzare Perché sperava che facessi un altro "Uomini di Mare" Vedi sono l'esempio della contraddizione Con mille volta faccia come la mia nazione E sto venendo in guerra, ma lo faccio da coniglio Perché me lo ha suggerito il Presidente del Consiglio [Ritornello] Io non so, molta gente mi considera odioso Io so solo che al microfono son pericoloso Ascolto Master P, mi fa sentire mafioso Copio pure Dizzee Rascal, c'ho il rap velenoso Io non so, molta gente mi considera odioso Io so solo che al microfono son pericoloso Io copio Warren G e anche Jay-Z il nervoso Che mi sale finché penso a quanto sono penoso [Strofa 2] Ho fatto piangere una prostituta Indovinando che ha due figli, ho detto: "Dio non ti aiuta!" A scuola ho fatto sempre scena muta Perché pensavo: "Chissà la prof come lo suca" Mi sono masturbato pure in Piazza del Duca E al posto del cazzo giro con questa verruca Ma quali troie, io ci vado a nozze (Perché?) Perché ho leccato le fighe più zozze Quelle che profumano di cozze Dopo che ti ascolti il mio CD m'insegui con due canne mozze C'è un ricercato nessuno c'ha la traccia C'è solo una foto, "Cazzo, Fibra, questa è la tua faccia!" Io sono il tipo senza un minimo di dignità Con sette crisi d'età, privo d'identità Se fai una festa non tenermi d'occhio Dopo mezz'ora io già giro in ginocchio È che difatti è easy, dimmi che metti il tanga Sono l'MC più busy, mi odia qualunque banda Sotto il letto ho una vanga, ma in giro non mi ci vedi E se mi passi una pistola, io mi sparo nei piedi Perché ho fatto di tutto per essere al centro e ora che ci sto Io non mi sposto, prendo pure il tuo posto Qui mi conoscono come il tipo più odioso Perché al microfono sono pericoloso [Interludio] Scemo, vaffanculo, scemo [Ritornello] Io non so, molta gente mi considera odioso Io so solo che al microfono son pericoloso Ascolto Master P, mi fa sentire mafioso Copio pure Dizzee Rascal, c'ho il rap velenoso Io non so, molta gente mi considera odioso Io so solo che al microfono son pericoloso Io copio anche Jay-Z, Warren G il nervoso Che mi sale finché penso a quanto sono penoso [Outro] Two strangers - not strangers</testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Faccio sul serio - Radio Version">
+                        <partecipanti/>
+                        <Durata minuti="2" ore="0" secondi="56"/>
+                        <testo></testo>
+                    </Traccia>
+                </tracce>
+                <Musica genere="rap">
+                    <dataUscita anno="2004" giorno="1" mese="9"/>
+                    <Durata minuti="12" ore="1" secondi="1"/>
+                    <ArtistProduct description="Mr. Simpatia è il secondo album solista di Fabri Fibra, pubblicato il 1º settembre 2004 per Vibrarecords. &#xa;La simpatia paventata nel titolo è un'ironia davanti alle delusioni della vita. Gli argomenti trattati sono il risentimento e l'amarezza per la stagnante scena hip hop italiana dell'epoca, il disprezzo verso la società, il rapporto complicato con le ragazze e le difficili condizioni lavorative. &#xa;Nell'album Fibra impersona il suo alter-ego Mr. Simpatia e, influenzato dall'Eminem di The Slim Shady LP, usa un linguaggio violento e scorretto. Numerosi sono i dissing espliciti a esponenti della scena rap italiana del tempo, nonché riferimenti a personaggi italiani del mondo dello spettacolo. In un'intervista del 2018, Fibra ha affermato di essersi ispirato anche a Dizzee Rascal, uno dei caposcuola della grime inglese. &#xa;Le diciotto tracce sono tutte rappate da Fibra, che le scrisse durante la sua permanenza a Brighton (in Inghilterra), ad esclusione del brano “Andiamo”, realizzato insieme al fratello minore Nesli. Quest'ultimo ha anche realizzato la maggior parte delle strumentali dell'album, fatta eccezione per “Io non ti invidio”, prodotta da Bassi Maestro, e “Bonus Track”, realizzata da Bosca. &#xa;È stata pubblicata, in seguito, una ristampa dal titolo Mr. Simpatia (Gold Edition) in cui è presente anche un DVD contenente il live di Fibra al FreeMusik di Brescia e un CD contenente la versione audio del DVD. &#xa;Nel 2018, dopo quasi quattordici anni dall'uscita, viene certificato disco d'oro. Due anni dopo Mr. Simpatia ottiene il disco di platino." imagePath="view/icons/Fabri_Fibra/Mr_Simpatia.jpg" title="Mr Simpatia"/>
+                </Musica>
+            </Album>
+        </prodotti>
+    </Artista>
+    <Artista genere="ambient" imagePath="view/icons/Lidl/profilo.jpeg" nome="Lidl">
+        <info>Lidl è registrata su Spotify come artista e conta circa 4.362 ascoltatori mensili, con un profilo seguito da fan che apprezzano il suo approccio non convenzionale alla musica.
+Nel 2019 Lidl Svizzera ha pubblicato l’album Allt annat är olidligt (“Tutto il resto è insopportabile”), un concept album di 21 tracce che raccoglie field recordings dal supermercato (beep delle casse, rumori di carrelli, annunci al microfono) trasformati in un’esperienza sonora ambient.
+Oltre all’album, sul profilo compaiono singoli come “Blippar varor i kassan” e “KONG I BYN”, che hanno accumulato centinaia di migliaia di stream, dimostrando l’interesse per questa curiosa forma di marketing musicale</info>
+        <prodotti>
+            <Singolo chartPosition="0" isRemix="false">
+                <mainTrack has_testo="1" nome="Kong I Byn">
+                    <partecipanti/>
+                    <Durata minuti="2" ore="0" secondi="1"/>
+                    <testo></testo>
+                </mainTrack>
+                <Musica genere="rap">
+                    <dataUscita anno="2023" giorno="3" mese="4"/>
+                    <Durata minuti="2" ore="0" secondi="1"/>
+                    <ArtistProduct description="Single by Lidl" imagePath="view/icons/Lidl/Kong_I_Byn.jpg" title="Kong I Byn"/>
+                </Musica>
+            </Singolo>
+        </prodotti>
+    </Artista>
+    <Artista genere="hip hop" imagePath="view/icons/Tyler,_The_Creator/profilo.jpg" nome="Tyler, The Creator">
+        <info>Tyler, the Creator, pseudonimo di Tyler Gregory Okonma (Los Angeles, 6 marzo 1991), è un rapper, cantautore, produttore discografico e stilista statunitense.,attore 
+Grazie al suo stile unico e versatile, è ampiamente considerato come una delle figure più influenti nella cultura popolare della sua generazione, sia nel mondo della musica che in quello della moda. Nel 2019 è stato definito «innovatore dell'anno» da parte del Wall Street Journal, mentre nel 2024 il Los Angeles Times ha incluso il rapper nella categoria di figure che «lasciano il segno» nella città di Los Angeles. 
+Okonma ha iniziato a guadagnare notorietà negli ultimi anni 2000, emergendo come leader del collettivo di musica alternative hip hop Odd Future, per il quale ha prodotto gran parte dei lavori musicali, oltre ad avere creato tutti le copertine per le pubblicazioni del gruppo e, secondo quanto rivelato in una intervista con DJ Semtex, aver disegnato tutti gli abiti del gruppo e tutto il merchandise collegato ad esso. Nel 2009 ha pubblicato il suo primo lavoro da solista, il mixtape Bastard, seguito dal suo album in studio di debutto Goblin, pubblicato nel 2011; a causa del sound pesantemente influenzato dall'horrorcore e dei testi violenti e trasgressivi di entrambi i progetti, Okonma è stato vittima di varie controversie. In seguito al suo secondo album Wolf (2013), Okonma ha cominciato a separarsi gradualmente da questo stile, virando su un sound influenzato da jazz, soul e R&amp;B nel suo terzo progetto Cherry Bomb, pubblicato nel 2015. Nel 2017 è uscito Flower Boy, che ha ricevuto una generale acclamazione della critica specializzata e un grande successo commerciale, apprezzamenti ricevuti anche dai suoi lavori successivi Igor (2019) e Call Me If You Get Lost (2021), che hanno debuttato alla prima posizione nella classifica statunitense e si sono aggiudicati il Grammy per miglior album rap rispettivamente nel 2020 e nel 2022. 
+Oltre ai suoi successi musicali, Okonma ha anche fondato due brand di abbigliamento, Golf Wang e Le Fleur, e ha collaborato con brand di massima importanza come Lacoste, Converse e Louis Vuitton, e a partire dal 2012 organizza annualmente il festival musicale Camp Flog Gnaw Carnival, che nel corso degli anni ha potuto contare la partecipazioni di diversi artisti di spessore, tra i quali Kanye West, Kendrick Lamar, Drake, ASAP Rocky, Lana Del Rey e Billie Eilish</info>
+        <prodotti>
+            <Singolo chartPosition="0" isRemix="false">
+                <mainTrack has_testo="1" nome="Potato Salad">
+                    <partecipanti>
+                        <partecipante nome="A$AP Rocky"/>
+                    </partecipanti>
+                    <Durata minuti="3" ore="0" secondi="2"/>
+                    <testo>[Intro: Tyler, The Creator]
+Yo, now you gon' start me from the top? Listen
+Shout out Harlem, man
+Shout out A$AP Rocky, man
+AWGE in the building, man
+What's good? Is that potato salad?
+Yo, listen
+
+[Verse 1: Tyler, The Creator]
+Niggas give me the cold shoulder, I can speak for myself
+So I keep a high waist and alligator the belt
+And got a belt with the holster, I ain't playing games
+But got some lil' niggas who would do it so I pass the controller
+You get pressed and X out, tri-angle your nose
+Pause your life if you squares try to mess with my O's, woah
+So cut the crap like shit barbers
+'Cause we really with the beef like closeted gay fathers
+Nigga we get dollars, give 'em to Ben Baller
+Exchange for them chains that's all shiny with thick water
+I got back pains, neck heavy like whipped cream
+My whip clean, and they all white, I whip cream
+And cop boys and I joystick, I whip cream and cop cribs
+I got more space than big jeans, y'all sleeping on me
+Explain why they got shit dreams
+I'm alien, got the laser gun with the big beam
+Married to the money, my bitch green
+No I don't sip lean, but ride around in rockets like Yao Ming
+Y'all niggas weak
+They thought I was goofy and all mouses
+Double C my luggage and fill them with Comme blouses
+Y'all cop kush, my nigga I cop houses
+And fill 'em with some Leo DiCap's and some Cole Sprouses, nigga
+Where we? Rocky, A$AP
+GOLF, boy, where we at? Nigga in Paris
+[Verse 2: A$AP Rocky]
+Fuck clothes, I cop pieces
+Couple thots with me and them hoes is like divas
+Got my Vans on but they look like sneakers
+Flipped a couple packs, BasedGod in the speakers
+Bass all in the speakers
+In the field like baseball, play ball, face wall when polices come
+I don't rock Chanel, I rock channel
+And no this ain't a purse, it's a satchel (At you)
+Bless, at you, nah, I ain't sneeze
+But if niggas want steam or smoke, bet I match you
+Got a bullet with your name on the barrel
+If hollows don't clip, you get nip like it's cat food
+That dude, when I die, they gotta make a statue
+Bad attitude, this ain't a purse, it's a satchel
+Go to any nigga with money up in my bracket
+Then I think about the state of rapping
+All the freshmens in the classes
+All the super seniors' mumblin' and ramblin'
+Mumblin' and rappin', mumble rapping?
+I find it hard to find actual talent
+I find it hard to find an actual challenge
+I'm like Shabazz Palace's last acid hit, elaborate
+Rap lab's labyrinth, word to Kodak's Black's Lazarus
+"CALLDROPS" on the album skits
+
+[Verse 3: Tyler, The Creator]
+Ayo, I'm the channel that you watch, I'm the ammo in the Glock
+Weird nigga, full suit with the sandals and the socks, stop
+And based on my neck boy
+You would think I hate glass homes way I'm handling the rocks
+Who cast the first stone? Bitch, it's me, fuck you thought?
+Real grunge nigga, I ain't got a flannel as the top
+And I'm picking up guitar, strum nigga
+Bum niggas wish they could make a garden shed
+But they sleeping on me man like their arm is dead
+I'm a wild nigga boy and you farmer bred, born
+You ain't animal, you are, corn, hahaha, yeah!
+
+[Outro: Tyler, The Creator]
+K shiz, what up, nigga!</testo>
+                </mainTrack>
+                <Musica genere="hip hop">
+                    <dataUscita anno="2018" giorno="23" mese="7"/>
+                    <Durata minuti="3" ore="0" secondi="2"/>
+                    <ArtistProduct description="“Potato Salad” is a track released on AWGE’s AWGE DVD Vol. 3, which was released on July 23, 2018. The song was put on streaming services on September 28, 2018. &#xa;On the track, we hear A$AP Rocky and Tyler, The Creator exchange bars on their successes, clothing and money. &#xa;The track’s instrumental is drawn from “Knock Knock” by Monica, which was produced by Kanye West. In a tweet Tyler stated that he was “trying to rap on that for years. ”&#xa;The track also teases a potential collaboration between the two, to be called WANG$AP. Though it is not confirmed and Tyler had said not to get our hopes up, the collaboration is still a possiblity. They previously teased their merging on “WHAT THE FUCK RIGHT NOW” and “Who Dat Boy”, respectively." imagePath="view/icons/Tyler,_The_Creator/Potato_Salad.png" title="Potato Salad"/>
+                </Musica>
+            </Singolo>
+            <TShirt colore="light cream" taglia="S, M, L, XL">
+                <Merch codiceProdotto="TTCT21">
+                    <NotMusica disponibile="1" prezzo="114.75" quantita="1000">
+                        <ArtistProduct description="For any lover of Tyler The Creator Merch, this shirt is actually one of the Tyler The Creator clothes that could not be missed from your collection. Bright colors, heavy Graphics that represent Tyler’s grunge style and creativity are implemented on this shirt. Regardless of whether it is his familiar iconic covers of albums, capricious drawings or witty phrases – each reflects the personality of Tyler. These shirts are produced from quality fabric so as to afford comfort and durability, being perfect for casual wear or airing your colours at concerts or informal gatherings.&#xa;Even being a part of rather wide-spread Tyler The Creator merchandise collection, these shirts are noteworthy for their workmanship and the actual references to his music and character. They are not just clothes – they are the anthem of personalities, and the reference to Tyler’s impact on music and style. If you are a die-hard Tyler fan or just an admirer of unique artistic t-shirts, then incorporating Tyler The Creator shirt is a perfect thing to do." imagePath="view/icons/Tyler,_The_Creator/CMIYGL_Tour_Classic_Shirt.jpg" title="CMIYGL Tour Classic Shirt"/>
+                    </NotMusica>
+                </Merch>
+            </TShirt>
+        </prodotti>
+    </Artista>
+    <Artista genere="pop" imagePath="view/icons/The_Weeknd/profilo.jpg" nome="The Weeknd">
+        <info>The Weeknd, pseudonimo di Abel Makkonen Tesfaye (in amarico አበል መኮነን ተስፋዬ; Toronto, 16 febbraio 1990), è un cantautore, produttore discografico e attore canadese. 
+Nel 2011 ha firmato il suo primo contratto discografico con la Republic Records, pubblicando la raccolta Trilogy formata dai mixtape House of Balloons, Thursday e Echoes of Silence, i cui singoli principali sono House Of Balloons/Glass Table Girls, Wicked Games e Twenty Eight. Nel 2013 ha pubblicato il suo primo album in studio Kiss Land. È salito alla ribalta del panorama musicale internazionale nel 2015 con l'uscita del secondo album, Beauty Behind the Madness, supportato dai singoli di successo globale The Hills e Can't Feel My Face che hanno raggiunto la vetta della Billboard Hot 100. L'anno successivo è stato messo in commercio Starboy, il cui omonimo singolo, una collaborazione con i Daft Punk, ha eguagliato i risultati dei suoi predecessori. Il suo quarto album After Hours (2020) ha generato i singoli Blinding Lights (quello più popolare di tutti i tempi negli Stati Uniti d'America secondo Billboard) e Save Your Tears, divenuti i più venduti a livello globale rispettivamente nel 2020 e nel 2021. La trilogia incominciata con After Hours è proseguita con gli album Dawn FM (2022) e Hurry Up Tomorrow (2025), promossi a livello internazionale attraverso il primo tour musicale negli stadi After Hours til Dawn Tour. 
+The Weeknd ha venduto oltre 75 milioni di dischi in tutto il mondo tra album e singoli digitali, risultando tra gli artisti con maggiori vendite nella storia della musica digitale. Nel 2016 il suo singolo Earned It è stato certificato dieci volte disco di platino dalla RIAA, ricevendo il Digital Diamond Award per le oltre 10 milioni di copie vendute digitalmente, rendendo The Weeknd il primo artista canadese nella storia ad essere insignito di tale riconoscimento, conferito tre anni dopo a un altro suo singolo, The Hills. Nel 2023 anche i brani Can't Feel My Face e Blinding Lights hanno raggiunto tale traguardo, facendolo entrare nel Guinness dei primati.
+Durante la sua carriera è stato premiato con quattro Grammy Awards, diciotto Billboard Music Awards, cinque American Music Award, quattro MTV Video Music Awards, tredici Juno Award, un MTV Europe Music Award e ha ricevuto una candidatura ai Premi Oscar per il brano Earned It inciso per la colonna sonora del film Cinquanta sfumature di grigio nel 2014. 
+Nel 2020 la rivista Time lo ha inserito nella lista delle 100 personalità più influenti dell'anno, mentre nel 2023 è stato definito «l'artista più popolare al mondo» dal Guinness World Records.</info>
+        <prodotti>
+            <Tour>
+                <dateTour>
+                    <DataTour luogo="Foxborough">
+                        <Data anno="2025" giorno="10" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Foxborough">
+                        <Data anno="2025" giorno="11" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Minneapolis">
+                        <Data anno="2025" giorno="14" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Denver">
+                        <Data anno="2025" giorno="21" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Inglewood">
+                        <Data anno="2025" giorno="25" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Inglewood">
+                        <Data anno="2025" giorno="26" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Inglewood">
+                        <Data anno="2025" giorno="28" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Inglewood">
+                        <Data anno="2025" giorno="29" mese="6"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Las Vegas">
+                        <Data anno="2025" giorno="4" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Las Vegas">
+                        <Data anno="2025" giorno="5" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Santa Clara">
+                        <Data anno="2025" giorno="8" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Santa Clara">
+                        <Data anno="2025" giorno="9" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Seattle">
+                        <Data anno="2025" giorno="12" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Vancouver">
+                        <Data anno="2025" giorno="15" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Vancouver">
+                        <Data anno="2025" giorno="16" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Edmonton">
+                        <Data anno="2025" giorno="19" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Montreal">
+                        <Data anno="2025" giorno="24" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Montreal">
+                        <Data anno="2025" giorno="25" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Toronto">
+                        <Data anno="2025" giorno="27" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Toronto">
+                        <Data anno="2025" giorno="28" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Philadelphia">
+                        <Data anno="2025" giorno="30" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Philadelphia">
+                        <Data anno="2025" giorno="31" mese="7"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Landover">
+                        <Data anno="2025" giorno="2" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Toronto">
+                        <Data anno="2025" giorno="7" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Toronto">
+                        <Data anno="2025" giorno="8" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Nashville">
+                        <Data anno="2025" giorno="12" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Miami">
+                        <Data anno="2025" giorno="15" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Miami">
+                        <Data anno="2025" giorno="16" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Atlanta">
+                        <Data anno="2025" giorno="21" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Orlando">
+                        <Data anno="2025" giorno="24" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Arlington">
+                        <Data anno="2025" giorno="27" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Arlington">
+                        <Data anno="2025" giorno="28" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Houston">
+                        <Data anno="2025" giorno="30" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="Houston">
+                        <Data anno="2025" giorno="31" mese="8"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                    <DataTour luogo="San Antonio">
+                        <Data anno="2025" giorno="3" mese="9"/>
+                        <Orario minuti="0" ore="19" secondi="0"/>
+                    </DataTour>
+                </dateTour>
+                <NotMusica disponibile="1" prezzo="65.00" quantita="100000">
+                    <ArtistProduct description="Il “After Hours Til Dawn Tour” è il tour mondiale di The Weeknd, creato per promuovere gli album After Hours (2020) e Dawn FM (2022). Caratterizzato da una produzione scenica immersiva—con luci, video mapping e coreografie—vede come special guest Playboi Carti e il produttore Mike Dean, e attraversa stadi e arene delle principali città nordamericane con uno show ad alto impatto visivo.&#xa;&#xa;Biglietti su: https://www.ticketmaster.com/the-weeknd-tickets/artist/1697014" imagePath="view/icons/The_Weeknd/The_Weeknd_After_Hours_Til_Dawn_Tour.jpg" title="The Weeknd: After Hours Til Dawn Tour"/>
+                </NotMusica>
+            </Tour>
+            <Singolo chartPosition="0" isRemix="false">
+                <mainTrack has_testo="0" nome="Blinding Lights - Instrumental">
+                    <partecipanti/>
+                    <Durata minuti="3" ore="0" secondi="22"/>
+                    <testo></testo>
+                </mainTrack>
+                <Musica genere="pop">
+                    <dataUscita anno="2020" giorno="11" mese="9"/>
+                    <Durata minuti="3" ore="0" secondi="22"/>
+                    <ArtistProduct description="“Blinding Lights (Instrumental)”, pubblicato ufficialmente l’11 settembre 2020 come singolo su tutte le piattaforme, ha superato i 5,9 milioni di stream su Spotify , vanta oltre 804 milioni di visualizzazioni su YouTube e conta più di 34,7 milioni di like su TikTok" imagePath="view/icons/The_Weeknd/Blinding_Lights_Instrumental.png" title="Blinding Lights Instrumental"/>
+                </Musica>
+            </Singolo>
+        </prodotti>
+    </Artista>
+    <Artista genere="rap" imagePath="view/icons/Club_Dogo/profilo.jpg" nome="Club Dogo">
+        <info>I Club Dogo sono un trio hip hop nato a Milano nel 1999 come Sacre Scuole (Guè, Dargen D’Amico e Jake La Furia), poi riformatosi nel 2002 con Don Joe al posto di Dargen e adottando il nome attuale. Dopo l’esordio indipendente con Mi fist (2003) e il successo di Penna capitale (2006), hanno firmato con Virgin Records per Vile denaro (2007), ottenendo riconoscimenti di critica e una maggiore visibilità mediatica. Nel 2009 hanno pubblicato Dogocrazia per Universal, consolidando la loro posizione nella scena italiana nonostante una ricezione radiofonica ridotta. Tra il 2010 e il 2014 hanno sfornato gli album Che bello essere noi, Noi siamo il club e Non siamo più quelli di Mi fist, accompagnati da numerosi video, collaborazioni e certificazioni oro e platino. Dopo una pausa dal 2015 al 2023, durante la quale ciascun membro ha portato avanti progetti solisti, il gruppo ha annunciato il ritorno ufficiale nell’autunno 2023 e ha pubblicato l’album Club Dogo nel gennaio 2024, seguito da una serie di concerti sold-out al Mediolanum Forum di Assago.</info>
+        <prodotti>
+            <Vinile diametro="30" rpm="33">
+                <Disco codiceRiconoscimento="1702378021" produttoreStampe="Universal Music" tipoProdotto="LP">
+                    <Merch codiceProdotto="1702378021">
+                        <NotMusica disponibile="0" prezzo="27.90" quantita="0">
+                            <ArtistProduct description="Il gruppo più influente della storia del rap italiano torna a sorpresa con un nuovo album.&#xa;Gué, Jake La Furia e Don Joe che con il loro sodalizio sono entrati nella leggenda della musica italiana, rivoluzionando le classifiche per come le conoscevamo e facendo da apripista a una generazione di giovani artisti hip hop, hanno deciso di rivedersi per tornare a fare musica insieme.&#xa;Club Dogo, il nuovo album. Fuori ora.&#xa;https://shop.universalmusic.it/products/club-dogo-club-dogo-vinile " imagePath="view/icons/Club_Dogo/Club_Dogo_-_LP.jpeg" title="Club Dogo - LP"/>
+                        </NotMusica>
+                    </Merch>
+                </Disco>
+            </Vinile>
+            <Album label="Vibrarecords">
+                <tracce>
+                    <Traccia has_testo="1" nome="Intro">
+                        <partecipanti/>
+                        <Durata minuti="1" ore="0" secondi="22"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Cronache di resistenza (Hard To Do)">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="41"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Rap soprano">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="46"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Qualcosa in mente">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="45"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Interlude, Pt.1">
+                        <partecipanti/>
+                        <Durata minuti="0" ore="0" secondi="0"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Sangue e filigrana">
+                        <partecipanti>
+                            <partecipante nome="Vincenzo"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="2"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Note killer">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="24"/>
+                        <testo>[Intro]
+Swing and dine and dance for your money
+Please Mr. DJ play this song for me
+
+[Ritornello: Jake La Furia &amp; Guè Pequeno]
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+
+[Strofa 1: Guè Pequeno]
+Notte di mezza estate
+In sogno precipito e atterro sveglio sopra queste strade
+Bevo Red Stripe, ho sete, gradi Fahrenheit fondono il marciapiede
+Tu oscuri i miei emisferi come i vetri di una Mercedes
+Incastonati in mia materia grigia
+Scintillanti occhi verdi come i rubini che ho in valigia
+Vale presidenti morti in contanti alle venti per lo scambio
+Ma è un'imboscata, saliva azzerata, pioggia di piombo
+Fuga allo Shangri-la, Cadillac, strade ripide
+Ora fa brutto se non mi rifletto più nella tua iride
+Penso che non ti ho mai capito tipo un ideogramma
+Raduno la mia famiglia e do sensimilla alla fiamma
+Più di un corpo diventerà salma, filma De Palma
+Camicie a fiori stile narcos, pronti ad aprire il varco
+Scena confusa, entro in sala da ballo
+Espiro draghi di fumo tipo tattoo yakuza
+Poi inferno dietro a porta chiusa, fuoco, fucili Remington
+Si freddano uno dietro l'altro tipo effetto domino
+La storia è cruda come al sushi bar dove ora conto i soldi
+Entri vestita per uccidere e mi avvolgi
+Dal tramonto all'alba complichiamo le nostre carni
+Ma sarò di nuovo solo ora che sto per svegliarmi
+Donna tarantola, schiverò una pallottola, ma mio Dio
+Non sopravviverò al tuo addio
+[Ritornello: Jake La Furia &amp; Guè Pequeno]
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+
+[Strofa 2: Jake la Furia]
+Fuoco nel sacro cuore
+Mi asciugo gli occhi mentre guardo il mare
+Dietro alle sbarre, dentro a un contenitore
+Vita che infossa, scossa, defibrillatore
+Ricordo amore, le mani intrecciate come le suore
+Pene ergastolano, raggio blindato, tu sei lontano
+Io, dall'altra parte del mondo con la tua foto in mano
+Mandami un bacio mami
+Di notte labbra bagnate sogno che mi ami
+Fogli formano cuori origami
+Raggiungi i soci in spiaggia a Copacabana
+Chiedi del Guercio, ha una camicia hawaiana
+Porta i miei saluti, prendi la grana
+Imbosca tutto alla dogana
+Il resto ai ragazzi, pensano loro a chi infama
+Il mio raggio è supersicuro, metratura scarsa
+Io muoio, lo giuro, i miei ricordi sfondano la stanza
+Vorrei farmi girare in un lenzuolo come in una Rizla
+Consumarti come la milza di chi si alcolizza
+Al mio ritorno baby
+Rubando l'oro del mondo farò due fedi
+Fosse anche che torno a piedi
+Mondo in faccia a fuoco, in alto i medi
+Tu intanto riempi i bicchieri
+Perché da qua fra un po' scompaio come Mr. Grady
+Aspettami, mia signorita, non ti lascio dama bianca a vita
+Ti pensavo in banca con in mano il mitra
+Ti pensavo al controllo peso, diamanti e Tanita
+Ti penso adesso che scavo verso l'uscita
+
+[Ritornello: Jake La Furia &amp; Guè Pequeno]
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è
+It's a shame
+Nella notte note killer
+Sangue nelle mie pupille
+Totalmente dipendente
+Sei la droga più potente che c'è</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Tana 2000">
+                        <partecipanti>
+                            <partecipante nome="Dargen D'Amico"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="29"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Indecifrabili, dangerous!">
+                        <partecipanti>
+                            <partecipante nome="Lama Islam"/>
+                        </partecipanti>
+                        <Durata minuti="4" ore="0" secondi="53"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Selezioni all'ingresso">
+                        <partecipanti/>
+                        <Durata minuti="5" ore="0" secondi="18"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Interlude, Pt.2">
+                        <partecipanti/>
+                        <Durata minuti="0" ore="0" secondi="45"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Vida loca - Remix 2k24">
+                        <partecipanti/>
+                        <Durata minuti="3" ore="0" secondi="14"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Kybono ni tsuki">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="3"/>
+                        <testo>[Strofa 1: Jake la Furia]
+Schiene molli cedono ai fischi e strofe senza poesia
+Se agli MC mancano i midolli i loro dischi hanno la leucemia
+Livello zero come torri nella Jihad
+Il rap è morto come Aaliyah, chiamate la polizia
+Siamo soli come Vasco, l'hip hop al giorno d'oggi è scomparso
+Oppure è pieno di infiltrati come Donnie Brasco
+Se l'era è di sorpasso, non puoi sottrarti al disastro, tu
+Sei come un kamikaze che si mette il casco
+Rimani indietro nel tempo, sei lento contro il mio flow
+Talmente indietro che il tuo CD ha dentro Kurtis Blow
+Così indietro che il tuo Moncler sarà il più togo
+Le tue Nike avranno la scritta ancora là sotto il logo
+Ho una potenza di rime, spesso interviene la scienza per farne le stime
+Sembrano senza fine, danno incandescenza alle mie emoglobine
+Quindi se sanguino in strada faccio la condensa sopra le vetrine
+Ora do cartelle che sembrano mine
+Rap violenza incline alla disobbedienza contro ogni regime
+Se nell'età dell'innocenza io stendevo righe
+Poi me le tiravo peggio delle fighe
+Sto a disagio tra rapper senza flow, senza pile
+Io sto in overdose di alcaline, corrodo le tue puntine, DJ
+Rapper fallito vestito da Spandau
+Chi chi man fan di MTV finito a ballare l'house
+Siamo come ying e yang all'interno del tao
+Se tu vuoi fare Van Damme ma io sono il Nak Su Kao
+Ora l'aria nella disco ha più gradi del Cannonau (Dogo Club, fra')
+Per educarne cento come Mao
+[Ritornello: Guè Pequeno &amp; Jake La Furia]
+Fottutamente esplicito
+Senza taglio, pura
+L'inchiostro non scende perché ha paura
+Liricamente ti apriamo tipo autopsia
+Con le sillabe killer che stanno all'angolo di questa via
+Fottutamente esplicito
+Senza taglio, pura
+L'inchiostro non scende perché ha paura (perché ha paura)
+Liricamente ti apriamo tipo autopsia
+Con le sillabe killer che stanno all'angolo di questa via
+
+[Strofa 2: Don Joe]
+Delle vostre città che quaggiù ora bruciano come Sodoma e Gomorra
+Perché se tu spingi dietro me io poi ti sgamo nella folla, chi chi
+Vuoi farti i cazzi miei come a Striscia Antonio Ricci?
+Il nome è Don Joe-Vanni, taglia come giù a Scandicci
+Lascio le menti sotto shock come Peter Berg
+Pensavi alla realtà ma è aldilà nello zoom di Spielberg
+Il film non ha più lieto fine come il tuo romanzo
+Alza barriere Full Metal Jacket perché quel che avanzo
+Club Dogo, piedi sul tatami vale todo
+Nella dancehall (More fyah) mando soffitti a fuoco
+Non abbiamo accordi come a Kyoto
+Quindi non ti informare, continua a fare un "Sonno Profondo" come la Yoshimoto
+Se consumo cheeba, lascio senza moto, saboto i vostri piani
+Jake con me, nocche senza paramani
+Lucky Luciano sopra il beat completa l'identikit
+Gli altri vanno fuori moda come la down beat
+
+[Ritornello: Guè Pequeno &amp; Jake La Furia]
+Fottutamente esplicito
+Senza taglio, pura
+L'inchiostro non scende perché ha paura
+Liricamente ti apriamo tipo autopsia
+Con le sillabe killer che stanno all'angolo di questa via
+Fottutamente esplicito
+Senza taglio, pura
+L'inchiostro non scende perché ha paura
+Liricamente ti apriamo tipo autopsia
+Con le sillabe killer che stanno all'angolo di questa via
+
+[Strofa 3: Guè Pequeno]
+Chiariamo, se il Guercio ha il microfono in mano
+È come se avesse un ferro tipo Tiziano
+Quindi se vuoi testarmi vesti un giubbotto in kevlar
+O non disturbarmi se sto cibando il mio intelletto fumando zeutla
+Non addormento la ragione o si svegliano i mostri
+Stando sdraiato ad occhi chiusi viaggio in mille posti
+Non siete MCs, ma signorine
+Il vostro sogno bagnato è avere rubato il mio libro di rime
+Sul disco vi brucio inferno tipo nei '70 in pista
+Vi giro a 360 come su un'Alfetta con Beretta in testa
+In lirica brillo tipo ametista
+A Bombay suono sitar, non passa mai
+Rubo la sabbia dalla tua clessidra
+Il tuo stile è da reparto femminile tipo ostetriche
+Delude come un padre con due figlie tossiche
+Versi che spezzano il coccige
+MCs vi sommo tutti insieme, il risultato è zero (Equazione semplice)
+Rispettami scuola, mi basta chiamarti, rimare dal Motorola
+Per farti ritirare come Scajola
+Trasmetto a qualsiasi ora da rete pirata 69
+Scene disturbate, la tua palpebra che non si muove
+Inietto nel tuo deltoide mezz'etto di strofa alcaloide
+La mia crew ti gonfia tipo steroide, rispetta il limite
+Nessun MC mi oltrepassa come la scena del crimine
+
+[Ritornello: Guè Pequeno &amp; Jake La Furia]
+Fottutamente esplicito
+Senza taglio, pura
+L'inchiostro non scende perché ha paura
+Liricamente ti apriamo tipo autopsia
+Con le sillabe killer che stanno all'angolo di questa via
+Fottutamente esplicito
+Senza taglio, pura
+L'inchiostro non scende perché ha paura
+Liricamente ti apriamo tipo autopsia
+Con le sillabe killer che stanno all'angolo di questa via</testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="02 massive">
+                        <partecipanti>
+                            <partecipante nome="Santy DJ"/>
+                        </partecipanti>
+                        <Durata minuti="4" ore="0" secondi="40"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="LLCD (Ladies Love Club Dogo)">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="24"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Hardboilde (Sabotatori)">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="1"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="0" nome="Totòlude">
+                        <partecipanti/>
+                        <Durata minuti="0" ore="0" secondi="32"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Ignoranz verse pusherz (2k)">
+                        <partecipanti>
+                            <partecipante nome="Totò Mezzola"/>
+                        </partecipanti>
+                        <Durata minuti="2" ore="0" secondi="7"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="La stanza dei fantasmi - Remix 2k4">
+                        <partecipanti/>
+                        <Durata minuti="4" ore="0" secondi="8"/>
+                        <testo></testo>
+                    </Traccia>
+                    <Traccia has_testo="1" nome="Phra (Outro)">
+                        <partecipanti>
+                            <partecipante nome="Vincenzo"/>
+                        </partecipanti>
+                        <Durata minuti="3" ore="0" secondi="48"/>
+                        <testo></testo>
+                    </Traccia>
+                </tracce>
+                <Musica genere="hip hop">
+                    <dataUscita anno="2003" giorno="23" mese="4"/>
+                    <Durata minuti="5" ore="1" secondi="22"/>
+                    <ArtistProduct description="Mi fist è il primo album in studio del gruppo musicale italiano Club Dogo, pubblicato il 23 aprile 2003 dalla MiResidenza Entertainment. &#xa;L'album è stato premiato come &quot;Miglior Album&quot; all'edizione del 2004 dell'MC Giaime.&#xa;L'album è stato prodotto in gran parte da Don Joe, aiutato da Frankie Gaudesi e DJ Paolino durante il processo di realizzazione del disco. Il titolo è una citazione del film Tokyo Fist di Shin'ya Tsukamoto, confermata dal fatto che la copertina contiene una scena tratta dal film in questione e dalla scritta che compare sulla copertina della riedizione del 2004 (拳のミラノ). MI invece indica la sigla di Milano. Tra i vari brani dell'album vi hanno partecipato anche alcuni artisti ospiti: oltre all'ex compagno del precedente gruppo Sacre Scuole Dargen D'Amico, autore in Tana 2000, hanno partecipato Lamaislam della Porzione Massiccia Crew, Santi DJ, Totò Mezzolla e Vincenzo da Via Anfossi. &#xa;Mi fist è diventato uno dei classici dell'hip hop italiano. Nello stesso anno fu ripubblicato dalla Vibrarecords con l'aggiunta di tre remix: le canzoni sono Sangue e filigrana (con Vincenzo da Via Anfossi), Vida loca e La stanza dei fantasmi. L'ordine della lista tracce rimane invariato, con la differenza che i brani remixati rimpiazzano quelli originali. " imagePath="view/icons/Club_Dogo/MI_Fist_(2004_Remaster).jpg" title="MI Fist (2004 Remaster)"/>
+                </Musica>
+            </Album>
+        </prodotti>
+    </Artista>
+</artisti>

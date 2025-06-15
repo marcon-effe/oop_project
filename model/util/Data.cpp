@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Data.h"
 
-// Costruttore: usa i setter così da applicare i controlli
 Data::Data(unsigned int g, unsigned int m, unsigned int a) {
     setMese(m);
     setAnno(a);
@@ -64,6 +63,10 @@ std::string Data::toString() const {
     return dayStr + "/" + monthStr + "/" + yearStr;
 }
 
+QDate Data::toQDate() const {
+    return QDate(anno, mese, giorno);
+}
+
 // JSON
 // Converte un oggetto JSON in un oggetto Data
 Data::Data(const QJsonObject& json) {
@@ -96,7 +99,6 @@ QDomElement Data::toXml(QDomDocument& doc) const {
     return xml;
 }
 
-//OVERLOADING OPERATORI
 bool operator==(const Data& lhs, const Data& rhs) {
     return lhs.getGiorno() == rhs.getGiorno()
         && lhs.getMese() == rhs.getMese()

@@ -1,5 +1,8 @@
 #include <iostream>
 #include "Traccia.h"
+#include <QDebug>
+
+#include "../../visitors/VisitorInterfaceNotConst.h"
 
 Traccia::Traccia(const std::string &n, const std::vector<std::string> &parts, const Durata &d, const std::string &t, bool ht)
 : nome(n), partecipanti(parts), durata(d), testo(t), hasTesto(ht){
@@ -33,6 +36,11 @@ void Traccia::setTesto(const std::string &t) {
     hasTesto = !t.empty();
 }
 
+void Traccia::setHasTesto(bool ht) {
+    hasTesto = ht;
+    if (!ht) testo = "";
+}
+
 bool Traccia::hasTestoPresent() const {
     return hasTesto;
 }
@@ -46,7 +54,29 @@ void Traccia::addPartecipante(const std::string &a) {
 }
 
 void Traccia::removePartecipante(const std::string &a) {
-    partecipanti.erase(std::remove(partecipanti.begin(), partecipanti.end(), a), partecipanti.end());
+    auto it = std::find(partecipanti.begin(), partecipanti.end(), a);
+    if (it != partecipanti.end())
+        partecipanti.erase(it);
+    else
+        throw std::invalid_argument("Partecipante non trovato.");
+}
+
+void Traccia::removePartecipante(unsigned int index) {
+    if (index >= partecipanti.size())
+        throw std::out_of_range("Indice partecipante non valido.");
+    partecipanti.erase(partecipanti.begin() + index);
+}
+
+void Traccia::editPartecipante(unsigned int index, const std::string& nuovoNome) {
+    if(index >= partecipanti.size())
+        throw std::out_of_range("Indice non valido.");
+    partecipanti[index] = nuovoNome;
+}
+
+void Traccia::setPartecipanti(const std::vector<std::string>& parts) {
+    this->partecipanti.clear();
+    this->partecipanti.shrink_to_fit();
+    partecipanti = parts;
 }
 
 
@@ -81,7 +111,7 @@ QJsonObject Traccia::toJson() const {
 //Converte un oggetto XML in un oggetto Traccia
 Traccia::Traccia(const QDomElement &xml)
 :   nome(xml.attribute("nome").toStdString()),
-    durata(Durata(xml.firstChildElement("durata"))),
+    durata(Durata(xml.firstChildElement("Durata"))),
     testo(xml.firstChildElement("testo").text().toStdString()),
     hasTesto(xml.attribute("has_testo").toInt())
     {
@@ -119,8 +149,10 @@ QDomElement Traccia::toXml(QDomDocument& doc) const {
     return tracciaElem;
 }
 
+void Traccia::accept(VisitorInterfaceNotConst* visitor) {
+    visitor->visit(this);
+}
 
-// OVERLOADING OPERATORI
 bool operator==(const Traccia& lhs, const Traccia& rhs) {
     return lhs.getNome() == rhs.getNome() &&
            lhs.getDurata() == rhs.getDurata() &&

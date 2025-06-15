@@ -1,32 +1,39 @@
 #ifndef MERCH_H
 #define MERCH_H
 
-#include <string>
-
 #include "../core/NotMusica.h"
-#include "../../include/data_format.h"
 
 class Merch : public NotMusica {
 protected:
     std::string codiceProdotto;
 public:
-    Merch(const std::string &t, const std::string &desc, double prezzo, bool disponibile, unsigned int quantita, const std::string &codice);
-    Merch(NotMusica* nm, std::string cp);
+    Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice);
+
+    Merch(Artista* owner, const std::string& t, const std::string& desc, double prezzo, bool disponibile, unsigned int quantita, const std::string& codice, const std::string& img);
+
+    Merch(NotMusica* base, const std::string& codice);
+
     Merch(const Merch* m);
-    Merch(const QJsonObject& obj);
-    Merch(const QDomElement& xml);
+
+    // Costruttore da JSON
+    Merch(Artista* owner, const QJsonObject& json);
+
+    // Costruttore da XML
+    Merch(Artista* owner, const QDomElement& xml);
+
     virtual ~Merch();
 
     std::string getCodiceProdotto() const;
-    void setCodiceProdotto(const std::string &codice);
+    void setCodiceProdotto(const std::string& codice);
 
     virtual void printInfo() const override;
-    QJsonObject toJson() const override;
-    QDomElement toXml(QDomDocument& doc) const override;
 
-    // OVERLOADING OPERATORI
+    // Serializzazione
+    virtual QJsonObject toJson(bool reduced=false) const override;
+    virtual QDomElement toXml(QDomDocument& doc, bool reduced=false) const override;
+
     friend bool operator==(const Merch& a, const Merch& b);
     friend bool operator!=(const Merch& a, const Merch& b);
 };
 
-#endif
+#endif // MERCH_H

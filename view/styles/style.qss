@@ -1,37 +1,232 @@
-/* Right Pannel */ 
-QWidget#rightPanel {
-    background-color: white;
+/* Left Panel */
+#leftPanel {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 10.5pt;
+}
+
+#artistList, #productList {
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+#searchArtisti, #searchProdotti {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background-color: #ffffff;
+}
+
+#filtroArtisti, #filtroProdotti {
+    background-color: #4285f4;
+    color: #ffffff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+#filtroArtisti:hover, #filtroProdotti:hover {
+    background-color: #2c6fe6;
+}
+
+#labelArtisti, #labelProdotti {
+    font-weight: bold;
+    color: #2C3E50;
+    font-size: 13pt;
+}
+
+
+/* Right Panel */
+QWidget#rightPanel,
+QScrollArea > QWidget,
+#relatedProductsContainer {
+    background-color: #ffffff;
 }
 
 QScrollArea {
     background: transparent;
     border: none;
 }
-QScrollArea > QWidget {
-    background-color: white;
-}
 
 
-/* Image Label */
-QLabel#artistImageLabel {
-    border: 2px solid red;
-    border-radius: 60px;      /* metà di 120px */
-    min-width: 120px;
-    min-height: 120px;
-    max-width: 120px;
-    max-height: 120px;
-}
-
-QLabel#defaultImageLabel {
-    border: 1px solid red;
-    border-radius: 4px;
-}
-
-/* Artista */
-QWidget#artistContainer {
+/* Correlati */
+#relatedProductsScrollArea {
     background-color: #ffffff;
+    border: none;
 }
 
+#productCard {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#productTitle {
+    color: #333;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+#productButton {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+#productButton:hover {
+    background-color: #2176ff;
+}
+#productButton:pressed {
+    background-color: #1549b9;
+}
+
+
+/* Generico Prodotto Container */
+QWidget#artistContainer,
+QWidget#singoloContainer,
+QWidget#albumContainer,
+QWidget#tshirtContainer,
+QWidget#cdContainer,
+QWidget#vinileContainer,
+QWidget#tourContainer {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 12px;
+}
+
+/* Immagine */
+QLabel#singoloImageLabel,
+QLabel#albumImageLabel,
+QLabel#tshirtImageLabel,
+QLabel#cdImageLabel,
+QLabel#vinileImageLabel,
+QLabel#tourImageLabel {
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 4px;
+    margin: 8px 0;
+}
+
+/* Titolo */
+QLabel#singoloTitleLabel,
+QLabel#albumTitleLabel,
+QLabel#tshirtTitleLabel,
+QLabel#cdTitleLabel,
+QLabel#vinileTitleLabel,
+QLabel#tourTitleLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #2C3E50;
+    qproperty-alignment: AlignCenter;
+    margin: 12px 0 16px 0;
+}
+
+/* Disponibilità */
+QLabel#tshirtAvailabilityLabel,
+QLabel#cdAvailabilityLabel,
+QLabel#vinileAvailabilityLabel,
+QLabel#tourAvailabilityLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0,0,0,0.4);
+    qproperty-alignment: AlignCenter;
+    margin: 2px 0;
+}
+
+/* Descrizione */
+QLabel#singoloDescLabel,
+QLabel#albumDescLabel,
+QLabel#tshirtDescLabel,
+QLabel#cdDescLabel,
+QLabel#vinileDescLabel,
+QLabel#tourDescLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: #555555;
+    background-color: #b6f9fbfd;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
+}
+
+/* Info generiche (label extra) */
+QLabel#albumLabelLabel,
+QLabel#vinileInfoLabel,
+QLabel#cdInfoLabel,
+QLabel#tourInfoLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9.5pt;
+    color: #2C3E50;
+    margin: 4px 0;
+}
+
+/* Tracce */
+QWidget#TrackContainer,
+QWidget#albumTrackContainer {
+    background-color: #ffffff;
+    border: 1px solid #E0E5EA;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 8px 0 12px 0;
+}
+
+QLabel#trackNameLabel,
+QLabel#albumTrackLabel {
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #2C3E50;
+    margin: 4px 0;
+}
+
+QLabel#trackDurationLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 10pt;
+    color: #555555;
+    margin: 4px 0;
+}
+
+QPushButton#textTrackButton {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 10pt;
+    font-weight: 500;
+    color: white;
+    background-color: #4285f4;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin: 6px 0;
+}
+QPushButton#textTrackButton:hover {
+    background-color: #2176ff;
+}
+QPushButton#textTrackButton:pressed {
+    background-color: #1549b9;
+    padding-top: 5px;
+}
+
+QLabel#trackFeatLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+    margin: 0 6px;            
+    qproperty-alignment: AlignVCenter;
+}
+
+QLabel#trackParticipantLabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 9pt;
+    color: rgba(0, 0, 0, 0.5);
+    font-style: italic;
+    margin: 0 1.5px;
+    qproperty-alignment: AlignVCenter;
+}
+
+/* Artista Specifico */
 QLabel#artistName {
     font-family: "Roboto";
     font-size: 24pt;
@@ -43,32 +238,26 @@ QLabel#artistName {
 QLabel#artistGenre {
     font-family: "Roboto";
     font-size: 16pt;
-    font-weight: normal;
-    color: #d8666666;
+    color: #666;
     qproperty-alignment: AlignCenter;
 }
 
-QGroupBox#artistDescBox {
-    border: 1px solid #62cccccc;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
+QGroupBox#artistDescBox,
 QGroupBox#artistProdBox {
-    border: 1px solid #62cccccc;
+    border: 1px solid #cccccc;
     border-radius: 8px;
     margin-top: 10px;
 }
 
-QWidget#productCard {
-    background: #fff;
-    border: 1px solid #62cccccc;
-    border-radius: 8px;
+QListWidget#artistProdList {
+    border: none;
+    background: transparent;
 }
 
 QLabel#productThumb {
-    border: 1px solid #62cccccc;
+    border: 1px solid #cccccc;
     border-radius: 4px;
+    margin: 6px;
 }
 
 QLabel#productTitle {
@@ -79,205 +268,4 @@ QLabel#productTitle {
 QLabel#productDesc {
     font-size: 10pt;
     color: #666;
-}
-
-QPushButton#productButton {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 4px 8px;
-}
-
-QPushButton#productButton:hover {
-    background-color: #2176ff;  
-    color: #fff;
-}
-
-QPushButton#productButton:pressed {
-    background-color: #1549b9; 
-    padding-top: 5px;  
-    color: white;          
-}
-
-/* ----------------------------------------------------------------- */
-/* TShirt */
-QWidget#tshirtContainer {
-    background: qlineargradient(x1:0,y1:0, x2:1,y2:1, stop:0 #fafafa, stop:1 #ffffff);
-    border: 2px dashed red;
-}
-
-QLabel#tshirtImageLabel {
-    border-radius: 8px;
-    border: 2px solid transparent;
-}
-QLabel#tshirtImageLabel:hover {
-    border: 2px solid #5b757575;
-}
-
-QLabel#tshirtTitleLabel {
-    font-family: "Roboto";
-    font-size: 24px;
-    font-weight: 600;
-    color: #000000;
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-}
-
-QLabel#tshirtCodeLabel,
-QLabel#tshirtQuantityLabel,
-QLabel#tshirtSizeLabel,
-QLabel#tshirtColorLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    color: #555555;
-}
-
-QLabel#tshirtAvailabilityLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-}
-QLabel#tshirtAvailabilityLabel[available="true"] {
-    color: #31ac00;
-}
-QLabel#tshirtAvailabilityLabel[available="false"] {
-    color: #d9534f;
-}
-
-QLabel#tshirtPriceLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #000000;
-}
-
-QLabel#tshirtDescLabel {
-    font-family: "Open Sans", sans-serif;
-    font-size: 13px;
-    color: #666666;
-    padding: 12px;
-    background-color: #ffffff;
-    border-radius: 4px;
-    margin-top: 6px;
-}
-
-QWidget#tshirtGrid0,
-QWidget#tshirtGrid1,
-QWidget#tshirtGrid2 {
-    margin-top: 4px;
-    margin-bottom: 4px;
-}
-
-
-/* CD */
-QLabel#cdImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
-}
-
-QLabel#cdTitleLabel {
-    qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-QLabel#cdFormatLabel,
-QLabel#cdDescLabel {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
-/* Vinile */
-QLabel#vinileImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
-}
-
-QLabel#vinileTitleLabel {
-    qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-QLabel#vinileDescLabel {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
-/* Singolo */
-QLabel#singoloImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
-}
-
-QLabel#singoloTitleLabel {
-    qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-QLabel#singoloDescLabel {
-    margin-bottom: 10px;
-}
-
-QLabel#singoloTrackInfoLabel {
-    margin-top: 10px;
-}
-
-
-/* Album */
-QLabel#albumImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
-}
-
-QLabel#albumTitleLabel {
-    qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-QLabel#albumLabelLabel {
-    qproperty-alignment: AlignCenter;
-    font-style: italic;
-    margin: 10px 0;
-}
-
-QLabel#albumDescLabel {
-    margin-bottom: 10px;
-}
-
-QLabel[class^="albumTrackLabel_"] {
-    margin-left: 10px;
-    margin-bottom: 4px;
-}
-
-
-/* Tour */
-QLabel#tourImageLabel {
-    border: 1px solid gray;
-    border-radius: 4px;
-}
-
-QLabel#tourTitleLabel {
-    qproperty-alignment: AlignCenter;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-QLabel#tourPeriodLabel {
-    qproperty-alignment: AlignCenter;
-    margin: 10px 0;
-}
-
-QLabel#tourDescLabel {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }

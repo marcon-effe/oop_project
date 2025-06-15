@@ -1,6 +1,8 @@
 #include <iostream>
 #include "DataTour.h"
 
+#include "../../visitors/VisitorInterfaceNotConst.h"
+
 DataTour::DataTour(unsigned int g, unsigned int m, unsigned int a, unsigned int o, unsigned int min, unsigned int s, const std::string &l)
 : Data(g, m, a), Orario(o, min, s), luogo(l) {}
 
@@ -30,6 +32,16 @@ void DataTour::setLuogo(const std::string &l) {
     luogo = l;
 }
 
+std::string DataTour::toString() const {
+    return "Data: " + Data::toString() + ", Orario: " + Orario::toString() + ", Luogo: " + luogo;
+}
+
+std::string DataTour::toStringFormat() const {
+    Orario orario = getOrario();
+    return (orario.getOre() < 10 ? "0" : "") + std::to_string(orario.getOre()) + ":" +
+           (orario.getMinuti() < 10 ? "0" : "") + std::to_string(orario.getMinuti());
+}
+
 
 //JSON
 // Converte un oggetto JSON in un oggetto DataTour
@@ -52,6 +64,7 @@ DataTour::DataTour(const QDomElement& xml)
 : Data::Data(xml.firstChildElement("Data")),
   Orario::Orario(xml.firstChildElement("Orario")),
   luogo(xml.attribute("luogo").toStdString()) {}
+  
 // Converte l'oggetto DataTour in un oggetto XML
 QDomElement DataTour::toXml(QDomDocument& doc) const {
     QDomElement xml = doc.createElement("DataTour");
@@ -66,8 +79,10 @@ QDomElement DataTour::toXml(QDomDocument& doc) const {
     return xml;
 }
 
+void DataTour::accept(VisitorInterfaceNotConst* visitor) {
+    visitor->visit(this);
+}
 
-// OVERLOADING OPERATORI
 bool operator==(const DataTour& lhs, const DataTour& rhs) {
     return static_cast<const Data&>(lhs) == static_cast<const Data&>(rhs)
         && static_cast<const Orario&>(lhs) == static_cast<const Orario&>(rhs)

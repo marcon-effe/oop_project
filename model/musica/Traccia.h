@@ -1,12 +1,11 @@
 #ifndef TRACCIA_H
 #define TRACCIA_H
 
-#include <string>
 #include <vector>
 
 #include "../util/Durata.h"
-#include "../../include/data_format.h"
 
+class VisitorInterfaceNotConst; // Forward declaration
 
 class Traccia {
 private:
@@ -31,17 +30,22 @@ public:
     void setTesto(const std::string &t);
 
     bool hasTestoPresent() const;
+    void setHasTesto(bool ht);
 
     const std::vector<std::string>& getPartecipanti() const;
     void addPartecipante(const std::string &a);
     void removePartecipante(const std::string &a);
+    void removePartecipante(unsigned int index);
+    void editPartecipante(unsigned int index, const std::string& nuovoNome);
+    void setPartecipanti(const std::vector<std::string>& parts);
 
     QJsonObject toJson() const;
     QDomElement toXml(QDomDocument& doc) const;
 
-    // OVERLOADING OPERATORI
+    void accept(VisitorInterfaceNotConst* visitor);
+
     friend bool operator==(const Traccia& a, const Traccia& b);
     friend bool operator!=(const Traccia& a, const Traccia& b);
 };
 
-#endif 
+#endif // TRACCIA_H
