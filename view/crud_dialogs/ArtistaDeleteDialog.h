@@ -25,8 +25,6 @@ private:
 
     QComboBox* artistaComboBox;
     QDialogButtonBox* buttonBox;
-
-    void eliminaArtista(Artista* artista);
 };
 
 #endif // ARTISTADELETEDIALOG_H
